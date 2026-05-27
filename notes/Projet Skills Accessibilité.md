@@ -10,8 +10,7 @@ statut: stable
 
 ## Lien GitHub
 
-> À mettre à jour après `git push` :  
-> `https://github.com/TON_USERNAME/skills-accessibilite`
+> https://github.com/brissonjo-sudo/Skills-accessibilite
 
 ## Skills stables
 
