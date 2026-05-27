@@ -1,0 +1,30 @@
+# Système d'exploitation
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.obsidian/
+
+# Node (au cas où des outils de génération sont ajoutés)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Fichiers temporaires
+*.tmp
+*.bak
+*.orig
+
+# Logs
+*.log
