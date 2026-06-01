@@ -1,10 +1,10 @@
-description: Évaluation skill accessibilite-haute-densite-cognitive V2 — multi-LLM
+description: Évaluation skill accessibilite-haute-densite-cognitive V3 — multi-LLM
 
 # Source unique du skill : pointe vers le fichier canonique dans skills/
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
 defaultTest:
   vars:
-    skill: "file://../skills/accessibilite-haute-densite-cognitive/skill_accessibilite_haute_densite_cognitive_V2.md"
+    skill: "file://../skills/accessibilite-haute-densite-cognitive/skill_accessibilite_haute_densite_cognitive_V3.md"
   # Modèle juge pour les assertions llm-rubric (Mistral Large — confirmé fiable).
   options:
     provider:

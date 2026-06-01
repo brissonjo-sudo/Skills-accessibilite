@@ -11,6 +11,22 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.3.0] — 2026-06-01
+
+### Modifié
+
+- **skill_accessibilite_haute_densite_cognitive_V3.md**
+  Un seul ajout ciblé après analyse 3-providers (Mistral / Gemini / Claude) :
+  **Contrainte absolue — application silencieuse** insérée en tête du skill, avant la
+  hiérarchie des priorités. Règle nommée "absolue" et "prime sur toutes les autres",
+  avec exemples de formulations interdites. Objectif : corriger le preamble méta sur
+  Mistral (0/8 en V2) et Gemini (3/8) qui ignoraient la règle lorsqu'elle était enfouie
+  dans les sections internes. Structure du skill inchangée par ailleurs.
+
+- **eval/promptfooconfig.yaml** — pointe désormais vers V3.
+
+---
+
 ## [1.2.0] — 2026-06-01
 
 ### Modifié
