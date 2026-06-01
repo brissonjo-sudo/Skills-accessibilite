@@ -5,6 +5,12 @@ description: Évaluation skill accessibilite-haute-densite-cognitive V1 — mult
 defaultTest:
   vars:
     skill: "file://../skills/accessibilite-haute-densite-cognitive/skill_accessibilite_haute_densite_cognitive_V1.md"
+  # Modèle juge pour les assertions llm-rubric (Gemini 3.1 Pro — clé GOOGLE_API_KEY).
+  options:
+    provider:
+      id: google:gemini-3.1-pro-preview
+      config:
+        apiKey: "{{env.GOOGLE_API_KEY}}"
 
 prompts:
   - id: with-skill
@@ -22,11 +28,6 @@ providers:
   - id: google:gemini-3.1-pro-preview
     config:
       apiKey: "{{env.GOOGLE_API_KEY}}"
-  - id: openai:chat:grok-3
-    label: "xAI Grok-3"
-    config:
-      apiKey: "{{env.XAI_API_KEY}}"
-      apiBaseUrl: https://api.x.ai/v1
 
 tests:
   - description: "Cas 1 — Déclaration HPI explicite + demande de profondeur"
