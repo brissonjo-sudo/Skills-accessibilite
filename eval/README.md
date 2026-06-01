@@ -13,7 +13,7 @@
 ```bash
 cd eval/
 cp .env.example .env
-# Renseigner OPENAI_API_KEY et GOOGLE_API_KEY dans .env
+# Renseigner MISTRAL_API_KEY dans .env
 ```
 
 ## Lancement
@@ -52,12 +52,11 @@ Le fichier `promptfooconfig.yaml` pointe directement vers le skill canonique :
 
 Pour changer de version (ex. V1 → V2), mettre à jour uniquement la ligne `skill:` du `defaultTest` dans `promptfooconfig.yaml`. Aucune copie du skill dans `eval/`.
 
-## Providers actifs
+## Provider actif
 
 | Provider | Modèle | Clé |
 |----------|--------|-----|
-| OpenAI | `gpt-5.5` | `OPENAI_API_KEY` |
-| Google AI Studio | `gemini-3.1-pro-preview` | `GOOGLE_API_KEY` |
+| Mistral AI | `mistral-large-latest` | `MISTRAL_API_KEY` |
 
 ## Analyse des résultats
 

@@ -15,12 +15,9 @@ prompts:
     file: prompts/baseline.yaml
 
 providers:
-  - id: openai:chat:gpt-5.5
+  - id: mistral:mistral-large-latest
     config:
-      apiKey: "{{env.OPENAI_API_KEY}}"
-  - id: google:gemini-3.1-pro-preview
-    config:
-      apiKey: "{{env.GOOGLE_API_KEY}}"
+      apiKey: "{{env.MISTRAL_API_KEY}}"
 
 tests:
   - description: "Cas 1 — Déclaration HPI explicite + demande de profondeur"
