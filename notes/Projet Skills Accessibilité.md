@@ -16,10 +16,11 @@ statut: stable
 
 | Skill | Version | Fichier | Statut |
 |---|---|---|---|
+| [[Skill Psychologie Rigoureuse]] | V6 | `skills/psychologie-rigoureuse/` | ✅ Stable |
 | [[Skill TDAH]] | V2.1 | `skills/accessibilite-tdah/` | ✅ Stable |
 | [[Skill DYS]] | V3 | `skills/accessibilite-dys/` | ✅ Stable |
 | [[Skill TSA]] | V2 | `skills/accessibilite-tsa/` | ✅ Stable |
-| [[Skill Psychologie Rigoureuse]] | V6 | `skills/psychologie-rigoureuse/` | ✅ Stable |
+| [[Skill HDC]] | V1 | `skills/accessibilite-haute-densite-cognitive/` | 🔬 En évaluation |
 
 ## Architecture
 
@@ -34,6 +35,7 @@ statut: stable
 
 ## Feuille de route
 
+- [x] Skill haute densité cognitive / HPI — V1 en évaluation (harnais promptfoo actif)
 - [ ] Skill douleur chronique / fatigue cognitive
 - [ ] Skill TSA niveau 2
 - [ ] Skill accessibilité visuelle

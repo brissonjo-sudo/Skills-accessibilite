@@ -1,0 +1,118 @@
+description: Évaluation skill accessibilite-haute-densite-cognitive V1 — multi-LLM
+
+# Source unique du skill : pointe vers le fichier canonique dans skills/
+# Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
+defaultTest:
+  vars:
+    skill: "file://../skills/accessibilite-haute-densite-cognitive/skill_accessibilite_haute_densite_cognitive_V1.md"
+
+prompts:
+  - id: with-skill
+    label: "Avec skill HDC"
+    file: prompts/with_skill.yaml
+  - id: baseline
+    label: "Baseline (sans skill)"
+    file: prompts/baseline.yaml
+
+providers:
+  - id: openai:gpt-5.5
+    config:
+      apiKey: "{{env.OPENAI_API_KEY}}"
+  - id: google:gemini-3.1-pro-preview
+    config:
+      apiKey: "{{env.GOOGLE_API_KEY}}"
+
+tests:
+  - description: "Cas 1 — Déclaration HPI explicite + demande de profondeur"
+    vars:
+      question: "J'ai un HPI. Explique-moi ce que la théorie de l'attachement dit vraiment sur les relations adultes — pas la version édulcorée."
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse traite la théorie de l'attachement avec sa complexité réelle :
+          elle couvre plusieurs cadres ou niveaux (styles, modèles internes opérants, implications adultes),
+          distingue ce qui est empiriquement solide de ce qui est débattu,
+          et ne réduit pas à une vulgarisation en 3 points génériques.
+
+      - type: llm-rubric
+        value: |
+          La réponse ne contient pas de formulations essentialisantes du type
+          « les HPI ont tendance à… » ou « les personnes à haut potentiel ressentent souvent… »
+          suivies d'une caractérisation comportementale imputable au profil HPI.
+
+  - description: "Cas 2 — Déclaration zèbre + question psychologique"
+    vars:
+      question: "Je suis zèbre. Comment se forment les biais de confirmation et comment peut-on s'en affranchir ?"
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse aborde les mécanismes de formation du biais de confirmation avec précision
+          (au moins deux angles : cognitif, motivationnel ou autre) et signale les limites des
+          stratégies de débiaisage connues, sans présenter ces dernières comme une solution simple.
+
+  - description: "Cas 3 — Question multi-couches sans déclaration de profil"
+    vars:
+      question: "En quoi le rapport entre le soi mémoriel et le soi expérientiel de Kahneman remet-il en question la notion de satisfaction de vie ?"
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse distingue clairement soi mémoriel et soi expérientiel, puis traite
+          leurs implications pour la satisfaction de vie comme une question ouverte.
+          Elle ne force pas une synthèse arbitraire et signale les limites ou critiques du cadre.
+
+  - description: "Cas 4 — Régression : sujet simple + déclaration HDC"
+    vars:
+      question: "Mode HDC. C'est quoi un préjugé ?"
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse reste proportionnée à un sujet simple.
+          Elle ne produit pas une réponse artificiellement longue ou complexe
+          sans que la profondeur du sujet ne le justifie.
+          Le skill HDC ne doit pas induire de sur-développement sur des questions dont la réponse
+          est brève et directe.
+
+  - description: "Cas 5 — Co-activation avec psychologie-rigoureuse"
+    vars:
+      question: "Je suis HPI. Pourquoi certaines personnes restent-elles dans des relations toxiques même quand elles en ont conscience ?"
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse propose plusieurs cadres explicatifs distincts (attachement, cognitif,
+          situationnel ou autre), utilise un marquage de confiance différencié sur au moins
+          une affirmation, et ne réduit pas à une explication unique présentée comme consensus.
+
+  - description: "Cas 6 — Anti-simplification sur sujet technique"
+    vars:
+      question: "Mode haute densité cognitive. Explique-moi les limites épistémologiques de la méta-analyse en psychologie."
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse aborde des limites réelles et distinctes (au moins deux parmi :
+          hétérogénéité des études, biais de publication, p-hacking ou virage de seuil,
+          qualité des études primaires, définition variable des construits).
+          Elle ne réduit pas à une liste de 3 points génériques sans contenu épistémologique précis.
+
+  # Cas 7 et 8 : variantes neutres sans le mot « HPI »
+  # Valident le déclenchement par besoin communicationnel seul.
+
+  - description: "Cas 7 — Besoin communicationnel seul : demande de respect de la complexité"
+    vars:
+      question: "J'ai besoin de réponses qui ne simplifieraient pas la complexité réelle des sujets que j'aborde. Avec ça en tête, explique-moi comment fonctionne la dissonance cognitive."
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse honore le besoin communicationnel exprimé : elle traite la dissonance
+          cognitive avec plusieurs dimensions (définition, mécanismes de réduction, limites
+          ou étendue du concept) et ne réduit pas à une définition simple suivie de conseils pratiques.
+
+  - description: "Cas 8 — Besoin communicationnel seul : pensée associative multi-niveaux"
+    vars:
+      question: "Je pense de façon très associative et mes questions contiennent souvent plusieurs niveaux imbriqués. Explique-moi la différence entre corrélation et causalité en gardant toute la nuance."
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse honore la demande de nuance : elle va au-delà de la formule
+          « corrélation ≠ causalité » et traite les conditions de causalité, les critères
+          utilisés (Bradford Hill ou autre), les limites, et au moins un exemple non trivial.
+          Elle ne s'arrête pas à la définition de base.

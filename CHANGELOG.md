@@ -11,6 +11,24 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.1.0] — 2026-06-01
+
+### Ajouté
+
+- **skill_accessibilite_haute_densite_cognitive_V1.md** (V1)
+  Skill de forme pour utilisateurs à haute densité cognitive (HDC/HPI). Autorise et structure
+  la profondeur informationnelle et la nuance. Déclencheur dual : déclaration explicite (HPI, zèbre)
+  ou besoin communicationnel exprimé. Anti-édulcoration, questions multi-couches, structure navigable,
+  tolérance à l'ambiguïté. Compatible avec les 4 skills existants.
+
+- **eval/** — harnais d'évaluation promptfoo
+  8 cas de test, 2 conditions (avec skill / baseline), 2 LLMs (GPT-5.5, Gemini 3.1 Pro).
+  Source unique : pointe vers le fichier canonique dans `skills/`. `.env` exclu du dépôt.
+
+- **notes/Skill HDC.md** — note Obsidian du skill V1 avec liaisons Graphify.
+
+---
+
 ## [1.0.0] — 2026-05-27
 
 ### Ajouté
@@ -41,3 +59,4 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 | DYS | V3 | `main` |
 | TSA | V2 | `main` |
 | Psychologie rigoureuse | V6 | `main` |
+| Haute densité cognitive | V1 (en évaluation) | `claude/wonderful-fermat-enaoG` |
