@@ -57,13 +57,17 @@ Pour changer de version (ex. V1 → V2), mettre à jour uniquement la ligne `ski
 | Provider | Modèle | Clé |
 |----------|--------|-----|
 | Mistral AI | `mistral-large-latest` | `MISTRAL_API_KEY` |
-| Google AI Studio | `gemini-3.1-pro-preview` | `GOOGLE_API_KEY` |
+| Google AI Studio | `gemini-2.5-flash` | `GOOGLE_API_KEY` |
 
-Le **modèle juge** des assertions `llm-rubric` est fixé sur `google:gemini-3.1-pro-preview`
-(clé `GOOGLE_API_KEY`). Voir `defaultTest.options.provider` dans `promptfooconfig.yaml`.
+Le **modèle juge** des assertions `llm-rubric` est fixé sur `mistral:mistral-large-latest`
+(clé `MISTRAL_API_KEY`). Voir `defaultTest.options.provider` dans `promptfooconfig.yaml`.
 
-> Note : Grok (xAI) a été retiré — le compte n'avait pas de crédits (HTTP 403). Pour le réajouter,
-> créditer le compte xAI puis ajouter le provider `openai:chat:grok-3` avec `apiBaseUrl: https://api.x.ai/v1`.
+> Notes providers :
+> - Grok (xAI) retiré — compte sans crédits (HTTP 403). Pour le réactiver : créditer xAI puis ajouter
+>   `openai:chat:grok-3` avec `apiBaseUrl: https://api.x.ai/v1`.
+> - Gemini 3.1 Pro Preview retiré — indisponible en tier gratuit (HTTP 429, `free_tier limit: 0`).
+>   Remplacé par `gemini-2.5-flash` (disponible en gratuit). Pour utiliser Gemini 3.1 Pro, activer
+>   la facturation sur le compte Google AI Studio.
 
 ## Analyse des résultats
 
