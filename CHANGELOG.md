@@ -11,6 +11,20 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.2.0] — 2026-06-01
+
+### Modifié
+
+- **skill_accessibilite_haute_densite_cognitive_V2.md**
+  Deux correctifs ciblés issus du run d'évaluation multi-LLM V1 :
+  1. **Application silencieuse** (nouveau) : règle interdisant tout préambule méta annonçant l'application du skill (« Voici une réponse en mode HDC »). Le skill s'applique sans se nommer.
+  2. **Proportionnalité renforcée** : cas particulier explicite dans "Plafond souple" + formulation renforcée dans "Patterns à éviter" — la déclaration de profil n'induit pas de longueur sur les sujets simples.
+  Structure inchangée (mode anti-noyade).
+
+- **eval/promptfooconfig.yaml** — pointe désormais vers V2.
+
+---
+
 ## [1.1.0] — 2026-06-01
 
 ### Ajouté
@@ -59,4 +73,4 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 | DYS | V3 | `main` |
 | TSA | V2 | `main` |
 | Psychologie rigoureuse | V6 | `main` |
-| Haute densité cognitive | V1 (en évaluation) | `claude/wonderful-fermat-enaoG` |
+| Haute densité cognitive | V2 (en évaluation) | `claude/wonderful-fermat-enaoG` |

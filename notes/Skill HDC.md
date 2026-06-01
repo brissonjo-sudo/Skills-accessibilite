@@ -1,10 +1,10 @@
 ---
 tags: [skill, accessibilite, hdc, hpi, forme]
-version: V1
+version: V2
 statut: en évaluation
 ---
 
-# Skill Accessibilité Haute Densité Cognitive — V1
+# Skill Accessibilité Haute Densité Cognitive — V2
 
 Skill de **forme** : autorise et structure la profondeur informationnelle pour les utilisateurs à haute densité cognitive (HDC/HPI/zèbre).
 
@@ -28,11 +28,11 @@ Inverse fonctionnel des skills DYS/TDAH/TSA : là où ceux-ci réduisent la char
 
 ## Fichier source
 
-`skills/accessibilite-haute-densite-cognitive/skill_accessibilite_haute_densite_cognitive_V1.md`
+`skills/accessibilite-haute-densite-cognitive/skill_accessibilite_haute_densite_cognitive_V2.md`
 
 ## Harnais d'évaluation
 
-`eval/promptfooconfig.yaml` — 8 cas de test, 2 conditions (avec/sans skill), 2 LLMs (GPT-5.5, Gemini 3.1 Pro)
+`eval/promptfooconfig.yaml` — 8 cas de test, 2 conditions (avec/sans skill), 2 LLMs (Mistral Large, Gemini 2.5 Flash)
 
 ## Relations
 
@@ -49,3 +49,4 @@ Le HPI est une catégorie **débattue** empiriquement. Le skill ne le valide pas
 | Version | Changements principaux |
 |---|---|
 | V1 | Première version — déclencheur dual (déclaration + besoin communicationnel), anti-édulcoration, structure navigable |
+| V2 | Correctif application silencieuse (anti-preamble) + renforcement proportionnalité sur sujets simples |
