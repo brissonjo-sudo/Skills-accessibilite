@@ -15,11 +15,10 @@ prompts:
     file: prompts/baseline.yaml
 
 providers:
-  - id: openai:chat:mistral-large-latest
+  - id: mistral:mistral-large-latest
     label: "Mistral Large"
     config:
       apiKey: "{{env.MISTRAL_API_KEY}}"
-      apiBaseUrl: https://api.mistral.ai/v1
   - id: google:gemini-3.1-pro-preview
     config:
       apiKey: "{{env.GOOGLE_API_KEY}}"
