@@ -18,6 +18,14 @@ providers:
   - id: mistral:mistral-large-latest
     config:
       apiKey: "{{env.MISTRAL_API_KEY}}"
+  - id: google:gemini-3.1-pro-preview
+    config:
+      apiKey: "{{env.GOOGLE_API_KEY}}"
+  - id: openai:chat:grok-3
+    label: "xAI Grok-3"
+    config:
+      apiKey: "{{env.XAI_API_KEY}}"
+      apiBaseUrl: https://api.x.ai/v1
 
 tests:
   - description: "Cas 1 — Déclaration HPI explicite + demande de profondeur"
