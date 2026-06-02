@@ -35,11 +35,11 @@ statut: stable
 
 ## Feuille de route
 
-- [x] Skill haute densité cognitive / HPI — V1 en évaluation (harnais promptfoo actif)
-- [ ] Skill douleur chronique / fatigue cognitive
+- [x] Skill haute densité cognitive / HPI — V3 stable (harnais promptfoo, 3 providers testés)
+- [~] [[Skill Douleur Chronique Fatigue Cognitive]] — V1 en évaluation (Claude 8/8, run 2-LLM à lancer)
 - [ ] Skill TSA niveau 2
 - [ ] Skill accessibilité visuelle
-- [ ] Tests multi-LLM systématiques pour chaque nouveau skill
+- [x] Tests multi-LLM systématiques pour chaque nouveau skill — harnais promptfoo rodé et réutilisable
 
 ## Date de publication
 

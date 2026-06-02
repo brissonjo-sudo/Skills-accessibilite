@@ -11,6 +11,29 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.4.0] — 2026-06-02
+
+### Ajouté
+
+- **skill_accessibilite_douleur_chronique_fatigue_cognitive_V1.md** (V1)
+  6e skill de l'écosystème. Skill de forme pour douleur chronique, fatigue cognitive et brouillard
+  mental (brain fog, fibromyalgie, SFC/EM, COVID long). Réduction de charge comme TDAH/DYS, mais
+  angle distinct : économie d'un budget cognitif limité et fluctuant. Principes : réponse d'abord,
+  modularité optionnelle, anti-injonction à l'effort (ne pousse pas à l'action), anti-minimisation /
+  anti-positivité toxique, auto-suffisance (mémoire de travail), sécurité éthique prioritaire
+  (comorbidité dépression). Déclencheur dual (déclaration OU besoin communicationnel d'économie).
+
+- **eval/promptfooconfig_fatigue.yaml** — harnais d'évaluation dédié (8 cas, 2 conditions, 2 LLMs),
+  config séparée du banc HDC.
+
+- **eval/results_fatigue_claude_v1.json** + **eval/analyse_fatigue_v1_claude.md** — run provider
+  Claude (16 sous-agents contexte frais) : with_skill 8/8 PASS, application silencieuse 8/8, aucune
+  régression. Run 2-LLM (Mistral + Gemini) en attente côté utilisateur.
+
+- **notes/Skill Douleur Chronique Fatigue Cognitive.md** — note Obsidian V1.
+
+---
+
 ## [1.3.0] — 2026-06-01
 
 ### Modifié
