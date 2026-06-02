@@ -15,15 +15,19 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ### Modifié
 
-- **skill_accessibilite_haute_densite_cognitive_V3.md**
+- **skill_accessibilite_haute_densite_cognitive_V3.md** — **VERSION STABLE**
   Un seul ajout ciblé après analyse 3-providers (Mistral / Gemini / Claude) :
   **Contrainte absolue — application silencieuse** insérée en tête du skill, avant la
   hiérarchie des priorités. Règle nommée "absolue" et "prime sur toutes les autres",
-  avec exemples de formulations interdites. Objectif : corriger le preamble méta sur
-  Mistral (0/8 en V2) et Gemini (3/8) qui ignoraient la règle lorsqu'elle était enfouie
-  dans les sections internes. Structure du skill inchangée par ailleurs.
+  avec exemples de formulations interdites.
 
-- **eval/promptfooconfig.yaml** — pointe désormais vers V3.
+  Résultat du run V3 (Mistral + Gemini) : amélioration marginale sur le preamble
+  (Mistral 0→1/8, Gemini 3→4/8). Confirmé : le preamble est un comportement RLHF
+  structurel de Mistral et Gemini, non corrigeable par instruction seule. Documenté
+  comme limitation de provider. **V3 déclaré version stable** — la contrainte reste
+  (efficace sur Claude 8/8, partiellement sur Gemini).
+
+- **eval/promptfooconfig.yaml** — pointe vers V3.
 
 ---
 
@@ -89,4 +93,4 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 | DYS | V3 | `main` |
 | TSA | V2 | `main` |
 | Psychologie rigoureuse | V6 | `main` |
-| Haute densité cognitive | V2 (en évaluation) | `claude/wonderful-fermat-enaoG` |
+| Haute densité cognitive | V3 (stable) | `claude/wonderful-fermat-enaoG` |

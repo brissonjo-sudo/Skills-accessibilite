@@ -20,7 +20,7 @@ statut: stable
 | [[Skill TDAH]] | V2.1 | `skills/accessibilite-tdah/` | ✅ Stable |
 | [[Skill DYS]] | V3 | `skills/accessibilite-dys/` | ✅ Stable |
 | [[Skill TSA]] | V2 | `skills/accessibilite-tsa/` | ✅ Stable |
-| [[Skill HDC]] | V1 | `skills/accessibilite-haute-densite-cognitive/` | 🔬 En évaluation |
+| [[Skill HDC]] | V3 | `skills/accessibilite-haute-densite-cognitive/` | ✅ Stable |
 
 ## Architecture
 
