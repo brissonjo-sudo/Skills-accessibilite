@@ -19,7 +19,7 @@ statut: stable
 | [[Skill Psychologie Rigoureuse]] | V6 | `skills/psychologie-rigoureuse/` | ✅ Stable |
 | [[Skill TDAH]] | V2.1 | `skills/accessibilite-tdah/` | ✅ Stable |
 | [[Skill DYS]] | V3 | `skills/accessibilite-dys/` | ✅ Stable |
-| [[Skill TSA]] | V2 | `skills/accessibilite-tsa/` | ✅ Stable |
+| [[Skill TSA]] | V3 | `skills/accessibilite-tsa/` | ✅ Stable |
 | [[Skill HDC]] | V3 | `skills/accessibilite-haute-densite-cognitive/` | ✅ Stable |
 | [[Skill Douleur Chronique Fatigue Cognitive]] | V3 | `skills/accessibilite-douleur-chronique-fatigue-cognitive/` | ✅ Stable |
 

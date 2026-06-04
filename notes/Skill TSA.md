@@ -1,7 +1,7 @@
 ---
 tags: [skill, accessibilite, tsa, forme]
 version: V3
-statut: en évaluation (Phase 1 — fiabilisation niveau 1)
+statut: stable
 ---
 
 # Skill Accessibilité TSA — V3
@@ -40,8 +40,8 @@ Les niveaux 1/2/3 du DSM-5 décrivent un **besoin de soutien**, **spécifié sé
 | Provider | with_skill | Application silencieuse |
 |---|---|---|
 | Claude (sonnet-4-6, 16 sous-agents) | 8/8 PASS | 8/8 |
-| Mistral Large | _run 2-LLM à lancer_ | — |
-| Gemini 2.5 Flash | _run 2-LLM à lancer_ | — |
+| Mistral Large | 8/8 PASS | 8/8 |
+| Gemini 2.5 Flash | 8/8 PASS | 8/8 |
 
 ## Historique versions
 
@@ -49,4 +49,4 @@ Les niveaux 1/2/3 du DSM-5 décrivent un **besoin de soutien**, **spécifié sé
 |---|---|
 | V1 | Première version |
 | V2 | Approfondissement littéralité, gestion transitions. Jamais passée au banc promptfoo. |
-| V3 | Itération anti-noyade : application silencieuse (contrainte absolue), définition clinique corrigée (niveau ≠ DI), proportionnalité, anti-dérobade, auto-vérification réparée. Run Claude 8/8. Run 2-LLM en attente. |
+| V3 | Itération anti-noyade : application silencieuse (contrainte absolue), définition clinique corrigée (niveau ≠ DI), proportionnalité, anti-dérobade, auto-vérification réparée. Run Claude 8/8. Run Mistral 8/8. Run Gemini 8/8. VERSION STABLE. |

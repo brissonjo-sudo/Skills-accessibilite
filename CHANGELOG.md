@@ -12,6 +12,22 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.9.0] — 2026-06-04
+
+### Ajouté
+
+- **eval/results_tsa_v3.json** + **eval/analyse_tsa_v3_2llm.md** — run 2-LLM V3 (Mistral Large + Gemini 2.5 Flash) :
+  with_skill 8/8 PASS les deux providers, application silencieuse 8/8 les deux providers.
+  Baseline Mistral 5/8 (Cas 2, 5, 6), Gemini 6/8 (Cas 2, 6) — le skill corrige tous les comportements défaillants.
+  **skill_accessibilite_tsa_V3.md déclaré VERSION STABLE.** Résumé 3-providers : Claude 8/8, Mistral 8/8, Gemini 8/8.
+
+### Modifié
+
+- **notes/Skill TSA.md** — statut → stable, tableau runs mis à jour (Mistral 8/8, Gemini 8/8).
+- **notes/Projet Skills Accessibilité.md** — TSA mis à jour V3 dans la table des skills stables.
+
+---
+
 ## [1.8.0] — 2026-06-04
 
 ### Ajouté / Modifié
@@ -180,7 +196,7 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 |---|---|---|
 | TDAH | V2.1 | `main` |
 | DYS | V3 | `main` |
-| TSA | V3 (en évaluation) | `claude/wonderful-fermat-enaoG` |
+| TSA | V3 (stable) | `main` |
 | Psychologie rigoureuse | V6 | `main` |
 | Haute densité cognitive | V3 (stable) | `main` |
 | Douleur chronique / Fatigue cognitive | V3 (stable) | `main` |
