@@ -11,6 +11,17 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.6.0] — 2026-06-04
+
+### Modifié
+
+- **skill_accessibilite_douleur_chronique_fatigue_cognitive_V3.md** — renforcement ciblé issu du run 2-LLM V2 (Gemini 8/8 ✅, Mistral 7/8 — cas mélatonine résistant) :
+  Règle "question-définition simple" renforcée en **règle absolue** : aucune couche optionnelle même brève/conditionnelle, aucun dosage/précaution/recommandation dans une couche secondaire, déclaration de condition ne justifie pas de conseils supplémentaires.
+  Ajout d'un **exemple de calibrage négatif** (Exemple 1b) montrant explicitement le pattern d'inflation conditionnelle à éviter.
+  Auto-vérification point 2 renforcé en conséquence.
+
+- **eval/promptfooconfig_fatigue.yaml** — pointe vers V3.
+
 ## [1.5.0] — 2026-06-04
 
 ### Modifié

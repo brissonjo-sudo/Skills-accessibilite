@@ -1,10 +1,10 @@
-description: Évaluation skill accessibilite-douleur-chronique-fatigue-cognitive V2 — multi-LLM
+description: Évaluation skill accessibilite-douleur-chronique-fatigue-cognitive V3 — multi-LLM
 
 # Source unique du skill : pointe vers le fichier canonique dans skills/
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
 defaultTest:
   vars:
-    skill: "file://../skills/accessibilite-douleur-chronique-fatigue-cognitive/skill_accessibilite_douleur_chronique_fatigue_cognitive_V2.md"
+    skill: "file://../skills/accessibilite-douleur-chronique-fatigue-cognitive/skill_accessibilite_douleur_chronique_fatigue_cognitive_V3.md"
   # Modèle juge pour les assertions llm-rubric (Mistral Large — confirmé fiable sur le banc HDC).
   options:
     provider:
