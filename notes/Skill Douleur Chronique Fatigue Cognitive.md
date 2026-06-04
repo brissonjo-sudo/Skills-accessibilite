@@ -1,10 +1,10 @@
 ---
 tags: [skill, accessibilite, douleur-chronique, fatigue-cognitive, brain-fog, forme]
-version: V1
-statut: en évaluation
+version: V2
+statut: en évaluation (run V2 à lancer)
 ---
 
-# Skill Accessibilité Douleur Chronique / Fatigue Cognitive — V1
+# Skill Accessibilité Douleur Chronique / Fatigue Cognitive — V2
 
 Skill de **forme** : économise le budget cognitif (lecture et traitement) des utilisateurs dont la capacité d'attention, de concentration et de mémoire de travail est réduite et **fluctuante**.
 
@@ -33,7 +33,7 @@ Douleur chronique, fatigue cognitive, brouillard mental (brain fog), fibromyalgi
 
 ## Fichier source
 
-`skills/accessibilite-douleur-chronique-fatigue-cognitive/skill_accessibilite_douleur_chronique_fatigue_cognitive_V1.md`
+`skills/accessibilite-douleur-chronique-fatigue-cognitive/skill_accessibilite_douleur_chronique_fatigue_cognitive_V2.md`
 
 ## Harnais d'évaluation
 
@@ -58,4 +58,5 @@ Douleur chronique, fatigue cognitive, brouillard mental (brain fog), fibromyalgi
 
 | Version | Changements principaux |
 |---|---|
-| V1 | Première version — déclencheur dual, réponse d'abord, modularité optionnelle, anti-injonction, anti-positivité toxique, sécurité éthique prioritaire. Run Claude 8/8. Run 2-LLM en attente. |
+| V1 | Première version — déclencheur dual, réponse d'abord, modularité optionnelle, anti-injonction, anti-positivité toxique, sécurité éthique prioritaire. Run Claude 8/8. Run 2-LLM : Mistral 7/8, Gemini 7/8. |
+| V2 | Correctif ciblé : exception question-définition simple (1-2 phrases, sans couche optionnelle). Diagnostic run 2-LLM V1 : inflation sur définitions atomiques même étiquetées optionnelles. |

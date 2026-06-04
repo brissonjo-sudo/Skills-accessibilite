@@ -11,6 +11,18 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.5.0] — 2026-06-04
+
+### Modifié
+
+- **skill_accessibilite_douleur_chronique_fatigue_cognitive_V2.md** — correctif ciblé issu du run 2-LLM V1 (Mistral Large + Gemini 2.5 Flash, 7/8 chacun) :
+  **Exception question-définition simple** ajoutée dans "Modularité optionnelle" et dans l'auto-vérification.
+  Diagnostic : les deux providers ajoutaient une couche optionnelle sur des questions-définitions atomiques (« c'est quoi la mélatonine ? »), produisant de l'inflation même étiquetée. La règle : si la question demande la définition d'un concept unique sans sujet multi-niveaux, la réponse est 1 à 2 phrases — sans couche optionnelle.
+
+- **eval/promptfooconfig_fatigue.yaml** — pointe vers V2.
+
+---
+
 ## [1.4.0] — 2026-06-02
 
 ### Ajouté
