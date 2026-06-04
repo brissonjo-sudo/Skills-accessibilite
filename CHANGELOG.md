@@ -8,6 +8,31 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 ## [Non publié]
 
 - Bilan de l'écosystème (`docs/bilan_ecosysteme_skills_accessibilite.md`) — à venir
+- Skill TSA niveau 2 clinique (Phase 2) — à venir, sur base saine V3
+
+---
+
+## [1.8.0] — 2026-06-04
+
+### Ajouté / Modifié
+
+- **skill_accessibilite_tsa_V3.md** — itération anti-noyade du skill TSA (Phase 1 « fiabiliser le niveau 1 »).
+  Correctifs issus de l'analyse des lacunes du V2 :
+  1. **Contrainte absolue — application silencieuse** en tête (modèle HDC V3) : interdiction d'accuser
+     réception du profil (« puisque tu es autiste… »).
+  2. **Définition clinique corrigée** : niveau DSM-5 ≠ déficience intellectuelle ; calage sur le langage
+     fonctionnel (on peut relever du niveau 2 sans DI).
+  3. **Proportionnalité** plan vs réponse-d'abord (pas d'annonce de plan sur une question simple).
+  4. **Règle anti-dérobade** (réponse franche d'abord, littéralité ≠ noyade de hedging).
+  5. **Auto-vérification réparée et resserrée** (double « 13 » corrigé, 12 points).
+  6. **Collision terminologique « niveau 2 »** supprimée dans la section essentialisation.
+
+- **eval/promptfooconfig_tsa.yaml** — harnais dédié TSA (8 cas, 2 conditions, 2 LLMs). Le TSA n'avait
+  jamais été évalué au banc promptfoo.
+
+- **eval/results_tsa_claude_v3.json** + **eval/analyse_tsa_v3_claude.md** — run Claude V3 (16 sous-agents) :
+  with_skill 8/8 PASS, application silencieuse 8/8, baseline 8/8. Finding cas 6 (test neurotypique vs
+  reconnaissance) versé au futur niveau 2. Run 2-LLM en attente.
 
 ---
 
@@ -155,7 +180,7 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 |---|---|---|
 | TDAH | V2.1 | `main` |
 | DYS | V3 | `main` |
-| TSA | V2 | `main` |
+| TSA | V3 (en évaluation) | `claude/wonderful-fermat-enaoG` |
 | Psychologie rigoureuse | V6 | `main` |
-| Haute densité cognitive | V3 (stable) | `claude/wonderful-fermat-enaoG` |
-| Douleur chronique / Fatigue cognitive | V3 (stable) | `claude/wonderful-fermat-enaoG` |
+| Haute densité cognitive | V3 (stable) | `main` |
+| Douleur chronique / Fatigue cognitive | V3 (stable) | `main` |
