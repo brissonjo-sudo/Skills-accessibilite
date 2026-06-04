@@ -11,6 +11,24 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.7.0] — 2026-06-04
+
+### Ajouté
+
+- **eval/analyse_fatigue_v3_2llm.md** — run 2-LLM V3 (Mistral + Gemini) : 8/8 PASS les deux providers.
+  Cas mélatonine (SFC) corrigé sur Mistral (V1 : 0/8, V2 : 0/8, V3 : PASS).
+  **skill_accessibilite_douleur_chronique_fatigue_cognitive_V3.md déclaré VERSION STABLE.**
+  Résumé 3-providers : Claude 8/8, Mistral 8/8, Gemini 8/8.
+
+- **eval/results_fatigue_claude_v3.json** + **eval/analyse_fatigue_v3_claude.md** — run Claude V3 (16 sous-agents) : 8/8 PASS, silencieux 8/8.
+
+### Modifié
+
+- **notes/Skill Douleur Chronique Fatigue Cognitive.md** — statut → stable, tableau runs mis à jour.
+- **notes/Projet Skills Accessibilité.md** — skill V3 ajouté dans la table des skills stables, roadmap cochée.
+
+---
+
 ## [1.6.0] — 2026-06-04
 
 ### Modifié
@@ -140,3 +158,4 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 | TSA | V2 | `main` |
 | Psychologie rigoureuse | V6 | `main` |
 | Haute densité cognitive | V3 (stable) | `claude/wonderful-fermat-enaoG` |
+| Douleur chronique / Fatigue cognitive | V3 (stable) | `claude/wonderful-fermat-enaoG` |

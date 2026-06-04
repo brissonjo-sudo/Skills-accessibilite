@@ -1,7 +1,7 @@
 ---
 tags: [skill, accessibilite, douleur-chronique, fatigue-cognitive, brain-fog, forme]
 version: V3
-statut: en évaluation (run V3 à lancer)
+statut: stable
 ---
 
 # Skill Accessibilité Douleur Chronique / Fatigue Cognitive — V3
@@ -48,11 +48,11 @@ Douleur chronique, fatigue cognitive, brouillard mental (brain fog), fibromyalgi
 
 ## Statut empirique du run
 
-| Provider | with_skill | Application silencieuse |
+| Provider | with_skill | Notes |
 |---|---|---|
-| Claude (sonnet-4-6, 16 sous-agents) | 8/8 PASS | 8/8 |
-| Mistral Large | _run 2-LLM à lancer_ | — |
-| Gemini 2.5 Flash | _run 2-LLM à lancer_ | — |
+| Claude (sonnet-4-6, 16 sous-agents) | 8/8 PASS V1 + V3 | Silencieux 8/8 |
+| Mistral Large | **8/8 PASS V3** ✅ | V1 : 7/8, V2 : 7/8, V3 : 8/8 — preamble méta bénin sur cas mélatonine |
+| Gemini 2.5 Flash | **8/8 PASS V2+V3** ✅ | V1 : 7/8, V2 : 8/8, V3 : 8/8 |
 
 ## Historique versions
 
@@ -60,4 +60,4 @@ Douleur chronique, fatigue cognitive, brouillard mental (brain fog), fibromyalgi
 |---|---|
 | V1 | Première version — déclencheur dual, réponse d'abord, modularité optionnelle, anti-injonction, anti-positivité toxique, sécurité éthique prioritaire. Run Claude 8/8. Run 2-LLM : Mistral 7/8, Gemini 7/8. |
 | V2 | Correctif ciblé : exception question-définition simple (1-2 phrases, sans couche optionnelle). Diagnostic run 2-LLM V1 : inflation sur définitions atomiques même étiquetées optionnelles. Run 2-LLM : Gemini 8/8 ✅, Mistral 7/8 (cas mélatonine résistant). |
-| V3 | Renforcement règle absolue : aucune couche optionnelle même brève/conditionnelle sur définition atomique ; exemple de calibrage négatif ajouté. |
+| V3 | Renforcement règle absolue : aucune couche optionnelle même brève/conditionnelle sur définition atomique ; exemple de calibrage négatif ajouté. Run 2-LLM : Mistral 8/8 ✅, Gemini 8/8 ✅ — **VERSION STABLE** |
