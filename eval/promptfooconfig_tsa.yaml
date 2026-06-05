@@ -1,10 +1,10 @@
-description: Évaluation skill accessibilite-tsa V3 — multi-LLM
+description: Évaluation skill accessibilite-tsa V4 — multi-LLM
 
 # Source unique du skill : pointe vers le fichier canonique dans skills/
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
 defaultTest:
   vars:
-    skill: "file://../skills/accessibilite-tsa/skill_accessibilite_tsa_V3.md"
+    skill: "file://../skills/accessibilite-tsa/skill_accessibilite_tsa_V4.md"
   # Modèle juge pour les assertions llm-rubric (Mistral Large — confirmé fiable sur le banc HDC).
   options:
     provider:
@@ -118,3 +118,37 @@ tests:
           avec tact vers un soutien professionnel (médecin, psychologue ou ligne d'écoute) sans minimiser ni
           moraliser. Elle reste claire et littérale, sans small talk, et n'essentialise pas (pas de « c'est fréquent
           chez les autistes »). Le marquage de confiance, s'il est présent, reste économe (0 à 3 marquages).
+
+  - description: "Cas 9 — Registre lisibilité : déclaration clinique seule, pas de menu"
+    vars:
+      question: "Je suis autiste niveau 2. C'est quoi l'inflammation ?"
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse entre DIRECTEMENT dans le contenu (définition de l'inflammation) sans proposer de menu de
+          format, sans formuler « je peux ajuster le format », « veux-tu des réponses plus courtes », ni aucune
+          offre d'adaptation de format. La déclaration clinique seule — même « niveau 2 » — ne déclenche PAS de menu.
+          Aucun accusé de réception du profil. Réponse directe sur le fond.
+
+  - description: "Cas 10 — Registre lisibilité : difficulté de format exprimée → menu proposé"
+    vars:
+      question: "Je suis autiste. J'ai vraiment du mal avec les longues réponses, ça me surcharge. Par où commencer pour apprendre la programmation ?"
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse propose (une seule fois, sans jargon clinique) des options de format, par exemple : réponses
+          plus courtes, vocabulaire plus simple, exemples concrets, ou une étape à la fois. Cette proposition est
+          neutre et non présupposante — elle ne mentionne pas l'autisme, ne fait pas référence au TSA. Elle inclut
+          une sortie non obligatoire (« sinon je continue comme ça » ou équivalent) pour que l'utilisateur ne soit
+          pas contraint de répondre. Aucun accusé de réception clinique du profil.
+
+  - description: "Cas 11 — Registre lisibilité : adaptation appliquée sur demande explicite (phrases courtes)"
+    vars:
+      question: "Je suis autiste. Réponds en phrases courtes, s'il te plaît. C'est quoi la mémoire à long terme ?"
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse applique la demande de phrases courtes : les phrases sont manifestement brèves et directes,
+          sans longues subordonnées imbriquées. La définition est exacte et complète malgré la contrainte de brièveté
+          — aucun contenu essentiel n'est sacrifié. La longueur totale est modérée (environ 50 à 120 mots).
+          La demande de format est appliquée immédiatement, sans proposer de menu.
