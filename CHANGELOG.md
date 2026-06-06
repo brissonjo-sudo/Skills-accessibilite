@@ -8,7 +8,38 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 ## [Non publié]
 
 - Bilan de l'écosystème (`docs/bilan_ecosysteme_skills_accessibilite.md`) — à venir
-- Skill TSA niveau 2 clinique (Phase 2) — à venir, sur base saine V3
+
+---
+
+## [1.11.0] — 2026-06-06
+
+### Ajouté
+
+- **eval/results_tsa_v4.json** + **eval/analyse_tsa_v4_2llm.md** — run 2-LLM V4 (Mistral Large + Gemini 2.5 Flash) :
+  Mistral with_skill 11/11 PASS, Gemini with_skill 10/11 PASS (Cas 3 anti-dérobade : limitation RLHF structurelle documentée).
+  Nouveaux cas 9/10/11 (registre lisibilité) : 100% PASS tous providers, with_skill et baseline.
+  **skill_accessibilite_tsa_V4.md déclaré VERSION STABLE.**
+
+- **eval/analyse_tsa_v4_claude.md** — run Claude V4 (11 sous-agents) : 11/11 PASS, application silencieuse 11/11.
+
+### Modifié
+
+- **notes/Skill TSA.md** — V3 → V4, statut stable, tableau runs mis à jour (11 cas).
+- **notes/Projet Skills Accessibilité.md** — TSA mis à jour V4 dans la table des skills stables.
+
+---
+
+## [1.10.0] — 2026-06-06
+
+### Ajouté
+
+- **skill_accessibilite_tsa_V4.md** — itération registre de lisibilité adaptable.
+  Conclusion de l'analyse à 4 sous-agents (lentilles clinique, architecture, anti-validisme, testabilité) :
+  pas de skill TSA niveau 2 séparé (duplication 70%, essentialisation de forme, non falsifiable).
+  Delta net de V3 : **registre de lisibilité adaptable** — menu de format neutre déclenché par besoin
+  exprimé (pas par déclaration clinique). Adaptations sur demande uniquement (≤120 mots, mots courants,
+  exemples concrets, étape à la fois). Anti-essentialisation préservée intacte. Délégation aux skills
+  DYS/fatigue co-actifs. Point 13 d'auto-vérification. Harnais étendu à 11 cas (3 nouveaux : C9, C10, C11).
 
 ---
 
@@ -196,7 +227,7 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 |---|---|---|
 | TDAH | V2.1 | `main` |
 | DYS | V3 | `main` |
-| TSA | V3 (stable) | `main` |
+| TSA | V4 (stable) | `claude/wonderful-fermat-enaoG` |
 | Psychologie rigoureuse | V6 | `main` |
 | Haute densité cognitive | V3 (stable) | `main` |
 | Douleur chronique / Fatigue cognitive | V3 (stable) | `main` |
