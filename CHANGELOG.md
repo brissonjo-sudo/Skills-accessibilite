@@ -11,6 +11,29 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.12.0] — 2026-06-07
+
+### Ajouté
+
+- **skills/accessibilite-visuelle/skill_accessibilite_visuelle_V1.md** — nouveau skill de forme pour les utilisateurs
+  malvoyants et non-voyants/lecteurs d'écran. Deux profils couverts : basse vision (aération, hiérarchie sémantique)
+  et cécité/lecteur d'écran (lisibilité linéaire, pas d'ASCII art, pas d'emojis décoratifs, tableaux auto-suffisants).
+  Application silencieuse (contrainte absolue). Anti-essentialisation. Alternatives textuelles pour tout contenu visuel.
+
+- **eval/promptfooconfig_visuel.yaml** — harnais 8 cas, 2 conditions (with_skill / baseline), 2 LLMs
+  (Mistral Large, Gemini 2.5 Flash). Cas couverts : application silencieuse, emojis décoratifs, références
+  positionnelles, ASCII art, tableaux, contenu visuel, structure sémantique des titres, sécurité éthique.
+
+- **eval/analyse_visuel_v1_claude.md** — run Claude V1 (8 sous-agents) : 8/8 PASS, application silencieuse 8/8.
+
+- **notes/Skill Accessibilité Visuelle.md** — note Obsidian du skill V1.
+
+### Modifié
+
+- **notes/Projet Skills Accessibilité.md** — Skill Accessibilité Visuelle ajouté dans la table (en cours d'évaluation).
+
+---
+
 ## [1.11.0] — 2026-06-06
 
 ### Ajouté

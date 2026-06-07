@@ -22,6 +22,7 @@ statut: stable
 | [[Skill TSA]] | V4 | `skills/accessibilite-tsa/` | ✅ Stable |
 | [[Skill HDC]] | V3 | `skills/accessibilite-haute-densite-cognitive/` | ✅ Stable |
 | [[Skill Douleur Chronique Fatigue Cognitive]] | V3 | `skills/accessibilite-douleur-chronique-fatigue-cognitive/` | ✅ Stable |
+| [[Skill Accessibilité Visuelle]] | V1 | `skills/accessibilite-visuelle/` | 🔄 En cours d'évaluation |
 
 ## Architecture
 

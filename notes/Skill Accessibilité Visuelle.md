@@ -44,7 +44,7 @@ Deux profils couverts :
 
 | Provider | with_skill | Application silencieuse |
 |---|---|---|
-| Claude (sous-agents, 8 cas) | — | — |
+| Claude (sonnet-4-6, 8 sous-agents) | 8/8 PASS | 8/8 |
 | Mistral Large | — | — |
 | Gemini 2.5 Flash | — | — |
 
