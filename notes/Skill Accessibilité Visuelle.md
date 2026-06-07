@@ -1,7 +1,7 @@
 ---
 tags: [skill, accessibilite, visuel, basse-vision, lecteur-ecran, forme]
 version: V1
-statut: en cours d'évaluation
+statut: stable
 ---
 
 # Skill Accessibilité Visuelle — V1
@@ -45,8 +45,8 @@ Deux profils couverts :
 | Provider | with_skill | Application silencieuse |
 |---|---|---|
 | Claude (sonnet-4-6, 8 sous-agents) | 8/8 PASS | 8/8 |
-| Mistral Large | — | — |
-| Gemini 2.5 Flash | — | — |
+| Mistral Large | 8/8 PASS | 8/8 |
+| Gemini 2.5 Flash | 5/5 évalués PASS (3 erreurs 503) | 5/5 |
 
 ## Historique versions
 

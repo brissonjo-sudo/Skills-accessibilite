@@ -22,7 +22,7 @@ statut: stable
 | [[Skill TSA]] | V4 | `skills/accessibilite-tsa/` | ✅ Stable |
 | [[Skill HDC]] | V3 | `skills/accessibilite-haute-densite-cognitive/` | ✅ Stable |
 | [[Skill Douleur Chronique Fatigue Cognitive]] | V3 | `skills/accessibilite-douleur-chronique-fatigue-cognitive/` | ✅ Stable |
-| [[Skill Accessibilité Visuelle]] | V1 | `skills/accessibilite-visuelle/` | 🔄 En cours d'évaluation |
+| [[Skill Accessibilité Visuelle]] | V1 | `skills/accessibilite-visuelle/` | ✅ Stable |
 
 ## Architecture
 
@@ -40,7 +40,7 @@ statut: stable
 - [x] Skill haute densité cognitive / HPI — V3 stable (harnais promptfoo, 3 providers testés)
 - [x] [[Skill Douleur Chronique Fatigue Cognitive]] — V3 stable (Claude 8/8, Mistral 8/8, Gemini 8/8)
 - [x] Skill TSA niveau 2 — recadré : couvert par [[Skill TSA]] V4 (registre de lisibilité adaptable, besoin exprimé, pas catégorie clinique)
-- [ ] [[Skill Accessibilité Visuelle]]
+- [x] [[Skill Accessibilité Visuelle]] — V1 stable (Claude 8/8, Mistral 8/8, Gemini 5/5 évalués)
 - [x] Tests multi-LLM systématiques pour chaque nouveau skill — harnais promptfoo rodé et réutilisable
 
 ## Date de publication

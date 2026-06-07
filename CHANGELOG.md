@@ -11,6 +11,23 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.13.0] — 2026-06-07
+
+### Ajouté
+
+- **eval/results_visuel_v1.json** + **eval/analyse_visuel_v1_2llm.md** — run 2-LLM V1 (Mistral Large + Gemini 2.5 Flash) :
+  Mistral with_skill 8/8 PASS, application silencieuse 8/8.
+  Gemini with_skill 5/5 évalués PASS (3 erreurs 503 infrastructure — API indisponible, pas d'échec du skill).
+  Démarque baseline Mistral : C1 FAIL sans skill (annonce du mode accessibilité) → PASS avec skill.
+  **skill_accessibilite_visuelle_V1.md déclaré VERSION STABLE.**
+
+### Modifié
+
+- **notes/Skill Accessibilité Visuelle.md** — statut → stable, tableau runs mis à jour.
+- **notes/Projet Skills Accessibilité.md** — visuel V1 stable dans la table + roadmap cochée.
+
+---
+
 ## [1.12.0] — 2026-06-07
 
 ### Ajouté
