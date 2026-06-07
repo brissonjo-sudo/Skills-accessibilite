@@ -1,12 +1,12 @@
-# Harnais d'évaluation — skill accessibilite-haute-densite-cognitive V1
+# Harnais d'évaluation — Écosystème Skills Accessibilité
 
-Évalue le skill HDC sur deux conditions (avec / sans) et deux LLMs (GPT-5.5, Gemini 3.1 Pro).
+Évalue chaque skill sur deux conditions (avec skill / baseline sans skill) et deux LLMs (Mistral Large, Gemini 2.5 Flash).
 
 ## Prérequis
 
 - Node.js LTS
 - promptfoo installé globalement : `npm install -g promptfoo`
-- Clés API OpenAI et Google AI Studio
+- Clés API renseignées dans `eval/.env`
 
 ## Installation
 
@@ -18,39 +18,63 @@ cp .env.example .env
 
 ## Lancement
 
-Depuis le dossier `eval/` :
+### Tous les harnais (runner unique)
 
 ```bash
-promptfoo eval -o results.json
+cd eval/
+./run_all.sh
+```
+
+### Un harnais spécifique
+
+```bash
+cd eval/
+promptfoo eval --config promptfooconfig_dys.yaml --output results_dys.json
 promptfoo view
 ```
 
-`results.json` contient les résultats bruts. Le pousser sur la branche pour analyse partagée.
+Chaque run produit un fichier `results_<skill>.json`. Le pousser sur la branche pour analyse partagée.
 
-## Structure des tests
+## Harnais disponibles
 
-| Cas | Type | Objet |
-|-----|------|-------|
-| 1 | Déclaration explicite HPI | Théorie de l'attachement — profondeur |
-| 2 | Déclaration explicite zèbre | Biais de confirmation — mécanismes |
-| 3 | Question multi-couches (sans déclaration) | Soi mémoriel vs expérientiel (Kahneman) |
-| 4 | Régression — sujet simple + déclaration HDC | Définition d'un préjugé |
-| 5 | Co-activation skill 1 (psychologie) | Relations toxiques — multi-cadres |
-| 6 | Anti-simplification technique | Limites épistémologiques des méta-analyses |
-| **7** | **Variante neutre sans « HPI »** | **Dissonance cognitive — déclenchement par besoin** |
-| **8** | **Variante neutre sans « HPI »** | **Corrélation vs causalité — déclenchement par besoin** |
+| Skill | Config | Cas | Skills testés |
+|-------|--------|-----|---------------|
+| Haute densité cognitive V3 | `promptfooconfig.yaml` | 8 | application silencieuse, profondeur, anti-essentialisation HDC, co-activation |
+| Accessibilité visuelle V1 | `promptfooconfig_visuel.yaml` | 8 | application silencieuse, emojis, références positionnelles, ASCII art, tableaux, sécurité éthique |
+| TSA V4 | `promptfooconfig_tsa.yaml` | 11 | application silencieuse, littéralité, prévisibilité, registre lisibilité, anti-essentialisation, sécurité |
+| Douleur chronique / Fatigue V3 | `promptfooconfig_fatigue.yaml` | 8 | application silencieuse, front-loading, modularité, anti-injonction, exception question-définition |
+| DYS V3 | `promptfooconfig_dys.yaml` | 8 | application silencieuse, phrases courtes, anti-essentialisation DYS, co-activation, sécurité éthique |
+| TDAH V2.1 | `promptfooconfig_tdah.yaml` | 8 | application silencieuse, action unique, chunking, anti-moralisation, anti-essentialisation TDAH |
+| Psychologie rigoureuse V6 | `promptfooconfig_psychologie.yaml` | 8 | marquage différencié, non-prescription, anti-essentialisation, mention pro, sécurité éthique |
 
-**Les cas 7 et 8 sont prioritaires** : ils valident que le skill se déclenche sur le besoin communicationnel exprimé seul, sans le mot « HPI ».
+## Structure des assertions
+
+Chaque harnais mélange deux types d'assertions :
+
+**Déterministes (`javascript`)** — vérifiables par regex, pas de juge LLM :
+- Application silencieuse : détection de formulations interdites (« mode DYS activ », « skill activ »…)
+- Anti-essentialisation : détection de généralisations catégorielles
+- Anti-prescription : détection de « tu devrais », « il faut que »
+- Anti-relance cascade : comptage des `?` en fin de réponse
+- Plafond de mots : comptage simple
+- Anti-emojis (pour DYS, Visuelle)
+
+**Sémantiques (`llm-rubric`)** — évalués par le juge LLM (`mistral:mistral-small-latest`) :
+- Qualité du fond (profondeur, nuance, rigueur)
+- Cohérence de la forme (structure, aération)
+- Co-activations
+
+> **Juge** : `mistral:mistral-small-latest` (non testé comme provider) — évite la circularité avec `mistral-large-latest`.
+
+## Erreurs API (503, 429)
+
+Les erreurs d'infrastructure (Gemini 503, quota dépassé) produisent des résultats avec `failureReason: 2`.
+À distinguer des échecs de skill (`failureReason: 1`). Le script `run_all.sh` exclut ces erreurs du score.
 
 ## Source unique du skill
 
-Le fichier `promptfooconfig.yaml` pointe directement vers le skill canonique :
-
-```
-../skills/accessibilite-haute-densite-cognitive/skill_accessibilite_haute_densite_cognitive_V1.md
-```
-
-Pour changer de version (ex. V1 → V2), mettre à jour uniquement la ligne `skill:` du `defaultTest` dans `promptfooconfig.yaml`. Aucune copie du skill dans `eval/`.
+Chaque config pointe directement vers le fichier canonique dans `skills/` via `file://..skills/...`.
+**Aucune copie du skill dans `eval/`.** Pour changer de version, mettre à jour uniquement la ligne `skill:` du `defaultTest`.
 
 ## Providers actifs
 
@@ -58,29 +82,15 @@ Pour changer de version (ex. V1 → V2), mettre à jour uniquement la ligne `ski
 |----------|--------|-----|
 | Mistral AI | `mistral-large-latest` | `MISTRAL_API_KEY` |
 | Google AI Studio | `gemini-2.5-flash` | `GOOGLE_API_KEY` |
+| Mistral AI (juge) | `mistral-small-latest` | `MISTRAL_API_KEY` |
 
-Le **modèle juge** des assertions `llm-rubric` est fixé sur `mistral:mistral-large-latest`
-(clé `MISTRAL_API_KEY`). Voir `defaultTest.options.provider` dans `promptfooconfig.yaml`.
-
-> Notes providers :
-> - Grok (xAI) retiré — compte sans crédits (HTTP 403). Pour le réactiver : créditer xAI puis ajouter
->   `openai:chat:grok-3` avec `apiBaseUrl: https://api.x.ai/v1`.
-> - Gemini 3.1 Pro Preview retiré — indisponible en tier gratuit (HTTP 429, `free_tier limit: 0`).
->   Remplacé par `gemini-2.5-flash` (disponible en gratuit). Pour utiliser Gemini 3.1 Pro, activer
->   la facturation sur le compte Google AI Studio.
-
-## Analyse des résultats
-
-Priorités d'analyse (dans l'ordre) :
-
-1. **Cas 7 et 8** : le skill se déclenche-t-il sans le mot « HPI » ? Les réponses avec-skill sont-elles plus denses/nuancées que baseline ?
-2. **Régressions** (cas 4) : le skill n'induit-il pas de sur-développement sur des sujets simples ?
-3. **Co-activation skill 1** (cas 5) : le marquage de confiance et la formulation impersonnelle sont-ils respectés ?
-4. **Différences inter-LLM** : un LLM produit-il plus d'essentialisation HDC ? Plus de vulgarisation forcée ?
+> Note historique :
+> - Grok (xAI) retiré — compte sans crédits (HTTP 403).
+> - Gemini 3.1 Pro Preview retiré — indisponible en tier gratuit (HTTP 429).
 
 ## Convention de versionnement
 
-Lors d'une itération du skill V1 → V2 :
-1. Créer `skills/accessibilite-haute-densite-cognitive/skill_accessibilite_haute_densite_cognitive_V2.md`
-2. Mettre à jour la ligne `skill:` dans `promptfooconfig.yaml`
+Lors d'une itération V1 → V2 :
+1. Créer le fichier `skills/<dossier>/skill_..._V2.md`
+2. Mettre à jour la ligne `skill:` dans le fichier de config correspondant
 3. Relancer `promptfoo eval` pour mesurer le delta

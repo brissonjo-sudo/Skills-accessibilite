@@ -11,6 +11,38 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.16.0] — 2026-06-07
+
+### Ajouté
+
+- **eval/promptfooconfig_dys.yaml** — harnais 8 cas pour DYS V3 (application silencieuse déterministe,
+  phrases courtes + plafond, anti-essentialisation DYS, co-activation skill 1, non-déclenchement,
+  données chiffrées, sécurité éthique).
+- **eval/promptfooconfig_tdah.yaml** — harnais 8 cas pour TDAH V2.1 (application silencieuse déterministe,
+  action unique + plafond ~150 mots, chunking > 3 étapes, anti-moralisation, anti-essentialisation TDAH,
+  co-activation skill 1, non-déclenchement fatigue ordinaire, sécurité éthique).
+- **eval/promptfooconfig_psychologie.yaml** — harnais 8 cas pour Psychologie rigoureuse V6 (marquage
+  différencié, non-prescription déterministe, anti-essentialisation déterministe, mention pro sur souffrance
+  déterministe, sécurité éthique + 3114 déterministe, plafond ~250 mots, anti-relance cascade déterministe,
+  formulation impersonnelle).
+- **eval/run_all.sh** — runner unique pour lancer tous les harnais séquentiellement, avec filtrage
+  automatique des erreurs API (failureReason 2), résumé global, et sélection partielle par arguments.
+
+### Modifié
+
+- **eval/README.md** — mis à jour pour couvrir l'écosystème complet (7 harnais), documentation des
+  assertions déterministes vs sémantiques, nouveau juge non-circulaire (`mistral-small-latest`).
+
+### Améliorations techniques
+
+- **Juge non-circulaire** : les 3 nouveaux harnais utilisent `mistral:mistral-small-latest` comme juge
+  (non testé comme provider) au lieu de `mistral-large-latest`. Réduit le biais juge/provider.
+- **Assertions déterministes** (type `javascript`) : 19 nouvelles assertions régex non-dépendantes
+  du juge LLM — application silencieuse, anti-essentialisation, anti-prescription, anti-relance,
+  plafonds de mots, anti-emojis, mention pro, référence 3114.
+
+---
+
 ## [1.15.0] — 2026-06-07
 
 ### Corrigé
