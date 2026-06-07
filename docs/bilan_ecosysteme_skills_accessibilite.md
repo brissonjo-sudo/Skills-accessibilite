@@ -232,57 +232,166 @@ Une version est stable quand les défauts résiduels sont mineurs, LLM-spécifiq
 
 ## 6. ~~Recommandations pour skill `accessibilite-tsa` (à venir)~~
 
-**Section archivée.** Le skill `accessibilite-tsa` V2 est en production (335 lignes, testé sur Gemini + Claude.ai). Les recommandations de cette section ont été appliquées lors de la rédaction des V1 et V2.
+**Section archivée.** Le skill `accessibilite-tsa` V4 est en production. Les recommandations de cette section ont été appliquées dès V1. La trajectoire V3→V4 est documentée en section 2.6.
 
-Pour le prochain skill à concevoir (profil à définir), reprendre la méthodologie de la section 5 et consulter les patterns de la section 3.
-
-### 6.1 Patterns à anticiper
-
-- **Marquage de confiance** : appliquer dès V1 le critère qualitatif + plafond opérationnel. Ne pas le découvrir en V2.
-- **Relances** : intégrer dès V1 le dispositif skill 1 V5 (par défaut absente, contraintes si présente, pas sur souffrance).
-- **Essentialisation TSA** : prévoir une section anti-essentialisation avec formulations interdites + règle anti-justification présupposante.
-- **Hiérarchie de priorités** : laisser à 4 niveaux. Ne pas promouvoir « rigueur épistémique » au niveau 2.
-- **Articulation inter-skills** : préciser dès V1 les cas d'écosystème (4 cas pour DYS, à transposer pour TSA).
-
-### 6.2 Tensions anticipées avec DYS
-
-Mentionné dans la V3 du skill DYS : « TSA peut accepter dense et précis ; DYS demande aéré. En cas de conflit non résoluble, l'aération prime. »
-
-À arbitrer en rédaction TSA : le skill TSA doit-il **demander la densité** activement, ou seulement **autoriser la densité** quand DYS n'est pas co-actif ? Recommandation : seulement autoriser, pour éviter une collision frontale.
-
-### 6.3 Tests recommandés dès V1
-
-- 5 prompts de stress sur règles distinctives TSA (à concevoir).
-- Tester sur Gemini + Claude.ai dès le premier cycle.
-- Si possible un prompt sur sujet factuel dense (équivalent du P2 sommeil) pour mesurer le marquage.
-- Un prompt de co-activation TSA + DYS pour vérifier la tension annoncée.
-
-### 6.4 Cible de longueur V1
-
-Viser 250-280 lignes maximum en V1. Le skill DYS V3 à 404 lignes est à la limite haute du gérable. Si on dépasse, consolider avant les tests.
-
-## 7. État de production des skills
-
-| Skill | Version stable | Lignes | Statut | Notes |
-|---|---|---|---|---|
-| psychologie-rigoureuse | V6 | 228 | production | référence d'écosystème |
-| accessibilite-tdah | V2.1 | 216 | production | testée sur Gemini + ChatGPT + 4 cas articulation |
-| accessibilite-dys | V3 | 404 | production | testée sur Gemini + Mistral + Claude.ai |
-| accessibilite-tsa | V2 | 335 | production | testée sur Gemini + Claude.ai |
-
-**Co-activations validées** :
-
-- skill 1 + DYS : testé en V3 sur P5 deuil. Hiérarchie tient.
-- skill 1 + TDAH : intégré dans les cycles TDAH.
-- DYS + TDAH : non testé en stress direct, articulation prévue dans les fichiers.
-
-**Co-activations à tester** lors de l'ouverture du TSA :
-
-- TSA + DYS (tension densité vs aération).
-- TSA + skill 1.
-- TSA + TDAH.
-- Triple co-activation skill 1 + TSA + DYS sur un prompt à fond psychologique.
+Pour tout nouveau skill à concevoir, reprendre la méthodologie de la section 5 et 5bis, et consulter les patterns de la section 3.
 
 ---
 
-*Document à mettre à jour à chaque clôture de cycle. Les sections 2.1, 2.2, 7 méritent un audit de précision par recoupement avec les fichiers sources si les détails comptent pour usage institutionnel.*
+## 2.4 accessibilite-haute-densite-cognitive (V1 → V3)
+
+Skill de forme. 3 versions, version stable V3. Skill déclenché sur déclaration HPI, HPE, haut potentiel, ou besoin explicite de densité cognitive.
+
+**Contexte** : skill conçu à l'origine avec un déclencheur « HPI » mais rapidement élargi au besoin communicationnel (densité, profondeur, rigueur) indépendamment du label clinique.
+
+**Défauts traités au fil des cycles** :
+
+- V1 → V2 : longueur insuffisante, structures trop plates, absence de profondeur sur les sujets complexes.
+- V2 → V3 : **pattern de preamble** découvert sur Gemini — introduction systématique avant d'entrer dans le contenu (ex : « Bien sûr, voici une réponse dense... »). Pattern identifié comme **limitation RLHF structurelle** : la contrainte de politesse de Gemini résiste à l'instruction d'application silencieuse. Solution : règle anti-preamble renforcée, mais résistance documentée comme LLM-spécifique, pas correctable par instruction.
+
+**Acquis stables V3** : densité substantielle autorisée, pas de résumé d'ouverture, pas de conclusion, rigueur épistémique maintenue, co-activation compatible avec skill 1.
+
+**Pattern méthodologique apporté** : première utilisation du harnais promptfoo avec fichier YAML dédié, 8 cas de test, 2 conditions (with_skill / baseline), 3 providers (Claude, Mistral, Gemini). Modèle reproductible adopté pour tous les skills suivants.
+
+### 2.5 accessibilite-douleur-chronique-fatigue-cognitive (V1 → V3)
+
+Skill de forme. 3 versions, version stable V3. Déclenché sur déclaration de douleur chronique, fatigue cognitive, brain fog, fibromyalgie, SFC/EM, COVID long.
+
+**Distinction avec TDAH** : le skill fatigue ne réduit pas les actions (logique TDAH), mais économise un budget cognitif limité et fluctuant — réponse d'abord, modularité optionnelle (couches additionnelles étiquetées, non imposées), anti-injonction à l'effort.
+
+**Défauts traités** :
+
+- V1 → V2 (Mistral + Gemini 7/8 chacun) : inflation conditionnelle sur questions-définitions simples — les deux providers ajoutaient une couche optionnelle même sur « c'est quoi la mélatonine ? », produisant du texte supplémentaire non demandé. Solution V2 : exception question-définition simple (réponse 1-2 phrases, sans couche optionnelle si la question est atomique).
+- V2 → V3 : exception V2 insuffisante pour Mistral (7/8 → encore 1 FAIL sur cas mélatonine SFC). Diagnostic : règle permissive interprétée comme conditionnelle, pas comme absolue. Solution V3 : règle absolue + **exemple de calibrage négatif** (Exemple 1b) montrant explicitement le pattern à éviter. Mistral : 8/8 PASS en V3.
+
+**Acquis stables V3** : réponse d'abord, modularité optionnelle étiquetée, exception question-définition absolue, anti-injonction, anti-minimisation.
+
+**Pattern méthodologique apporté** : l'**exemple de calibrage négatif** (montrer explicitement le pattern interdit, pas seulement le décrire) s'est révélé plus efficace qu'une règle abstraite. Adopté comme outil standard.
+
+### 2.6 accessibilite-tsa (V3 → V4)
+
+Prolongement de la trajectoire V1→V2 documentée en section 2 (archivé). Cette section couvre le chantier V3→V4 ouvert en juin 2026.
+
+**Chantier V3** : fiabilisation de la version niveau 1. Correctifs : application silencieuse érigée en **contrainte absolue** (en-tête de section, formulations interdites explicites), définition clinique DSM-5 corrigée (niveau ≠ DI), proportionnalité (pas de plan annoncé sur question simple), règle anti-dérobade (réponse franche d'abord). Harnais 8 cas. Claude 8/8, Mistral 8/8, Gemini 8/8. V3 stable.
+
+**Chantier V4 — question architecturale** : la roadmap prévoyait un skill TSA niveau 2 séparé (DSM-5 niveau de soutien 2). Avant rédaction, analyse à 4 sous-agents indépendants (lentilles : clinique, architecture, anti-validisme, testabilité). Convergence : **pas de skill niveau 2 séparé**. Raisons :
+1. Le niveau DSM-5 n'est pas un paramètre communicationnel — même profil clinique, besoin de langage différent selon le sujet.
+2. Duplication 70% attendue avec V3.
+3. Simplification par défaut = essentialisation de forme (imposer un langage simplifié sur déclaration clinique, sans besoin exprimé).
+4. Non falsifiable (pas de critère de test qui ne soit pas circulaire).
+
+**Solution V4 : registre de lisibilité adaptable.** Menu de format neutre déclenché par besoin exprimé (« j'ai du mal avec les longues réponses »), pas par déclaration clinique. La déclaration « je suis autiste niveau 2 » → entrée directe dans le contenu (pas de menu). La déclaration + besoin de format → menu proposé une fois, avec sortie non obligatoire. Harnais étendu à 11 cas (3 nouveaux : déclaration clinique seule, difficulté de format exprimée, adaptation appliquée). Claude 11/11, Mistral 11/11, Gemini 10/11 (Cas 3 anti-dérobade : limitation RLHF structurelle, non correctable par instruction). V4 stable.
+
+**Pattern méthodologique apporté** : le **challenge multi-sous-agents** (4 agents indépendants avec lentilles différentes) comme outil de validation architecturale avant rédaction. A permis d'éviter un skill entier avec défauts structurels.
+
+### 2.7 accessibilite-visuelle (V1)
+
+Skill de forme. V1 stable au premier cycle. Deux profils couverts : basse vision (aération, structure sémantique des titres, gras économes) et cécité/lecteur d'écran (lisibilité entièrement linéaire).
+
+**Règles distinctives** :
+- Pas de références visuelles non autonomes (couleurs comme seul vecteur d'information, positions spatiales sans ancrage textuel).
+- Pas d'ASCII art ni de diagrammes par caractères (illisibles sur lecteur d'écran).
+- Pas d'emojis décoratifs (lus à voix haute : « fusée », « étoile verte »).
+- Tableaux : une ligne d'en-tête, cellules auto-suffisantes, pas de cellules fusionnées. Si non respecté : convertir en liste de paires clé : valeur.
+- Structure sémantique des titres : pas de saut de niveau (# directement suivi de ###).
+- Alternatives textuelles pour tout contenu normalement visuel.
+
+**Résultats** : Claude 8/8, Mistral 8/8, Gemini 5/5 évalués PASS (3 erreurs 503 infrastructure). Démarque baseline Mistral (C1) : sans skill, Mistral ajoute une section « boucles et accessibilité : si tu utilises un lecteur d'écran… » — annonce du mode corrigée silencieusement par le skill.
+
+**Pattern méthodologique** : premier skill stable au premier cycle (V1), sans itération nécessaire. Hypothèse : les règles les plus spécifiques (pas d'ASCII art, pas d'emojis) sont suffisamment contra-intuitives pour être absentes du comportement par défaut, et suffisamment précises pour être correctement appliquées dès la première instruction.
+
+---
+
+## 3.7 Harnais promptfoo systématique (nouveau pattern)
+
+**Avant** (cycles TDAH, DYS, TSA V1-V2) : tests manuels sur interface Claude.ai ou ChatGPT, 5 prompts par LLM, résultats saisis à la main.
+
+**Après** (HDC, Fatigue, TSA V3-V4, Visuelle) : harnais YAML reproductible — `promptfooconfig_<skill>.yaml` par skill, `prompts/with_skill.yaml` + `prompts/baseline.yaml`, 2 conditions systématiques, 2+ providers, juge Mistral Large (`llm-rubric`), résultats en JSON exploitable.
+
+**Avantages** :
+- Reproductibilité : le même run peut être relancé à n'importe quel moment.
+- Baseline systématique : comparaison with_skill / sans skill à chaque run, permettant de mesurer l'apport réel du skill.
+- Isolation des variables : source unique du skill dans `skills/`, aucune copie dans `eval/`.
+- Audit de régression : pour chaque version, on détecte si un correctif crée un nouveau défaut sur un cas précédemment PASS.
+
+**Coût** : deux providers payants (Mistral, Gemini ou OpenAI), plus juge. Géré par clés dans `.env` non committé.
+
+**Limite identifiée** : les erreurs 503 (surcharge API Gemini) produisent des résultats `null` indiscernables a priori des échecs de skill — distinguer par le champ `failureReason` (2 = erreur API, 1 = assertion fail).
+
+### 3.8 Application silencieuse — contrainte absolue (nouveau pattern)
+
+Pattern transversal apparu progressivement, érigé en contrainte absolue à partir de TSA V3.
+
+**Définition** : le skill s'applique sans jamais nommer son mode d'activation, sans accuser réception du profil déclaré, et sans annoncer les adaptations produites.
+
+**Formulations interdites (génériques)** :
+- « Puisque tu es [profil], je vais… »
+- « Mode [profil] activé. »
+- « Pour m'adapter à [profil]… »
+- « Je vais éviter [X] pour toi. »
+
+**Avant** : les skills contenaient des règles implicites sur la discrétion, mais aucune formulation interdite explicite.
+
+**Après** : chaque skill contient une section « Contrainte absolue — application silencieuse » en tête, avec une liste de formulations interdites. L'auto-vérification inclut un point explicite sur cette contrainte.
+
+**Résultat empirique** : les trois LLMs passent systématiquement cette contrainte sur les skills récents (TSA V3-V4, Fatigue V3, Visuelle V1). L'unique exception est le pattern de preamble Gemini sur HDC (limitation RLHF, non corrigée par instruction).
+
+### 3.9 Essentialisation de forme vs essentialisation de fond (nouveau pattern)
+
+Distinction affinée en TSA V4 (challenge 4 sous-agents).
+
+**Essentialisation de fond** (connue depuis V1) : « les personnes autistes ont tendance à… », « avec ton TDAH tu as besoin de… ». Traitée dans tous les skills par anti-essentialisation.
+
+**Essentialisation de forme** (identifiée en V4) : adapter la présentation par défaut sur la base d'une déclaration clinique, sans besoin exprimé. Exemple : proposer des réponses simplifiées à quelqu'un qui a dit « je suis autiste niveau 2 » sans mentionner de difficulté de format. La simplification non demandée est une forme d'essentialisation — elle présuppose un déficit de traitement sans que l'utilisateur l'ait signalé.
+
+**Solution** : le déclencheur du registre de lisibilité est le besoin exprimé, pas la déclaration clinique. Applicable à tout skill de forme.
+
+---
+
+## 5bis. Évolution méthodologique (juin 2026)
+
+Trois évolutions majeures par rapport aux pratiques décrites en section 5 :
+
+### 5bis.1 Harnais promptfoo
+
+Voir section 3.7. Remplace les tests manuels à partir du skill HDC.
+
+### 5bis.2 Challenge multi-sous-agents
+
+Avant de rédiger une version majeure ou un nouveau skill, soumettre la question architecturale à plusieurs agents indépendants avec des lentilles différentes (clinique, architecture, anti-validisme, testabilité). Convergence forte → décision. Divergence → identifier le vrai désaccord avant de trancher.
+
+Appliqué en TSA V4 : 4 agents, convergence 4/4 sur « pas de skill niveau 2 séparé ».
+
+### 5bis.3 Analyse par sous-agents isolés (auto-évaluation)
+
+Pour le run Claude (contexte frais par cas), utiliser un sous-agent par cas de test. L'agent joue le LLM testé ET évalue sa propre réponse selon la rubrique. Avantage : contexte frais garanti, pas de contamination entre cas. Limite : l'agent évalue sa propre réponse — biais de complaisance possible, contrebalancé par le juge externe Mistral Large sur le run promptfoo.
+
+---
+
+## 7. État de production des skills (mis à jour juin 2026)
+
+| Skill | Version stable | Statut | Méthode de test | Résultats |
+|---|---|---|---|---|
+| psychologie-rigoureuse | V6 | production | Gemini + ChatGPT + Claude.ai (manuel) | référence d'écosystème |
+| accessibilite-tdah | V2.1 | production | Gemini + ChatGPT + 4 cas articulation (manuel) | référence forme |
+| accessibilite-dys | V3 | production | Gemini + Mistral + Claude.ai (manuel) | 3 cycles |
+| accessibilite-tsa | V4 | production | promptfoo 11 cas — Claude 11/11, Mistral 11/11, Gemini 10/11 | V4 stable ; Gemini C3 RLHF documenté |
+| accessibilite-haute-densite-cognitive | V3 | production | promptfoo 8 cas — 3 providers | Gemini preamble RLHF documenté |
+| accessibilite-douleur-chronique-fatigue-cognitive | V3 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 8/8 | 3 cycles |
+| accessibilite-visuelle | V1 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 5/5 évalués | stable au 1er cycle |
+
+**Co-activations validées dans les fichiers de skill** (non toutes testées en stress direct) :
+- skill 1 + DYS / TDAH / TSA / HDC / Fatigue / Visuelle : prévues dans chaque skill.
+- skill 1 + DYS : testé en stress (P5 deuil). Hiérarchie tient.
+- skill 1 + TDAH : intégré dans les cycles TDAH.
+- TSA + DYS : tension densité/aération documentée, aération prime.
+- Visuelle + HDC : lisibilité linéaire prime sur densité en co-activation.
+
+**Co-activations non encore testées en stress direct** :
+- TSA + TDAH, TSA + Fatigue, DYS + Fatigue.
+- Triple co-activation skill 1 + TSA + DYS sur prompt à fond psychologique.
+- Skill visuelle + TSA (application silencieuse × 2, compatibles en principe).
+
+---
+
+*Document mis à jour au 7 juin 2026. Les sections 2.1–2.3 couvrent les cycles manuels (mai 2026). Les sections 2.4–2.7 et 3.7–3.9 couvrent les cycles promptfoo (juin 2026). Section 7 reflète l'état de production courant.*

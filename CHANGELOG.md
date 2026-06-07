@@ -7,7 +7,23 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ## [Non publié]
 
-- Bilan de l'écosystème (`docs/bilan_ecosysteme_skills_accessibilite.md`) — à venir
+*(rien en attente)*
+
+---
+
+## [1.14.0] — 2026-06-07
+
+### Ajouté / Modifié
+
+- **docs/bilan_ecosysteme_skills_accessibilite.md** — mise à jour complète du bilan de synthèse.
+  Nouvelles sections : trajectoires HDC V1→V3, Fatigue V1→V3, TSA V3→V4, Visuelle V1.
+  Nouveaux patterns : harnais promptfoo (3.7), application silencieuse contrainte absolue (3.8),
+  essentialisation de forme vs fond (3.9). Section 5bis : évolutions méthodologiques juin 2026.
+  Section 7 mise à jour avec les 7 skills en production.
+
+- **notes/Bilan Écosystème Skills.md** — skills couverts et principes méthodologiques mis à jour.
+
+- **CHANGELOG.md** — section [Non publié] soldée.
 
 ---
 
