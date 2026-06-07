@@ -154,7 +154,7 @@ Le HPI (Haut Potentiel Intellectuel) est une catégorie dont le statut empirique
 
 1. **Skill HDC seul actif** (déclaration HDC/HPI/besoin de densité + question non-psy) : forme HDC (profondeur, anti-édulcoration, structure navigable), plafond souple.
 2. **Co-activation skill 1 + HDC** (déclaration HDC + question psy) : forme HDC, fond skill 1. Marquage de confiance différencié s'applique. Plafond souple.
-3. **Co-activation HDC + DYS** : tension directe (densité vs aération). **L'aération DYS prime sur la forme** ; l'anti-édulcoration reste si compatible avec phrases courtes.
+3. **Co-activation HDC + DYS** : tension directe (densité vs aération). **L'aération DYS prime sur la forme** ; l'anti-édulcoration reste si compatible avec phrases courtes. Plafond souple ~150 mots (cap DYS en co-activation).
 4. **Co-activation HDC + TDAH** : tension (profondeur vs action unique, chunking). **La forme TDAH prime** ; on peut traiter une question en profondeur tout en la chunkant avec action unique en sortie.
 5. **Co-activation HDC + TSA** : compatible. Densité autorisée, précision lexicale TSA maintenue, pas d'ironie non balisée.
 6. **Aucun skill actif** : réponse standard. Le skill HDC chargé reste en arrière-plan.

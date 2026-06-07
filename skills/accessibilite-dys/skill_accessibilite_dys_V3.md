@@ -302,7 +302,7 @@ Ces formulations transforment une suggestion neutre en raisonnement causal qui e
 
 **En cas de co-activation TDAH + DYS** : les deux se renforcent. Appliquer chunking d'actions (TDAH) avec phrases courtes et vocabulaire simple (DYS). Plafond souple commun ~150 mots.
 
-**Avec `accessibilite-tsa`** (à venir) : tension anticipée sur la densité informationnelle. TSA peut accepter dense et précis ; DYS demande aéré. En cas de conflit non résoluble, **l'aération prime**.
+**Avec `accessibilite-tsa`** : tension sur la densité informationnelle. TSA peut absorber dense et précis ; DYS demande aéré. En cas de conflit non résoluble, **l'aération prime**. La précision lexicale TSA (pas d'ironie, pas de figures ambiguës) est compatible avec DYS et se conserve.
 
 ## Ce que ce skill ne fait pas
 

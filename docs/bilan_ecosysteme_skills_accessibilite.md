@@ -334,7 +334,11 @@ Pattern transversal apparu progressivement, érigé en contrainte absolue à par
 
 **Après** : chaque skill contient une section « Contrainte absolue — application silencieuse » en tête, avec une liste de formulations interdites. L'auto-vérification inclut un point explicite sur cette contrainte.
 
-**Résultat empirique** : les trois LLMs passent systématiquement cette contrainte sur les skills récents (TSA V3-V4, Fatigue V3, Visuelle V1). L'unique exception est le pattern de preamble Gemini sur HDC (limitation RLHF, non corrigée par instruction).
+**Résultat empirique** : les trois LLMs passent systématiquement cette contrainte sur les skills récents (TSA V3-V4, Fatigue V3, Visuelle V1). Deux manifestations documentées de résistance RLHF :
+- **HDC V3** : Mistral 1/8 (preamble « En mode HDC… ») et Gemini 4/8 (preamble « Bien sûr, voici une réponse dense… ») — limitation structurelle, non corrigeable par instruction.
+- **TSA V4 C3** : Gemini (preamble résiduel sur question de communication autistique).
+
+Ces résistances sont LLM-spécifiques, documentées, et ne constituent pas des défauts du skill.
 
 ### 3.9 Essentialisation de forme vs essentialisation de fond (nouveau pattern)
 
@@ -376,21 +380,24 @@ Pour le run Claude (contexte frais par cas), utiliser un sous-agent par cas de t
 | accessibilite-tdah | V2.1 | production | Gemini + ChatGPT + 4 cas articulation (manuel) | référence forme |
 | accessibilite-dys | V3 | production | Gemini + Mistral + Claude.ai (manuel) | 3 cycles |
 | accessibilite-tsa | V4 | production | promptfoo 11 cas — Claude 11/11, Mistral 11/11, Gemini 10/11 | V4 stable ; Gemini C3 RLHF documenté |
-| accessibilite-haute-densite-cognitive | V3 | production | promptfoo 8 cas — 3 providers | Gemini preamble RLHF documenté |
+| accessibilite-haute-densite-cognitive | V3 | production | promptfoo 8 cas — Claude 8/8, Mistral 7/8, Gemini 4/8 applic. silencieuse | Gemini + Mistral preamble RLHF documenté |
 | accessibilite-douleur-chronique-fatigue-cognitive | V3 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 8/8 | 3 cycles |
 | accessibilite-visuelle | V1 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 5/5 évalués | stable au 1er cycle |
+
+**Règle méta de co-activation — plafonds** : en co-activation, le plafond de mots le plus bas parmi les skills actifs prime. Exemples : DYS seul ~200 mots ; DYS + skill 1 ~150 mots ; DYS + TSA + skill 1 ~150 mots. HDC (pas de plafond fixe) adopte celui du skill le plus contraignant co-actif : HDC + DYS → ~150 mots.
 
 **Co-activations validées dans les fichiers de skill** (non toutes testées en stress direct) :
 - skill 1 + DYS / TDAH / TSA / HDC / Fatigue / Visuelle : prévues dans chaque skill.
 - skill 1 + DYS : testé en stress (P5 deuil). Hiérarchie tient.
 - skill 1 + TDAH : intégré dans les cycles TDAH.
 - TSA + DYS : tension densité/aération documentée, aération prime.
+- TSA + Visuelle : compatibilité forte, règles de forme orthogonales. Documenté dans TSA V4 et Visuelle V1.
 - Visuelle + HDC : lisibilité linéaire prime sur densité en co-activation.
 
 **Co-activations non encore testées en stress direct** :
 - TSA + TDAH, TSA + Fatigue, DYS + Fatigue.
 - Triple co-activation skill 1 + TSA + DYS sur prompt à fond psychologique.
-- Skill visuelle + TSA (application silencieuse × 2, compatibles en principe).
+- Visuelle + TSA (application silencieuse × 2, compatibles en principe).
 
 ---
 

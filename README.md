@@ -14,10 +14,13 @@ Un skill est un fichier texte (`.md`) que tu charges dans ton assistant IA (Clau
 
 | Dossier | Skill | Version | Description |
 |---|---|---|---|
+| `skills/psychologie-rigoureuse/` | Psychologie rigoureuse | V6 | Cadre d'analyse psychologique non dogmatique, marquage du degré de confiance |
 | `skills/accessibilite-tdah/` | TDAH | V2.1 | Communication adaptée aux profils TDAH : structure, ancrage, charge cognitive réduite |
 | `skills/accessibilite-dys/` | DYS | V3 | Adaptation pour dyslexie, dysorthographie, dyscalculie : lisibilité, reformulation |
-| `skills/accessibilite-tsa/` | TSA | V2 | Communication adaptée aux personnes autistes : littéralité, prévisibilité, pas de sous-entendus |
-| `skills/psychologie-rigoureuse/` | Psychologie rigoureuse | V6 | Cadre d'analyse psychologique non dogmatique, marquage du degré de confiance |
+| `skills/accessibilite-tsa/` | TSA | V4 | Communication adaptée aux personnes autistes : littéralité, prévisibilité, pas de sous-entendus |
+| `skills/accessibilite-haute-densite-cognitive/` | Haute densité cognitive | V3 | Réponses denses et rigoureuses pour profils HDC/HPI : profondeur, rigueur épistémique |
+| `skills/accessibilite-douleur-chronique-fatigue-cognitive/` | Douleur chronique / Fatigue cognitive | V3 | Adaptation pour fatigue cognitive et douleur persistante : économie cognitive, modularité |
+| `skills/accessibilite-visuelle/` | Accessibilité visuelle | V1 | Adaptation pour basse vision et cécité : structure sémantique, alternatives textuelles, compatibilité lecteur d'écran |
 
 Le fichier `docs/bilan_ecosysteme_skills_accessibilite.md` présente la philosophie commune et les complémentarités entre skills.
 
@@ -38,7 +41,7 @@ Si tu n'as pas accès au prompt système, colle le contenu du skill au tout déb
 
 ### Option 3 — Plateforme Claude Code (Anthropic)
 
-Dépose le fichier `.md` dans ton dossier `.claude/skills/` et il sera disponible via la commande `/nom-du-skill`.
+Dépose le fichier `.md` dans ton dossier `.claude/commands/` et il sera disponible via la commande `/nom-du-fichier`.
 
 ---
 
@@ -50,28 +53,40 @@ skills-accessibilite/
 ├── CHANGELOG.md
 ├── .gitignore
 ├── skills/
+│   ├── psychologie-rigoureuse/
+│   │   └── skill_psychologie_rigoureuse_V6.md
 │   ├── accessibilite-tdah/
 │   │   └── skill_accessibilite_tdah_V2_1.md
 │   ├── accessibilite-dys/
 │   │   └── skill_accessibilite_dys_V3.md
 │   ├── accessibilite-tsa/
-│   │   └── skill_accessibilite_tsa_V2.md
-│   └── psychologie-rigoureuse/
-│       └── skill_psychologie_rigoureuse_V6.md
+│   │   └── skill_accessibilite_tsa_V4.md
+│   ├── accessibilite-haute-densite-cognitive/
+│   │   └── skill_accessibilite_haute_densite_cognitive_V3.md
+│   ├── accessibilite-douleur-chronique-fatigue-cognitive/
+│   │   └── skill_accessibilite_douleur_chronique_fatigue_cognitive_V3.md
+│   └── accessibilite-visuelle/
+│       └── skill_accessibilite_visuelle_V1.md
+├── eval/
+│   ├── promptfooconfig.yaml
+│   ├── promptfooconfig_visuel.yaml
+│   ├── prompts/
+│   └── README.md
 └── docs/
     └── bilan_ecosysteme_skills_accessibilite.md
 ```
 
-Chaque skill est dans son propre dossier pour faciliter l'ajout de variantes (ex. `V3`, version "enfant", etc.).
+Chaque skill est dans son propre dossier pour faciliter l'ajout de variantes (ex. `V2`, version "enfant", etc.).
 
 ---
 
 ## Feuille de route
 
 Skills en cours de développement :
-- `accessibilite-douleur-chronique/` — adaptation pour fatigue cognitive et douleur persistante
-- `accessibilite-tsa-niveau2/` — version approfondie du skill TSA
-- `accessibilite-visuelle/` — description d'images et adaptation pour malvoyance
+- `accessibilite-tsa-niveau2/` — la roadmap TSA niveau 2 a été abandonnée après analyse : le niveau DSM-5 n'est pas un paramètre communicationnel, et la simplification imposée sur déclaration clinique constitue une essentialisation de forme. Voir `docs/bilan_ecosysteme_skills_accessibilite.md` §2.6.
+
+Skills envisagés :
+- Harnais promptfoo pour les 3 skills fondateurs (TDAH, DYS, Psychologie rigoureuse)
 
 ---
 

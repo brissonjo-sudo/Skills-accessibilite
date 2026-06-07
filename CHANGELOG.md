@@ -11,6 +11,30 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.15.0] — 2026-06-07
+
+### Corrigé
+
+- **docs/bilan_ecosysteme_skills_accessibilite.md §3.8** — erreur factuelle corrigée : la résistance RLHF
+  à l'application silencieuse sur HDC n'est pas une « exception unique Gemini ». Données réelles :
+  Mistral 1/8 FAIL (preamble), Gemini 4/8 FAIL (preamble). Deux manifestations documentées :
+  HDC (Mistral + Gemini) et TSA V4 C3 (Gemini).
+- **docs/bilan_ecosysteme_skills_accessibilite.md §7** — ligne HDC corrigée avec résultats précis
+  (Claude 8/8, Mistral 7/8, Gemini 4/8 application silencieuse) et les deux providers mentionnés.
+- **docs/bilan_ecosysteme_skills_accessibilite.md §7** — ajout règle méta co-activation plafonds :
+  le plafond le plus bas parmi les skills actifs prime. Cas HDC+DYS documenté (~150 mots).
+- **skills/accessibilite-dys/skill_accessibilite_dys_V3.md** — suppression mention « à venir » sur TSA
+  (TSA V4 est en production). Règle d'arbitrage densité/aération précisée.
+- **skills/accessibilite-tsa/skill_accessibilite_tsa_V4.md** — ajout de la section co-activation
+  avec `accessibilite-visuelle` (réciprocité manquante).
+- **skills/accessibilite-haute-densite-cognitive/skill_accessibilite_haute_densite_cognitive_V3.md** —
+  ajout plafond ~150 mots sur co-activation HDC+DYS.
+- **README.md** — refonte complète : 7 skills (vs 4), versions correctes (TSA V4, etc.), roadmap
+  nettoyée (TSA niveau 2 abandonné documenté, Visuelle livré), instruction Claude Code corrigée
+  (`.claude/commands/` au lieu de `.claude/skills/`).
+
+---
+
 ## [1.14.0] — 2026-06-07
 
 ### Ajouté / Modifié

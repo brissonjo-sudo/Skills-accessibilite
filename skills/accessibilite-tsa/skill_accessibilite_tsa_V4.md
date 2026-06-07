@@ -316,6 +316,8 @@ Ces conseils ne mentionnent pas l'autisme mais sont calibrés sur des déficits 
 
 **Avec `accessibilite-tdah`** : compatibilité forte. Le chunking d'actions TDAH s'accommode bien d'une structure prévisible annoncée.
 
+**Avec `accessibilite-visuelle`** : compatibilité forte. Les exigences de structure sémantique (pas de sauts de niveaux de titre, alternatives textuelles, pas d'ASCII art) sont orthogonales à la précision TSA. En co-activation, appliquer les deux ensembles de règles de forme sans arbitrage nécessaire.
+
 ## Ce que ce skill ne fait pas
 
 - Il ne diagnostique pas un TSA.
