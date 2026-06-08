@@ -7,7 +7,23 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ## [Non publié]
 
-*(rien en attente)*
+### Refactor — skills importables (branche `refactor/skills-importables`)
+
+- **Conformité format Claude Skills** : chaque skill renommé en `SKILL.md` (nom requis), une
+  seule version conservée par skill (la plus récente). Versions historiques supprimées du dépôt
+  (toujours dans l'historique git) : HDC V1/V2, Fatigue V1/V2, TSA V2/V3.
+- **Descriptions YAML ≤ 1024 caractères** : raccourcies pour TSA V4 (1082→819), Fatigue V3
+  (1066→662) et DYS V3 (1002→693). Les 4 autres étaient déjà conformes.
+- **Choix d'architecture** : skills gardés en un seul `SKILL.md` (pas de découpage
+  guidelines/examples). Justification : aucune limite de taille dure (la « limite 16 KB » du
+  brief n'existe pas — limite réelle 30 MB/bundle), tous les skills < 500 lignes (seuil de
+  découpage recommandé), et les exemples de calibrage sont comportementalement essentiels +
+  couplés au harnais d'éval. Garder le contenu complet préserve la fidélité de l'évaluation et
+  la robustesse des règles de sécurité (toujours actives, pas chargées conditionnellement).
+- **eval/** : les 7 configs promptfoo pointent désormais vers `SKILL.md`.
+- **README** : structure mise à jour, instructions d'import via ZIP (Capabilities).
+- **build_release.sh** : génère un ZIP par skill (dossier à la racine) pour les GitHub Releases.
+  `dist/` ajouté au `.gitignore`.
 
 ---
 
