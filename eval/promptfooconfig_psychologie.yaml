@@ -4,7 +4,7 @@ description: Évaluation skill psychologie-rigoureuse V6 — multi-LLM
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
 defaultTest:
   vars:
-    skill: "file://../skills/psychologie-rigoureuse/skill_psychologie_rigoureuse_V6.md"
+    skill: "file://../skills/psychologie-rigoureuse/SKILL.md"
   # Juge non-circulaire : mistral-small-latest n'est pas un provider testé.
   options:
     provider:

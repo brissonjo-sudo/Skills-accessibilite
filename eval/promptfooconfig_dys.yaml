@@ -4,7 +4,7 @@ description: Évaluation skill accessibilite-dys V3 — multi-LLM
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
 defaultTest:
   vars:
-    skill: "file://../skills/accessibilite-dys/skill_accessibilite_dys_V3.md"
+    skill: "file://../skills/accessibilite-dys/SKILL.md"
   # Juge non-circulaire : mistral-small-latest n'est pas un provider testé.
   options:
     provider:

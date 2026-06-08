@@ -4,7 +4,7 @@ description: Évaluation skill accessibilite-tsa V4 — multi-LLM
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
 defaultTest:
   vars:
-    skill: "file://../skills/accessibilite-tsa/skill_accessibilite_tsa_V4.md"
+    skill: "file://../skills/accessibilite-tsa/SKILL.md"
   # Modèle juge pour les assertions llm-rubric (Mistral Large — confirmé fiable sur le banc HDC).
   options:
     provider:

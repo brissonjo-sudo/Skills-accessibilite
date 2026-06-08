@@ -4,7 +4,7 @@ description: Évaluation skill accessibilite-tdah V2.1 — multi-LLM
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
 defaultTest:
   vars:
-    skill: "file://../skills/accessibilite-tdah/skill_accessibilite_tdah_V2_1.md"
+    skill: "file://../skills/accessibilite-tdah/SKILL.md"
   # Juge non-circulaire : mistral-small-latest n'est pas un provider testé.
   options:
     provider:

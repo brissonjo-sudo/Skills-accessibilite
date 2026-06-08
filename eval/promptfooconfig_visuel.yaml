@@ -4,7 +4,7 @@ description: Évaluation skill accessibilite-visuelle V1 — multi-LLM
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
 defaultTest:
   vars:
-    skill: "file://../skills/accessibilite-visuelle/skill_accessibilite_visuelle_V1.md"
+    skill: "file://../skills/accessibilite-visuelle/SKILL.md"
   # Modèle juge pour les assertions llm-rubric (Mistral Large — confirmé fiable sur le banc HDC).
   options:
     provider:
