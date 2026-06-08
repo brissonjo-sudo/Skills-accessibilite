@@ -7,6 +7,14 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ## [Non publié]
 
+*(rien en attente)*
+
+---
+
+## [1.17.0] — 2026-06-08
+
+Première version publique importable dans Claude (Capabilities / ZIP).
+
 ### Refactor — skills importables (branche `refactor/skills-importables`)
 
 - **Conformité format Claude Skills** : chaque skill renommé en `SKILL.md` (nom requis), une
