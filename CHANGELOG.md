@@ -7,7 +7,135 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ## [Non publié]
 
-- Bilan de l'écosystème (`docs/bilan_ecosysteme_skills_accessibilite.md`) — à venir
+### Refactor — skills importables (branche `refactor/skills-importables`)
+
+- **Conformité format Claude Skills** : chaque skill renommé en `SKILL.md` (nom requis), une
+  seule version conservée par skill (la plus récente). Versions historiques supprimées du dépôt
+  (toujours dans l'historique git) : HDC V1/V2, Fatigue V1/V2, TSA V2/V3.
+- **Descriptions YAML ≤ 1024 caractères** : raccourcies pour TSA V4 (1082→819), Fatigue V3
+  (1066→662) et DYS V3 (1002→693). Les 4 autres étaient déjà conformes.
+- **Choix d'architecture** : skills gardés en un seul `SKILL.md` (pas de découpage
+  guidelines/examples). Justification : aucune limite de taille dure (la « limite 16 KB » du
+  brief n'existe pas — limite réelle 30 MB/bundle), tous les skills < 500 lignes (seuil de
+  découpage recommandé), et les exemples de calibrage sont comportementalement essentiels +
+  couplés au harnais d'éval. Garder le contenu complet préserve la fidélité de l'évaluation et
+  la robustesse des règles de sécurité (toujours actives, pas chargées conditionnellement).
+- **eval/** : les 7 configs promptfoo pointent désormais vers `SKILL.md`.
+- **README** : structure mise à jour, instructions d'import via ZIP (Capabilities).
+- **build_release.sh** : génère un ZIP par skill (dossier à la racine) pour les GitHub Releases.
+  `dist/` ajouté au `.gitignore`.
+
+---
+
+## [1.16.0] — 2026-06-07
+
+### Ajouté
+
+- **eval/promptfooconfig_dys.yaml** — harnais 8 cas pour DYS V3 (application silencieuse déterministe,
+  phrases courtes + plafond, anti-essentialisation DYS, co-activation skill 1, non-déclenchement,
+  données chiffrées, sécurité éthique).
+- **eval/promptfooconfig_tdah.yaml** — harnais 8 cas pour TDAH V2.1 (application silencieuse déterministe,
+  action unique + plafond ~150 mots, chunking > 3 étapes, anti-moralisation, anti-essentialisation TDAH,
+  co-activation skill 1, non-déclenchement fatigue ordinaire, sécurité éthique).
+- **eval/promptfooconfig_psychologie.yaml** — harnais 8 cas pour Psychologie rigoureuse V6 (marquage
+  différencié, non-prescription déterministe, anti-essentialisation déterministe, mention pro sur souffrance
+  déterministe, sécurité éthique + 3114 déterministe, plafond ~250 mots, anti-relance cascade déterministe,
+  formulation impersonnelle).
+- **eval/run_all.sh** — runner unique pour lancer tous les harnais séquentiellement, avec filtrage
+  automatique des erreurs API (failureReason 2), résumé global, et sélection partielle par arguments.
+
+### Modifié
+
+- **eval/README.md** — mis à jour pour couvrir l'écosystème complet (7 harnais), documentation des
+  assertions déterministes vs sémantiques, nouveau juge non-circulaire (`mistral-small-latest`).
+
+### Améliorations techniques
+
+- **Juge non-circulaire** : les 3 nouveaux harnais utilisent `mistral:mistral-small-latest` comme juge
+  (non testé comme provider) au lieu de `mistral-large-latest`. Réduit le biais juge/provider.
+- **Assertions déterministes** (type `javascript`) : 19 nouvelles assertions régex non-dépendantes
+  du juge LLM — application silencieuse, anti-essentialisation, anti-prescription, anti-relance,
+  plafonds de mots, anti-emojis, mention pro, référence 3114.
+
+---
+
+## [1.15.0] — 2026-06-07
+
+### Corrigé
+
+- **docs/bilan_ecosysteme_skills_accessibilite.md §3.8** — erreur factuelle corrigée : la résistance RLHF
+  à l'application silencieuse sur HDC n'est pas une « exception unique Gemini ». Données réelles :
+  Mistral 1/8 FAIL (preamble), Gemini 4/8 FAIL (preamble). Deux manifestations documentées :
+  HDC (Mistral + Gemini) et TSA V4 C3 (Gemini).
+- **docs/bilan_ecosysteme_skills_accessibilite.md §7** — ligne HDC corrigée avec résultats précis
+  (Claude 8/8, Mistral 7/8, Gemini 4/8 application silencieuse) et les deux providers mentionnés.
+- **docs/bilan_ecosysteme_skills_accessibilite.md §7** — ajout règle méta co-activation plafonds :
+  le plafond le plus bas parmi les skills actifs prime. Cas HDC+DYS documenté (~150 mots).
+- **skills/accessibilite-dys/skill_accessibilite_dys_V3.md** — suppression mention « à venir » sur TSA
+  (TSA V4 est en production). Règle d'arbitrage densité/aération précisée.
+- **skills/accessibilite-tsa/skill_accessibilite_tsa_V4.md** — ajout de la section co-activation
+  avec `accessibilite-visuelle` (réciprocité manquante).
+- **skills/accessibilite-haute-densite-cognitive/skill_accessibilite_haute_densite_cognitive_V3.md** —
+  ajout plafond ~150 mots sur co-activation HDC+DYS.
+- **README.md** — refonte complète : 7 skills (vs 4), versions correctes (TSA V4, etc.), roadmap
+  nettoyée (TSA niveau 2 abandonné documenté, Visuelle livré), instruction Claude Code corrigée
+  (`.claude/commands/` au lieu de `.claude/skills/`).
+
+---
+
+## [1.14.0] — 2026-06-07
+
+### Ajouté / Modifié
+
+- **docs/bilan_ecosysteme_skills_accessibilite.md** — mise à jour complète du bilan de synthèse.
+  Nouvelles sections : trajectoires HDC V1→V3, Fatigue V1→V3, TSA V3→V4, Visuelle V1.
+  Nouveaux patterns : harnais promptfoo (3.7), application silencieuse contrainte absolue (3.8),
+  essentialisation de forme vs fond (3.9). Section 5bis : évolutions méthodologiques juin 2026.
+  Section 7 mise à jour avec les 7 skills en production.
+
+- **notes/Bilan Écosystème Skills.md** — skills couverts et principes méthodologiques mis à jour.
+
+- **CHANGELOG.md** — section [Non publié] soldée.
+
+---
+
+## [1.13.0] — 2026-06-07
+
+### Ajouté
+
+- **eval/results_visuel_v1.json** + **eval/analyse_visuel_v1_2llm.md** — run 2-LLM V1 (Mistral Large + Gemini 2.5 Flash) :
+  Mistral with_skill 8/8 PASS, application silencieuse 8/8.
+  Gemini with_skill 5/5 évalués PASS (3 erreurs 503 infrastructure — API indisponible, pas d'échec du skill).
+  Démarque baseline Mistral : C1 FAIL sans skill (annonce du mode accessibilité) → PASS avec skill.
+  **skill_accessibilite_visuelle_V1.md déclaré VERSION STABLE.**
+
+### Modifié
+
+- **notes/Skill Accessibilité Visuelle.md** — statut → stable, tableau runs mis à jour.
+- **notes/Projet Skills Accessibilité.md** — visuel V1 stable dans la table + roadmap cochée.
+
+---
+
+## [1.12.0] — 2026-06-07
+
+### Ajouté
+
+- **skills/accessibilite-visuelle/skill_accessibilite_visuelle_V1.md** — nouveau skill de forme pour les utilisateurs
+  malvoyants et non-voyants/lecteurs d'écran. Deux profils couverts : basse vision (aération, hiérarchie sémantique)
+  et cécité/lecteur d'écran (lisibilité linéaire, pas d'ASCII art, pas d'emojis décoratifs, tableaux auto-suffisants).
+  Application silencieuse (contrainte absolue). Anti-essentialisation. Alternatives textuelles pour tout contenu visuel.
+
+- **eval/promptfooconfig_visuel.yaml** — harnais 8 cas, 2 conditions (with_skill / baseline), 2 LLMs
+  (Mistral Large, Gemini 2.5 Flash). Cas couverts : application silencieuse, emojis décoratifs, références
+  positionnelles, ASCII art, tableaux, contenu visuel, structure sémantique des titres, sécurité éthique.
+
+- **eval/analyse_visuel_v1_claude.md** — run Claude V1 (8 sous-agents) : 8/8 PASS, application silencieuse 8/8.
+
+- **notes/Skill Accessibilité Visuelle.md** — note Obsidian du skill V1.
+
+### Modifié
+
+- **notes/Projet Skills Accessibilité.md** — Skill Accessibilité Visuelle ajouté dans la table (en cours d'évaluation).
 
 ---
 

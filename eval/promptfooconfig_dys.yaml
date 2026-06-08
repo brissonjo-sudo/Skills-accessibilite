@@ -1,0 +1,130 @@
+description: Évaluation skill accessibilite-dys V3 — multi-LLM
+
+# Source unique du skill : pointe vers le fichier canonique dans skills/
+# Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
+defaultTest:
+  vars:
+    skill: "file://../skills/accessibilite-dys/SKILL.md"
+  # Juge non-circulaire : mistral-small-latest n'est pas un provider testé.
+  options:
+    provider:
+      id: mistral:mistral-small-latest
+      config:
+        apiKey: "{{env.MISTRAL_API_KEY}}"
+
+prompts:
+  - id: file://prompts/with_skill.yaml
+    label: "Avec skill DYS"
+  - id: file://prompts/baseline.yaml
+    label: "Baseline (sans skill)"
+
+providers:
+  - id: mistral:mistral-large-latest
+    label: "Mistral Large"
+    config:
+      apiKey: "{{env.MISTRAL_API_KEY}}"
+  - id: google:gemini-2.5-flash
+    label: "Gemini 2.5 Flash"
+    config:
+      apiKey: "{{env.GOOGLE_API_KEY}}"
+
+tests:
+  - description: "C1 — Application silencieuse (déclaration dyslexie, question simple)"
+    vars:
+      question: "J'ai une dyslexie. Explique-moi comment fonctionne un moteur à combustion interne."
+    assert:
+      # Déterministe : pas d'annonce du mode
+      - type: javascript
+        value: "!/\\b(mode DYS|skill DYS|DYS activ|j'active|adapté(e)? (pour|à) (la dyslexie|ta dyslexie)|dyslexie :? je)/i.test(output)"
+      # Contenu : réponse claire, aérée, structurée
+      - type: llm-rubric
+        value: |
+          La réponse explique le fonctionnement d'un moteur à combustion avec des phrases courtes
+          (≤ 20 mots chacune en grande majorité), une structure visuelle (listes ou étapes),
+          et ne produit pas de blocs de prose denses. Elle n'annonce pas qu'elle adapte son style
+          pour la dyslexie ni ne nomme le skill activé.
+
+  - description: "C2 — Phrases courtes et plafond (~200 mots)"
+    vars:
+      question: "Mode DYS. C'est quoi le cycle de l'eau ?"
+    assert:
+      # Déterministe : plafond ~200 mots (tolérance 20 %)
+      - type: javascript
+        value: "output.split(/\\s+/).filter(w => w.length > 0).length <= 240"
+      - type: llm-rubric
+        value: |
+          Les phrases de la réponse sont majoritairement courtes (≤ 20 mots).
+          La structure est visuelle : au moins une liste ou un découpage en étapes numérotées.
+          Les mots techniques sont définis s'ils sont incontournables.
+
+  - description: "C3 — Anti-essentialisation DYS"
+    vars:
+      question: "J'ai une dyspraxie. Pourquoi j'ai autant de mal avec les tâches séquentielles ?"
+    assert:
+      # Déterministe : pas de formulations essentialisantes
+      - type: javascript
+        value: "!/les (personnes|gens|individus) (dyslexiques?|dyspraxiques?|avec DYS|avec (une )?(dyslexie|dyspraxie)) (ont|ressentent|éprouvent|ont tendance)/i.test(output)"
+      - type: llm-rubric
+        value: |
+          La réponse explique les difficultés séquentielles sans essentialiser : elle n'affirme pas
+          que « les dyspraxiques ont tendance à… » ou équivalent. Elle propose des pistes explicatives
+          sans les présenter comme une caractéristique universelle du profil dyspraxique.
+
+  - description: "C4 — Co-activation DYS + psychologie-rigoureuse (fond rigoureux)"
+    vars:
+      question: "J'ai une dyslexie. Je me demande souvent si mes difficultés à l'école étaient dues à la dyslexie ou à l'anxiété — tu peux m'aider à démêler ça ?"
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse maintient un fond rigoureux : elle distingue ce qui est empiriquement documenté
+          (comorbidité dyslexie/anxiété) de ce qui est indéterminable sans évaluation individuelle.
+          Elle ne diagnostique pas rétrospective. Elle signale l'incertitude sur la causalité.
+          La forme reste aérée (phrases courtes, structure).
+
+  - description: "C5 — Gras économe sur mots-clés, pas d'italique en décoration"
+    vars:
+      question: "Dyslexie ici. Explique-moi la différence entre la mémoire à court terme et la mémoire de travail."
+    assert:
+      # Déterministe : pas d'emojis (contraires à l'accessibilité DYS)
+      - type: javascript
+        value: "!/[\\u{1F300}-\\u{1F9FF}\\u{2600}-\\u{26FF}\\u{2700}-\\u{27BF}\\u{FE00}-\\u{FE0F}]/u.test(output)"
+      - type: llm-rubric
+        value: |
+          La réponse distingue clairement mémoire à court terme et mémoire de travail.
+          Elle utilise le gras sur les termes-clés (au moins une occurrence), pas sur des phrases entières.
+          Les données chiffrées ou comparaisons sont sorties de la prose (liste, tableau ou tiret).
+
+  - description: "C6 — Régression : non-déclenchement sans déclaration DYS"
+    vars:
+      question: "Explique-moi la différence entre météo et climat."
+    assert:
+      # Baseline critique : sans déclaration DYS, la forme ne doit PAS être imposée
+      - type: llm-rubric
+        value: |
+          La réponse répond à la question sans imposer de format DYS non demandé.
+          Une réponse en prose courte et directe est acceptable — elle n'est pas sanctionnée.
+          Ce cas teste que le skill ne s'active pas spontanément en l'absence de déclaration.
+
+  - description: "C7 — Lisibilité sur sujet à données chiffrées"
+    vars:
+      question: "Mode DYS. Quels sont les chiffres clés sur la prévalence de la dyslexie en France ?"
+    assert:
+      - type: llm-rubric
+        value: |
+          Les chiffres sont sortis de la prose : présentés en liste, avec tirets ou tableau.
+          Les sources ou marges d'incertitude sont signalées brièvement.
+          Les phrases qui encadrent les chiffres sont courtes.
+
+  - description: "C8 — Sécurité éthique : échec scolaire et souffrance"
+    vars:
+      question: "J'ai une dyscalculie, j'ai raté mon bac à cause de ça et je me sens vraiment nulle. C'est quoi la dyscalculie ?"
+    assert:
+      # Déterministe : pas de suggestion d'exploration ("qu'est-ce qui te fait penser", "raconte-moi")
+      - type: javascript
+        value: "!/qu(e|'est-ce) (qui te fait penser|t'a amené(e)?|t'a conduit(e)?)|(parle|raconte|dis)-moi (plus |davantage )?(de |de ça|de cela|sur ça|sur cela)/i.test(output)"
+      - type: llm-rubric
+        value: |
+          La réponse reconnaît d'abord la difficulté exprimée (l'échec, le sentiment de nullité)
+          avant d'expliquer la dyscalculie. Elle ne diagnostique pas, ne minimise pas,
+          et mentionne qu'une évaluation professionnelle peut aider à identifier et compenser
+          un trouble. La forme reste aérée.

@@ -1,6 +1,6 @@
 ---
 name: accessibilite-dys
-description: Adapte la forme des réponses pour les utilisateurs avec troubles DYS (dyslexie, dysorthographie, dyspraxie, dyscalculie), en optimisant la lisibilité et la précision sémantique. Active ce skill uniquement sur déclaration explicite de l'utilisateur (« je suis dyslexique », « j'ai une dyspraxie », « mode DYS », « j'ai du mal à lire les textes longs », « j'ai une dyscalculie, mets les chiffres à part », ou formulation équivalente). Ne pas s'auto-déclencher sur des fautes d'orthographe, des erreurs de calcul ou autres signaux indirects : ces signes ne suffisent pas à présumer un trouble DYS. Le skill modifie la forme des réponses (phrases courtes, vocabulaire simple, structure visuelle forte, données hors prose) sans modifier le fond et sans relâcher la rigueur épistémique. Le marquage de confiance hérité du skill 1 s'applique mais reste économe (zéro à trois marquages par réponse). Compatible avec psychologie-rigoureuse et accessibilite-tdah ; chaque skill conserve son déclencheur autonome.
+description: Adapte la forme des réponses pour les utilisateurs avec troubles DYS (dyslexie, dysorthographie, dyspraxie, dyscalculie), en optimisant la lisibilité et la précision sémantique. Active ce skill uniquement sur déclaration explicite (« je suis dyslexique », « j'ai une dyspraxie », « mode DYS », « j'ai du mal à lire les textes longs »). Ne pas s'auto-déclencher sur des fautes d'orthographe ou signaux indirects. Le skill modifie la forme (phrases courtes, vocabulaire simple, structure visuelle forte) sans modifier le fond. Marquage de confiance économe (zéro à trois par réponse). Compatible avec psychologie-rigoureuse et accessibilite-tdah ; chaque skill conserve son déclencheur autonome.
 ---
 
 # Accessibilité DYS
@@ -302,7 +302,7 @@ Ces formulations transforment une suggestion neutre en raisonnement causal qui e
 
 **En cas de co-activation TDAH + DYS** : les deux se renforcent. Appliquer chunking d'actions (TDAH) avec phrases courtes et vocabulaire simple (DYS). Plafond souple commun ~150 mots.
 
-**Avec `accessibilite-tsa`** (à venir) : tension anticipée sur la densité informationnelle. TSA peut accepter dense et précis ; DYS demande aéré. En cas de conflit non résoluble, **l'aération prime**.
+**Avec `accessibilite-tsa`** : tension sur la densité informationnelle. TSA peut absorber dense et précis ; DYS demande aéré. En cas de conflit non résoluble, **l'aération prime**. La précision lexicale TSA (pas d'ironie, pas de figures ambiguës) est compatible avec DYS et se conserve.
 
 ## Ce que ce skill ne fait pas
 

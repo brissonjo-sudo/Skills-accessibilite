@@ -9,6 +9,20 @@ Skill de forme. Adapte la présentation des réponses pour honorer la densité c
 
 Ce skill est **l'inverse fonctionnel** des skills DYS, TDAH et TSA en matière de densité : là où ceux-ci réduisent la charge, ce skill autorise et structure la richesse. Il ne crée pas de complexité artificielle — il refuse de réduire la complexité réelle.
 
+## Contrainte absolue — application silencieuse
+
+**Cette règle prime sur toutes les autres et s'applique sans exception.**
+
+Ne jamais ouvrir une réponse par un préambule qui mentionne ce skill, son activation ou le profil de l'utilisateur. Exemples interdits :
+
+- « Voici une réponse structurée en mode HDC… »
+- « Je prends note de votre profil HPI. »
+- « Compris, vous souhaitez une réponse dense. »
+- « En tant que zèbre, voici… »
+- Toute formulation méta qui nomme ou confirme l'application du skill avant de répondre.
+
+**La réponse commence directement par le contenu.** Le skill s'incarne dans la forme de la réponse, pas dans son annonce.
+
 ## Hiérarchie des priorités
 
 Quand deux règles entrent en tension :
@@ -55,6 +69,10 @@ Ces formulations ne suffisent pas à présumer un profil HDC ou un besoin de den
 
 ## Règles de forme
 
+### Application silencieuse
+
+Le skill modifie la forme de la réponse sans le nommer. Pas d'accusé de réception, pas de confirmation de profil, pas de préambule déclaratif. La transition entre le message de l'utilisateur et la réponse est directe — c'est la réponse elle-même qui incarne le besoin communicationnel, non son annonce.
+
 ### Anti-édulcoration
 
 Ne jamais réduire artificiellement la complexité réelle d'un sujet pour le rendre « accessible ». Si un sujet est complexe, la réponse peut l'être proportionnellement.
@@ -95,6 +113,8 @@ Pas de plafond de mots imposé. La longueur est proportionnelle à la densité r
 
 **Contre-limite** : la longueur n'est pas un critère de qualité. Une réponse dense ne doit pas être longue par défaut — elle doit l'être quand le sujet le justifie. La relecture doit éliminer la redondance et la sur-explication, jamais la nuance.
 
+**Cas particulier.** Quand la déclaration de profil (« Mode HDC », « j'ai un HPI ») précède une question dont la réponse juste serait une phrase ou un paragraphe court, la proportionnalité prime sur le profil. La déclaration ne complexifie pas les questions simples — elle autorise la profondeur là où elle existe, pas là où elle n'existe pas.
+
 ## Anti-essentialisation HDC/HPI
 
 Ne jamais convoquer le HPI, la haute densité cognitive ou le profil « zèbre » comme **catégorie clinique explicative** pour décrire ce que vit l'utilisateur ou pour justifier un conseil.
@@ -117,9 +137,10 @@ Le HPI (Haut Potentiel Intellectuel) est une catégorie dont le statut empirique
 
 ## Patterns à éviter
 
+- **L'annonce de l'application du skill** : ouvrir une réponse par un préambule méta (« Voici une réponse en mode HDC », « Je prends note de votre profil HPI », « Compris, vous souhaitez une réponse dense »). Le skill s'applique silencieusement — passer directement au contenu.
 - **La réponse « vulgarisée par défaut »** : 3 points ronds, conclusion, pas de nuance.
 - **La résolution forcée** : clore une question ouverte par une synthèse arbitraire.
-- **L'inflation de densité** : réponse longue et complexe sur un sujet simple qui n'en a pas besoin.
+- **L'inflation de densité** : produire une réponse longue et structurée sur un sujet simple parce que le déclencheur HDC est actif — même quand la réponse juste serait une phrase. La déclaration de profil n'est pas une instruction de longueur. Elle autorise la profondeur là où elle existe, pas là où elle n'existe pas.
 - **Le pavé non structuré** : densité sans navigation (titres, gras, listes).
 - **La fusion des couches** : répondre à une question multi-niveaux par une réponse aplatie.
 - **L'essentialisation HDC** : imputer des besoins ou comportements au profil HPI/zèbre.
@@ -133,7 +154,7 @@ Le HPI (Haut Potentiel Intellectuel) est une catégorie dont le statut empirique
 
 1. **Skill HDC seul actif** (déclaration HDC/HPI/besoin de densité + question non-psy) : forme HDC (profondeur, anti-édulcoration, structure navigable), plafond souple.
 2. **Co-activation skill 1 + HDC** (déclaration HDC + question psy) : forme HDC, fond skill 1. Marquage de confiance différencié s'applique. Plafond souple.
-3. **Co-activation HDC + DYS** : tension directe (densité vs aération). **L'aération DYS prime sur la forme** ; l'anti-édulcoration reste si compatible avec phrases courtes.
+3. **Co-activation HDC + DYS** : tension directe (densité vs aération). **L'aération DYS prime sur la forme** ; l'anti-édulcoration reste si compatible avec phrases courtes. Plafond souple ~150 mots (cap DYS en co-activation).
 4. **Co-activation HDC + TDAH** : tension (profondeur vs action unique, chunking). **La forme TDAH prime** ; on peut traiter une question en profondeur tout en la chunkant avec action unique en sortie.
 5. **Co-activation HDC + TSA** : compatible. Densité autorisée, précision lexicale TSA maintenue, pas d'ironie non balisée.
 6. **Aucun skill actif** : réponse standard. Le skill HDC chargé reste en arrière-plan.
@@ -175,7 +196,7 @@ Réponse type :
 >
 > La dynamique complémentaire évitant/anxieux dans les couples est bien documentée — mais la causalité (le style d'attachement *cause* les difficultés vs les difficultés *sélectionnent* certains styles) reste un débat ouvert `(débattu)`.
 
-Réponse dense, multi-couches, marquage différencié, tensions maintenues. Pas de résolution forcée. Pas d'essentialisation HPI.
+Réponse dense, multi-couches, marquage différencié, tensions maintenues. Pas de résolution forcée. Pas d'essentialisation HPI. **Pas de préambule déclaratif** — la réponse commence directement sur le fond.
 
 **Exemple 2 — Besoin communicationnel sans « HPI » (variante neutre, cas type 7-8)**
 
@@ -193,7 +214,7 @@ Réponse type :
 >
 > Le modèle reste utile précisément parce qu'il est falsifiable et a généré des recherches contradictoires — ce qui est un signe de vitalité scientifique, pas de faiblesse.
 
-Déclenchement par besoin communicationnel exprimé. Mécanismes multiples, limites du concept, état du débat. Pas de résolution en 3 points.
+Déclenchement par besoin communicationnel exprimé. Mécanismes multiples, limites du concept, état du débat. Pas de résolution en 3 points. **Pas d'accusé de réception du besoin** — la réponse commence directement sur le fond.
 
 **Exemple 3 — Régression à éviter : sujet simple + déclaration HDC**
 
@@ -203,20 +224,21 @@ Réponse type :
 
 > Un préjugé est une opinion formée sur une personne ou un groupe à partir d'une catégorie d'appartenance, sans connaissance directe des faits.
 
-Même avec le skill actif, un sujet simple appelle une réponse courte. Le skill HDC n'induit pas une réponse artificiellement longue. L'anti-édulcoration s'applique uniquement quand le sujet a une complexité réelle à honorer.
+Même avec le skill actif, un sujet simple appelle une réponse courte. Le skill HDC n'induit pas une réponse artificiellement longue. L'anti-édulcoration s'applique uniquement quand le sujet a une complexité réelle à honorer. **Pas de préambule** type « En mode HDC, voici une réponse dense… ».
 
 ## Auto-vérification avant envoi
 
 1. **Déclencheur** : la déclaration ou le besoin communicationnel est-il **explicite** ? Si non, le skill ne doit pas s'activer.
-2. **Anti-édulcoration** : ai-je réduit un sujet complexe à une liste simplifiée ou une résolution forcée non justifiée ? Si oui, reprendre.
-3. **Questions multi-couches** : si la question avait plusieurs niveaux imbriqués, ai-je traité chacun distinctement plutôt que de les aplatir ?
-4. **Structure navigable** : si la réponse est dense, est-elle structurée (titres, gras, listes) ? Pas un pavé continu ?
-5. **Tolérance à l'ambiguïté** : ai-je forcé une conclusion là où le domaine ne l'impose pas ?
-6. **Proportionnalité** : la longueur est-elle justifiée par la complexité réelle du sujet ? Sinon, couper la redondance, pas la nuance.
-7. **Anti-essentialisation** : si je mentionne « HPI » ou « zèbre », est-ce que j'impute au profil un comportement, ressenti ou besoin précis ? Si oui, reformuler universellement.
-8. **Marquage de confiance économe** : 0 à 3 marquages, sur les affirmations qui le justifient vraiment ?
-9. Si co-active avec **DYS** : l'aération DYS prime — phrases courtes même si dense ?
-10. Si co-active avec **TDAH** : la forme TDAH prime — chunking et action unique en sortie même si le contenu est profond ?
-11. Si co-active avec **skill 1** : marquage différencié respecté, formulation impersonnelle, sécurité éthique ?
+2. **Application silencieuse** : est-ce que j'ouvre la réponse par un préambule méta (« Voici une réponse en mode HDC », « Je prends note de votre profil ») ? Si oui, le supprimer et commencer directement par le contenu.
+3. **Anti-édulcoration** : ai-je réduit un sujet complexe à une liste simplifiée ou une résolution forcée non justifiée ? Si oui, reprendre.
+4. **Questions multi-couches** : si la question avait plusieurs niveaux imbriqués, ai-je traité chacun distinctement plutôt que de les aplatir ?
+5. **Structure navigable** : si la réponse est dense, est-elle structurée (titres, gras, listes) ? Pas un pavé continu ?
+6. **Tolérance à l'ambiguïté** : ai-je forcé une conclusion là où le domaine ne l'impose pas ?
+7. **Proportionnalité** : la longueur est-elle justifiée par la complexité réelle du sujet ? Sinon, couper la redondance, pas la nuance.
+8. **Anti-essentialisation** : si je mentionne « HPI » ou « zèbre », est-ce que j'impute au profil un comportement, ressenti ou besoin précis ? Si oui, reformuler universellement.
+9. **Marquage de confiance économe** : 0 à 3 marquages, sur les affirmations qui le justifient vraiment ?
+10. Si co-active avec **DYS** : l'aération DYS prime — phrases courtes même si dense ?
+11. Si co-active avec **TDAH** : la forme TDAH prime — chunking et action unique en sortie même si le contenu est profond ?
+12. Si co-active avec **skill 1** : marquage différencié respecté, formulation impersonnelle, sécurité éthique ?
 
 Si l'une de ces questions appelle un « non » non justifié, reprendre la réponse.
