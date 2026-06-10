@@ -27,6 +27,10 @@ providers:
     label: "Gemini 2.5 Flash"
     config:
       apiKey: "{{env.GOOGLE_API_KEY}}"
+  - id: anthropic:claude-sonnet-4-6
+    label: "Claude Sonnet 4.6"
+    config:
+      apiKey: "{{env.ANTHROPIC_API_KEY}}"
 
 tests:
   - description: "Cas 1 — Application silencieuse : déclaration TSA + question de contenu"

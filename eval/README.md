@@ -1,6 +1,6 @@
 # Harnais d'évaluation — Écosystème Skills Accessibilité
 
-Évalue chaque skill sur deux conditions (avec skill / baseline sans skill) et deux LLMs (Mistral Large, Gemini 2.5 Flash).
+Évalue chaque skill sur deux conditions (avec skill / baseline sans skill) et trois LLMs (Mistral Large, Gemini 2.5 Flash, Claude Sonnet 4.6).
 
 ## Prérequis
 
@@ -82,7 +82,9 @@ Chaque config pointe directement vers le fichier canonique dans `skills/` via `f
 |----------|--------|-----|
 | Mistral AI | `mistral-large-latest` | `MISTRAL_API_KEY` |
 | Google AI Studio | `gemini-2.5-flash` | `GOOGLE_API_KEY` |
-| Mistral AI (juge) | `mistral-small-latest` | `MISTRAL_API_KEY` |
+| Anthropic | `claude-sonnet-4-6` | `ANTHROPIC_API_KEY` |
+
+> Le **modèle juge** des assertions `llm-rubric` est `mistral:mistral-small-latest` (non-circulaire : ce modèle n'est pas dans les providers testés).
 
 > Note historique :
 > - Grok (xAI) retiré — compte sans crédits (HTTP 403).

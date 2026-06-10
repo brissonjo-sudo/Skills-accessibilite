@@ -11,6 +11,7 @@
 #
 # Prérequis : promptfoo installé globalement (npm install -g promptfoo)
 #             Variables d'environnement : MISTRAL_API_KEY, GOOGLE_API_KEY
+#             ANTHROPIC_API_KEY (optionnel — Claude Sonnet 4.6 ignoré si absent)
 
 set -euo pipefail
 
@@ -29,6 +30,11 @@ GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
+
+# Avertissement non-bloquant : ANTHROPIC_API_KEY optionnel
+if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
+  echo -e "${YELLOW}[WARN]${NC} ANTHROPIC_API_KEY non définie — le provider Claude Sonnet 4.6 sera ignoré ou retournera des erreurs API."
+fi
 
 # Mapping skill → fichier config
 declare -A CONFIGS=(
