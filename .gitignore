@@ -31,3 +31,6 @@ yarn-error.log*
 
 # Artefacts de build (ZIPs de release, régénérables via build_release.sh)
 dist/
+
+# Worktrees temporaires Claude Code (sous-agents)
+.claude/
