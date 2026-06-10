@@ -11,6 +11,53 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.18.0] — 2026-06-10
+
+CI, homogénéisation des évaluations, harnais de co-activation, et outillage communauté.
+
+### CI/CD — GitHub Actions (`ci: validate skills`)
+
+- Workflow `.github/workflows/validate.yml` déclenché sur tout push et PR vers `main`.
+- `scripts/check_frontmatter.py` : vérifie que chaque `skills/*/SKILL.md` a un frontmatter
+  valide (`name` ≤ 64 chars, regex `[a-z0-9-]+` ; `description` ≤ 1024 chars).
+- `scripts/check_eval_configs.py` : résout les chemins `file://` dans les 8 configs promptfoo
+  et vérifie que chaque `SKILL.md` référencé existe.
+- Step no-.env : `git ls-files eval/.env` doit retourner vide.
+- Step build-zips : `build_release.sh` doit produire 7 ZIPs valides avec `<name>/SKILL.md`.
+
+### Évaluation — Provider Claude ajouté (Axe dette d'éval)
+
+- `anthropic:claude-sonnet-4-6` ajouté comme 3e provider dans les 7 harnais existants
+  (`promptfooconfig.yaml`, `_fatigue`, `_tsa`, `_visuel`, `_dys`, `_tdah`, `_psychologie`).
+- `eval/.env.example` : ajout `ANTHROPIC_API_KEY=...`.
+- `eval/run_all.sh` : avertissement non-bloquant si `ANTHROPIC_API_KEY` absente.
+- Méthodo désormais uniforme 3-providers (Mistral Large, Gemini 2.5 Flash, Claude Sonnet 4.6)
+  pour tous les skills. Les 3 harnais sans résultats (DYS, TDAH, Psychologie) sont prêts à
+  tourner : `cd eval/ && ./run_all.sh dys tdah psychologie`.
+
+### Évaluation — Harnais co-activation (6 paires)
+
+- `eval/promptfooconfig_coactivation.yaml` : 6 cas testant les règles d'articulation inter-skills
+  jamais validées empiriquement au banc :
+  - C1 HDC+DYS : plafond DYS prime (≤ 220 mots)
+  - C2 TDAH+Fatigue : pas d'injonction à l'action
+  - C3 TSA+Psychologie : littéralité + marquage confiance simultanés
+  - C4 DYS+Psychologie : phrases courtes + marquage différencié (≤ 220 mots)
+  - C5 HDC+Psychologie : densité additive (≥ 2 dimensions épistémiques)
+  - C6 TDAH+DYS : double réduction, plafond TDAH le plus bas (≤ 180 mots)
+- `eval/prompts/with_two_skills.yaml` : template pour charger deux skills en system prompt.
+
+### Diffusion & communauté
+
+- `CONTRIBUTING.md` : critères d'acceptation d'un skill, convention de versionnement,
+  conventions de commit, hygiène secrets, commandes de lancement des évaluations.
+- `README.md` : badges (version GitHub Release, MIT, tested with promptfoo) ajoutés en haut.
+- `README.en.md` : README anglais court (tableau 7 skills, instructions d'import, section éval).
+- `eval/.gitignore` : `results*.json` gitignorés (les 11 fichiers pèsent 6,5 Mo ; les analyses
+  Markdown `analyse_*.md` restent versionnées comme source de vérité archivée).
+
+---
+
 ## [1.17.0] — 2026-06-08
 
 Première version publique importable dans Claude (Capabilities / ZIP).
