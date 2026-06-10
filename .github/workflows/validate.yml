@@ -1,0 +1,46 @@
+name: Validate skills
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check skill frontmatter
+        run: python scripts/check_frontmatter.py
+
+      - name: Check eval config paths
+        run: python scripts/check_eval_configs.py
+
+      - name: Check no .env committed
+        run: |
+          bash -c 'if git ls-files eval/.env | grep -q .; then echo "FAIL: eval/.env is tracked"; exit 1; fi; echo "OK: no .env committed"'
+
+      - name: Install zip
+        run: sudo apt-get install -y zip
+
+      - name: Build release ZIPs
+        run: bash build_release.sh
+
+      - name: Verify ZIP structure
+        run: |
+          for zipfile in dist/*.zip; do
+            if ! unzip -l "$zipfile" | grep -q 'SKILL\.md'; then
+              echo "FAIL: $zipfile does not contain SKILL.md"
+              exit 1
+            fi
+            echo "OK: $zipfile contains SKILL.md"
+          done
