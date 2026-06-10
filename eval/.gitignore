@@ -4,3 +4,7 @@
 # Sorties générées (committer results.json pour analyse partagée si besoin)
 *.html
 promptfoo_cache/
+
+# Résultats JSON bruts — trop lourds pour le dépôt (6,5 Mo)
+# Les analyses Markdown (analyse_*.md) sont la source de vérité archivée.
+results*.json

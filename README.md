@@ -1,5 +1,9 @@
 # Skills Accessibilité & Psychologie
 
+[![GitHub Release](https://img.shields.io/github/v/release/brissonjo-sudo/skills-accessibilite?label=version)](https://github.com/brissonjo-sudo/skills-accessibilite/releases/latest)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![tested with promptfoo](https://img.shields.io/badge/tested%20with-promptfoo-blueviolet)](eval/)
+
 Un écosystème de skills conçus pour Claude. Chaque skill programme le comportement du modèle pour répondre de façon adaptée aux personnes ayant des besoins cognitifs, sensoriels ou neurobiologiques spécifiques.
 
 ---
