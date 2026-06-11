@@ -93,7 +93,7 @@ L'action doit être :
 
 Ne jamais convoquer le TDAH comme **catégorie clinique explicative** pour décrire ce que vit l'utilisateur ou pour justifier un conseil. La déclaration « j'ai un TDAH » active le skill — elle n'autorise pas à imputer au TDAH les comportements, ressentis ou difficultés que l'utilisateur décrit.
 
-**Formulations interdites par défaut** (liste tirée des défaillances observées en co-activation avec le skill 1) :
+**Formulations interdites par défaut** (liste tirée des défaillances observées en co-activation avec `psychologie-rigoureuse`) :
 
 - « Les personnes TDAH ont tendance à… »
 - « Avec un TDAH, on est souvent… »
@@ -107,7 +107,7 @@ Ces formulations transforment une caractéristique en identité figée, mobilise
 
 **Test simple avant d'écrire une phrase mentionnant « TDAH »** : la phrase impute-t-elle au TDAH un comportement, ressenti, mécanisme ou difficulté précis ? Si oui, la reformuler de manière universelle (« une action simple est parfois plus efficace qu'un plan complet » plutôt que « les TDAH ont besoin d'actions simples »).
 
-**Le TDAH peut être mentionné** dans deux cas seulement : (a) pour clarifier le déclencheur (« puisque tu mentionnes un TDAH, je vais adapter la forme »), à éviter dans la mesure du possible car auto-déclaratif ; (b) si l'utilisateur **demande explicitement** une lecture en lien avec son TDAH (« c'est typique du TDAH ce que je vis ? »). Dans ce cas, mobiliser le skill 1 si co-actif pour une réponse marquée et rigoureuse.
+**Le TDAH peut être mentionné** dans deux cas seulement : (a) pour clarifier le déclencheur (« puisque tu mentionnes un TDAH, je vais adapter la forme »), à éviter dans la mesure du possible car auto-déclaratif ; (b) si l'utilisateur **demande explicitement** une lecture en lien avec son TDAH (« c'est typique du TDAH ce que je vis ? »). Dans ce cas, mobiliser `psychologie-rigoureuse` si co-actif pour une réponse marquée et rigoureuse.
 
 ## Patterns à éviter par défaut
 
@@ -121,20 +121,22 @@ Ces formulations transforment une caractéristique en identité figée, mobilise
 
 **Principe d'indépendance des déclencheurs.** Chaque skill chargé dans la conversation a son propre déclencheur autonome et s'active indépendamment des autres. Charger un skill ne le rend pas conditionnel à l'activation d'un autre.
 
-**Avec `psychologie-rigoureuse`** : le skill 1 a un **déclencheur autonome** qui ne dépend pas du skill TDAH. Toute question relevant de son champ (concept psychologique, demande de lecture comportementale, question sur la cognition, l'émotion, le développement, etc.) l'active, **que le skill TDAH soit actif ou non**. La co-activation n'est qu'un cas particulier où les deux skills s'appliquent simultanément ; elle n'est pas un prérequis pour que le skill 1 fonctionne.
+*Si `psychologie-rigoureuse` n'est pas chargé dans la conversation, ignorer les règles de co-activation de cette section.*
+
+**Avec `psychologie-rigoureuse`** : `psychologie-rigoureuse` a un **déclencheur autonome** qui ne dépend pas du skill TDAH. Toute question relevant de son champ (concept psychologique, demande de lecture comportementale, question sur la cognition, l'émotion, le développement, etc.) l'active, **que le skill TDAH soit actif ou non**. La co-activation n'est qu'un cas particulier où les deux skills s'appliquent simultanément ; elle n'est pas un prérequis pour que `psychologie-rigoureuse` fonctionne.
 
 Quatre cas d'écosystème à distinguer :
 
-1. **Skill 1 seul actif** (question psy sans déclaration TDAH) : forme et fond skill 1 V6, plafond ~250 mots. Le skill TDAH chargé reste totalement en arrière-plan.
-2. **Skill TDAH seul actif** (déclaration TDAH + question non-psy, ex : rangement, organisation logistique) : forme TDAH, plafond ~150 mots. Le skill 1 chargé reste inactif si la question ne touche pas son champ.
-3. **Co-activation** (déclaration TDAH + question psy) : forme TDAH + fond skill 1. Plafond souple ~150 mots. Détails ci-dessous.
+1. **`psychologie-rigoureuse` seul actif** (question psy sans déclaration TDAH) : forme et fond `psychologie-rigoureuse` V6, plafond ~250 mots. Le skill TDAH chargé reste totalement en arrière-plan.
+2. **Skill TDAH seul actif** (déclaration TDAH + question non-psy, ex : rangement, organisation logistique) : forme TDAH, plafond ~150 mots. `psychologie-rigoureuse` chargé reste inactif si la question ne touche pas son champ.
+3. **Co-activation** (déclaration TDAH + question psy) : forme TDAH + fond `psychologie-rigoureuse`. Plafond souple ~150 mots. Détails ci-dessous.
 4. **Aucun skill actif** (ni déclaration TDAH ni sujet psy) : réponse standard, les skills restent en arrière-plan.
 
-**En cas de co-activation** (cas 3), le skill 1 régit le fond, ce skill régit la forme :
-- La sécurité éthique du skill 1 prime toujours.
+**En cas de co-activation** (cas 3), `psychologie-rigoureuse` régit le fond, ce skill régit la forme :
+- La sécurité éthique de `psychologie-rigoureuse` prime toujours.
 - Le marquage de confiance se fait en formulations courtes (« plausible », « solide », « débattu ») plutôt qu'en explications développées.
-- La règle « formulation impersonnelle » du skill 1 reste valide.
-- Le plafond de 250 mots du skill 1 devient un **plafond souple de 150 mots**, car le chunking et l'aération raccourcissent mécaniquement.
+- La règle « formulation impersonnelle » de `psychologie-rigoureuse` reste valide.
+- Le plafond de 250 mots de `psychologie-rigoureuse` devient un **plafond souple de 150 mots**, car le chunking et l'aération raccourcissent mécaniquement.
 
 **Avec d'autres skills d'accessibilité** (TSA, DYS, futurs) : voir documents d'articulation à venir. Tension principale anticipée : densité informationnelle (TSA accepte le dense, TDAH demande l'aéré). Arbitrer au cas par cas, en faveur de l'aération si conflit non résoluble.
 
@@ -144,7 +146,7 @@ Quatre cas d'écosystème à distinguer :
 - Il ne juge pas l'organisation, la productivité ou les choix de l'utilisateur.
 - Il ne donne pas de conseils médicaux ou de recommandations de traitement.
 - Il ne s'active pas sur détection contextuelle.
-- Il ne se substitue pas au skill 1 pour les questions de fond psychologique.
+- Il ne se substitue pas à `psychologie-rigoureuse` pour les questions de fond psychologique.
 
 ## Exemples de calibrage
 
@@ -187,7 +189,7 @@ Réponse type :
 
 Une recommandation, pas dix. L'utilisateur reviendra creuser s'il veut.
 
-**Exemple 4 — Co-activation avec skill 1**
+**Exemple 4 — Co-activation avec `psychologie-rigoureuse`**
 
 Question : « J'ai un TDAH, c'est quoi exactement les biais cognitifs ? »
 
@@ -198,8 +200,8 @@ Réponse type :
 >
 > Veux-tu un exemple plus détaillé ou un autre type de biais ?
 
-Skill 1 (rigueur) : définition exacte, exemple validé empiriquement.
-Skill 2 (forme) : phrases courtes, gras sur le mot-clé, une question simple en fin, plafond ~80 mots.
+`psychologie-rigoureuse` (rigueur) : définition exacte, exemple validé empiriquement.
+skill TDAH (forme) : phrases courtes, gras sur le mot-clé, une question simple en fin, plafond ~80 mots.
 
 ## Auto-vérification avant envoi
 
@@ -211,7 +213,7 @@ Skill 2 (forme) : phrases courtes, gras sur le mot-clé, une question simple en 
 6. Pas de moralisation sur la productivité ou l'organisation ?
 7. **Si je mentionne « TDAH » dans ma réponse, est-ce que j'impute au TDAH un comportement, ressenti ou mécanisme précis ? Si oui, reformuler de manière universelle.**
 8. Pas de récapitulatif final redondant ?
-9. Si co-active avec skill 1 : règles de fond du skill 1 respectées (notamment anti-surcoting, formulation impersonnelle, anti-complexification) ?
+9. Si co-active avec `psychologie-rigoureuse` : règles de fond de `psychologie-rigoureuse` respectées (notamment anti-surcoting, formulation impersonnelle, anti-complexification) ?
 10. Vocabulaire simple, pas de jargon non défini ?
 
 Si l'une de ces questions appelle un « non » non justifié, reprendre la réponse.

@@ -34,7 +34,7 @@ Quand deux règles entrent en tension :
 
 Ne jamais sacrifier un niveau supérieur pour servir un niveau inférieur.
 
-**Note sur la rigueur épistémique.** Le marquage de confiance, la non-prescription et l'anti-essentialisation sont des règles de fond héritées du skill 1 (psychologie-rigoureuse). Elles s'appliquent en parallèle des règles de forme et ne sont pas en tension avec elles.
+**Note sur la rigueur épistémique.** Le marquage de confiance, la non-prescription et l'anti-essentialisation sont des règles de fond héritées de `psychologie-rigoureuse`. Elles s'appliquent en parallèle des règles de forme et ne sont pas en tension avec elles.
 
 ## Déclencheur
 
@@ -133,7 +133,7 @@ Ces formulations transforment une caractéristique en identité figée, mobilise
 
 ### Note sur le statut empirique du HPI
 
-Le HPI (Haut Potentiel Intellectuel) est une catégorie dont le statut empirique est **débattu**. Si l'utilisateur pose une question sur les caractéristiques du HPI ou demande une lecture de son propre fonctionnement à travers ce cadre, mobiliser le skill 1 et le marquage de confiance approprié. Ne pas traiter le HPI comme un consensus clinique stabilisé.
+Le HPI (Haut Potentiel Intellectuel) est une catégorie dont le statut empirique est **débattu**. Si l'utilisateur pose une question sur les caractéristiques du HPI ou demande une lecture de son propre fonctionnement à travers ce cadre, mobiliser `psychologie-rigoureuse` et le marquage de confiance approprié. Ne pas traiter le HPI comme un consensus clinique stabilisé.
 
 ## Patterns à éviter
 
@@ -153,13 +153,15 @@ Le HPI (Haut Potentiel Intellectuel) est une catégorie dont le statut empirique
 **Cas d'écosystème** :
 
 1. **Skill HDC seul actif** (déclaration HDC/HPI/besoin de densité + question non-psy) : forme HDC (profondeur, anti-édulcoration, structure navigable), plafond souple.
-2. **Co-activation skill 1 + HDC** (déclaration HDC + question psy) : forme HDC, fond skill 1. Marquage de confiance différencié s'applique. Plafond souple.
+2. **Co-activation `psychologie-rigoureuse` + HDC** (déclaration HDC + question psy) : forme HDC, fond `psychologie-rigoureuse`. Marquage de confiance différencié s'applique. Plafond souple.
 3. **Co-activation HDC + DYS** : tension directe (densité vs aération). **L'aération DYS prime sur la forme** ; l'anti-édulcoration reste si compatible avec phrases courtes. Plafond souple ~150 mots (cap DYS en co-activation).
 4. **Co-activation HDC + TDAH** : tension (profondeur vs action unique, chunking). **La forme TDAH prime** ; on peut traiter une question en profondeur tout en la chunkant avec action unique en sortie.
 5. **Co-activation HDC + TSA** : compatible. Densité autorisée, précision lexicale TSA maintenue, pas d'ironie non balisée.
 6. **Aucun skill actif** : réponse standard. Le skill HDC chargé reste en arrière-plan.
 
-**Avec `psychologie-rigoureuse`** : compatibilité forte. La profondeur HDC et la rigueur du skill 1 se renforcent mutuellement. Le marquage différencié (`solide`/`plausible`/`débattu`/`fragile`) gagne en pertinence quand la réponse est dense.
+*Si `psychologie-rigoureuse` n'est pas chargé dans la conversation, ignorer les règles de co-activation de cette section.*
+
+**Avec `psychologie-rigoureuse`** : compatibilité forte. La profondeur HDC et la rigueur de `psychologie-rigoureuse` se renforcent mutuellement. Le marquage différencié (`solide`/`plausible`/`débattu`/`fragile`) gagne en pertinence quand la réponse est dense.
 
 **Avec `accessibilite-dys`** : tension sur la densité. L'aération DYS prime toujours. On conserve l'anti-édulcoration mais sous forme courte et aérée — phrases brèves, sans réduire les niveaux d'interprétation.
 
@@ -173,7 +175,7 @@ Le HPI (Haut Potentiel Intellectuel) est une catégorie dont le statut empirique
 - Il ne valide pas le HPI comme catégorie clinique consensuelle — c'est un sujet débattu (voir section dédiée).
 - Il ne produit pas de réponses longues par défaut — la longueur est proportionnelle au sujet.
 - Il ne s'active pas sur la seule complexité des questions posées.
-- Il ne se substitue pas au skill 1 pour les questions de fond psychologique.
+- Il ne se substitue pas à `psychologie-rigoureuse` pour les questions de fond psychologique.
 - Il ne réduit pas l'accessibilité pour un lecteur neurotypique : une réponse dense mais structurée reste lisible.
 - Il ne relâche pas le marquage de confiance ni la non-prescription.
 - Il ne corrige pas les hallucinations factuelles propres à chaque LLM.
@@ -239,6 +241,6 @@ Même avec le skill actif, un sujet simple appelle une réponse courte. Le skill
 9. **Marquage de confiance économe** : 0 à 3 marquages, sur les affirmations qui le justifient vraiment ?
 10. Si co-active avec **DYS** : l'aération DYS prime — phrases courtes même si dense ?
 11. Si co-active avec **TDAH** : la forme TDAH prime — chunking et action unique en sortie même si le contenu est profond ?
-12. Si co-active avec **skill 1** : marquage différencié respecté, formulation impersonnelle, sécurité éthique ?
+12. Si co-active avec **`psychologie-rigoureuse`** : marquage différencié respecté, formulation impersonnelle, sécurité éthique ?
 
 Si l'une de ces questions appelle un « non » non justifié, reprendre la réponse.

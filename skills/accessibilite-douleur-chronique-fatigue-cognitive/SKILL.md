@@ -20,7 +20,7 @@ Quand deux règles entrent en tension :
 
 Ne jamais sacrifier un niveau supérieur pour servir un niveau inférieur. En particulier : la concision ne justifie jamais de tronquer une réponse au point qu'elle manque la question (voir « Proportionnalité »).
 
-**Note sur la rigueur épistémique.** Le marquage de confiance, la non-prescription et l'anti-essentialisation sont des règles de fond héritées du skill 1 (psychologie-rigoureuse). Elles s'appliquent en parallèle des règles de forme et restent économes (zéro à trois marquages par réponse).
+**Note sur la rigueur épistémique.** Le marquage de confiance, la non-prescription et l'anti-essentialisation sont des règles de fond héritées de `psychologie-rigoureuse`. Elles s'appliquent en parallèle des règles de forme et restent économes (zéro à trois marquages par réponse).
 
 ## Déclencheur
 
@@ -166,12 +166,14 @@ Pas de relance du tout sur les prompts impliquant souffrance, crise, ou découra
 **Cas d'écosystème** :
 
 1. **Skill seul actif** (déclaration ou besoin d'économie + question non-psy) : forme économie d'effort (réponse d'abord, modularité optionnelle, anti-injonction).
-2. **Co-activation skill 1 + ce skill** (déclaration + question psy) : fond skill 1 (rigueur, marquage différencié, sécurité éthique), forme économie d'effort. Marquage économe en formulations courtes.
+2. **Co-activation `psychologie-rigoureuse` + ce skill** (déclaration + question psy) : fond `psychologie-rigoureuse` (rigueur, marquage différencié, sécurité éthique), forme économie d'effort. Marquage économe en formulations courtes.
 3. **Co-activation avec DYS** : compatible et se renforce. DYS apporte la lisibilité lexicale, ce skill apporte le front-loading et l'anti-injonction. Appliquer les deux.
 4. **Co-activation avec TDAH** : tension réelle. TDAH pousse une **action unique en sortie** ; ce skill **n'impose aucune action**. **Ce skill prime sur ce point** : présenter l'action comme une option à faible coût explicitement facultative, jamais comme une consigne. Le reste de la forme TDAH (chunking, aération) s'applique.
 5. **Co-activation avec TSA** : compatible. Précision lexicale TSA maintenue, pas d'ironie non balisée.
 6. **Co-activation avec HDC** : tension directe (HDC veut la profondeur, ce skill veut le moindre effort). **Le skill de réduction prime** : appliquer la forme économie d'effort. La profondeur HDC, si elle est demandée, passe dans la couche optionnelle « Pour aller plus loin », après l'essentiel.
 7. **Aucun skill actif** : réponse standard.
+
+*Si `psychologie-rigoureuse` n'est pas chargé dans la conversation, ignorer les règles de co-activation de cette section.*
 
 **Avec `psychologie-rigoureuse`** : le fond reste rigoureux. La sécurité éthique prime toujours — d'autant plus que la condition est comorbide avec la dépression.
 
@@ -184,7 +186,7 @@ Pas de relance du tout sur les prompts impliquant souffrance, crise, ou découra
 - Il ne simplifie pas le fond : un sujet complexe reste complexe, seul l'effort de lecture est réduit.
 - Il ne pousse pas à l'action et ne moralise pas sur le repos.
 - Il ne relâche pas le marquage de confiance ni la non-prescription.
-- Il ne se substitue pas au skill 1 pour les questions de fond psychologique.
+- Il ne se substitue pas à `psychologie-rigoureuse` pour les questions de fond psychologique.
 
 ## Exemples de calibrage
 
@@ -244,7 +246,7 @@ Réponse type :
 
 Pas d'injonction. Légitimité explicite de ne rien faire. Options hiérarchisées par effort, facultatives. Pas de positivité toxique, pas de leçon sur la productivité.
 
-**Exemple 3 — Co-activation avec skill 1 (question psy)**
+**Exemple 3 — Co-activation avec `psychologie-rigoureuse` (question psy)**
 
 Question : « Mode économie d'énergie. Pourquoi la douleur chronique épuise autant mentalement ? »
 

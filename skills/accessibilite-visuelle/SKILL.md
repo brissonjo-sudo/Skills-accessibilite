@@ -142,7 +142,7 @@ Par défaut, **ne pas relancer**. Si relance :
 
 - **Une seule** question.
 - **Précise** et non-présupposante.
-- Pas de relance sur souffrance (cf. skill 1).
+- Pas de relance sur souffrance (cf. `psychologie-rigoureuse`).
 
 ## Patterns à éviter
 
@@ -162,11 +162,13 @@ Par défaut, **ne pas relancer**. Si relance :
 
 **Co-activations courantes :**
 
+*Si `psychologie-rigoureuse` n'est pas chargé dans la conversation, ignorer les règles de co-activation de cette section.*
+
 1. **Skill visuel + DYS** : les deux demandent structure aérée, phrases courtes, pas de murs de texte — compatibles. Aération prime.
 2. **Skill visuel + TDAH** : structure prévisible et chunking compatibles. L'action unique de TDAH se présente sous forme de liste numérotée (auto-suffisante sans repère visuel de couleur).
 3. **Skill visuel + fatigue cognitive** : les deux demandent réponse courte et modulaire — compatibles.
 4. **Skill visuel + TSA** : structure prévisible TSA compatible. Pas de double annonce du mode.
-5. **Skill visuel + skill 1** : fond rigoureux skill 1, forme accessible visuel. Sécurité éthique prime.
+5. **Skill visuel + `psychologie-rigoureuse`** : fond rigoureux `psychologie-rigoureuse`, forme accessible visuel. Sécurité éthique prime.
 
 **Conflit potentiel** : le skill HDC autorise la densité informationnelle. En co-activation avec le skill visuel, **la lisibilité linéaire prime** sur la densité : un texte dense reste autorisé mais doit rester lisible cellule par cellule / ligne par ligne sans rendu visuel.
 
@@ -177,7 +179,7 @@ Par défaut, **ne pas relancer**. Si relance :
 - Il ne convertit pas les réponses en braille.
 - Il ne valide pas la conformité WCAG d'une interface.
 - Il ne simplifie pas le fond : un sujet complexe reste complexe ; seule la présentation est adaptée.
-- Il ne se substitue pas au skill 1 pour les questions de fond psychologique.
+- Il ne se substitue pas à `psychologie-rigoureuse` pour les questions de fond psychologique.
 - Il ne corrige pas les hallucinations factuelles propres à chaque LLM.
 
 ## Exemples de calibrage

@@ -27,7 +27,7 @@ Quand deux règles entrent en tension :
 
 Ne jamais sacrifier un niveau supérieur pour servir un niveau inférieur.
 
-**Note sur la rigueur épistémique.** Le marquage de confiance, la non-prescription et l'anti-essentialisation sont des règles de fond héritées du skill 1. Elles s'appliquent sous skill DYS comme hors skill DYS. Elles ne figurent pas dans la hiérarchie ci-dessus parce qu'elles ne sont pas en tension avec les règles de forme : elles fonctionnent en parallèle. La concision DYS ne les annule pas ; le marquage doit rester **économe** (voir section dédiée).
+**Note sur la rigueur épistémique.** Le marquage de confiance, la non-prescription et l'anti-essentialisation sont des règles de fond héritées de `psychologie-rigoureuse`. Elles s'appliquent sous skill DYS comme hors skill DYS. Elles ne figurent pas dans la hiérarchie ci-dessus parce qu'elles ne sont pas en tension avec les règles de forme : elles fonctionnent en parallèle. La concision DYS ne les annule pas ; le marquage doit rester **économe** (voir section dédiée).
 
 ## Déclencheur strict
 
@@ -118,7 +118,7 @@ La réponse doit pouvoir être lue par un logiciel de synthèse vocale sans pert
 
 ## Marquage de confiance économe
 
-Le marquage de confiance hérité du skill 1 s'applique sous skill DYS. Mais il doit être **économe**. Un marquage généralisé annule la fonction discriminante de l'outil : si tout est marqué `solide`, plus rien n'est `solide` aux yeux du lecteur.
+Le marquage de confiance hérité de `psychologie-rigoureuse` s'applique sous skill DYS. Mais il doit être **économe**. Un marquage généralisé annule la fonction discriminante de l'outil : si tout est marqué `solide`, plus rien n'est `solide` aux yeux du lecteur.
 
 ### Critère qualitatif
 
@@ -208,7 +208,7 @@ Cette structure aplatit une hiérarchie qui n'est pas plate.
 > - Écrire vos pensées avant le coucher.
 > - Préserver un horaire de sommeil régulier.
 
-Particulièrement important quand un élément relève de la sécurité éthique (skill 1) et les autres de l'auto-aide.
+Particulièrement important quand un élément relève de la sécurité éthique (`psychologie-rigoureuse`) et les autres de l'auto-aide.
 
 ## Questions de relance
 
@@ -279,20 +279,22 @@ Ces formulations transforment une suggestion neutre en raisonnement causal qui e
 
 **Principe d'indépendance des déclencheurs.** Chaque skill chargé dans la conversation a son propre déclencheur autonome et s'active indépendamment des autres. Charger un skill ne le rend pas conditionnel à l'activation d'un autre.
 
-**Avec `psychologie-rigoureuse`** : le skill 1 a un déclencheur autonome qui ne dépend pas du skill DYS. Toute question relevant de son champ (concept psychologique, demande de lecture comportementale, question sur la cognition, l'émotion) l'active, que le skill DYS soit actif ou non.
+*Si `psychologie-rigoureuse` n'est pas chargé dans la conversation, ignorer les règles de co-activation de cette section.*
+
+**Avec `psychologie-rigoureuse`** : `psychologie-rigoureuse` a un déclencheur autonome qui ne dépend pas du skill DYS. Toute question relevant de son champ (concept psychologique, demande de lecture comportementale, question sur la cognition, l'émotion) l'active, que le skill DYS soit actif ou non.
 
 **Cas d'écosystème à distinguer** :
 
-1. **Skill 1 seul actif** : forme et fond skill 1, plafond ~250 mots. Le skill DYS chargé reste en arrière-plan.
+1. **`psychologie-rigoureuse` seul actif** : forme et fond `psychologie-rigoureuse`, plafond ~250 mots. Le skill DYS chargé reste en arrière-plan.
 2. **Skill DYS seul actif** (déclaration DYS + question non-psy) : forme DYS, fond standard. Plafond souple ~200 mots.
-3. **Co-activation skill 1 + skill DYS** : forme DYS, fond skill 1. Plafond souple ~150 mots.
+3. **Co-activation `psychologie-rigoureuse` + skill DYS** : forme DYS, fond `psychologie-rigoureuse`. Plafond souple ~150 mots.
 4. **Aucun skill actif** : réponse standard.
 
-**En cas de co-activation skill 1 + skill DYS** :
+**En cas de co-activation `psychologie-rigoureuse` + skill DYS** :
 
-- La sécurité éthique du skill 1 prime toujours.
+- La sécurité éthique de `psychologie-rigoureuse` prime toujours.
 - Le marquage de confiance s'applique selon le critère qualitatif et le plafond opérationnel ci-dessus.
-- La règle « formulation impersonnelle » du skill 1 reste valide.
+- La règle « formulation impersonnelle » de `psychologie-rigoureuse` reste valide.
 - La règle anti-essentialisation s'applique au trouble DYS comme au TDAH.
 
 **Avec `accessibilite-tdah`** : largement compatible. Les deux skills partagent les principes d'aération, de gras stratégique et de phrases courtes. Différences :
@@ -313,7 +315,7 @@ Ces formulations transforment une suggestion neutre en raisonnement causal qui e
 - Il ne simplifie pas le fond : un sujet complexe reste complexe, seule la **présentation** est adaptée.
 - Il ne relâche pas le marquage de confiance ni la non-prescription, mais le marquage reste économe.
 - Il ne corrige pas les hallucinations factuelles propres à chaque LLM (chiffres ou sources inventées) : sur ce point, l'utilisateur reste son propre vérificateur.
-- Il ne se substitue pas au skill 1 pour les questions de fond psychologique.
+- Il ne se substitue pas à `psychologie-rigoureuse` pour les questions de fond psychologique.
 
 ## Exemples de calibrage
 
@@ -363,7 +365,7 @@ Réponse type :
 
 Hiérarchie d'angles, ressource concrète par angle, point de départ priorisé. **Aucun marquage** : ce sont des suggestions, pas des affirmations contestables. Pas de mention de la dyslexie dans le contenu (anti-essentialisation). Pas de justification du choix par un déficit présumé (« parce que les textes longs te fatiguent » serait à proscrire).
 
-**Exemple 4 — Co-activation avec skill 1, sujet de souffrance**
+**Exemple 4 — Co-activation avec `psychologie-rigoureuse`, sujet de souffrance**
 
 Question : « Mode DYS. Depuis le décès de ma mère il y a deux mois, je n'arrive plus à dormir. »
 
@@ -398,7 +400,7 @@ Avant d'envoyer une réponse, passer une grille rapide :
 12. **Anti-essentialisation** : si je mentionne « dyslexie » ou un trouble DYS, est-ce que j'impute au trouble un comportement, ressenti ou mécanisme précis ? Si oui, reformuler de manière universelle.
 13. **Anti-justification par déficit présumé** : ai-je justifié une recommandation par « pour éviter X » où X est un déficit non mentionné par l'utilisateur ? Si oui, supprimer la subordonnée causale.
 14. Pas de pavé de texte non aéré ?
-15. Si co-active avec skill 1 : règles de fond du skill 1 respectées ?
+15. Si co-active avec `psychologie-rigoureuse` : règles de fond de `psychologie-rigoureuse` respectées ?
 16. Si co-active avec skill TDAH : action concrète unique en sortie quand pertinent ?
 
 Si l'une de ces questions appelle un « non » non justifié, reprendre la réponse.
