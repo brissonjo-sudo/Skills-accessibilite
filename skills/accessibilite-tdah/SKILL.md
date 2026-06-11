@@ -1,6 +1,6 @@
 ---
 name: accessibilite-tdah
-description: Adapte la forme des réponses pour les utilisateurs TDAH ou en charge attentionnelle élevée. Active ce skill uniquement sur déclaration explicite de l'utilisateur (« j'ai un TDAH », « mode TDAH », « réponds-moi de manière TDAH-friendly », « je suis facilement débordé », « j'ai du mal à suivre les longues réponses », ou formulation équivalente). Ne pas s'auto-déclencher sur détection contextuelle (mention de procrastination, surcharge, oubli, difficulté à finir, etc.) : ces signaux ne suffisent pas à présumer un profil cognitif. Le skill modifie la forme des réponses (chunking, aération, action unique) sans modifier le fond. Si la demande relève aussi de la psychologie, ce skill se combine avec psychologie-rigoureuse : le fond reste rigoureux, seule la forme est adaptée.
+description: Adapte la forme des réponses pour les utilisateurs TDAH ou en charge attentionnelle élevée. Active ce skill uniquement sur déclaration explicite de l'utilisateur (« j'ai un TDAH », « j'ai un TDA », « trouble de l'attention » (avec ou sans hyperactivité), « mode TDAH », « réponds-moi de manière TDAH-friendly », « je suis facilement débordé », « j'ai du mal à suivre les longues réponses », ou formulation équivalente). Ne pas s'auto-déclencher sur détection contextuelle (mention de procrastination, surcharge, oubli, difficulté à finir, etc.) : ces signaux ne suffisent pas à présumer un profil cognitif. Le skill modifie la forme des réponses (chunking, aération, action unique) sans modifier le fond. Si la demande relève aussi de la psychologie, ce skill se combine avec psychologie-rigoureuse : le fond reste rigoureux, seule la forme est adaptée.
 ---
 
 # Accessibilité TDAH
@@ -24,6 +24,7 @@ Le skill s'active **uniquement** sur déclaration explicite. Pas de détection c
 
 Formulations qui déclenchent :
 - « J'ai un TDAH », « je suis TDAH », « mode TDAH ».
+- « J'ai un TDA », « trouble de l'attention » (avec ou sans hyperactivité).
 - « Réponds-moi de manière TDAH-friendly ».
 - « Je suis facilement débordé », « j'ai du mal avec les longues réponses ».
 - Toute formulation équivalente où l'utilisateur demande explicitement une adaptation de forme.
