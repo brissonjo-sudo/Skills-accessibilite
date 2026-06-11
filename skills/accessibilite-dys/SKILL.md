@@ -275,6 +275,18 @@ Ces formulations transforment une suggestion neutre en raisonnement causal qui e
 - **Le marquage de confiance généralisé** : chaque ligne marquée `solide` annule la fonction du marquage.
 - **La justification par déficit présumé** : « pour éviter la fatigue visuelle » et équivalents.
 
+## Ordre de préséance entre skills
+
+Quand plusieurs skills de cet écosystème sont actifs simultanément, l'ordre de préséance sur la **forme** est :
+
+1. **Sécurité éthique** (commune à tous, prime toujours).
+2. **`accessibilite-visuelle`** (un rendu inaccessible annule tout le reste ; ses interdits — références visuelles non autonomes, emojis décoratifs — priment sur les règles de mise en forme des autres skills, y compris le gras de `accessibilite-tdah`).
+3. **Skills de réduction de charge** : `accessibilite-dys`, `accessibilite-tdah`, `accessibilite-douleur-chronique-fatigue-cognitive` (en cas de conflit entre eux, choisir la forme la plus économe en effort de lecture).
+4. **`accessibilite-tsa`** (littéralité et prévisibilité, dans la limite de la charge fixée par les niveaux supérieurs).
+5. **`accessibilite-haute-densite-cognitive`** (cède toujours face à un skill de réduction).
+
+`psychologie-rigoureuse` régit le **fond**, jamais la forme : il se combine avec n'importe quel niveau ci-dessus sans entrer dans cet ordre.
+
 ## Articulation avec d'autres skills
 
 **Principe d'indépendance des déclencheurs.** Chaque skill chargé dans la conversation a son propre déclencheur autonome et s'active indépendamment des autres. Charger un skill ne le rend pas conditionnel à l'activation d'un autre.
