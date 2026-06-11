@@ -24,6 +24,10 @@ fi
 mkdir -p dist
 rm -f dist/*.zip
 
+echo "Validation des skills…"
+python3 scripts/validate_skills.py
+echo ""
+
 count=0
 cd skills
 for d in */; do
