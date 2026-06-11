@@ -5,9 +5,22 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
-## [Non publié]
+## [1.18.0] — 2026-06-11
 
-*(rien en attente)*
+Amélioration de la robustesse et de la maintenabilité de l'écosystème (déclencheurs, articulation inter-skills, CI).
+
+### Ajouté
+
+- **Déclencheur « TDA »** (skill TDAH) : « j'ai un TDA », « trouble de l'attention » (avec ou sans hyperactivité) ajoutés à la description et à la liste des formulations déclenchantes. Deux cas d'éval (C9 déclenchement TDA, C10 non-déclenchement sur distraction passagère).
+- **Bloc « Ordre de préséance entre skills »** : section canonique strictement identique insérée dans les 7 SKILL.md, fixant l'ordre de préséance sur la forme (sécurité éthique > `accessibilite-visuelle` > skills de réduction de charge > `accessibilite-tsa` > `accessibilite-haute-densite-cognitive` ; `psychologie-rigoureuse` régit le fond hors de cet ordre).
+- **CI** : `scripts/validate_skills.py` (validation frontmatter, `name` == dossier, description ≤ 1024, fichier < 500 lignes, identité des blocs de préséance) ; workflows `validate.yml` (push/PR sur `main`) et `release.yml` (publication automatique des ZIP sur tag).
+
+### Modifié
+
+- **Articulation inter-skills** : toutes les références opaques « skill 1 » remplacées par le nom réel `psychologie-rigoureuse` dans les 6 skills d'accessibilité, avec reformulation naturelle. Ajout d'une ligne de dégradation gracieuse dans chaque section d'articulation (si `psychologie-rigoureuse` n'est pas chargé, ignorer les règles de co-activation).
+- **Harmonisation** (skill TDAH) : suppression de « arbitrer au cas par cas » (contradictoire avec le bloc canonique) ; plafond de co-activation exprimé en relatif.
+- **build_release.sh** : la validation des skills s'exécute avant la génération des ZIP (échec = pas de ZIP).
+- **Versions** : TDAH V2.1 → V2.2 ; bump mineur des 6 autres skills (touchés par le bloc de préséance).
 
 ---
 
@@ -361,9 +374,10 @@ Première version publique importable dans Claude (Capabilities / ZIP).
 
 | Skill | Version stable | Branche |
 |---|---|---|
-| TDAH | V2.1 | `main` |
-| DYS | V3 | `main` |
-| TSA | V4 (stable) | `claude/wonderful-fermat-enaoG` |
-| Psychologie rigoureuse | V6 | `main` |
-| Haute densité cognitive | V3 (stable) | `main` |
-| Douleur chronique / Fatigue cognitive | V3 (stable) | `main` |
+| TDAH | V2.2 | `main` |
+| DYS | V3.1 | `main` |
+| TSA | V4.1 (stable) | `claude/wonderful-fermat-enaoG` |
+| Psychologie rigoureuse | V6.1 | `main` |
+| Haute densité cognitive | V3.1 (stable) | `main` |
+| Douleur chronique / Fatigue cognitive | V3.1 (stable) | `main` |
+| Accessibilité visuelle | V1.1 | `main` |

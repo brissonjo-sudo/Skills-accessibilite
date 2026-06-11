@@ -29,6 +29,8 @@ Document de synthèse consolidant les cycles d'itération de l'écosystème.
 4. **Pas d'auto-déclaration** — application silencieuse (contrainte absolue depuis TSA V3)
 5. **Challenge multi-sous-agents** pour valider les décisions architecturales avant rédaction
 6. **Exemple de calibrage négatif** — montrer le pattern interdit, pas seulement le décrire
+7. **Ordre de préséance canonique** — un bloc identique dans les 7 skills fixe la priorité de forme (voir [[Ordre de préséance]]) ; fin des références opaques « skill 1 » au profit du nom réel des skills.
+8. **CI de validation** — script stdlib + GitHub Actions vérifient frontmatter, contraintes de taille et identité des blocs de préséance avant toute release.
 
 ## Projet parent
 
