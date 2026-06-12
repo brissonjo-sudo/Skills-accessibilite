@@ -1,0 +1,52 @@
+name: validate
+
+# Déclenché sur chaque push vers main et sur chaque pull request ciblant main.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Configurer Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Valider les skills
+        run: python scripts/validate_skills.py
+
+      - name: Installer zip et générer les ZIP
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y zip
+          ./build_release.sh
+
+      - name: Vérifier la structure interne de chaque ZIP
+        run: |
+          erreur=0
+          for zip_file in dist/*.zip; do
+            nom=$(basename "$zip_file" .zip)
+            # Vérifier que le ZIP contient bien <nom>/SKILL.md à sa racine
+            if unzip -l "$zip_file" | grep -qE "^\s+[0-9].*\s${nom}/SKILL\.md$"; then
+              echo "[OK]     $zip_file contient ${nom}/SKILL.md"
+            else
+              echo "[ERREUR] $zip_file ne contient PAS ${nom}/SKILL.md"
+              echo "         Contenu du ZIP :"
+              unzip -l "$zip_file"
+              erreur=1
+            fi
+          done
+          exit $erreur

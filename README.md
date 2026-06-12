@@ -1,5 +1,7 @@
 # Skills Accessibilité & Psychologie
 
+[![validate](https://github.com/brissonjo-sudo/Skills-accessibilite/actions/workflows/validate.yml/badge.svg)](https://github.com/brissonjo-sudo/Skills-accessibilite/actions/workflows/validate.yml)
+
 Un écosystème de skills conçus pour Claude. Chaque skill programme le comportement du modèle pour répondre de façon adaptée aux personnes ayant des besoins cognitifs, sensoriels ou neurobiologiques spécifiques.
 
 ---
@@ -14,13 +16,13 @@ Un skill est un dossier contenant un fichier `SKILL.md` (instructions + métadon
 
 | Dossier | Skill | Version | Description |
 |---|---|---|---|
-| `skills/psychologie-rigoureuse/` | Psychologie rigoureuse | V6 | Cadre d'analyse psychologique non dogmatique, marquage du degré de confiance |
-| `skills/accessibilite-tdah/` | TDAH | V2.1 | Communication adaptée aux profils TDAH : structure, ancrage, charge cognitive réduite |
-| `skills/accessibilite-dys/` | DYS | V3 | Adaptation pour dyslexie, dysorthographie, dyspraxie, dyscalculie : lisibilité, reformulation |
-| `skills/accessibilite-tsa/` | TSA | V4 | Communication adaptée aux personnes autistes : littéralité, prévisibilité, pas de sous-entendus |
-| `skills/accessibilite-haute-densite-cognitive/` | Haute densité cognitive | V3 | Réponses denses et rigoureuses pour profils HDC/HPI : profondeur, rigueur épistémique |
-| `skills/accessibilite-douleur-chronique-fatigue-cognitive/` | Douleur chronique / Fatigue cognitive | V3 | Adaptation pour fatigue cognitive et douleur persistante : économie cognitive, modularité |
-| `skills/accessibilite-visuelle/` | Accessibilité visuelle | V1 | Adaptation pour basse vision et cécité : structure sémantique, alternatives textuelles, compatibilité lecteur d'écran |
+| `skills/psychologie-rigoureuse/` | Psychologie rigoureuse | V6.1 | Cadre d'analyse psychologique non dogmatique, marquage du degré de confiance |
+| `skills/accessibilite-tdah/` | TDAH | V2.2 | Communication adaptée aux profils TDAH : structure, ancrage, charge cognitive réduite |
+| `skills/accessibilite-dys/` | DYS | V3.1 | Adaptation pour dyslexie, dysorthographie, dyspraxie, dyscalculie : lisibilité, reformulation |
+| `skills/accessibilite-tsa/` | TSA | V4.1 | Communication adaptée aux personnes autistes : littéralité, prévisibilité, pas de sous-entendus |
+| `skills/accessibilite-haute-densite-cognitive/` | Haute densité cognitive | V3.1 | Réponses denses et rigoureuses pour profils HDC/HPI : profondeur, rigueur épistémique |
+| `skills/accessibilite-douleur-chronique-fatigue-cognitive/` | Douleur chronique / Fatigue cognitive | V3.1 | Adaptation pour fatigue cognitive et douleur persistante : économie cognitive, modularité |
+| `skills/accessibilite-visuelle/` | Accessibilité visuelle | V1.1 | Adaptation pour basse vision et cécité : structure sémantique, alternatives textuelles, compatibilité lecteur d'écran |
 
 Chaque dossier contient un fichier **`SKILL.md`** : un en-tête YAML (`name`, `description`) suivi des règles du skill.
 

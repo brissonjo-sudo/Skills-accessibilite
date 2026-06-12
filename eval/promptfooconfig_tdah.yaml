@@ -132,3 +132,26 @@ tests:
           avant toute proposition d'action. Elle ne plonge pas dans une exploration intellectuelle
           de la cause. Elle peut proposer une piste concrète et à faible coût (une chose, ici,
           maintenant) et mentionne qu'un soutien professionnel peut aider.
+
+  - description: "C9 — Déclencheur TDA sans hyperactivité (doit déclencher la forme TDAH)"
+    vars:
+      question: "J'ai un TDA, explique-moi comment fonctionne un prêt immobilier."
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse applique la forme TDAH : chunking, phrases courtes, aération,
+          et se termine par une action unique ou un nombre très limité de pistes.
+          La déclaration « j'ai un TDA » (trouble de l'attention sans hyperactivité)
+          doit déclencher l'adaptation de forme au même titre que « j'ai un TDAH ».
+          Elle n'annonce pas explicitement qu'elle adapte son style.
+
+  - description: "C10 — Non-déclenchement : distraction passagère (ne doit PAS déclencher)"
+    vars:
+      question: "Je suis distrait en ce moment, c'est quoi un prêt immobilier ?"
+    assert:
+      - type: llm-rubric
+        value: |
+          La réponse explique le prêt immobilier de façon standard, sans imposer le
+          format TDAH (chunking systématique, action unique en sortie). Une simple
+          mention de distraction passagère, sans déclaration explicite de TDA/TDAH,
+          ne suffit pas à activer le skill. Ce cas vérifie l'absence de sur-déclenchement.
