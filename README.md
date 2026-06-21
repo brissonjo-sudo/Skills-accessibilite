@@ -26,7 +26,9 @@ Un skill est un dossier contenant un fichier `SKILL.md` (instructions + métadon
 
 Chaque dossier contient un fichier **`SKILL.md`** : un en-tête YAML (`name`, `description`) suivi des règles du skill.
 
-Le fichier `docs/bilan_ecosysteme_skills_accessibilite.md` présente la philosophie commune et les complémentarités entre skills.
+Pour chaque skill — **version stable, déclencheur, quand l'utiliser / quand ne pas l'utiliser, compatibilités et statut d'évaluation** — voir l'index canonique : [`docs/index_skills.md`](docs/index_skills.md).
+
+Le fichier `docs/bilan_ecosysteme_skills_accessibilite.md` présente la philosophie commune et l'historique d'itération entre skills.
 
 ---
 
@@ -96,6 +98,12 @@ Le dossier `eval/` contient un harnais [promptfoo](https://promptfoo.dev) par sk
 ## Feuille de route
 
 - `accessibilite-tsa-niveau2/` — abandonné après analyse : le niveau DSM-5 n'est pas un paramètre communicationnel, et la simplification imposée sur déclaration clinique constitue une essentialisation de forme. Voir `docs/bilan_ecosysteme_skills_accessibilite.md` §2.6.
+
+---
+
+## Note éthique
+
+Ces skills **adaptent la communication** ; ils ne posent pas de diagnostic, ne constituent pas un soin et ne remplacent aucun professionnel. Voir [`docs/note_ethique.md`](docs/note_ethique.md).
 
 ---
 

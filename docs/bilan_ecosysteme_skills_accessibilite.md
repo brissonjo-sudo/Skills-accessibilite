@@ -1,6 +1,6 @@
 # Bilan de synthèse — Écosystème des skills d'accessibilité
 
-Document de référence consolidant trois cycles d'itération (skill 1 « psychologie-rigoureuse », skill TDAH « accessibilite-tdah », skill DYS « accessibilite-dys »). Sert d'ancrage avant l'ouverture du chantier suivant (skill TSA « accessibilite-tsa »).
+Document de référence consolidant les cycles d'itération de l'écosystème. Initialement centré sur les trois premiers skills (« psychologie-rigoureuse », « accessibilite-tdah », « accessibilite-dys »), il couvre désormais les sept skills en production. Pour la vue d'ensemble synthétique (versions, déclencheurs, statuts), voir `docs/index_skills.md`.
 
 ## 1. Vue d'ensemble du projet
 
@@ -13,7 +13,10 @@ Chaque skill couvre un périmètre clair :
 - **psychologie-rigoureuse** : règles de fond pour toute question relevant de la psychologie, de la cognition, de l'émotion ou de la lecture comportementale.
 - **accessibilite-tdah** : adaptation de forme pour profils TDAH (chunking d'actions, action unique en sortie, gestion des digressions).
 - **accessibilite-dys** : adaptation de forme pour profils DYS (phrases courtes, vocabulaire simple, données hors prose, structure visuelle).
-- **accessibilite-tsa** (à venir) : adaptation pour profils du spectre autistique.
+- **accessibilite-tsa** (V4, production) : adaptation pour profils du spectre autistique à langage fonctionnel.
+- **accessibilite-haute-densite-cognitive** (V3, production) : autorisation et structuration de la densité informationnelle pour profils HDC/HPI.
+- **accessibilite-douleur-chronique-fatigue-cognitive** (V3, production) : économie cognitive pour douleur chronique et fatigue cognitive.
+- **accessibilite-visuelle** (V1, production) : structure pour basse vision et lecteur d'écran.
 
 ### Architecture
 
