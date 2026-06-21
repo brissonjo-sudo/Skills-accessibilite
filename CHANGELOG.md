@@ -11,11 +11,13 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 - **`docs/index_skills.md`** : index canonique de l'écosystème — pour chaque skill, version stable, fichier source, déclencheur, risques couverts, compatibilités, statut d'évaluation ; rappel de l'ordre de préséance et matrice de co-activation.
 - **`docs/note_ethique.md`** : cadre éthique explicite (adaptation de communication, pas de diagnostic, pas de soin, pas de substitution professionnelle, anti-essentialisation, sécurité éthique prioritaire, ressources d'urgence).
+- **`AGENTS.md`** : guide de contribution (conventions de skills, invariants validés par CI, ordre de préséance, workflow d'évaluation et de release).
+- **`docs/usage.md`** : cas d'usage concrets par skill et par contexte, avec rappel des co-activations typiques.
 
 ### Modifié
 
-- **README** : liens vers l'index canonique et la note éthique ; mention « quand l'utiliser / quand ne pas l'utiliser » renvoyant à l'index.
-- **`docs/bilan_ecosysteme_skills_accessibilite.md`** : suppression des mentions périmées « accessibilite-tsa (à venir) » (le skill TSA est en production depuis V4) ; liste des skills couverts mise à jour (7 skills en production) ; renvoi vers l'index canonique.
+- **README** : liens vers l'index canonique, la note éthique, les cas d'usage et `AGENTS.md` ; mention « quand l'utiliser / quand ne pas l'utiliser » renvoyant à l'index.
+- **`docs/bilan_ecosysteme_skills_accessibilite.md`** : suppression des mentions périmées « accessibilite-tsa (à venir) » (le skill TSA est en production depuis V4), y compris l'en-tête de la section 6 archivée ; liste des skills couverts mise à jour (7 skills en production) ; renvoi vers l'index canonique.
 
 ---
 

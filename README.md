@@ -26,7 +26,7 @@ Un skill est un dossier contenant un fichier `SKILL.md` (instructions + métadon
 
 Chaque dossier contient un fichier **`SKILL.md`** : un en-tête YAML (`name`, `description`) suivi des règles du skill.
 
-Pour chaque skill — **version stable, déclencheur, quand l'utiliser / quand ne pas l'utiliser, compatibilités et statut d'évaluation** — voir l'index canonique : [`docs/index_skills.md`](docs/index_skills.md).
+Pour chaque skill — **version stable, déclencheur, quand l'utiliser / quand ne pas l'utiliser, compatibilités et statut d'évaluation** — voir l'index canonique : [`docs/index_skills.md`](docs/index_skills.md). Des cas d'usage concrets sont rassemblés dans [`docs/usage.md`](docs/usage.md). Les conventions de contribution sont décrites dans [`AGENTS.md`](AGENTS.md).
 
 Le fichier `docs/bilan_ecosysteme_skills_accessibilite.md` présente la philosophie commune et l'historique d'itération entre skills.
 
