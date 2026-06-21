@@ -233,9 +233,9 @@ Ajouter des règles pour chaque LLM-spécificité alourdit le skill sans bénéf
 
 Une version est stable quand les défauts résiduels sont mineurs, LLM-spécifiques ou hors-périmètre. La poursuite d'une perfection complète mène à l'oscillation. Critère pratique : si la prochaine itération corrige X mais crée probablement Y de même magnitude, stabiliser ici.
 
-## 6. ~~Recommandations pour skill `accessibilite-tsa` (à venir)~~
+## 6. Recommandations pour la conception d'un nouveau skill
 
-**Section archivée.** Le skill `accessibilite-tsa` V4 est en production. Les recommandations de cette section ont été appliquées dès V1. La trajectoire V3→V4 est documentée en section 2.6.
+**Section archivée — référence historique.** Cette section listait des recommandations pour le skill `accessibilite-tsa`, qui est en production depuis la V4. Les recommandations ont été appliquées dès la V1 ; la trajectoire V3→V4 est documentée en section 2.6. Le texte est conservé comme guide méthodologique réutilisable pour les futurs skills.
 
 Pour tout nouveau skill à concevoir, reprendre la méthodologie de la section 5 et 5bis, et consulter les patterns de la section 3.
 
