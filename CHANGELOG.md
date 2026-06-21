@@ -18,6 +18,11 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 - **README** : liens vers l'index canonique, la note éthique, les cas d'usage et `AGENTS.md` ; mention « quand l'utiliser / quand ne pas l'utiliser » renvoyant à l'index.
 - **`docs/bilan_ecosysteme_skills_accessibilite.md`** : suppression des mentions périmées « accessibilite-tsa (à venir) » (le skill TSA est en production depuis V4), y compris l'en-tête de la section 6 archivée ; liste des skills couverts mise à jour (7 skills en production) ; renvoi vers l'index canonique.
+- **Cohérence documentaire** (micro-corrections) :
+  - `docs/index_skills.md` : statut d'éval HDC renseigné (`eval/promptfooconfig.yaml`, 8 cas) au lieu de « banc à formaliser » ; matrice de co-activation alignée sur le bilan (statuts *testée en stress* / *documentée* / *spécifiée*), suppression d'un doublon TSA/Visuelle.
+  - `docs/bilan_…md` : label déprécié « skill 1 » remplacé par `psychologie-rigoureuse` ; tableau « État de production » (section 7) aligné sur les versions stables bumpées (V6.1, V2.2, V3.1, V4.1, V3.1, V3.1, V1.1) avec note sur les chiffres d'éval.
+  - `CHANGELOG.md` : branche de TSA corrigée (`main` au lieu de `claude/wonderful-fermat-enaoG`).
+  - `eval/README.md` : TDAH V2.2 / 10 cas ; versions des harnais bumpées ; convention de versionnement réécrite pour le format `SKILL.md` (plus de fichier `skill_..._V2.md`).
 
 ---
 
@@ -392,7 +397,7 @@ Première version publique importable dans Claude (Capabilities / ZIP).
 |---|---|---|
 | TDAH | V2.2 | `main` |
 | DYS | V3.1 | `main` |
-| TSA | V4.1 (stable) | `claude/wonderful-fermat-enaoG` |
+| TSA | V4.1 (stable) | `main` |
 | Psychologie rigoureuse | V6.1 | `main` |
 | Haute densité cognitive | V3.1 (stable) | `main` |
 | Douleur chronique / Fatigue cognitive | V3.1 (stable) | `main` |
