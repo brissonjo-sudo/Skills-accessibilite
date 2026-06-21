@@ -5,7 +5,9 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
-## [Non publié]
+## [1.19.0] — 2026-06-21
+
+Release de documentation et de maintenabilité : aucun changement de comportement des skills (les 7 `SKILL.md` sont identiques à 1.18.0). Ajout d'un index canonique, d'une note éthique, d'un guide de contribution, de cas d'usage, et harmonisation de la documentation.
 
 ### Ajouté
 
