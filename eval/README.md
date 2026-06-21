@@ -39,13 +39,13 @@ Chaque run produit un fichier `results_<skill>.json`. Le pousser sur la branche 
 
 | Skill | Config | Cas | Skills testés |
 |-------|--------|-----|---------------|
-| Haute densité cognitive V3 | `promptfooconfig.yaml` | 8 | application silencieuse, profondeur, anti-essentialisation HDC, co-activation |
-| Accessibilité visuelle V1 | `promptfooconfig_visuel.yaml` | 8 | application silencieuse, emojis, références positionnelles, ASCII art, tableaux, sécurité éthique |
-| TSA V4 | `promptfooconfig_tsa.yaml` | 11 | application silencieuse, littéralité, prévisibilité, registre lisibilité, anti-essentialisation, sécurité |
-| Douleur chronique / Fatigue V3 | `promptfooconfig_fatigue.yaml` | 8 | application silencieuse, front-loading, modularité, anti-injonction, exception question-définition |
-| DYS V3 | `promptfooconfig_dys.yaml` | 8 | application silencieuse, phrases courtes, anti-essentialisation DYS, co-activation, sécurité éthique |
-| TDAH V2.1 | `promptfooconfig_tdah.yaml` | 8 | application silencieuse, action unique, chunking, anti-moralisation, anti-essentialisation TDAH |
-| Psychologie rigoureuse V6 | `promptfooconfig_psychologie.yaml` | 8 | marquage différencié, non-prescription, anti-essentialisation, mention pro, sécurité éthique |
+| Haute densité cognitive V3.1 | `promptfooconfig.yaml` | 8 | application silencieuse, profondeur, anti-essentialisation HDC, co-activation |
+| Accessibilité visuelle V1.1 | `promptfooconfig_visuel.yaml` | 8 | application silencieuse, emojis, références positionnelles, ASCII art, tableaux, sécurité éthique |
+| TSA V4.1 | `promptfooconfig_tsa.yaml` | 11 | application silencieuse, littéralité, prévisibilité, registre lisibilité, anti-essentialisation, sécurité |
+| Douleur chronique / Fatigue V3.1 | `promptfooconfig_fatigue.yaml` | 8 | application silencieuse, front-loading, modularité, anti-injonction, exception question-définition |
+| DYS V3.1 | `promptfooconfig_dys.yaml` | 8 | application silencieuse, phrases courtes, anti-essentialisation DYS, co-activation, sécurité éthique |
+| TDAH V2.2 | `promptfooconfig_tdah.yaml` | 10 | application silencieuse, action unique, chunking, anti-moralisation, anti-essentialisation TDAH, déclencheur TDA, non-déclenchement |
+| Psychologie rigoureuse V6.1 | `promptfooconfig_psychologie.yaml` | 8 | marquage différencié, non-prescription, anti-essentialisation, mention pro, sécurité éthique |
 
 ## Structure des assertions
 
@@ -90,7 +90,7 @@ Chaque config pointe directement vers le fichier canonique dans `skills/` via `f
 
 ## Convention de versionnement
 
-Lors d'une itération V1 → V2 :
-1. Créer le fichier `skills/<dossier>/skill_..._V2.md`
-2. Mettre à jour la ligne `skill:` dans le fichier de config correspondant
-3. Relancer `promptfoo eval` pour mesurer le delta
+Chaque skill tient dans un unique `skills/<dossier>/SKILL.md` (pas de fichier versionné séparé ; l'historique des versions est dans Git). Lors d'une itération :
+1. Modifier le `SKILL.md` du skill (et incrémenter la version mentionnée dans son contenu / l'index).
+2. La ligne `skill:` du `defaultTest` pointe déjà vers `file://../skills/<dossier>/SKILL.md` — rien à changer.
+3. Relancer `promptfoo eval` pour mesurer le delta, puis mettre à jour `CHANGELOG.md` et `docs/index_skills.md`.

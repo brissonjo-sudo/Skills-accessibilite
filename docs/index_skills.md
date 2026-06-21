@@ -18,7 +18,7 @@ Dernière mise à jour : 2026-06-21 (écosystème v1.18.0).
 | accessibilite-tdah | V2.2 | `skills/accessibilite-tdah/SKILL.md` | production | `eval/promptfooconfig_tdah.yaml` (10 cas) |
 | accessibilite-dys | V3.1 | `skills/accessibilite-dys/SKILL.md` | production | `eval/promptfooconfig_dys.yaml` (8 cas) |
 | accessibilite-tsa | V4.1 | `skills/accessibilite-tsa/SKILL.md` | production | `eval/promptfooconfig_tsa.yaml` (11 cas) |
-| accessibilite-haute-densite-cognitive | V3.1 | `skills/accessibilite-haute-densite-cognitive/SKILL.md` | production | (banc à formaliser) |
+| accessibilite-haute-densite-cognitive | V3.1 | `skills/accessibilite-haute-densite-cognitive/SKILL.md` | production | `eval/promptfooconfig.yaml` (8 cas) |
 | accessibilite-douleur-chronique-fatigue-cognitive | V3.1 | `skills/accessibilite-douleur-chronique-fatigue-cognitive/SKILL.md` | production | `eval/promptfooconfig_fatigue.yaml` (8 cas) |
 | accessibilite-visuelle | V1.1 | `skills/accessibilite-visuelle/SKILL.md` | production | `eval/promptfooconfig_visuel.yaml` (8 cas) |
 
@@ -101,13 +101,17 @@ En co-activation, le **plafond de mots le plus bas** parmi les skills actifs pri
 
 ## Matrice de co-activation
 
+Trois niveaux de statut, alignés sur le bilan (§7) : **testée en stress** (cas adverse joué), **documentée** (compatibilité établie dans les fichiers de skill, sans test de stress dédié), **spécifiée** (règle prévue mais non encore testée en stress direct).
+
 | Combinaison | Statut | Note |
 |---|---|---|
-| `psychologie-rigoureuse` + tout skill de forme | testée / par construction | fond rigoureux + forme adaptée, sans tension |
-| TSA + DYS | testée | tension densité/aération : aération prime |
-| TSA + Visuelle | testée | compatibilité forte, règles orthogonales |
-| HDC + DYS / TDAH | spécifiée | la réduction prime sur la densité |
-| TDAH + Fatigue | spécifiée | plafond le plus bas prime |
+| `psychologie-rigoureuse` + DYS | testée en stress | stress P5 (deuil) ; la hiérarchie fond/forme tient |
+| `psychologie-rigoureuse` + TDAH | testée en stress | intégrée aux cycles de test TDAH |
+| TSA + DYS | documentée | tension densité/aération : aération prime |
+| TSA + Visuelle | documentée | compatibilité forte, règles orthogonales (TSA V4 + Visuelle V1) ; non testée en stress direct |
+| Visuelle + HDC | documentée | lisibilité linéaire prime sur densité |
+| HDC + DYS / TDAH | spécifiée | la réduction de charge prime sur la densité |
+| TDAH + Fatigue | spécifiée | plafond de mots le plus bas prime |
 | HDC + Fatigue | spécifiée | HDC adopte le plafond du skill le plus contraignant |
-| `psychologie-rigoureuse` + TSA + DYS | testée (triple, fond psy) | sécurité éthique prime, puis forme |
-| `psychologie-rigoureuse` + Fatigue en contexte de détresse | testée | sécurité éthique prime, marquage de confiance économe |
+| TSA + TDAH, TSA + Fatigue, DYS + Fatigue | spécifiée | non encore testées en stress direct |
+| `psychologie-rigoureuse` + TSA + DYS (fond psy) | spécifiée | triple co-activation, non encore testée en stress direct |
