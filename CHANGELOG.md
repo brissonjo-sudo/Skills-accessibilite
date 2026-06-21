@@ -5,6 +5,20 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [Non publié]
+
+### Ajouté
+
+- **`docs/index_skills.md`** : index canonique de l'écosystème — pour chaque skill, version stable, fichier source, déclencheur, risques couverts, compatibilités, statut d'évaluation ; rappel de l'ordre de préséance et matrice de co-activation.
+- **`docs/note_ethique.md`** : cadre éthique explicite (adaptation de communication, pas de diagnostic, pas de soin, pas de substitution professionnelle, anti-essentialisation, sécurité éthique prioritaire, ressources d'urgence).
+
+### Modifié
+
+- **README** : liens vers l'index canonique et la note éthique ; mention « quand l'utiliser / quand ne pas l'utiliser » renvoyant à l'index.
+- **`docs/bilan_ecosysteme_skills_accessibilite.md`** : suppression des mentions périmées « accessibilite-tsa (à venir) » (le skill TSA est en production depuis V4) ; liste des skills couverts mise à jour (7 skills en production) ; renvoi vers l'index canonique.
+
+---
+
 ## [1.18.0] — 2026-06-11
 
 Amélioration de la robustesse et de la maintenabilité de l'écosystème (déclencheurs, articulation inter-skills, CI).
