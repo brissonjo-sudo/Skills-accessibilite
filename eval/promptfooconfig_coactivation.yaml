@@ -1,0 +1,141 @@
+description: Évaluation co-activation inter-skills — 6 paires à tension maximale
+
+defaultTest:
+  # Juge non-circulaire : mistral-small-latest n'est pas un provider testé
+  options:
+    provider:
+      id: mistral:mistral-small-latest
+      config:
+        apiKey: "{{env.MISTRAL_API_KEY}}"
+
+prompts:
+  - id: file://prompts/with_two_skills.yaml
+    label: "Co-activation (skill1 + skill2)"
+
+providers:
+  - id: mistral:mistral-large-latest
+    label: "Mistral Large"
+    config:
+      apiKey: "{{env.MISTRAL_API_KEY}}"
+  - id: google:gemini-2.5-flash
+    label: "Gemini 2.5 Flash"
+    config:
+      apiKey: "{{env.GOOGLE_API_KEY}}"
+  - id: anthropic:claude-sonnet-4-6
+    label: "Claude Sonnet 4.6"
+    config:
+      apiKey: "{{env.ANTHROPIC_API_KEY}}"
+
+tests:
+  - description: "C1 — HDC + DYS : plafond DYS prime en co-activation"
+    vars:
+      skill1: "file://../skills/accessibilite-haute-densite-cognitive/SKILL.md"
+      skill2: "file://../skills/accessibilite-dys/SKILL.md"
+      question: "J'ai un HPI et une dyslexie. Explique-moi ce que la théorie des systèmes dynamiques dit sur le développement cognitif."
+    assert:
+      # Déterministe : plafond DYS prime (220 mots avec marge pour ponctuation)
+      - type: javascript
+        value: "output.split(/\\s+/).filter(w => w.length > 0).length <= 220"
+      # Contenu : structure visuelle, phrases courtes, pas de digressions
+      - type: llm-rubric
+        value: |
+          La réponse est structurée (titres courts ou listes).
+          Elle ne contient pas de longues digressions.
+          Les phrases sont en moyenne ≤ 20 mots.
+          La forme favorise la lisibilité plutôt que la densité HDC.
+
+  - description: "C2 — TDAH + Fatigue : pas d'injonction à l'action"
+    vars:
+      skill1: "file://../skills/accessibilite-tdah/SKILL.md"
+      skill2: "file://../skills/accessibilite-douleur-chronique-fatigue-cognitive/SKILL.md"
+      question: "J'ai un TDAH et de la fibromyalgie. J'ai une tâche importante à rendre demain mais je n'arrive pas à commencer. Aide-moi."
+    assert:
+      # Déterministe : pas d'injonction à l'action
+      - type: javascript
+        value: "!/(essaie|essayez|force-toi|fais d'abord|commence par|tu dois|il faut que tu)/i.test(output)"
+      # Contenu : une seule action concrète, petite, sans moralisation
+      - type: llm-rubric
+        value: |
+          La réponse propose au plus une action concrète, petite et facultative.
+          Elle ne moralise pas sur la procrastination ou la fatigue.
+          Elle reconnaît explicitement qu'il est légitime de ne pas agir maintenant
+          ou présente toute piste comme une option, pas une consigne.
+
+  - description: "C3 — TSA + Psychologie : littéralité + marquage de confiance"
+    vars:
+      skill1: "file://../skills/accessibilite-tsa/SKILL.md"
+      skill2: "file://../skills/psychologie-rigoureuse/SKILL.md"
+      question: "J'ai un TSA. Pourquoi les gens disent-ils \"ça va ?\" sans vouloir vraiment savoir comment ça va ?"
+    assert:
+      # Contenu : explication littérale de la fonction sociale + marquage différencié
+      - type: llm-rubric
+        value: |
+          La réponse explique littéralement la fonction sociale de la formule « ça va ? »
+          (salutation rituelle, régulateur social, sans attente d'une vraie réponse).
+          Elle utilise au moins un marquage de confiance différencié
+          (ex : « probablement », « les données suggèrent », « plausible », « débattu »)
+          sur au moins une affirmation qui le justifie.
+          Elle ne présuppose pas que l'utilisateur ne comprend pas les conventions sociales.
+      # Déterministe : pas de métaphore ou expression figurée non expliquée
+      - type: javascript
+        value: |
+          // Vérifie l'absence de quelques métaphores courantes non expliquées
+          const figuratives = [
+            /briser la glace/i,
+            /ouvrir une porte/i,
+            /tisser des liens/i,
+            /huiler les rouages/i,
+            /ciment social/i
+          ];
+          !figuratives.some(re => re.test(output))
+
+  - description: "C4 — DYS + Psychologie : phrases courtes + marquage différencié"
+    vars:
+      skill1: "file://../skills/accessibilite-dys/SKILL.md"
+      skill2: "file://../skills/psychologie-rigoureuse/SKILL.md"
+      question: "J'ai une dyslexie. Comment les biais cognitifs se forment-ils ?"
+    assert:
+      # Déterministe : plafond 220 mots
+      - type: javascript
+        value: "output.split(/\\s+/).filter(w => w.length > 0).length <= 220"
+      # Contenu : au moins 2 mécanismes distincts + marquage sur l'un + structure claire
+      - type: llm-rubric
+        value: |
+          La réponse présente au moins 2 mécanismes distincts de formation des biais cognitifs.
+          Au moins l'un de ces mécanismes porte un marquage de confiance différencié
+          (ex : « plausible », « débattu », « solide »).
+          La structure est visuelle (listes ou titres courts).
+          Les phrases sont courtes et aérées.
+
+  - description: "C5 — HDC + Psychologie : densité additive, multi-dimensions + marquage"
+    vars:
+      skill1: "file://../skills/accessibilite-haute-densite-cognitive/SKILL.md"
+      skill2: "file://../skills/psychologie-rigoureuse/SKILL.md"
+      question: "Je suis HPI. Quelle est la valeur épistémique réelle des études longitudinales en psychologie du développement ?"
+    assert:
+      # Contenu : au moins 2 dimensions distinctes + marquage différencié + pas de réduction plate
+      - type: llm-rubric
+        value: |
+          La réponse traite au moins 2 dimensions distinctes parmi :
+          force causale vs corrélation, attrition, effets cohorte, validité externe,
+          continuité développementale, limites méthodologiques.
+          Elle utilise un marquage de confiance différencié sur au moins une affirmation.
+          Elle ne réduit pas à une conclusion du type « les études longitudinales sont utiles mais imparfaites »
+          sans développer les tensions réelles.
+
+  - description: "C6 — TDAH + DYS : double réduction, plafond TDAH le plus bas"
+    vars:
+      skill1: "file://../skills/accessibilite-tdah/SKILL.md"
+      skill2: "file://../skills/accessibilite-dys/SKILL.md"
+      question: "J'ai un TDAH et une dyslexie. Comment fonctionne la mémoire de travail ?"
+    assert:
+      # Déterministe : plafond TDAH prime (180 mots)
+      - type: javascript
+        value: "output.split(/\\s+/).filter(w => w.length > 0).length <= 180"
+      # Contenu : structuré, une idée principale, sans digressions
+      - type: llm-rubric
+        value: |
+          La réponse est structurée (listes ou titres courts).
+          Elle développe une seule idée principale sur la mémoire de travail.
+          Elle ne contient pas de digressions ni de sous-thèmes secondaires non sollicités.
+          Les phrases sont courtes et aérées.

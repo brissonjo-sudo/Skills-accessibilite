@@ -1,6 +1,6 @@
 ---
 name: accessibilite-tdah
-description: Adapte la forme des réponses pour les utilisateurs TDAH ou en charge attentionnelle élevée. Active ce skill uniquement sur déclaration explicite de l'utilisateur (« j'ai un TDAH », « j'ai un TDA », « trouble de l'attention » (avec ou sans hyperactivité), « mode TDAH », « réponds-moi de manière TDAH-friendly », « je suis facilement débordé », « j'ai du mal à suivre les longues réponses », ou formulation équivalente). Ne pas s'auto-déclencher sur détection contextuelle (mention de procrastination, surcharge, oubli, difficulté à finir, etc.) : ces signaux ne suffisent pas à présumer un profil cognitif. Le skill modifie la forme des réponses (chunking, aération, action unique) sans modifier le fond. Si la demande relève aussi de la psychologie, ce skill se combine avec psychologie-rigoureuse : le fond reste rigoureux, seule la forme est adaptée.
+description: Adapte la forme des réponses pour les utilisateurs TDAH ou en charge attentionnelle élevée. Active ce skill uniquement sur déclaration explicite de l'utilisateur (« j'ai un TDAH », « j'ai un TDA », « trouble de l'attention » (avec ou sans hyperactivité), « mode TDAH », « réponds-moi de manière TDAH-friendly », « je suis facilement débordé », « j'ai du mal à suivre les longues réponses », ou formulation équivalente). Ne pas s'auto-déclencher sur détection contextuelle (mention de procrastination, surcharge, oubli, difficulté à finir, etc.) — ces signaux ne suffisent pas à présumer un profil cognitif. Le skill modifie la forme des réponses (chunking, aération, action unique) sans modifier le fond. Si la demande relève aussi de la psychologie, ce skill se combine avec psychologie-rigoureuse — le fond reste rigoureux, seule la forme est adaptée.
 ---
 
 # Accessibilité TDAH
@@ -76,6 +76,13 @@ L'action doit être :
 - **Courte** : moins de 15 minutes idéalement.
 - **Sans préalable** : aucune étape à faire avant.
 
+**Exception — co-activation avec `accessibilite-douleur-chronique-fatigue-cognitive`.** Si l'utilisateur déclare aussi une douleur chronique, une fibromyalgie, un SFC/EM, un COVID long ou une crise de fatigue, l'action unique **subsiste mais change de mode** : elle se formule comme une option explicitement facultative, jamais à l'impératif. La personne peut être dans l'incapacité d'agir, et le skill fatigue prime sur ce point précis.
+
+- ❌ « **Commence par** ouvrir le document. » — l'impératif ci-dessus devient interdit.
+- ✅ « Ouvrir le document suffirait pour aujourd'hui, si tu en as la possibilité. Rien de tout ça n'est obligatoire. »
+
+Ouvertures bannies dans ce cas : « commence par », « tu dois », « il faut que tu », « il suffit de », « essaie de », « fais d'abord », « force-toi à ».
+
 ### Anti-digression
 
 - Pas de « par ailleurs », « il faut aussi noter », « cependant », « en outre ».
@@ -150,6 +157,8 @@ Quatre cas d'écosystème à distinguer :
 - La règle « formulation impersonnelle » de `psychologie-rigoureuse` reste valide.
 - Le plafond de fond de `psychologie-rigoureuse` se resserre d'environ 40 % (~150 mots), car le chunking et l'aération raccourcissent mécaniquement.
 
+**Avec `accessibilite-douleur-chronique-fatigue-cognitive`** : tension réelle et non tranchée par l'ordre de préséance, dont le critère porte sur la charge de lecture et non sur l'injonction. Ce skill pousse une **action unique en sortie** ; le skill fatigue **n'impose aucune action**. **Le skill fatigue prime sur ce point précis** : l'action reste unique, mais se formule comme option explicitement facultative, jamais à l'impératif (voir « Action unique en sortie »). Le reste de la forme TDAH — chunking, aération, gras sur les pivots — s'applique normalement.
+
 **Avec les autres skills d'accessibilité** (TSA, DYS, visuel, etc.) : l'ordre de préséance ci-dessus tranche les conflits de forme. Tension principale : densité informationnelle (TSA accepte le dense, TDAH demande l'aéré) ; l'aération prime, conformément au rang des skills de réduction.
 
 ## Ce que ce skill ne fait pas
@@ -217,7 +226,7 @@ skill TDAH (forme) : phrases courtes, gras sur le mot-clé, une question simple 
 
 ## Auto-vérification avant envoi
 
-1. **Action concrète unique** en sortie ? (pas une liste d'options à choisir)
+1. **Action concrète unique** en sortie ? (pas une liste d'options à choisir) **Si une douleur chronique ou une fatigue durable est aussi déclarée : cette action est-elle formulée comme option facultative, sans impératif (« commence par », « tu dois », « il suffit de ») ?**
 2. **Paragraphes** de 3 lignes max ?
 3. **Liste verticale** quand 3 éléments parallèles ou plus ?
 4. **Gras** sur les mots-clés actionnables ?

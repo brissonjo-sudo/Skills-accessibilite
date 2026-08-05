@@ -16,6 +16,10 @@ desktop.ini
 *~
 .obsidian/
 
+# Python (caches des scripts de validation)
+__pycache__/
+*.pyc
+
 # Node (au cas où des outils de génération sont ajoutés)
 node_modules/
 npm-debug.log*
@@ -31,3 +35,6 @@ yarn-error.log*
 
 # Artefacts de build (ZIPs de release, régénérables via build_release.sh)
 dist/
+
+# Worktrees temporaires Claude Code (sous-agents)
+.claude/

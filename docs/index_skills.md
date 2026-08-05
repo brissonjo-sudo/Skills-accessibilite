@@ -1,12 +1,12 @@
 # Index canonique des skills
 
-Page de référence unique : pour chaque skill, sa version stable, son fichier source, son déclencheur, les risques qu'il couvre, ses compatibilités et son statut d'évaluation.
+Page de référence unique : pour chaque skill, sa version courante, son fichier source, son déclencheur, les risques qu'il couvre, ses compatibilités et son statut d'évaluation.
 
 > Source de vérité du **comportement** : le fichier `SKILL.md` de chaque skill.
 > Source de vérité de l'**historique d'itération** : `docs/bilan_ecosysteme_skills_accessibilite.md`.
 > En cas de divergence, le `SKILL.md` prime sur cet index.
 
-Dernière mise à jour : 2026-06-21 (écosystème v1.18.0).
+Dernière mise à jour : 2026-08-05 (changements non publiés après l'écosystème v1.19.0).
 
 ---
 
@@ -14,19 +14,19 @@ Dernière mise à jour : 2026-06-21 (écosystème v1.18.0).
 
 | Skill | Version | Fichier source | Statut | Banc d'éval |
 |---|---|---|---|---|
-| psychologie-rigoureuse | V6.1 | `skills/psychologie-rigoureuse/SKILL.md` | production | `eval/promptfooconfig_psychologie.yaml` (8 cas) |
-| accessibilite-tdah | V2.2 | `skills/accessibilite-tdah/SKILL.md` | production | `eval/promptfooconfig_tdah.yaml` (10 cas) |
+| psychologie-rigoureuse | V6.2 | `skills/psychologie-rigoureuse/SKILL.md` | candidat — promptfoo requis | `eval/promptfooconfig_psychologie.yaml` (8 cas) |
+| accessibilite-tdah | V2.3 | `skills/accessibilite-tdah/SKILL.md` | candidat — promptfoo requis | `eval/promptfooconfig_tdah.yaml` (10 cas) |
 | accessibilite-dys | V3.1 | `skills/accessibilite-dys/SKILL.md` | production | `eval/promptfooconfig_dys.yaml` (8 cas) |
 | accessibilite-tsa | V4.1 | `skills/accessibilite-tsa/SKILL.md` | production | `eval/promptfooconfig_tsa.yaml` (11 cas) |
-| accessibilite-haute-densite-cognitive | V3.1 | `skills/accessibilite-haute-densite-cognitive/SKILL.md` | production | `eval/promptfooconfig.yaml` (8 cas) |
-| accessibilite-douleur-chronique-fatigue-cognitive | V3.1 | `skills/accessibilite-douleur-chronique-fatigue-cognitive/SKILL.md` | production | `eval/promptfooconfig_fatigue.yaml` (8 cas) |
-| accessibilite-visuelle | V1.1 | `skills/accessibilite-visuelle/SKILL.md` | production | `eval/promptfooconfig_visuel.yaml` (8 cas) |
+| accessibilite-haute-densite-cognitive | V3.2 | `skills/accessibilite-haute-densite-cognitive/SKILL.md` | candidat — promptfoo requis | `eval/promptfooconfig.yaml` (8 cas) |
+| accessibilite-douleur-chronique-fatigue-cognitive | V3.2 | `skills/accessibilite-douleur-chronique-fatigue-cognitive/SKILL.md` | candidat — promptfoo requis | `eval/promptfooconfig_fatigue.yaml` (8 cas) |
+| accessibilite-visuelle | V1.2 | `skills/accessibilite-visuelle/SKILL.md` | candidat — promptfoo requis | `eval/promptfooconfig_visuel.yaml` (8 cas) |
 
 ---
 
 ## Fiches par skill
 
-### psychologie-rigoureuse — V6.1
+### psychologie-rigoureuse — V6.2
 
 - **Périmètre** : fond. Cadre d'analyse psychologique rigoureux et non dogmatique.
 - **Déclencheur** : toute question touchant un concept psy (biais, attachement, motivation, personnalité, trouble, mécanisme de défense…), citation d'un auteur du champ, demande de lecture comportementale/émotionnelle, question sur les relations, le développement, la cognition, l'émotion ou la santé mentale. Se déclenche même si la demande n'est pas formulée comme « psychologique ».
@@ -34,7 +34,7 @@ Dernière mise à jour : 2026-06-21 (écosystème v1.18.0).
 - **Quand NE PAS l'utiliser** : il ne se substitue pas à un professionnel ; il ne pose pas de diagnostic. Voir `docs/note_ethique.md`.
 - **Compatibilités** : régit le **fond** ; se combine avec tous les skills de forme sans tension.
 
-### accessibilite-tdah — V2.2
+### accessibilite-tdah — V2.3
 
 - **Périmètre** : forme.
 - **Déclencheur** : déclaration explicite uniquement (« j'ai un TDAH », « j'ai un TDA », « trouble de l'attention », « mode TDAH », « réponds-moi de manière TDAH-friendly », « je suis facilement débordé », « j'ai du mal à suivre les longues réponses »).
@@ -58,7 +58,7 @@ Dernière mise à jour : 2026-06-21 (écosystème v1.18.0).
 - **Effet** : précision lexicale, structure prévisible, pas de small talk, littéralité. Application **silencieuse**. Menu de format neutre proposé une fois si l'utilisateur exprime une difficulté de format.
 - **Compatibilités** : `psychologie-rigoureuse`, DYS, TDAH, Visuelle.
 
-### accessibilite-haute-densite-cognitive — V3.1
+### accessibilite-haute-densite-cognitive — V3.2
 
 - **Périmètre** : forme. Profils HDC/HPI/« zèbre ».
 - **Déclencheur** : déclaration explicite (« j'ai un HPI », « je suis zèbre », « mode HDC », « je pense de façon associative ») OU besoin explicite de densité (« ne simplifie pas », « garde toute la nuance »).
@@ -66,7 +66,7 @@ Dernière mise à jour : 2026-06-21 (écosystème v1.18.0).
 - **Effet** : autorise et structure la profondeur, la nuance, l'exploration multi-couches. Ne touche pas au fond.
 - **Compatibilités** : `psychologie-rigoureuse` et les autres skills. **En co-activation avec un skill de réduction (DYS, TDAH), la réduction prime sur la forme.**
 
-### accessibilite-douleur-chronique-fatigue-cognitive — V3.1
+### accessibilite-douleur-chronique-fatigue-cognitive — V3.2
 
 - **Périmètre** : forme. Douleur chronique, fatigue cognitive, brouillard mental (fibromyalgie, SFC/EM, COVID long).
 - **Déclencheur** : déclaration explicite (« fibromyalgie », « SFC/EM », « COVID long », « brouillard mental », « mode économie d'énergie ») OU besoin direct d'économie d'effort (« je n'ai pas l'énergie de lire long », « je suis en crise de fatigue »).
@@ -74,7 +74,7 @@ Dernière mise à jour : 2026-06-21 (écosystème v1.18.0).
 - **Effet** : réponse d'abord, modularité optionnelle, anti-injonction à l'effort. Ne touche pas au fond.
 - **Compatibilités** : `psychologie-rigoureuse` ; les autres skills d'accessibilité.
 
-### accessibilite-visuelle — V1.1
+### accessibilite-visuelle — V1.2
 
 - **Périmètre** : forme. Basse vision, cécité avec lecteur d'écran.
 - **Déclencheur** : déclaration explicite (« je suis malvoyant », « je suis non-voyant », « j'utilise un lecteur d'écran »).

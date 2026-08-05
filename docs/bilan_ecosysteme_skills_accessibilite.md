@@ -379,13 +379,13 @@ Pour le run Claude (contexte frais par cas), utiliser un sous-agent par cas de t
 
 | Skill | Version stable | Statut | Méthode de test | Résultats |
 |---|---|---|---|---|
-| psychologie-rigoureuse | V6.1 | production | Gemini + ChatGPT + Claude.ai (manuel) ; promptfoo 8 cas | référence d'écosystème |
-| accessibilite-tdah | V2.2 | production | Gemini + ChatGPT + 4 cas articulation (manuel) ; promptfoo 10 cas (C9 TDA / C10 non-déclenchement) | référence forme |
+| psychologie-rigoureuse | V6.2 | production | Gemini + ChatGPT + Claude.ai (manuel) ; promptfoo 8 cas | référence d'écosystème |
+| accessibilite-tdah | V2.3 | production | Gemini + ChatGPT + 4 cas articulation (manuel) ; promptfoo 10 cas (C9 TDA / C10 non-déclenchement) | référence forme |
 | accessibilite-dys | V3.1 | production | Gemini + Mistral + Claude.ai (manuel) ; promptfoo 8 cas | 3 cycles |
 | accessibilite-tsa | V4.1 | production | promptfoo 11 cas — Claude 11/11, Mistral 11/11, Gemini 10/11 | V4 stable ; Gemini C3 RLHF documenté |
-| accessibilite-haute-densite-cognitive | V3.1 | production | promptfoo 8 cas — Claude 8/8, Mistral 7/8, Gemini 4/8 applic. silencieuse | Gemini + Mistral preamble RLHF documenté |
-| accessibilite-douleur-chronique-fatigue-cognitive | V3.1 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 8/8 | 3 cycles |
-| accessibilite-visuelle | V1.1 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 5/5 évalués | stable au 1er cycle |
+| accessibilite-haute-densite-cognitive | V3.2 | production | promptfoo 8 cas — Claude 8/8, Mistral 7/8, Gemini 4/8 applic. silencieuse | Gemini + Mistral preamble RLHF documenté |
+| accessibilite-douleur-chronique-fatigue-cognitive | V3.2 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 8/8 | 3 cycles |
+| accessibilite-visuelle | V1.2 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 5/5 évalués | stable au 1er cycle |
 
 > Les versions indiquées sont les versions stables actuelles (bump mineur 1.18.0 : insertion du bloc canonique « Ordre de préséance »). Les chiffres d'évaluation promptfoo ont été mesurés sur la version mineure antérieure (avant le bloc de préséance, sans impact comportemental sur les cas testés). Vue synthétique : `docs/index_skills.md`.
 

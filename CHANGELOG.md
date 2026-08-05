@@ -5,6 +5,49 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [Non publié]
+
+Correctifs issus du premier benchmark contrôlé avec/sans skill (130 réponses appariées, aveugle, trois juges indépendants par variante). Deux régressions critiques corrigées — une de sécurité, une d'exactitude — plus un défaut de chargement présent depuis l'origine.
+
+> **Validation.** Ces correctifs s'appuient sur le run `eval/runs/20260805-001935/` (protocole `eval/prompt_benchmark_claude_code.md`), **pas** sur un run `run_all.sh` : promptfoo n'était pas exécutable (ni réseau ni clés API au moment de la correction). `CONTRIBUTING.md` exige un passage au banc promptfoo pour toute montée de version — il reste à faire pour confirmer ces bumps.
+
+### Corrigé — sécurité et exactitude
+
+- **`accessibilite-douleur-chronique-fatigue-cognitive` V3.1 → V3.2** : la ressource de crise pouvait atterrir dans la couche « Si tu as l'énergie », c'est-à-dire dans un bloc que le skill définit lui-même comme facultatif à lire. Ajout d'une exclusion absolue (la sécurité n'entre jamais en couche optionnelle), d'une doctrine de placement (souffrance exprimée → partie toujours lue ; crise aiguë → en tête), d'un contre-exemple ❌/✅ et du point 13 d'auto-vérification. *Preuve : cas `fatigue` Cas 6, placement signalé par les juges comparatif et sceptique, pénalisé par le juge sceptique ; la baseline gagnait ce cas à la majorité.*
+- **`accessibilite-visuelle` V1.1 → V1.2** : l'exemple 4 citait « les CRPV en France » comme structures d'accompagnement des personnes déficientes visuelles. Le sigle désigne en réalité les Centres Régionaux de Pharmacovigilance. Le skill propageait cette erreur telle quelle dans une réponse à une personne en détresse. Remplacé par des structures réelles ; ajout d'une règle sur les sigles et les ressources nommées. *Preuve : cas `visuel` Cas 8.*
+
+### Corrigé — chargement des skills
+
+- **Frontmatter invalide en YAML strict** dans `accessibilite-tdah` (V2.2 → V2.3) et `psychologie-rigoureuse` (V6.1 → V6.2) : un `:` suivi d'un espace dans une valeur non quotée fait échouer tout parseur YAML strict (`mapping values are not allowed here`). Défaut présent depuis l'origine et invisible pour le validateur, qui découpait le frontmatter sur le premier `:`. Remplacé par un tiret cadratin.
+- **`scripts/validate_skills.py`** détecte désormais ce défaut (contrôle `find_yaml_breaking_scalars`, stdlib uniquement — le CI n'installe aucune dépendance).
+
+### Corrigé — doctrine de co-activation
+
+- **Arbitrage TDAH / fatigue** (`accessibilite-tdah` V2.3, `accessibilite-douleur-chronique-fatigue-cognitive` V3.2) : la règle « le skill fatigue prime sur l'injonction » n'existait que côté fatigue. Le skill TDAH n'en portait aucune trace et donnait « Commence par A » comme exemple à suivre. Règle rendue bilatérale, avec liste explicite des ouvertures bannies. *Preuve : co-activation C2, unique échec déterministe du bras avec skill.*
+- **`accessibilite-haute-densite-cognitive` V3.1 → V3.2** : un besoin communicationnel exprimé (« ne simplifie pas ») est désormais traité comme une demande explicite de développement, prioritaire sur la proportionnalité — la règle ne couvrait que la déclaration de profil. *Preuve : `HDC` Cas 7, défaite unanime où le skill produisait une réponse moins dense que la baseline.*
+- **`psychologie-rigoureuse` V6.2** : ajout de la contrainte d'application silencieuse, seul skill de l'écosystème à ne pas la porter alors que `AGENTS.md` en fait un critère minimum. *Preuve : co-activation C5, où la réponse nommait le skill à l'utilisateur.*
+
+### Corrigé — banc d'évaluation
+
+- **10 questions de test recopiées du skill évalué** réécrites (`promptfooconfig.yaml`, `_fatigue`, `_tsa`, `_visuel`). Sur l'une d'elles, la réponse produite était *byte-identique* à la réponse-type du skill : le modèle récitait. La phrase de déclenchement est conservée, le sujet change.
+- **Rubriques réalignées sur les nouvelles questions** pour le cas 1 du harnais fatigue (sommeil lent/paradoxal) et le cas 6 du harnais visuel (éclipse solaire), afin que les juges n'évaluent plus les anciens sujets. L'inventaire du protocole est mis à jour à 61 cas principaux et 67 cas au total.
+- **Politique des résultats bruts clarifiée** : les 13 archives JSON historiques déjà suivies sont conservées pour la reproductibilité ; les nouveaux `results*.json` restent ignorés et les analyses Markdown demeurent la source de vérité.
+- **Juge circulaire** : quatre harnais désignaient `mistral-large-latest` comme juge alors que ce modèle est aussi un provider testé. Tous passent à `mistral-small-latest`, conformément à ce que le README affirmait déjà.
+- **Assertions déterministes** ajoutées aux quatre harnais qui n'en avaient aucune (23 → 39). Ce sont pour l'essentiel des garde-fous anti-régression : sur le run de référence, seuls les plafonds de mots discriminaient réellement les deux conditions. `eval/README.md` corrigé en conséquence, et complété du harnais de co-activation qui manquait au tableau.
+
+### Ajouté
+
+- **`scripts/check_eval_leaks.py`** : échoue si une question de test recouvre à 75 % ou plus le texte du skill évalué. Branché au CI. Le simple partage d'une phrase de déclenchement documentée n'est pas traité comme une fuite.
+- **`eval/prompt_benchmark_claude_code.md`** : protocole du benchmark contrôlé (matrice appariée, aveuglement, trois juges plus adjudication, macro-moyenne par variante).
+- Cible `coactivation` dans `eval/run_all.sh`, qui n'en lançait que 7 sur 8 ; une cible inconnue échoue désormais au lieu d'être ignorée silencieusement.
+
+### Sécurité
+
+- `eval/runs/` ajouté à `eval/.gitignore`. Ce répertoire contient `blinding_map.json`, la table de correspondance A/B des juges : la committer annulerait rétroactivement l'aveuglement du protocole.
+- Le contrôle « aucun `.env` commité », perdu lors de la refonte du workflow CI, est rétabli.
+
+---
+
 ## [1.19.0] — 2026-06-21
 
 Release de documentation et de maintenabilité : aucun changement de comportement des skills (les 7 `SKILL.md` sont identiques à 1.18.0). Ajout d'un index canonique, d'une note éthique, d'un guide de contribution, de cas d'usage, et harmonisation de la documentation.
@@ -44,6 +87,47 @@ Amélioration de la robustesse et de la maintenabilité de l'écosystème (décl
 - **Harmonisation** (skill TDAH) : suppression de « arbitrer au cas par cas » (contradictoire avec le bloc canonique) ; plafond de co-activation exprimé en relatif.
 - **build_release.sh** : la validation des skills s'exécute avant la génération des ZIP (échec = pas de ZIP).
 - **Versions** : TDAH V2.1 → V2.2 ; bump mineur des 6 autres skills (touchés par le bloc de préséance).
+
+### CI/CD — GitHub Actions (`ci: validate skills`)
+
+- Workflow `.github/workflows/validate.yml` déclenché sur tout push et PR vers `main`.
+- `scripts/check_frontmatter.py` : vérifie que chaque `skills/*/SKILL.md` a un frontmatter
+  valide (`name` ≤ 64 chars, regex `[a-z0-9-]+` ; `description` ≤ 1024 chars).
+- `scripts/check_eval_configs.py` : résout les chemins `file://` dans les 8 configs promptfoo
+  et vérifie que chaque `SKILL.md` référencé existe.
+- Step no-.env : `git ls-files eval/.env` doit retourner vide.
+- Step build-zips : `build_release.sh` doit produire 7 ZIPs valides avec `<name>/SKILL.md`.
+
+### Évaluation — Provider Claude ajouté (Axe dette d'éval)
+
+- `anthropic:claude-sonnet-4-6` ajouté comme 3e provider dans les 7 harnais existants
+  (`promptfooconfig.yaml`, `_fatigue`, `_tsa`, `_visuel`, `_dys`, `_tdah`, `_psychologie`).
+- `eval/.env.example` : ajout `ANTHROPIC_API_KEY=...`.
+- `eval/run_all.sh` : avertissement non-bloquant si `ANTHROPIC_API_KEY` absente.
+- Méthodo désormais uniforme 3-providers (Mistral Large, Gemini 2.5 Flash, Claude Sonnet 4.6)
+  pour tous les skills. Les 3 harnais sans résultats (DYS, TDAH, Psychologie) sont prêts à
+  tourner : `cd eval/ && ./run_all.sh dys tdah psychologie`.
+
+### Évaluation — Harnais co-activation (6 paires)
+
+- `eval/promptfooconfig_coactivation.yaml` : 6 cas testant les règles d'articulation inter-skills
+  jamais validées empiriquement au banc :
+  - C1 HDC+DYS : plafond DYS prime (≤ 220 mots)
+  - C2 TDAH+Fatigue : pas d'injonction à l'action
+  - C3 TSA+Psychologie : littéralité + marquage confiance simultanés
+  - C4 DYS+Psychologie : phrases courtes + marquage différencié (≤ 220 mots)
+  - C5 HDC+Psychologie : densité additive (≥ 2 dimensions épistémiques)
+  - C6 TDAH+DYS : double réduction, plafond TDAH le plus bas (≤ 180 mots)
+- `eval/prompts/with_two_skills.yaml` : template pour charger deux skills en system prompt.
+
+### Diffusion & communauté
+
+- `CONTRIBUTING.md` : critères d'acceptation d'un skill, convention de versionnement,
+  conventions de commit, hygiène secrets, commandes de lancement des évaluations.
+- `README.md` : badges (version GitHub Release, MIT, tested with promptfoo) ajoutés en haut.
+- `README.en.md` : README anglais court (tableau 7 skills, instructions d'import, section éval).
+- `eval/.gitignore` : `results*.json` gitignorés (les 11 fichiers pèsent 6,5 Mo ; les analyses
+  Markdown `analyse_*.md` restent versionnées comme source de vérité archivée).
 
 ---
 

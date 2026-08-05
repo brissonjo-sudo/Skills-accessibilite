@@ -28,6 +28,24 @@ jobs:
       - name: Valider les skills
         run: python scripts/validate_skills.py
 
+      # validate_skills.py ne couvre pas les références file:// des harnais :
+      # ce contrôle reste porté par son propre script.
+      - name: Vérifier les chemins des configs d'évaluation
+        run: python scripts/check_eval_configs.py
+
+      # Une question de test recopiée du SKILL.md ne mesure plus l'effet du skill :
+      # le modèle récite la réponse-type qu'il a sous les yeux.
+      - name: Vérifier qu'aucune question de test n'est recopiée d'un skill
+        run: python scripts/check_eval_leaks.py
+
+      - name: Vérifier qu'aucun .env n'est commité
+        run: |
+          if git ls-files eval/.env | grep -q .; then
+            echo "[ERREUR] eval/.env est suivi par git"
+            exit 1
+          fi
+          echo "[OK]     aucun .env commité"
+
       - name: Installer zip et générer les ZIP
         run: |
           sudo apt-get update -qq

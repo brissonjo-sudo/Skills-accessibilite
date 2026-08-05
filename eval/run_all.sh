@@ -11,6 +11,7 @@
 #
 # Prérequis : promptfoo installé globalement (npm install -g promptfoo)
 #             Variables d'environnement : MISTRAL_API_KEY, GOOGLE_API_KEY
+#             ANTHROPIC_API_KEY (optionnel — Claude Sonnet 4.6 ignoré si absent)
 
 set -euo pipefail
 
@@ -30,6 +31,11 @@ RED='\033[0;31m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
+# Avertissement non-bloquant : ANTHROPIC_API_KEY optionnel
+if [ -z "${ANTHROPIC_API_KEY:-}" ]; then
+  echo -e "${YELLOW}[WARN]${NC} ANTHROPIC_API_KEY non définie — le provider Claude Sonnet 4.6 sera ignoré ou retournera des erreurs API."
+fi
+
 # Mapping skill → fichier config
 declare -A CONFIGS=(
   ["hdc"]="promptfooconfig.yaml"
@@ -39,13 +45,14 @@ declare -A CONFIGS=(
   ["dys"]="promptfooconfig_dys.yaml"
   ["tdah"]="promptfooconfig_tdah.yaml"
   ["psychologie"]="promptfooconfig_psychologie.yaml"
+  ["coactivation"]="promptfooconfig_coactivation.yaml"
 )
 
 # Sélection des harnais à lancer
 if [ $# -gt 0 ]; then
   TARGETS=("$@")
 else
-  TARGETS=("hdc" "fatigue" "tsa" "visuel" "dys" "tdah" "psychologie")
+  TARGETS=("hdc" "fatigue" "tsa" "visuel" "dys" "tdah" "psychologie" "coactivation")
 fi
 
 PASS_TOTAL=0
@@ -56,8 +63,11 @@ SKIPPED_CONFIGS=()
 for TARGET in "${TARGETS[@]}"; do
   CONFIG="${CONFIGS[$TARGET]:-}"
   if [ -z "$CONFIG" ]; then
-    echo -e "${YELLOW}[SKIP]${NC} Harnais inconnu : $TARGET"
-    continue
+    # Cible inconnue = faute de frappe ou harnais oublié dans CONFIGS.
+    # Échouer bruyamment plutôt que de passer sous silence.
+    echo -e "${RED}[ERREUR]${NC} Harnais inconnu : $TARGET"
+    echo "         Cibles disponibles : ${!CONFIGS[*]}"
+    exit 1
   fi
   if [ ! -f "$CONFIG" ]; then
     echo -e "${YELLOW}[SKIP]${NC} Fichier absent : $CONFIG"

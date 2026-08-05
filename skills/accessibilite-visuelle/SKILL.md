@@ -117,6 +117,16 @@ Pour les profils basse vision qui lisent du texte agrandi :
 - Ligne blanche entre blocs distincts.
 - Gras et italique **économes** : utilisés pour marquer l'essentiel, pas comme décoration. Un paragraphe entier en gras annule l'effet discriminant du gras.
 
+### Sigles et ressources nommées
+
+Un sigle non développé est illisible à l'oreille : le lecteur d'écran l'épelle ou le prononce comme un mot, sans que rien ne permette de le décoder.
+
+- **Développer tout sigle à sa première occurrence** : « SAVS (service d'accompagnement à la vie sociale) », pas « SAVS ».
+- **Ne jamais citer une ressource dont on n'est pas sûr.** Un nom d'organisme, un numéro ou un sigle inventé est plus nuisible qu'une formulation générique : la personne peut le chercher, ne rien trouver, et perdre du temps dans un moment où elle en a peu.
+- En cas de doute, rester générique (« une association spécialisée dans la déficience visuelle ») plutôt que de nommer.
+
+Cette règle vaut d'abord pour les ressources d'orientation en cas de souffrance, où l'exactitude prime sur la précision apparente.
+
 ### Alternatives textuelles pour le contenu non textuel
 
 Si la réponse décrit ou suppose un contenu normalement visuel (image, graphique, carte, interface) :
@@ -155,6 +165,8 @@ Par défaut, **ne pas relancer**. Si relance :
 - **Renvois à des visuels non décrits** (schéma, figure, graphique non explicités).
 - **Gras / italique généralisés** (annule la fonction discriminante).
 - **Annonce du mode** (« je vais adapter pour ta basse vision »).
+- **Sigle non développé** à sa première occurrence.
+- **Ressource nommée non vérifiée** (organisme, sigle, numéro) — rester générique dans le doute.
 
 ## Ordre de préséance entre skills
 
@@ -189,7 +201,7 @@ Quand plusieurs skills de cet écosystème sont actifs simultanément, l'ordre d
 - Il ne diagnostique pas un déficit visuel.
 - Il ne produit pas d'images ou de fichiers audio accessibles.
 - Il ne convertit pas les réponses en braille.
-- Il ne valide pas la conformité WCAG d'une interface.
+- Il ne valide pas la conformité WCAG (Web Content Accessibility Guidelines) d'une interface.
 - Il ne simplifie pas le fond : un sujet complexe reste complexe ; seule la présentation est adaptée.
 - Il ne se substitue pas à `psychologie-rigoureuse` pour les questions de fond psychologique.
 - Il ne corrige pas les hallucinations factuelles propres à chaque LLM.
@@ -248,7 +260,7 @@ Réponse type :
 
 > Ce que tu décris — un isolement important après une perte de vision — est une réaction fréquente après un changement aussi majeur.
 >
-> Recommandation prioritaire : consulter un médecin traitant ou un psychologue peut t'aider à traverser cette période. Des structures spécialisées dans l'accompagnement des personnes déficientes visuelles (comme les CRPV en France) proposent aussi un soutien adapté.
+> Recommandation prioritaire : consulter un médecin traitant ou un psychologue peut t'aider à traverser cette période. Des structures spécialisées dans l'accompagnement des personnes déficientes visuelles proposent aussi un soutien adapté — en France, l'Association Valentin Haüy et la Fédération des Aveugles de France, ou un service d'accompagnement à la vie sociale (SAVS) orienté déficience visuelle.
 >
 > Si tu veux parler de façon plus immédiate, le 3114 (numéro national de prévention du suicide, 24h/24) est disponible.
 
@@ -265,8 +277,9 @@ Sécurité éthique prime sur la forme. Pas d'ouverture sociale. Pas de référe
 7. **Structure sémantique** : pas de saut de niveau de titre (# puis ###) ?
 8. **Aération** : paragraphes courts, gras/italique économes ?
 9. **Contenu visuel** : si le sujet est normalement visuel, alternative textuelle complète fournie ?
-10. **Sécurité éthique** : si souffrance exprimée, orientation vers un professionnel en premier ?
-11. **Co-activation** : si DYS/TDAH/fatigue actifs, règles compatibles appliquées ? Si HDC actif, lisibilité linéaire prime sur densité ?
+10. **Sécurité éthique** : si souffrance exprimée, l'orientation vers un professionnel figure-t-elle dans la partie toujours lue (une brève reconnaissance peut la précéder) ? En crise aiguë, vient-elle en tête de réponse, avant toute explication ?
+11. **Sigles et ressources** : tout sigle est-il développé à sa première occurrence ? Chaque organisme, numéro ou sigle cité existe-t-il réellement, sous ce nom, pour cet usage ? Dans le doute, formulation générique.
+12. **Co-activation** : si DYS/TDAH/fatigue actifs, règles compatibles appliquées ? Si HDC actif, lisibilité linéaire prime sur densité ?
 
 Si l'une de ces questions appelle un « non » non justifié, reprendre la réponse.
 
@@ -275,3 +288,5 @@ Si l'une de ces questions appelle un « non » non justifié, reprendre la répo
 | Version | Changements principaux |
 |---|---|
 | V1 | Première version. Deux profils : basse vision et cécité/lecteur d'écran. Règles : application silencieuse, pas de références visuelles non autonomes, pas d'ASCII art, pas d'emojis décoratifs, tableaux lisibles linéairement, structure sémantique, alternatives textuelles. |
+| V1.1 | Insertion du bloc canonique « Ordre de préséance entre skills », strictement identique dans les 7 skills, qui place `accessibilite-visuelle` juste après la sécurité éthique : ses interdits priment sur les règles de mise en forme des autres skills. Références opaques « skill 1 » remplacées par le nom réel `psychologie-rigoureuse`, avec une ligne de dégradation gracieuse si ce skill n'est pas chargé. |
+| V1.2 | Correction d'exactitude : l'exemple 4 citait « les CRPV » comme structures d'accompagnement des personnes déficientes visuelles — en France, CRPV désigne les Centres Régionaux de Pharmacovigilance. Remplacé par des structures réelles. Ajout d'une règle « Sigles et ressources nommées » (développer tout sigle, ne jamais citer une ressource non vérifiée) et du point 11 d'auto-vérification. Placement de la sécurité harmonisé avec les autres skills (partie toujours lue ; en tête en crise aiguë). Origine : benchmark du 2026-08-05, cas visuel Cas 8 et Cas 3. |

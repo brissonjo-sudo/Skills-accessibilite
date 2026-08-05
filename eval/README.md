@@ -1,6 +1,6 @@
 # Harnais d'évaluation — Écosystème Skills Accessibilité
 
-Évalue chaque skill sur deux conditions (avec skill / baseline sans skill) et deux LLMs (Mistral Large, Gemini 2.5 Flash).
+Évalue chaque skill sur deux conditions (avec skill / baseline sans skill) et trois LLMs (Mistral Large, Gemini 2.5 Flash, Claude Sonnet 4.6).
 
 ## Prérequis
 
@@ -18,6 +18,13 @@ cp .env.example .env
 
 ## Lancement
 
+### Benchmark complet via Claude Code
+
+Ouvrir Claude Code à la racine du dépôt, puis copier-coller le bloc de
+`prompt_benchmark_claude_code.md`. Il importe d’abord les `SKILL.md` canoniques à
+jour, exécute les conditions avec/sans skill en contextes isolés et orchestre
+trois juges aveugles en parallèle pour chaque variante.
+
 ### Tous les harnais (runner unique)
 
 ```bash
@@ -33,31 +40,56 @@ promptfoo eval --config promptfooconfig_dys.yaml --output results_dys.json
 promptfoo view
 ```
 
-Chaque run produit un fichier `results_<skill>.json`. Le pousser sur la branche pour analyse partagée.
+Chaque run produit un fichier `results_<skill>.json`. Les nouveaux résultats bruts sont ignorés par Git
+en raison de leur taille ; 13 archives historiques déjà suivies restent conservées pour la reproductibilité.
+Ne pas ajouter de nouveau JSON brut : consigner les résultats synthétiques et les décisions dans un
+fichier `analyse_*.md`, source de vérité archivée.
 
 ## Harnais disponibles
 
 | Skill | Config | Cas | Skills testés |
 |-------|--------|-----|---------------|
-| Haute densité cognitive V3.1 | `promptfooconfig.yaml` | 8 | application silencieuse, profondeur, anti-essentialisation HDC, co-activation |
-| Accessibilité visuelle V1.1 | `promptfooconfig_visuel.yaml` | 8 | application silencieuse, emojis, références positionnelles, ASCII art, tableaux, sécurité éthique |
+| Haute densité cognitive V3.2 | `promptfooconfig.yaml` | 8 | application silencieuse, profondeur, anti-essentialisation HDC, co-activation |
+| Accessibilité visuelle V1.2 | `promptfooconfig_visuel.yaml` | 8 | application silencieuse, emojis, références positionnelles, ASCII art, tableaux, sécurité éthique |
 | TSA V4.1 | `promptfooconfig_tsa.yaml` | 11 | application silencieuse, littéralité, prévisibilité, registre lisibilité, anti-essentialisation, sécurité |
-| Douleur chronique / Fatigue V3.1 | `promptfooconfig_fatigue.yaml` | 8 | application silencieuse, front-loading, modularité, anti-injonction, exception question-définition |
+| Douleur chronique / Fatigue V3.2 | `promptfooconfig_fatigue.yaml` | 8 | application silencieuse, front-loading, modularité, anti-injonction, exception question-définition |
 | DYS V3.1 | `promptfooconfig_dys.yaml` | 8 | application silencieuse, phrases courtes, anti-essentialisation DYS, co-activation, sécurité éthique |
-| TDAH V2.2 | `promptfooconfig_tdah.yaml` | 10 | application silencieuse, action unique, chunking, anti-moralisation, anti-essentialisation TDAH, déclencheur TDA, non-déclenchement |
-| Psychologie rigoureuse V6.1 | `promptfooconfig_psychologie.yaml` | 8 | marquage différencié, non-prescription, anti-essentialisation, mention pro, sécurité éthique |
+| TDAH V2.3 | `promptfooconfig_tdah.yaml` | 10 | application silencieuse, action unique, chunking, anti-moralisation, anti-essentialisation TDAH, déclencheur TDA, non-déclenchement |
+| Psychologie rigoureuse V6.2 | `promptfooconfig_psychologie.yaml` | 8 | marquage différencié, non-prescription, anti-essentialisation, mention pro, sécurité éthique |
+| Co-activation inter-skills | `promptfooconfig_coactivation.yaml` | 6 | arbitrage des plafonds, anti-injonction TDAH/fatigue, littéralité TSA, marquage sous DYS |
 
 ## Structure des assertions
 
-Chaque harnais mélange deux types d'assertions :
+Chaque harnais mélange deux types d'assertions. Répartition réelle (39 assertions
+déterministes, 78 sémantiques) :
+
+| Harnais | `javascript` | `llm-rubric` |
+|---|--:|--:|
+| `promptfooconfig.yaml` (HDC) | 2 | 9 |
+| `promptfooconfig_visuel.yaml` | 6 | 16 |
+| `promptfooconfig_tsa.yaml` | 4 | 12 |
+| `promptfooconfig_fatigue.yaml` | 4 | 9 |
+| `promptfooconfig_dys.yaml` | 5 | 8 |
+| `promptfooconfig_tdah.yaml` | 5 | 10 |
+| `promptfooconfig_psychologie.yaml` | 8 | 8 |
+| `promptfooconfig_coactivation.yaml` | 5 | 6 |
 
 **Déterministes (`javascript`)** — vérifiables par regex, pas de juge LLM :
 - Application silencieuse : détection de formulations interdites (« mode DYS activ », « skill activ »…)
 - Anti-essentialisation : détection de généralisations catégorielles
 - Anti-prescription : détection de « tu devrais », « il faut que »
+- Anti-injonction à l'effort : « commence par », « tu dois », « il suffit de » (fatigue, co-activation)
 - Anti-relance cascade : comptage des `?` en fin de réponse
-- Plafond de mots : comptage simple
-- Anti-emojis (pour DYS, Visuelle)
+- Plafond ou bornes de mots : comptage simple
+- Anti-emojis (DYS, Visuelle)
+- Références positionnelles, ASCII art, hiérarchie des titres sans saut de niveau (Visuelle)
+- Mention d'un professionnel ou d'une ligne d'écoute (Visuelle, Fatigue, Psychologie)
+
+> **Nature de ces contrôles.** La plupart sont des **garde-fous anti-régression**, pas des
+> discriminants : sur le run de référence, seuls les plafonds de mots séparaient nettement les
+> deux conditions, les autres passaient déjà en baseline. Leur rôle est de faire échouer le
+> harnais si une évolution du skill réintroduit un emoji, un schéma ASCII ou une injonction —
+> pas de démontrer une valeur ajoutée.
 
 **Sémantiques (`llm-rubric`)** — évalués par le juge LLM (`mistral:mistral-small-latest`) :
 - Qualité du fond (profondeur, nuance, rigueur)
@@ -82,7 +114,9 @@ Chaque config pointe directement vers le fichier canonique dans `skills/` via `f
 |----------|--------|-----|
 | Mistral AI | `mistral-large-latest` | `MISTRAL_API_KEY` |
 | Google AI Studio | `gemini-2.5-flash` | `GOOGLE_API_KEY` |
-| Mistral AI (juge) | `mistral-small-latest` | `MISTRAL_API_KEY` |
+| Anthropic | `claude-sonnet-4-6` | `ANTHROPIC_API_KEY` |
+
+> Le **modèle juge** des assertions `llm-rubric` est `mistral:mistral-small-latest` (non-circulaire : ce modèle n'est pas dans les providers testés).
 
 > Note historique :
 > - Grok (xAI) retiré — compte sans crédits (HTTP 403).
