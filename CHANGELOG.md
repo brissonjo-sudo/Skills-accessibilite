@@ -58,6 +58,12 @@ bout en bout — deux conditions appariées, aveuglement A/B, trois juges indép
 
 ### Corrigé — banc d'évaluation
 
+- **Validation complète des banques YAML** : `scripts/check_eval_configs.py` parse désormais les
+  8 fichiers avec PyYAML et contrôle leur schéma, les 67 cas, les références de skills et les
+  assertions requises ; le CI installe la dépendance figée dans `requirements-ci.txt`.
+- **Méthodes obsolètes neutralisées** : l'auto-évaluation par le sous-agent générateur est marquée
+  comme abandonnée dans le bilan, et l'ancien prompt HDC exécutable `eval/prompt_eval_claude.md`
+  est supprimé. Le protocole courant sépare générateurs et trois juges aveugles indépendants.
 - **10 questions de test recopiées du skill évalué** réécrites (`promptfooconfig.yaml`, `_fatigue`, `_tsa`, `_visuel`). Sur l'une d'elles, la réponse produite était *byte-identique* à la réponse-type du skill : le modèle récitait. La phrase de déclenchement est conservée, le sujet change.
 - **Rubriques réalignées sur les nouvelles questions** pour le cas 1 du harnais fatigue (sommeil lent/paradoxal) et le cas 6 du harnais visuel (éclipse solaire), afin que les juges n'évaluent plus les anciens sujets. L'inventaire du protocole est mis à jour à 61 cas principaux et 67 cas au total.
 - **Politique des résultats bruts clarifiée** : les 13 archives JSON historiques déjà suivies sont conservées pour la reproductibilité ; les nouveaux `results*.json` restent ignorés et les analyses Markdown demeurent la source de vérité.

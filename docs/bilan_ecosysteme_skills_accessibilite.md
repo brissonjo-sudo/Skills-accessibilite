@@ -369,13 +369,13 @@ Avant de rédiger une version majeure ou un nouveau skill, soumettre la question
 
 Appliqué en TSA V4 : 4 agents, convergence 4/4 sur « pas de skill niveau 2 séparé ».
 
-### 5bis.3 Analyse par sous-agents isolés (auto-évaluation)
+### 5bis.3 Analyse par sous-agents isolés (auto-évaluation, abandonnée)
 
-Pour le run Claude (contexte frais par cas), utiliser un sous-agent par cas de test. L'agent joue le LLM testé ET évalue sa propre réponse selon la rubrique. Avantage : contexte frais garanti, pas de contamination entre cas. Limite : l'agent évalue sa propre réponse — biais de complaisance possible, contrebalancé par le juge externe Mistral Large sur le run promptfoo.
+Cette méthode a été utilisée lors des premiers runs Claude : un sous-agent frais produisait puis évaluait sa propre réponse. Elle limitait la contamination entre cas, mais introduisait un biais de complaisance que le juge externe du run promptfoo ne suffisait pas à éliminer. Elle a été abandonnée en août 2026. Le protocole courant sépare les générateurs des évaluateurs et confie chaque comparaison aveugle à trois juges indépendants en contexte frais (`eval/prompt_benchmark_claude_code.md`).
 
 ---
 
-## 7. État de production des skills (mis à jour juin 2026)
+## 7. État de production des skills (mis à jour août 2026)
 
 | Skill | Version stable | Statut | Méthode de test | Résultats |
 |---|---|---|---|---|
@@ -408,4 +408,4 @@ Pour le run Claude (contexte frais par cas), utiliser un sous-agent par cas de t
 
 ---
 
-*Document mis à jour au 7 juin 2026. Les sections 2.1–2.3 couvrent les cycles manuels (mai 2026). Les sections 2.4–2.7 et 3.7–3.9 couvrent les cycles promptfoo (juin 2026). Section 7 reflète l'état de production courant.*
+*Document mis à jour au 6 août 2026. Les sections 2.1–2.3 couvrent les cycles manuels (mai 2026). Les sections 2.4–2.7 et 3.7–3.9 décrivent les cycles promptfoo historiques (juin 2026). La validation courante procède par vagues avec générateurs et juges séparés ; la section 7 reflète l'état de production courant.*

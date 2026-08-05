@@ -18,6 +18,8 @@ import sys
 import unicodedata
 from pathlib import Path
 
+import yaml
+
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
 
@@ -56,40 +58,23 @@ def longest_common_substring(needle: str, haystack: str, floor: int) -> str | No
 
 
 def iter_cases(config: Path):
-    """Extrait (question, [chemins de skill]) de chaque cas d'une config promptfoo.
+    """Extrait (question, [chemins de skill]) depuis le YAML déjà validé."""
+    data = yaml.safe_load(config.read_text(encoding="utf-8"))
 
-    Parsing volontairement littéral (pas de PyYAML) : on ne lit que les lignes
-    `question:` et `skill*: "file://..."`, ce que la structure des configs permet.
-    """
-    default_skills: list[str] = []
+    def refs(vars_block: dict) -> list[str]:
+        paths = []
+        for key, value in vars_block.items():
+            if (key == "skill" or (key.startswith("skill") and key[5:].isdigit())) \
+                    and isinstance(value, str) and value.startswith("file://"):
+                paths.append(str((config.parent / value[len("file://"):]).resolve()))
+        return paths
+
+    default_vars = (data.get("defaultTest") or {}).get("vars") or {}
+    default_skills = refs(default_vars)
     cases: list[tuple[str, list[str]]] = []
-    current_skills: list[str] = []
-    question: str | None = None
-    in_tests = False
-
-    for raw in config.read_text(encoding="utf-8").splitlines():
-        if re.match(r"^tests:\s*$", raw):
-            in_tests = True
-            continue
-
-        m_skill = re.match(r'^\s*skill\d*:\s*"?(file://[^\s"]+)"?\s*$', raw)
-        if m_skill:
-            rel = (config.parent / m_skill.group(1)[len("file://"):]).resolve()
-            (current_skills if in_tests else default_skills).append(str(rel))
-            continue
-
-        if re.match(r"^\s*-\s+description:", raw):
-            if question:
-                cases.append((question, current_skills or default_skills))
-            question, current_skills = None, []
-            continue
-
-        m_q = re.match(r'^\s*question:\s*"(.*)"\s*$', raw)
-        if m_q:
-            question = m_q.group(1).replace('\\"', '"')
-
-    if question:
-        cases.append((question, current_skills or default_skills))
+    for test in data.get("tests", []):
+        vars_block = test.get("vars") or {}
+        cases.append((vars_block["question"], refs(vars_block) or default_skills))
     return cases
 
 
