@@ -1,6 +1,6 @@
 # Bilan de synthèse — Écosystème des skills d'accessibilité
 
-Document de référence consolidant trois cycles d'itération (skill 1 « psychologie-rigoureuse », skill TDAH « accessibilite-tdah », skill DYS « accessibilite-dys »). Sert d'ancrage avant l'ouverture du chantier suivant (skill TSA « accessibilite-tsa »).
+Document de référence consolidant les cycles d'itération de l'écosystème. Initialement centré sur les trois premiers skills (« psychologie-rigoureuse », « accessibilite-tdah », « accessibilite-dys »), il couvre désormais les sept skills en production. Pour la vue d'ensemble synthétique (versions, déclencheurs, statuts), voir `docs/index_skills.md`.
 
 ## 1. Vue d'ensemble du projet
 
@@ -13,7 +13,10 @@ Chaque skill couvre un périmètre clair :
 - **psychologie-rigoureuse** : règles de fond pour toute question relevant de la psychologie, de la cognition, de l'émotion ou de la lecture comportementale.
 - **accessibilite-tdah** : adaptation de forme pour profils TDAH (chunking d'actions, action unique en sortie, gestion des digressions).
 - **accessibilite-dys** : adaptation de forme pour profils DYS (phrases courtes, vocabulaire simple, données hors prose, structure visuelle).
-- **accessibilite-tsa** (à venir) : adaptation pour profils du spectre autistique.
+- **accessibilite-tsa** (V4, production) : adaptation pour profils du spectre autistique à langage fonctionnel.
+- **accessibilite-haute-densite-cognitive** (V3, production) : autorisation et structuration de la densité informationnelle pour profils HDC/HPI.
+- **accessibilite-douleur-chronique-fatigue-cognitive** (V3, production) : économie cognitive pour douleur chronique et fatigue cognitive.
+- **accessibilite-visuelle** (V1, production) : structure pour basse vision et lecteur d'écran.
 
 ### Architecture
 
@@ -21,8 +24,8 @@ Chaque skill couvre un périmètre clair :
 
 **Hiérarchie commune** quand plusieurs skills se rencontrent :
 
-1. Sécurité éthique (skill 1) prime sur tout.
-2. Règles de fond du skill 1 (marquage de confiance, non-prescription, anti-essentialisation) s'appliquent toujours, parallèlement aux règles de forme.
+1. Sécurité éthique (psychologie-rigoureuse) prime sur tout.
+2. Règles de fond du psychologie-rigoureuse (marquage de confiance, non-prescription, anti-essentialisation) s'appliquent toujours, parallèlement aux règles de forme.
 3. Règles de forme des skills d'accessibilité s'appliquent en parallèle (pas en tension) avec le fond.
 
 ### Méthodologie
@@ -62,23 +65,23 @@ Skill de forme. 3 versions effectives (V1, V2, V2.1 patch). Version stable V2.1 
 **Défauts traités au fil des cycles** :
 
 - V1 → V2 : essentialisation TDAH en co-activation (« le vrai blocage TDAH vient de... »). Confirmé sur deux LLM (Gemini prompt 5, ChatGPT prompt 1). Section anti-essentialisation ajoutée avec liste explicite des formulations interdites et test simple.
-- V2 → V2.1 : défaut d'articulation — Gemini interprétait la co-activation comme un prérequis pour que le skill 1 fonctionne (Cas C). Patch : principe d'indépendance des déclencheurs + 4 cas d'écosystème explicites.
+- V2 → V2.1 : défaut d'articulation — Gemini interprétait la co-activation comme un prérequis pour que le psychologie-rigoureuse fonctionne (Cas C). Patch : principe d'indépendance des déclencheurs + 4 cas d'écosystème explicites.
 
 **Acquis stables V2.1** :
 
 - Chunking (2 étapes max, ne présenter que les 2 premières si tâche > 3 étapes).
 - Action unique en sortie, observable, courte (< 15 min), sans préalable.
-- Plafond ~150 mots (seul), ~150 mots souple (co-activation skill 1).
+- Plafond ~150 mots (seul), ~150 mots souple (co-activation psychologie-rigoureuse).
 - Anti-moralisation, anti-digression, anti-récapitulatif.
 - Anti-essentialisation TDAH : 7 formulations interdites, test simple avant toute mention du TDAH.
-- Articulation skill 1 : 4 cas d'écosystème, principe d'indépendance des déclencheurs.
+- Articulation psychologie-rigoureuse : 4 cas d'écosystème, principe d'indépendance des déclencheurs.
 
 **Défauts résiduels LLM-spécifiques** :
 
 - ChatGPT : hachage excessif (aération forcée ligne par ligne), digressions pédagogiques, essentialisation TDAH plus marquée qu'en Gemini.
 - Gemini : légère tendance à l'essentialisation en co-activation, moins bloquante.
 
-**Tests d'articulation (Cas A/B/C/D) — verdict final** : « l'écosystème fonctionne ». Couple skill 1 V6 + skill TDAH V2.1 production-ready.
+**Tests d'articulation (Cas A/B/C/D) — verdict final** : « l'écosystème fonctionne ». Couple psychologie-rigoureuse V6 + skill TDAH V2.1 production-ready.
 
 ### 2.3 accessibilite-dys (V1 → V3)
 
@@ -107,7 +110,7 @@ Skill de forme. 3 versions, version stable V3 (404 lignes).
 
 ### 3.1 Le marquage de confiance comme défaut transversal
 
-Sur deux skills (DYS, et probablement aussi sur le skill 1 entre certaines versions), le marquage de confiance oscille entre deux échecs symétriques :
+Sur deux skills (DYS, et probablement aussi sur le psychologie-rigoureuse entre certaines versions), le marquage de confiance oscille entre deux échecs symétriques :
 
 - **Sous-marquage** : le LLM omet de marquer des affirmations inégalement validées, présentant tout comme également solide.
 - **Sur-marquage** : le LLM marque chaque ligne `(solide)`, ce qui annule la fonction discriminante de l'outil.
@@ -120,12 +123,12 @@ Sur deux skills (DYS, et probablement aussi sur le skill 1 entre certaines versi
 
 Sur les trois skills, les relances apparaissent comme défaut récurrent sous plusieurs formes :
 
-- **Cascade** : 2-3 questions enchaînées (« Veux-tu que je développe ? Sur quel point ? »). Observé sur skill 1 V4, skill DYS V1 P3, skill DYS V2 (chez Mistral).
+- **Cascade** : 2-3 questions enchaînées (« Veux-tu que je développe ? Sur quel point ? »). Observé sur psychologie-rigoureuse V4, skill DYS V1 P3, skill DYS V2 (chez Mistral).
 - **Présupposante** : suppose que l'utilisateur veut continuer dans un cadre installé par la réponse. Observé sur skill DYS V1 P3, V2 P3, V3 P4 (Gemini).
 - **Binaire forcée** : « préférez-vous A ou B ? » qui force un choix dans un espace mal défini.
-- **Sur souffrance** : exploration intellectuelle qui désamorce la reconnaissance. Spécifiquement traitée en skill 1 V5.
+- **Sur souffrance** : exploration intellectuelle qui désamorce la reconnaissance. Spécifiquement traitée en psychologie-rigoureuse V5.
 
-**Solution stable** : par défaut, pas de relance. Si relance : une seule, ouverte, non-présupposante, jamais sur souffrance. Dispositif d'origine skill 1 V5, repris à l'identique en skill DYS V2.
+**Solution stable** : par défaut, pas de relance. Si relance : une seule, ouverte, non-présupposante, jamais sur souffrance. Dispositif d'origine psychologie-rigoureuse V5, repris à l'identique en skill DYS V2.
 
 ### 3.3 L'essentialisation par catégorie clinique
 
@@ -147,7 +150,7 @@ Présente dans tous les skills d'accessibilité. Structure générale :
 
 ### 3.5 Rendements décroissants des itérations
 
-Pattern observé à la fois sur skill 1 (V5→V6) et sur skill DYS (V2→V3, et probablement V3→V4 si on continuait). Chaque correction induit une régression ailleurs : on corrige un défaut central, on crée un défaut symétrique ou mineur.
+Pattern observé à la fois sur psychologie-rigoureuse (V5→V6) et sur skill DYS (V2→V3, et probablement V3→V4 si on continuait). Chaque correction induit une régression ailleurs : on corrige un défaut central, on crée un défaut symétrique ou mineur.
 
 **Symptômes** :
 
@@ -230,9 +233,9 @@ Ajouter des règles pour chaque LLM-spécificité alourdit le skill sans bénéf
 
 Une version est stable quand les défauts résiduels sont mineurs, LLM-spécifiques ou hors-périmètre. La poursuite d'une perfection complète mène à l'oscillation. Critère pratique : si la prochaine itération corrige X mais crée probablement Y de même magnitude, stabiliser ici.
 
-## 6. ~~Recommandations pour skill `accessibilite-tsa` (à venir)~~
+## 6. Recommandations pour la conception d'un nouveau skill
 
-**Section archivée.** Le skill `accessibilite-tsa` V4 est en production. Les recommandations de cette section ont été appliquées dès V1. La trajectoire V3→V4 est documentée en section 2.6.
+**Section archivée — référence historique.** Cette section listait des recommandations pour le skill `accessibilite-tsa`, qui est en production depuis la V4. Les recommandations ont été appliquées dès la V1 ; la trajectoire V3→V4 est documentée en section 2.6. Le texte est conservé comme guide méthodologique réutilisable pour les futurs skills.
 
 Pour tout nouveau skill à concevoir, reprendre la méthodologie de la section 5 et 5bis, et consulter les patterns de la section 3.
 
@@ -249,7 +252,7 @@ Skill de forme. 3 versions, version stable V3. Skill déclenché sur déclaratio
 - V1 → V2 : longueur insuffisante, structures trop plates, absence de profondeur sur les sujets complexes.
 - V2 → V3 : **pattern de preamble** découvert sur Gemini — introduction systématique avant d'entrer dans le contenu (ex : « Bien sûr, voici une réponse dense... »). Pattern identifié comme **limitation RLHF structurelle** : la contrainte de politesse de Gemini résiste à l'instruction d'application silencieuse. Solution : règle anti-preamble renforcée, mais résistance documentée comme LLM-spécifique, pas correctable par instruction.
 
-**Acquis stables V3** : densité substantielle autorisée, pas de résumé d'ouverture, pas de conclusion, rigueur épistémique maintenue, co-activation compatible avec skill 1.
+**Acquis stables V3** : densité substantielle autorisée, pas de résumé d'ouverture, pas de conclusion, rigueur épistémique maintenue, co-activation compatible avec psychologie-rigoureuse.
 
 **Pattern méthodologique apporté** : première utilisation du harnais promptfoo avec fichier YAML dédié, 8 cas de test, 2 conditions (with_skill / baseline), 3 providers (Claude, Mistral, Gemini). Modèle reproductible adopté pour tous les skills suivants.
 
@@ -376,27 +379,29 @@ Pour le run Claude (contexte frais par cas), utiliser un sous-agent par cas de t
 
 | Skill | Version stable | Statut | Méthode de test | Résultats |
 |---|---|---|---|---|
-| psychologie-rigoureuse | V6 | production | Gemini + ChatGPT + Claude.ai (manuel) | référence d'écosystème |
-| accessibilite-tdah | V2.1 | production | Gemini + ChatGPT + 4 cas articulation (manuel) | référence forme |
-| accessibilite-dys | V3 | production | Gemini + Mistral + Claude.ai (manuel) | 3 cycles |
-| accessibilite-tsa | V4 | production | promptfoo 11 cas — Claude 11/11, Mistral 11/11, Gemini 10/11 | V4 stable ; Gemini C3 RLHF documenté |
-| accessibilite-haute-densite-cognitive | V3 | production | promptfoo 8 cas — Claude 8/8, Mistral 7/8, Gemini 4/8 applic. silencieuse | Gemini + Mistral preamble RLHF documenté |
-| accessibilite-douleur-chronique-fatigue-cognitive | V3 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 8/8 | 3 cycles |
-| accessibilite-visuelle | V1 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 5/5 évalués | stable au 1er cycle |
+| psychologie-rigoureuse | V6.1 | production | Gemini + ChatGPT + Claude.ai (manuel) ; promptfoo 8 cas | référence d'écosystème |
+| accessibilite-tdah | V2.2 | production | Gemini + ChatGPT + 4 cas articulation (manuel) ; promptfoo 10 cas (C9 TDA / C10 non-déclenchement) | référence forme |
+| accessibilite-dys | V3.1 | production | Gemini + Mistral + Claude.ai (manuel) ; promptfoo 8 cas | 3 cycles |
+| accessibilite-tsa | V4.1 | production | promptfoo 11 cas — Claude 11/11, Mistral 11/11, Gemini 10/11 | V4 stable ; Gemini C3 RLHF documenté |
+| accessibilite-haute-densite-cognitive | V3.1 | production | promptfoo 8 cas — Claude 8/8, Mistral 7/8, Gemini 4/8 applic. silencieuse | Gemini + Mistral preamble RLHF documenté |
+| accessibilite-douleur-chronique-fatigue-cognitive | V3.1 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 8/8 | 3 cycles |
+| accessibilite-visuelle | V1.1 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 5/5 évalués | stable au 1er cycle |
 
-**Règle méta de co-activation — plafonds** : en co-activation, le plafond de mots le plus bas parmi les skills actifs prime. Exemples : DYS seul ~200 mots ; DYS + skill 1 ~150 mots ; DYS + TSA + skill 1 ~150 mots. HDC (pas de plafond fixe) adopte celui du skill le plus contraignant co-actif : HDC + DYS → ~150 mots.
+> Les versions indiquées sont les versions stables actuelles (bump mineur 1.18.0 : insertion du bloc canonique « Ordre de préséance »). Les chiffres d'évaluation promptfoo ont été mesurés sur la version mineure antérieure (avant le bloc de préséance, sans impact comportemental sur les cas testés). Vue synthétique : `docs/index_skills.md`.
+
+**Règle méta de co-activation — plafonds** : en co-activation, le plafond de mots le plus bas parmi les skills actifs prime. Exemples : DYS seul ~200 mots ; DYS + psychologie-rigoureuse ~150 mots ; DYS + TSA + psychologie-rigoureuse ~150 mots. HDC (pas de plafond fixe) adopte celui du skill le plus contraignant co-actif : HDC + DYS → ~150 mots.
 
 **Co-activations validées dans les fichiers de skill** (non toutes testées en stress direct) :
-- skill 1 + DYS / TDAH / TSA / HDC / Fatigue / Visuelle : prévues dans chaque skill.
-- skill 1 + DYS : testé en stress (P5 deuil). Hiérarchie tient.
-- skill 1 + TDAH : intégré dans les cycles TDAH.
+- psychologie-rigoureuse + DYS / TDAH / TSA / HDC / Fatigue / Visuelle : prévues dans chaque skill.
+- psychologie-rigoureuse + DYS : testé en stress (P5 deuil). Hiérarchie tient.
+- psychologie-rigoureuse + TDAH : intégré dans les cycles TDAH.
 - TSA + DYS : tension densité/aération documentée, aération prime.
 - TSA + Visuelle : compatibilité forte, règles de forme orthogonales. Documenté dans TSA V4 et Visuelle V1.
 - Visuelle + HDC : lisibilité linéaire prime sur densité en co-activation.
 
 **Co-activations non encore testées en stress direct** :
 - TSA + TDAH, TSA + Fatigue, DYS + Fatigue.
-- Triple co-activation skill 1 + TSA + DYS sur prompt à fond psychologique.
+- Triple co-activation psychologie-rigoureuse + TSA + DYS sur prompt à fond psychologique.
 - Visuelle + TSA (application silencieuse × 2, compatibles en principe).
 
 ---

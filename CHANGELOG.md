@@ -5,9 +5,45 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
-## [Non publié]
+## [1.19.0] — 2026-06-21
 
-*(rien en attente)*
+Release de documentation et de maintenabilité : aucun changement de comportement des skills (les 7 `SKILL.md` sont identiques à 1.18.0). Ajout d'un index canonique, d'une note éthique, d'un guide de contribution, de cas d'usage, et harmonisation de la documentation.
+
+### Ajouté
+
+- **`docs/index_skills.md`** : index canonique de l'écosystème — pour chaque skill, version stable, fichier source, déclencheur, risques couverts, compatibilités, statut d'évaluation ; rappel de l'ordre de préséance et matrice de co-activation.
+- **`docs/note_ethique.md`** : cadre éthique explicite (adaptation de communication, pas de diagnostic, pas de soin, pas de substitution professionnelle, anti-essentialisation, sécurité éthique prioritaire, ressources d'urgence).
+- **`AGENTS.md`** : guide de contribution (conventions de skills, invariants validés par CI, ordre de préséance, workflow d'évaluation et de release).
+- **`docs/usage.md`** : cas d'usage concrets par skill et par contexte, avec rappel des co-activations typiques.
+
+### Modifié
+
+- **README** : liens vers l'index canonique, la note éthique, les cas d'usage et `AGENTS.md` ; mention « quand l'utiliser / quand ne pas l'utiliser » renvoyant à l'index.
+- **`docs/bilan_ecosysteme_skills_accessibilite.md`** : suppression des mentions périmées « accessibilite-tsa (à venir) » (le skill TSA est en production depuis V4), y compris l'en-tête de la section 6 archivée ; liste des skills couverts mise à jour (7 skills en production) ; renvoi vers l'index canonique.
+- **Cohérence documentaire** (micro-corrections) :
+  - `docs/index_skills.md` : statut d'éval HDC renseigné (`eval/promptfooconfig.yaml`, 8 cas) au lieu de « banc à formaliser » ; matrice de co-activation alignée sur le bilan (statuts *testée en stress* / *documentée* / *spécifiée*), suppression d'un doublon TSA/Visuelle.
+  - `docs/bilan_…md` : label déprécié « skill 1 » remplacé par `psychologie-rigoureuse` ; tableau « État de production » (section 7) aligné sur les versions stables bumpées (V6.1, V2.2, V3.1, V4.1, V3.1, V3.1, V1.1) avec note sur les chiffres d'éval.
+  - `CHANGELOG.md` : branche de TSA corrigée (`main` au lieu de `claude/wonderful-fermat-enaoG`).
+  - `eval/README.md` : TDAH V2.2 / 10 cas ; versions des harnais bumpées ; convention de versionnement réécrite pour le format `SKILL.md` (plus de fichier `skill_..._V2.md`).
+
+---
+
+## [1.18.0] — 2026-06-11
+
+Amélioration de la robustesse et de la maintenabilité de l'écosystème (déclencheurs, articulation inter-skills, CI).
+
+### Ajouté
+
+- **Déclencheur « TDA »** (skill TDAH) : « j'ai un TDA », « trouble de l'attention » (avec ou sans hyperactivité) ajoutés à la description et à la liste des formulations déclenchantes. Deux cas d'éval (C9 déclenchement TDA, C10 non-déclenchement sur distraction passagère).
+- **Bloc « Ordre de préséance entre skills »** : section canonique strictement identique insérée dans les 7 SKILL.md, fixant l'ordre de préséance sur la forme (sécurité éthique > `accessibilite-visuelle` > skills de réduction de charge > `accessibilite-tsa` > `accessibilite-haute-densite-cognitive` ; `psychologie-rigoureuse` régit le fond hors de cet ordre).
+- **CI** : `scripts/validate_skills.py` (validation frontmatter, `name` == dossier, description ≤ 1024, fichier < 500 lignes, identité des blocs de préséance) ; workflows `validate.yml` (push/PR sur `main`) et `release.yml` (publication automatique des ZIP sur tag).
+
+### Modifié
+
+- **Articulation inter-skills** : toutes les références opaques « skill 1 » remplacées par le nom réel `psychologie-rigoureuse` dans les 6 skills d'accessibilité, avec reformulation naturelle. Ajout d'une ligne de dégradation gracieuse dans chaque section d'articulation (si `psychologie-rigoureuse` n'est pas chargé, ignorer les règles de co-activation).
+- **Harmonisation** (skill TDAH) : suppression de « arbitrer au cas par cas » (contradictoire avec le bloc canonique) ; plafond de co-activation exprimé en relatif.
+- **build_release.sh** : la validation des skills s'exécute avant la génération des ZIP (échec = pas de ZIP).
+- **Versions** : TDAH V2.1 → V2.2 ; bump mineur des 6 autres skills (touchés par le bloc de préséance).
 
 ---
 
@@ -408,9 +444,10 @@ Première version publique importable dans Claude (Capabilities / ZIP).
 
 | Skill | Version stable | Branche |
 |---|---|---|
-| TDAH | V2.1 | `main` |
-| DYS | V3 | `main` |
-| TSA | V4 (stable) | `claude/wonderful-fermat-enaoG` |
-| Psychologie rigoureuse | V6 | `main` |
-| Haute densité cognitive | V3 (stable) | `main` |
-| Douleur chronique / Fatigue cognitive | V3 (stable) | `main` |
+| TDAH | V2.2 | `main` |
+| DYS | V3.1 | `main` |
+| TSA | V4.1 (stable) | `main` |
+| Psychologie rigoureuse | V6.1 | `main` |
+| Haute densité cognitive | V3.1 (stable) | `main` |
+| Douleur chronique / Fatigue cognitive | V3.1 (stable) | `main` |
+| Accessibilité visuelle | V1.1 | `main` |

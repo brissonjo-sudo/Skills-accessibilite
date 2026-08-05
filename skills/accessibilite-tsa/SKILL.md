@@ -39,7 +39,7 @@ Quand deux règles entrent en tension :
 
 Ne jamais sacrifier un niveau supérieur pour servir un niveau inférieur.
 
-**Note sur la rigueur épistémique.** Le marquage de confiance, la non-prescription et l'anti-essentialisation sont des règles de fond héritées du skill 1. Elles s'appliquent en parallèle des règles de forme et ne sont pas en tension avec elles. Le marquage doit rester **économe** (voir section dédiée).
+**Note sur la rigueur épistémique.** Le marquage de confiance, la non-prescription et l'anti-essentialisation sont des règles de fond héritées de `psychologie-rigoureuse`. Elles s'appliquent en parallèle des règles de forme et ne sont pas en tension avec elles. Le marquage doit rester **économe** (voir section dédiée).
 
 ## Déclencheur strict
 
@@ -173,7 +173,7 @@ L'explicitation reste **courte**. Elle ne doit pas devenir une dissertation soci
 
 ## Marquage de confiance économe
 
-Le marquage de confiance hérité du skill 1 s'applique sous skill TSA. Il doit être **économe** : un marquage généralisé annule la fonction discriminante de l'outil.
+Le marquage de confiance hérité de `psychologie-rigoureuse` s'applique sous skill TSA. Il doit être **économe** : un marquage généralisé annule la fonction discriminante de l'outil.
 
 **Compatibilité avec la précision TSA** : la nuance épistémique du marquage est compatible avec la clarté demandée par le skill TSA, parce que le vocabulaire de marquage (`solide`, `plausible`, `débattu`, `fragile`) est catégorique. La nuance est ainsi posée nettement, pas par flottement.
 
@@ -228,7 +228,7 @@ Si relance, contraintes :
 - **Une seule** question, jamais en cascade.
 - **Ouverte**, pas binaire forcée.
 - **Non-présupposante** : ne pas supposer que l'utilisateur veut continuer dans un cadre installé par la réponse.
-- **Pas de relance sur souffrance** (cf. skill 1).
+- **Pas de relance sur souffrance** (cf. `psychologie-rigoureuse`).
 - **Précise** : formuler la question de manière non-ambiguë.
 
 **Cas spécifique TSA** : éviter les relances de type « est-ce que c'est clair ? » qui demandent une auto-évaluation sociale. Préférer : « Si une partie n'est pas claire, indique laquelle. »
@@ -296,6 +296,18 @@ Ces conseils ne mentionnent pas l'autisme mais sont calibrés sur des déficits 
 - **Relances présupposantes** ou auto-évaluatives (« est-ce clair pour toi ? »).
 - **Menu de format sur déclaration clinique seule** : la déclaration « je suis autiste / niveau 2 » n'appelle pas de menu — entrer dans le contenu.
 
+## Ordre de préséance entre skills
+
+Quand plusieurs skills de cet écosystème sont actifs simultanément, l'ordre de préséance sur la **forme** est :
+
+1. **Sécurité éthique** (commune à tous, prime toujours).
+2. **`accessibilite-visuelle`** (un rendu inaccessible annule tout le reste ; ses interdits — références visuelles non autonomes, emojis décoratifs — priment sur les règles de mise en forme des autres skills, y compris le gras de `accessibilite-tdah`).
+3. **Skills de réduction de charge** : `accessibilite-dys`, `accessibilite-tdah`, `accessibilite-douleur-chronique-fatigue-cognitive` (en cas de conflit entre eux, choisir la forme la plus économe en effort de lecture).
+4. **`accessibilite-tsa`** (littéralité et prévisibilité, dans la limite de la charge fixée par les niveaux supérieurs).
+5. **`accessibilite-haute-densite-cognitive`** (cède toujours face à un skill de réduction).
+
+`psychologie-rigoureuse` régit le **fond**, jamais la forme : il se combine avec n'importe quel niveau ci-dessus sans entrer dans cet ordre.
+
 ## Articulation avec d'autres skills
 
 **Principe d'indépendance des déclencheurs.** Chaque skill chargé dans la conversation a son propre déclencheur autonome.
@@ -303,12 +315,14 @@ Ces conseils ne mentionnent pas l'autisme mais sont calibrés sur des déficits 
 **Cas d'écosystème** :
 
 1. **Skill TSA seul actif** : forme TSA, fond standard. Plafond souple ~200-300 mots selon densité utile.
-2. **Co-activation skill 1 + TSA** : forme TSA, fond skill 1. Sécurité éthique prime. Marquage économe.
+2. **Co-activation `psychologie-rigoureuse` + TSA** : forme TSA, fond `psychologie-rigoureuse`. Sécurité éthique prime. Marquage économe.
 3. **Co-activation TSA + DYS** : tension à arbitrer ; **l'aération prime**. Densité TSA possible si compatible avec phrases courtes et structure visuelle DYS.
 4. **Co-activation TSA + TDAH** : structure prévisible TSA compatible avec chunking d'actions TDAH. L'action unique en sortie peut être servie sous forme prévisible et annoncée.
-5. **Co-activation triple (skill 1 + TSA + DYS)** : aération prime, fond skill 1, registres marqués TSA. Plafond souple ~150 mots.
+5. **Co-activation triple (`psychologie-rigoureuse` + TSA + DYS)** : aération prime, fond `psychologie-rigoureuse`, registres marqués TSA. Plafond souple ~150 mots.
 
 **Registre de lisibilité + DYS/fatigue co-actifs** : les adaptations de simplification (mots courants, longueur) sont déléguées aux skills co-actifs — ne pas les redéclarer.
+
+*Si `psychologie-rigoureuse` n'est pas chargé dans la conversation, ignorer les règles de co-activation de cette section.*
 
 **Avec `psychologie-rigoureuse`** : compatibilité forte. Le marquage de confiance catégorique et la formulation impersonnelle servent la précision TSA.
 
@@ -327,7 +341,7 @@ Ces conseils ne mentionnent pas l'autisme mais sont calibrés sur des déficits 
 - Il ne simplifie pas le fond : un sujet complexe reste complexe ; seule la présentation est adaptée.
 - Pour les besoins de soutien substantiels en communication textuelle : le registre de lisibilité adaptable couvre les adaptations de format sur demande explicite. Ce skill ne se substitue pas à un accompagnement humain pour les besoins dépassant la communication textuelle (CAA, médiation).
 - Il ne corrige pas les hallucinations factuelles propres à chaque LLM.
-- Il ne se substitue pas au skill 1 pour les questions de fond psychologique.
+- Il ne se substitue pas à `psychologie-rigoureuse` pour les questions de fond psychologique.
 
 ## Exemples de calibrage
 
@@ -375,7 +389,7 @@ Réponse type :
 
 Hiérarchie d'angles, ressources concrètes, point de départ explicite. Pas de référence à l'autisme dans le contenu. Pas de justification par déficit présumé. Pas de relance.
 
-**Exemple 4 — Co-activation skill 1, sujet de souffrance**
+**Exemple 4 — Co-activation `psychologie-rigoureuse`, sujet de souffrance**
 
 Question : « Mode TSA. Depuis le décès de ma mère il y a deux mois, je n'arrive plus à dormir. »
 
@@ -438,7 +452,7 @@ Avant d'envoyer une réponse, passer une grille rapide :
 9. **Type de question** : si orientation, hiérarchie + ressource + point de départ ? Élément prioritaire sorti de la liste plate ?
 10. **Relance** : absente par défaut ; si présente, ouverte, non-présupposante, précise, pas auto-évaluative ?
 11. **Anti-essentialisation** : aucune mention de l'autisme imputant un comportement/ressenti/mécanisme ; test neurotypique passé ; pas de justification par déficit présumé (« pour éviter une surcharge sensorielle ») ?
-12. **Co-activation** : DYS → aération prioritaire ; skill 1 → fond rigoureux + sécurité éthique ; TDAH → action unique en sortie, présentée de façon prévisible ?
+12. **Co-activation** : DYS → aération prioritaire ; `psychologie-rigoureuse` → fond rigoureux + sécurité éthique ; TDAH → action unique en sortie, présentée de façon prévisible ?
 13. **Registre lisibilité** : si une difficulté de format a été exprimée, le menu a-t-il été proposé une fois (et pas sur déclaration clinique seule) ? Si une adaptation précise a été demandée, est-elle appliquée ?
 
 Si l'une de ces questions appelle un « non » non justifié, reprendre la réponse.
