@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "tests": [
+    {
+      "id": "hdc-explicit-need",
+      "description": "Besoin explicite de densité cognitive",
+      "target_skill": "accessibilite-haute-densite-cognitive",
+      "expected_activation": true,
+      "question": "Ne simplifie pas et garde toute la nuance : comment fonctionne le protocole TLS ?"
+    },
+    {
+      "id": "hdc-complexity-only",
+      "description": "Complexité du sujet seule, sans besoin communicationnel déclaré",
+      "target_skill": "accessibilite-haute-densite-cognitive",
+      "expected_activation": false,
+      "question": "Comment les autorités de certification interviennent-elles dans une connexion TLS ?"
+    },
+    {
+      "id": "dys-explicit-declaration",
+      "description": "Déclaration explicite de dyslexie",
+      "target_skill": "accessibilite-dys",
+      "expected_activation": true,
+      "question": "Je suis dyslexique. Explique-moi simplement la différence entre HTTP et HTTPS."
+    },
+    {
+      "id": "dys-typos-only",
+      "description": "Fautes passagères sans déclaration DYS",
+      "target_skill": "accessibilite-dys",
+      "expected_activation": false,
+      "question": "J'écris vite et je fais des fautes aujourd'hui. C'est quoi HTTPS ?"
+    },
+    {
+      "id": "tdah-explicit-declaration",
+      "description": "Déclaration explicite de TDAH",
+      "target_skill": "accessibilite-tdah",
+      "expected_activation": true,
+      "question": "J'ai un TDAH. Aide-moi à préparer les étapes d'un déménagement."
+    },
+    {
+      "id": "tdah-temporary-distraction",
+      "description": "Distraction passagère sans déclaration TDAH",
+      "target_skill": "accessibilite-tdah",
+      "expected_activation": false,
+      "question": "Je suis distrait en ce moment. C'est quoi un prêt immobilier ?"
+    },
+    {
+      "id": "tsa-explicit-declaration",
+      "description": "Déclaration explicite de TSA",
+      "target_skill": "accessibilite-tsa",
+      "expected_activation": true,
+      "question": "Je suis autiste. Que signifie l'expression « on en reparlera à tête reposée » ?"
+    },
+    {
+      "id": "tsa-routine-only",
+      "description": "Goût des routines sans déclaration TSA",
+      "target_skill": "accessibilite-tsa",
+      "expected_activation": false,
+      "question": "J'aime suivre toujours la même routine le matin. Comment fonctionne une cafetière italienne ?"
+    },
+    {
+      "id": "fatigue-explicit-need",
+      "description": "Pathologie et besoin explicite d'économie cognitive",
+      "target_skill": "accessibilite-douleur-chronique-fatigue-cognitive",
+      "expected_activation": true,
+      "question": "J'ai une fibromyalgie et je n'ai pas l'énergie de lire long. Explique-moi le sommeil paradoxal."
+    },
+    {
+      "id": "fatigue-ordinary-week",
+      "description": "Fatigue ordinaire et temporaire",
+      "target_skill": "accessibilite-douleur-chronique-fatigue-cognitive",
+      "expected_activation": false,
+      "question": "Je suis fatigué après une longue semaine. Comment récupérer ce week-end ?"
+    },
+    {
+      "id": "visual-explicit-declaration",
+      "description": "Déclaration explicite de cécité",
+      "target_skill": "accessibilite-visuelle",
+      "expected_activation": true,
+      "question": "Je suis non-voyant. Explique-moi comment se produit une éclipse solaire."
+    },
+    {
+      "id": "visual-topic-only",
+      "description": "Sujet visuel sans besoin d'accessibilité déclaré",
+      "target_skill": "accessibilite-visuelle",
+      "expected_activation": false,
+      "question": "Explique-moi comment se produit une éclipse solaire."
+    },
+    {
+      "id": "psychology-domain-question",
+      "description": "Question relevant explicitement de la psychologie",
+      "target_skill": "psychologie-rigoureuse",
+      "expected_activation": true,
+      "question": "Pourquoi le biais de confirmation influence-t-il nos décisions ?"
+    },
+    {
+      "id": "psychology-unrelated-question",
+      "description": "Question technique sans contenu psychologique",
+      "target_skill": "psychologie-rigoureuse",
+      "expected_activation": false,
+      "question": "Comment convertir des degrés Celsius en degrés Fahrenheit ?"
+    }
+  ]
+}

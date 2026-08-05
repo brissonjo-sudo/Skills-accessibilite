@@ -25,11 +25,13 @@
 
 **Banque de cas**
 - Fichier `eval/promptfooconfig_<nom>.yaml` dédié
-- Minimum 6 cas de test (dont cas de non-déclenchement)
+- Minimum 6 cas comportementaux
 - Chaque cas porte au moins une assertion sémantique (`llm-rubric`) ; les assertions
   déterministes (`javascript`) s'ajoutent quand le critère est mécaniquement vérifiable
 - Aucune question de test ne doit être recopiée du `SKILL.md` évalué (vérifié en CI
   par `scripts/check_eval_leaks.py`)
+- Deux cas dans `eval/activation_cases.json` : un déclenchement attendu et un
+  non-déclenchement attendu, validés en CI par `scripts/check_activation_cases.py`
 
 ---
 
@@ -40,7 +42,8 @@
 - **Chaque montée de version doit s'appuyer sur une vague de validation** (voir §5) :
   une comparaison avec/sans skill, en aveugle, sur les cas de la banque
 - Le `CHANGELOG.md` documente ce qui a changé entre chaque version (règles ajoutées,
-  supprimées, reformulées) et **cite le run qui l'appuie**
+  supprimées, reformulées) et **cite le rapport versionné** sous
+  `eval/evidence/<identifiant>/report.md`
 
 ---
 
@@ -79,28 +82,34 @@ session ouverte à la racine du dépôt.
 **Ce qu'une vague produit**, dans `eval/runs/<AAAAMMJJ-HHMMSS>/` (répertoire ignoré par Git) :
 
 - `manifest.json` — commit, modèles, empreintes SHA-256 des skills testés, graines
+- `activation_results.jsonl` — décisions des sélecteurs avant révélation des attentes
 - `raw_generations.jsonl` — une ligne par cellule, réponse intégrale conservée
 - `judge_outputs/` — verdicts des juges, en aveugle
 - `metrics.json` et `report.md` — agrégats et rapport
 
 **Ce qui fait qu'une vague est recevable** :
 
-1. **Deux conditions appariées** — chaque cas joué avec et sans le skill, sur la même
+1. **Sélection indépendante** — chaque cas de `activation_cases.json` est soumis à trois
+   sélecteurs neufs qui ne voient que la question et les métadonnées des skills, jamais
+   leur corps ni le résultat attendu. Les faux positifs et faux négatifs sont rapportés.
+2. **Deux conditions appariées** — chaque cas comportemental est joué avec et sans le skill, sur la même
    question, dans des contextes isolés. Un agent ne juge jamais sa propre réponse.
-2. **Aveuglement** — les réponses sont présentées aux juges en A/B, sans indiquer laquelle
+3. **Aveuglement** — les réponses sont présentées aux juges en A/B, sans indiquer laquelle
    porte le skill. La correspondance n'est révélée qu'à l'agrégation.
-3. **Trois juges indépendants** par variante, dont un chargé de chercher les régressions.
-4. **Cas exclus signalés** — question recopiée du skill, cellule perdue sur erreur
-   d'infrastructure, cas de non-déclenchement (inévaluable quand le skill est injecté
-   de force).
-5. **Fond et forme rapportés séparément.** Une régression de sécurité, d'exactitude, de
+4. **Trois juges indépendants** par variante, dont un chargé de chercher les régressions.
+5. **Cas exclus signalés** — question recopiée du skill ou cellule perdue sur erreur
+   d'infrastructure.
+6. **Fond et forme rapportés séparément.** Une régression de sécurité, d'exactitude, de
    non-diagnostic ou d'essentialisation interdit une conclusion positive, quels que
    soient les gains de forme.
 
-**Limite à ne pas masquer** : injecter le texte intégral d'un skill mesure l'effet
-d'instructions dans une session. Cela ne teste pas le mécanisme automatique de
-déclenchement d'une skill sur les autres surfaces.
+**Limite à ne pas masquer** : la phase de sélection mesure une décision à partir des
+métadonnées dans une session d'agents. Elle ne reproduit pas l'implémentation interne du
+mécanisme de découverte d'une plateforme donnée.
 
 Les analyses et décisions sont consignées dans `eval/analyse_*.md`, source de vérité
-archivée. Le `report.md` d'un run vit dans `eval/runs/` : le recopier hors de ce
-répertoire s'il doit être partagé.
+archivée. Pour appuyer une promotion, la vague produit obligatoirement un paquet assaini
+suivi dans `eval/evidence/<identifiant>/` : `manifest.json`, `activation_results.jsonl`,
+`verdicts.jsonl`, `metrics.json` et `report.md`. Il exclut les réponses brutes, la table
+A/B et tout secret. Ce paquet est inclus dans la même PR que la promotion ; la CI vérifie
+qu'il couvre chaque skill modifié ou nouvellement marqué `production`.

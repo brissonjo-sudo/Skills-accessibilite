@@ -9,14 +9,16 @@ d'agents (Claude Code ou ChatGPT).
 Ouvrir une session à la racine du dépôt et coller le contenu de
 [`prompt_benchmark_claude_code.md`](prompt_benchmark_claude_code.md).
 
-Le protocole lit les `SKILL.md` canoniques et les banques de cas ci-dessous, joue chaque cas
-**deux fois** — avec et sans le skill, même question, contextes isolés — puis fait juger les
-paires **en aveugle** par trois juges indépendants par variante.
+Le protocole teste d'abord la sélection avec trois agents ne voyant que les métadonnées des
+skills. Il joue ensuite chaque cas comportemental **deux fois** — avec et sans le skill,
+même question, contextes isolés — puis fait juger les paires **en aveugle** par trois juges
+indépendants par variante.
 
-Les artefacts vont dans `eval/runs/<AAAAMMJJ-HHMMSS>/`, **ignoré par Git** :
-`blinding_map.json` y contient la correspondance A/B → condition et lève l'anonymat du
-protocole. Pour partager un résultat, recopier le `report.md` hors de `runs/`, ou consigner
-la synthèse dans un `analyse_*.md` — source de vérité archivée.
+Les artefacts bruts vont dans `eval/runs/<AAAAMMJJ-HHMMSS>/`, **ignoré par Git** :
+`blinding_map.json` y contient la correspondance A/B → condition. Toute promotion produit
+aussi un paquet assaini et suivi sous `eval/evidence/<AAAAMMJJ-HHMMSS>/`, avec manifeste,
+résultats de sélection, verdicts résolus, métriques et rapport. La CI exige ce paquet pour
+chaque skill modifié ou nouvellement marqué `production`.
 
 Les `results*.json` historiques (13 archives, issues de l'ancien outillage) restent suivis
 pour la reproductibilité. Ne pas en ajouter de nouveaux.
@@ -37,6 +39,10 @@ pour la reproductibilité. Ne pas en ajouter de nouveaux.
 **67 cas au total.** Les noms de fichiers sont un héritage de l'ancien outillage ; leur
 contenu est désormais une simple banque de cas — description, question, assertions, et lien
 vers le `SKILL.md` évalué.
+
+`activation_cases.json` ajoute **14 cas de sélection** : un déclenchement et un
+non-déclenchement pour chacun des 7 skills. Chaque cas est soumis à trois sélecteurs neufs,
+soit 42 décisions indépendantes. `scripts/check_activation_cases.py` contrôle cette couverture.
 
 ## Structure des assertions
 
@@ -96,8 +102,8 @@ lien suit le fichier.
   récite au lieu de raisonner — c'est arrivé, avec une réponse *byte-identique* à celle du
   skill. Vérifié en CI par `scripts/check_eval_leaks.py`. Partager la **phrase de
   déclenchement** documentée reste nécessaire et n'est pas une fuite.
-- **Cas de non-déclenchement** : la question ne contient aucune déclaration. Ils sont
-  inévaluables par une vague, qui injecte le skill de force — les rapporter à part.
+- **Déclenchement et non-déclenchement** : les tester dans `activation_cases.json`, avant
+  toute injection du corps d'un skill.
 - **Chaque cas porte au moins une assertion sémantique.** Les assertions déterministes
   s'ajoutent quand le critère est mécaniquement vérifiable.
 
@@ -105,5 +111,5 @@ lien suit le fichier.
 
 1. Modifier le `SKILL.md` et incrémenter sa version.
 2. Rien à changer dans la banque de cas : le lien `skill:` suit déjà le fichier.
-3. Passer une **vague de validation**, puis mettre à jour `CHANGELOG.md` (en citant le run
-   qui appuie la montée de version) et `docs/index_skills.md`.
+3. Passer une **vague de validation**, ajouter son paquet sous `eval/evidence/`, puis mettre
+   à jour `CHANGELOG.md` en citant le `report.md` suivi et `docs/index_skills.md`.

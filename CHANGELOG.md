@@ -31,6 +31,14 @@ bout en bout — deux conditions appariées, aveuglement A/B, trois juges indép
   sont conservés pour ne pas casser l'outillage et les références existantes.
 - **`eval/.env.example`** vidé de sa liste de providers : aucune clé n'est plus requise par
   l'outillage du dépôt. Le garde-fou « aucun `.env` commité » reste en CI.
+- **Déclenchement testé séparément** : `eval/activation_cases.json` ajoute un cas positif
+  et un cas négatif pour chacun des 7 skills. Trois sélecteurs indépendants ne voient que
+  les métadonnées ; les faux positifs majoritaires interdisent la promotion. La couverture
+  est vérifiée en CI par `scripts/check_activation_cases.py`.
+- **Preuves auditables obligatoires** : toute modification d'un skill déjà en production,
+  ou promotion d'un candidat, doit ajouter un paquet assaini sous `eval/evidence/` couvrant
+  le skill. `scripts/check_evidence.py` vérifie en CI sa structure et sa présence ; le
+  changelog cite désormais le rapport suivi plutôt qu'un répertoire local ignoré.
 
 ### Corrigé — sécurité et exactitude
 

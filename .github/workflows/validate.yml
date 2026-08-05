@@ -19,6 +19,8 @@ jobs:
     steps:
       - name: Récupérer le code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Configurer Python 3.12
         uses: actions/setup-python@v5
@@ -37,6 +39,14 @@ jobs:
       # le modèle récite la réponse-type qu'il a sous les yeux.
       - name: Vérifier qu'aucune question de test n'est recopiée d'un skill
         run: python scripts/check_eval_leaks.py
+
+      - name: Vérifier les cas d'activation et de non-déclenchement
+        run: python scripts/check_activation_cases.py
+
+      - name: Vérifier les preuves des skills promus ou modifiés en production
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python scripts/check_evidence.py --base "$BASE_SHA"
 
       - name: Vérifier qu'aucun .env n'est commité
         run: |

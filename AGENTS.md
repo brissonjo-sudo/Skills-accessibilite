@@ -19,7 +19,7 @@ Guide de contribution pour agents (Claude Code, Codex) et humains travaillant su
 | `docs/bilan_ecosysteme_skills_accessibilite.md` | Historique d'itération, méthodologie, décisions d'architecture. |
 | `docs/note_ethique.md` | Limites éthiques (pas de diagnostic, pas de soin, pas de substitution). |
 | `docs/usage.md` | Cas d'usage concrets par skill. |
-| `eval/` | Banque de cas : un `promptfooconfig_<skill>.yaml` par skill, plus le protocole de validation en vagues (`prompt_benchmark_claude_code.md`) et les analyses archivées. |
+| `eval/` | Banques de cas comportementaux et d'activation, protocole de validation en vagues (`prompt_benchmark_claude_code.md`) et preuves assainies versionnées. |
 | `scripts/validate_skills.py` | Validation structurelle (CI + pré-commit). Stdlib uniquement. |
 | `.github/workflows/` | `validate.yml` (push/PR sur `main`), `release.yml` (publication des ZIP sur tag). |
 | `build_release.sh` | Valide puis génère un ZIP par skill dans `dist/`. |
@@ -64,18 +64,21 @@ Il n'y a **pas de lanceur automatisé**. La validation se fait en **vagues** : u
 d'agents (Claude Code ou ChatGPT) exécute le protocole `eval/prompt_benchmark_claude_code.md`,
 ouvert à la racine du dépôt.
 
-Les `eval/promptfooconfig_<skill>.yaml` ne sont plus exécutés par un outil : ils servent de
-**banque de cas** — question, assertions déterministes (`javascript`) et sémantiques
-(`llm-rubric`), et lien vers le `SKILL.md` évalué. Le protocole les lit pour construire ses cellules.
+Les `eval/promptfooconfig_<skill>.yaml` servent de **banque de cas comportementaux** —
+question, assertions déterministes (`javascript`) et sémantiques (`llm-rubric`), et lien
+vers le `SKILL.md` évalué. `eval/activation_cases.json` teste séparément la décision de
+charger ou non chaque skill, sans injecter son corps.
 
-Une vague joue chaque cas **deux fois** — avec et sans le skill, même question, contextes
-isolés — puis fait juger les paires **en aveugle** par trois juges indépendants, dont un
-chargé de chercher les régressions. Couvrir au minimum : cas nominaux, **non-déclenchement**,
-**co-activation**, **sécurité/éthique**. Les erreurs d'infrastructure sont exclues des
-dénominateurs, jamais comptées comme échec du skill.
+Une vague commence par trois décisions de sélection indépendantes sur chaque cas
+d'activation/non-déclenchement. Elle joue ensuite chaque cas comportemental **deux fois** —
+avec et sans le skill, même question, contextes isolés — puis fait juger les paires **en
+aveugle** par trois juges indépendants, dont un chargé de chercher les régressions. Couvrir
+au minimum : cas nominaux, **co-activation**, **sécurité/éthique**. Les erreurs
+d'infrastructure sont exclues des dénominateurs, jamais comptées comme échec du skill.
 
 Les artefacts d'une vague vont dans `eval/runs/<horodatage>/`, ignoré par Git : `blinding_map.json`
-y lève l'anonymat des juges et ne doit pas être commité.
+y lève l'anonymat des juges et ne doit pas être commité. Une promotion exige dans la même PR
+un paquet assaini suivi sous `eval/evidence/<horodatage>/` ; la CI vérifie sa présence et sa structure.
 
 ## Versionnement & release
 
