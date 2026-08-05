@@ -40,8 +40,10 @@ promptfoo eval --config promptfooconfig_dys.yaml --output results_dys.json
 promptfoo view
 ```
 
-Chaque run produit un fichier `results_<skill>.json`, ignoré par Git en raison de sa taille. Pour une
-analyse partagée, consigner les résultats synthétiques et les décisions dans un fichier `analyse_*.md`.
+Chaque run produit un fichier `results_<skill>.json`. Les nouveaux résultats bruts sont ignorés par Git
+en raison de leur taille ; 13 archives historiques déjà suivies restent conservées pour la reproductibilité.
+Ne pas ajouter de nouveau JSON brut : consigner les résultats synthétiques et les décisions dans un
+fichier `analyse_*.md`, source de vérité archivée.
 
 ## Harnais disponibles
 

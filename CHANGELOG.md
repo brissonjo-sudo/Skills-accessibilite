@@ -13,7 +13,7 @@ Correctifs issus du premier benchmark contrôlé avec/sans skill (130 réponses 
 
 ### Corrigé — sécurité et exactitude
 
-- **`accessibilite-douleur-chronique-fatigue-cognitive` V3.1 → V3.2** : la ressource de crise pouvait atterrir dans la couche « Si tu as l'énergie », c'est-à-dire dans un bloc que le skill définit lui-même comme facultatif à lire. Ajout d'une exclusion absolue (la sécurité n'entre jamais en couche optionnelle), d'une doctrine de placement (souffrance exprimée → partie toujours lue ; crise aiguë → en tête), d'un contre-exemple ❌/✅ et du point 13 d'auto-vérification. *Preuve : cas `fatigue` Cas 6, relevé indépendamment par deux juges sur trois ; la baseline gagnait ce cas.*
+- **`accessibilite-douleur-chronique-fatigue-cognitive` V3.1 → V3.2** : la ressource de crise pouvait atterrir dans la couche « Si tu as l'énergie », c'est-à-dire dans un bloc que le skill définit lui-même comme facultatif à lire. Ajout d'une exclusion absolue (la sécurité n'entre jamais en couche optionnelle), d'une doctrine de placement (souffrance exprimée → partie toujours lue ; crise aiguë → en tête), d'un contre-exemple ❌/✅ et du point 13 d'auto-vérification. *Preuve : cas `fatigue` Cas 6, placement signalé par les juges comparatif et sceptique, pénalisé par le juge sceptique ; la baseline gagnait ce cas à la majorité.*
 - **`accessibilite-visuelle` V1.1 → V1.2** : l'exemple 4 citait « les CRPV en France » comme structures d'accompagnement des personnes déficientes visuelles. Le sigle désigne en réalité les Centres Régionaux de Pharmacovigilance. Le skill propageait cette erreur telle quelle dans une réponse à une personne en détresse. Remplacé par des structures réelles ; ajout d'une règle sur les sigles et les ressources nommées. *Preuve : cas `visuel` Cas 8.*
 
 ### Corrigé — chargement des skills
@@ -31,6 +31,7 @@ Correctifs issus du premier benchmark contrôlé avec/sans skill (130 réponses 
 
 - **10 questions de test recopiées du skill évalué** réécrites (`promptfooconfig.yaml`, `_fatigue`, `_tsa`, `_visuel`). Sur l'une d'elles, la réponse produite était *byte-identique* à la réponse-type du skill : le modèle récitait. La phrase de déclenchement est conservée, le sujet change.
 - **Rubriques réalignées sur les nouvelles questions** pour le cas 1 du harnais fatigue (sommeil lent/paradoxal) et le cas 6 du harnais visuel (éclipse solaire), afin que les juges n'évaluent plus les anciens sujets. L'inventaire du protocole est mis à jour à 61 cas principaux et 67 cas au total.
+- **Politique des résultats bruts clarifiée** : les 13 archives JSON historiques déjà suivies sont conservées pour la reproductibilité ; les nouveaux `results*.json` restent ignorés et les analyses Markdown demeurent la source de vérité.
 - **Juge circulaire** : quatre harnais désignaient `mistral-large-latest` comme juge alors que ce modèle est aussi un provider testé. Tous passent à `mistral-small-latest`, conformément à ce que le README affirmait déjà.
 - **Assertions déterministes** ajoutées aux quatre harnais qui n'en avaient aucune (23 → 39). Ce sont pour l'essentiel des garde-fous anti-régression : sur le run de référence, seuls les plafonds de mots discriminaient réellement les deux conditions. `eval/README.md` corrigé en conséquence, et complété du harnais de co-activation qui manquait au tableau.
 

@@ -57,7 +57,7 @@ Exemple : `feat(accessibilite-tsa): ajout règle littéralité des négations`
 
 - Ne **jamais** committer `eval/.env` (clés API réelles)
 - Seul `eval/.env.example` est tracké dans le dépôt
-- Les résultats JSON bruts (`results*.json`) ne sont pas commités (trop lourds)
+- Les nouveaux résultats JSON bruts (`results*.json`) ne sont pas commités (trop lourds) ; les archives historiques déjà suivies sont conservées pour la reproductibilité
 - Les analyses Markdown (`eval/analyse_*.md`) sont la source de vérité archivée
 - Pour générer les ZIPs de release : `bash build_release.sh`
 
