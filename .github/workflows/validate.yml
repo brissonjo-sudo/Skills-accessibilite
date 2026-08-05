@@ -19,24 +19,35 @@ jobs:
     steps:
       - name: Récupérer le code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Configurer Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
+      - name: Installer les dépendances de validation
+        run: python -m pip install --requirement requirements-ci.txt
+
       - name: Valider les skills
         run: python scripts/validate_skills.py
 
-      # validate_skills.py ne couvre pas les références file:// des harnais :
-      # ce contrôle reste porté par son propre script.
-      - name: Vérifier les chemins des configs d'évaluation
+      - name: Vérifier le schéma complet des banques d'évaluation
         run: python scripts/check_eval_configs.py
 
       # Une question de test recopiée du SKILL.md ne mesure plus l'effet du skill :
       # le modèle récite la réponse-type qu'il a sous les yeux.
       - name: Vérifier qu'aucune question de test n'est recopiée d'un skill
         run: python scripts/check_eval_leaks.py
+
+      - name: Vérifier les cas d'activation et de non-déclenchement
+        run: python scripts/check_activation_cases.py
+
+      - name: Vérifier les preuves des skills promus ou modifiés en production
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: python scripts/check_evidence.py --base "$BASE_SHA"
 
       - name: Vérifier qu'aucun .env n'est commité
         run: |

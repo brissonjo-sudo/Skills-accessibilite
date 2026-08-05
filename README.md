@@ -3,7 +3,6 @@
 [![validate](https://github.com/brissonjo-sudo/Skills-accessibilite/actions/workflows/validate.yml/badge.svg)](https://github.com/brissonjo-sudo/Skills-accessibilite/actions/workflows/validate.yml)
 [![GitHub Release](https://img.shields.io/github/v/release/brissonjo-sudo/skills-accessibilite?label=version)](https://github.com/brissonjo-sudo/skills-accessibilite/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![tested with promptfoo](https://img.shields.io/badge/tested%20with-promptfoo-blueviolet)](eval/)
 
 Un écosystème de skills conçus pour Claude. Chaque skill programme le comportement du modèle pour répondre de façon adaptée aux personnes ayant des besoins cognitifs, sensoriels ou neurobiologiques spécifiques.
 
@@ -80,9 +79,9 @@ skills-accessibilite/
 │   │   └── SKILL.md
 │   └── accessibilite-visuelle/
 │       └── SKILL.md
-├── eval/                  # harnais d'évaluation promptfoo (multi-LLM)
+├── eval/                  # banque de cas + protocole de validation en vagues
 │   ├── promptfooconfig*.yaml
-│   ├── run_all.sh
+│   ├── prompt_benchmark_claude_code.md
 │   └── README.md
 └── docs/
     └── bilan_ecosysteme_skills_accessibilite.md
@@ -94,7 +93,7 @@ Chaque skill tient dans un unique `SKILL.md` (< 500 lignes, en deçà du seuil d
 
 ## Évaluation
 
-Le dossier `eval/` contient un harnais [promptfoo](https://promptfoo.dev) par skill : deux conditions (avec / sans skill), deux LLM (Mistral Large, Gemini 2.5 Flash), assertions déterministes et sémantiques. Voir `eval/README.md`.
+Le dossier `eval/` contient une banque de cas par skill et le protocole de validation. Une **vague** joue chaque cas deux fois — avec et sans le skill, même question, contextes isolés — puis fait juger les paires en aveugle par trois juges indépendants. Voir `eval/README.md`.
 
 ---
 

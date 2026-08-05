@@ -9,7 +9,36 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 Correctifs issus du premier benchmark contrôlé avec/sans skill (130 réponses appariées, aveugle, trois juges indépendants par variante). Deux régressions critiques corrigées — une de sécurité, une d'exactitude — plus un défaut de chargement présent depuis l'origine.
 
-> **Validation.** Ces correctifs s'appuient sur le run `eval/runs/20260805-001935/` (protocole `eval/prompt_benchmark_claude_code.md`), **pas** sur un run `run_all.sh` : promptfoo n'était pas exécutable (ni réseau ni clés API au moment de la correction). `CONTRIBUTING.md` exige un passage au banc promptfoo pour toute montée de version — il reste à faire pour confirmer ces bumps.
+> **Validation.** Ces correctifs s'appuient sur le run `eval/runs/20260805-001935/` et sa vérification ciblée `eval/runs/20260805-181022-verif/` (protocole `eval/prompt_benchmark_claude_code.md`). Ce run a été conduit et jugé par le même agent que celui qui a écrit les correctifs : les montées de version restent **à confirmer par une vague indépendante**, d'où le statut « candidat » dans `docs/index_skills.md`.
+
+### Modifié — la validation ne passe plus par promptfoo
+
+L'évaluation automatisée est abandonnée. La validation se fait désormais en **vagues** : une
+session d'agents (Claude Code ou ChatGPT) exécute `eval/prompt_benchmark_claude_code.md` de
+bout en bout — deux conditions appariées, aveuglement A/B, trois juges indépendants par variante.
+
+- **Règle de versionnement réécrite** (`CONTRIBUTING.md` §2 et §5, `AGENTS.md`) : une montée de
+  version s'appuie sur une vague de validation, et le `CHANGELOG.md` cite le run qui l'appuie.
+  Les critères de recevabilité d'une vague sont explicités (appariement, aveuglement, trois juges,
+  cas exclus signalés, veto en cas de régression de sécurité ou d'exactitude).
+- **`eval/run_all.sh` supprimé** — lanceur promptfoo devenu inopérant. Un script mort qui prétend
+  valider est pire qu'une absence de script.
+- **`eval/prompts/` supprimé** — gabarits de prompt au format promptfoo ; le protocole définit
+  désormais son propre socle neutre.
+- **Les 8 `promptfooconfig*.yaml` deviennent une banque de cas** : les blocs `providers:`,
+  `prompts:` et le juge `mistral` sont retirés. Restent la description, le lien vers le `SKILL.md`,
+  les 67 cas et leurs 117 assertions — tout ce que le protocole consomme. Les noms de fichiers
+  sont conservés pour ne pas casser l'outillage et les références existantes.
+- **`eval/.env.example`** vidé de sa liste de providers : aucune clé n'est plus requise par
+  l'outillage du dépôt. Le garde-fou « aucun `.env` commité » reste en CI.
+- **Déclenchement testé séparément** : `eval/activation_cases.json` ajoute un cas positif
+  et un cas négatif pour chacun des 7 skills. Trois sélecteurs indépendants ne voient que
+  les métadonnées ; les faux positifs majoritaires interdisent la promotion. La couverture
+  est vérifiée en CI par `scripts/check_activation_cases.py`.
+- **Preuves auditables obligatoires** : toute modification d'un skill déjà en production,
+  ou promotion d'un candidat, doit ajouter un paquet assaini sous `eval/evidence/` couvrant
+  le skill. `scripts/check_evidence.py` vérifie en CI sa structure et sa présence ; le
+  changelog cite désormais le rapport suivi plutôt qu'un répertoire local ignoré.
 
 ### Corrigé — sécurité et exactitude
 
@@ -29,6 +58,12 @@ Correctifs issus du premier benchmark contrôlé avec/sans skill (130 réponses 
 
 ### Corrigé — banc d'évaluation
 
+- **Validation complète des banques YAML** : `scripts/check_eval_configs.py` parse désormais les
+  8 fichiers avec PyYAML et contrôle leur schéma, les 67 cas, les références de skills et les
+  assertions requises ; le CI installe la dépendance figée dans `requirements-ci.txt`.
+- **Méthodes obsolètes neutralisées** : l'auto-évaluation par le sous-agent générateur est marquée
+  comme abandonnée dans le bilan, et l'ancien prompt HDC exécutable `eval/prompt_eval_claude.md`
+  est supprimé. Le protocole courant sépare générateurs et trois juges aveugles indépendants.
 - **10 questions de test recopiées du skill évalué** réécrites (`promptfooconfig.yaml`, `_fatigue`, `_tsa`, `_visuel`). Sur l'une d'elles, la réponse produite était *byte-identique* à la réponse-type du skill : le modèle récitait. La phrase de déclenchement est conservée, le sujet change.
 - **Rubriques réalignées sur les nouvelles questions** pour le cas 1 du harnais fatigue (sommeil lent/paradoxal) et le cas 6 du harnais visuel (éclipse solaire), afin que les juges n'évaluent plus les anciens sujets. L'inventaire du protocole est mis à jour à 61 cas principaux et 67 cas au total.
 - **Politique des résultats bruts clarifiée** : les 13 archives JSON historiques déjà suivies sont conservées pour la reproductibilité ; les nouveaux `results*.json` restent ignorés et les analyses Markdown demeurent la source de vérité.

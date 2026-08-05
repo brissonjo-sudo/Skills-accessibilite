@@ -34,7 +34,7 @@ Copy the content of `skills/<name>/SKILL.md` into the system prompt field of any
 
 ## Evaluation
 
-Each skill is tested with [promptfoo](https://promptfoo.dev) across 3 LLMs (Mistral Large, Gemini 2.5 Flash, Claude Sonnet). See [`eval/`](eval/) for harnesses and result analyses.
+Each skill is validated in **waves**: every test case is answered twice — with and without the skill, same question, isolated contexts — then the pairs are graded blind by three independent judges. See [`eval/`](eval/) for the case bank, the protocol and archived analyses.
 
 ---
 

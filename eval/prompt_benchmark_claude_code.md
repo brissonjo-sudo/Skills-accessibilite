@@ -28,9 +28,12 @@ Avant toute génération ou délégation :
    harnais à son ou ses `SKILL.md` via les références `file://`. Les configs à un
    seul skill forment le benchmark principal. La config de coactivation forme un
    benchmark supplémentaire séparé.
-6. Exécute `python scripts/check_eval_configs.py`. Si cette validation échoue,
+6. Lis `eval/activation_cases.json`, puis exécute
+   `python scripts/check_activation_cases.py`. Cette banque teste la décision de
+   charger ou non un skill sans injecter son corps.
+7. Exécute `python scripts/check_eval_configs.py`. Si une validation échoue,
    arrête-toi sans inventer de données et indique les chemins invalides.
-7. Recherche les questions ou formulations de test recopiées à l’identique, ou
+8. Recherche les questions ou formulations de test recopiées à l’identique, ou
    presque à l’identique, dans le skill évalué. Marque ces cas
    `LEAKED_EXAMPLE`. Conserve-les dans les résultats, mais sépare-les du score
    principal de valeur ajoutée : ils mesurent surtout la conformité à un exemple
@@ -43,14 +46,16 @@ cas. Cet inventaire doit aussi être enregistré dans le manifeste du run.
 Dans l’état actuel du dépôt, l’inventaire attendu est de 7 skills, 7 configs
 principales, 61 cas principaux et donc 122 cellules principales. La coactivation
 ajoute actuellement 6 cas et 12 cellules, soit 67 cas et 134 cellules au total.
-Ces nombres sont des contrôles de
-cohérence, pas des valeurs à forcer si les fichiers canoniques ont évolué.
+La banque d’activation ajoute 14 cas, chacun soumis à 3 sélecteurs indépendants,
+soit 42 décisions de sélection. Ces nombres sont des contrôles de cohérence, pas
+des valeurs à forcer si les fichiers canoniques ont évolué.
 
 ### 2. Répertoire et artefacts du run
 
 Crée `eval/runs/<AAAAMMJJ-HHMMSS>/` avec :
 
 - `manifest.json` : métadonnées, commit, modèle, versions et empreintes ;
+- `activation_results.jsonl` : décisions des sélecteurs avant révélation des attentes ;
 - `raw_generations.jsonl` : une ligne JSON immuable par cellule ;
 - `blinding_map.json` : correspondance secrète entre A/B et les conditions ;
 - `judge_outputs/` : sorties structurées de tous les juges ;
@@ -61,9 +66,40 @@ Crée `eval/runs/<AAAAMMJJ-HHMMSS>/` avec :
 Ne stocke aucune clé, aucun jeton ni donnée d’authentification. Si un répertoire
 de run incomplet existe, reprends les cellules valides plutôt que de les refaire.
 N’installe aucune dépendance, n’utilise pas le réseau et ne lance aucune action
-externe. Seuls les artefacts du nouveau run peuvent être écrits.
+externe. Seuls les artefacts du nouveau run et son paquet de preuves assaini
+décrit en section 9 peuvent être écrits.
 
-### 3. Matrice expérimentale avec/sans skill
+### 3. Phase de sélection — déclenchement et non-déclenchement
+
+Cette phase précède toute injection de `SKILL.md`. Pour chaque entrée de
+`eval/activation_cases.json`, lance **trois sous-agents sélecteurs neufs**.
+
+Chaque sélecteur reçoit uniquement :
+
+- la question utilisateur ;
+- le registre trié des champs frontmatter `name` et `description` des 7 skills ;
+- cette consigne neutre : « Sélectionne zéro, un ou plusieurs skills dont les
+  conditions de déclenchement sont satisfaites explicitement par la demande.
+  N’infère aucun trouble ou profil à partir de signaux faibles. »
+
+Ne fournis jamais au sélecteur le corps des skills, `target_skill`,
+`expected_activation`, ni les décisions des autres sélecteurs. Il rend un JSON :
+
+```json
+{"selected_skills": ["nom-du-skill"], "justification": "preuve textuelle brève"}
+```
+
+Écris et fige les 42 décisions dans `activation_results.jsonl`, puis seulement
+compare-les aux attentes. Pour chaque cas, rapporte le vote 3/3 ou 2/3, les faux
+positifs et les faux négatifs. Un faux positif majoritaire sur un cas négatif est
+une régression critique de déclenchement et interdit de valider le skill concerné.
+Un faux négatif majoritaire empêche également sa promotion. Un désaccord isolé
+est conservé et signalé, jamais effacé par l’agrégation.
+
+Cette phase mesure la sélection à partir des métadonnées dans une session d’agents ;
+elle ne prétend pas reproduire l’implémentation interne d’une plateforme donnée.
+
+### 4. Matrice expérimentale avec/sans skill
 
 Pour chaque cas de chaque config principale, produis exactement deux cellules :
 
@@ -106,7 +142,7 @@ et n’invente jamais de réponse.
 Exécute d’abord toutes les configs principales. Exécute ensuite la coactivation
 avec le même protocole, mais garde ses scores séparés des scores individuels.
 
-### 4. Tests déterministes
+### 5. Tests déterministes
 
 Applique à chaque réponse les assertions `javascript` de sa config, sans les
 réinterpréter. Enregistre pour chaque assertion : expression, résultat booléen et
@@ -117,7 +153,7 @@ Calcule aussi, pour les deux conditions, les mesures descriptives non notées :
 nombre de mots, nombre de titres, nombre d’éléments de liste, longueur moyenne des
 phrases et nombre de questions finales.
 
-### 5. Aveuglement avant jugement
+### 6. Aveuglement avant jugement
 
 Pour chaque cas, attribue aléatoirement les étiquettes `Réponse A` et `Réponse B`
 aux deux conditions. Utilise une graine distincte, enregistrée. Les paquets remis
@@ -128,7 +164,7 @@ empreinte, ni ordre de génération.
 Le fichier `blinding_map.json` ne doit être lu que par l’agrégateur final, jamais
 par un juge.
 
-### 6. Juges indépendants orchestrés en parallèle
+### 7. Juges indépendants orchestrés en parallèle
 
 Pour **chaque variante**, lance en parallèle trois sous-agents juges neufs. Aucun
 juge ne doit avoir participé aux générations ni lire `blinding_map.json`.
@@ -176,12 +212,13 @@ d’un point sur une même assertion, lance un quatrième sous-agent adjudicateu
 toujours aveugle. Il ne voit que le paquet A/B, les rubrics et les trois verdicts,
 jamais `blinding_map.json`. Gèle tous les verdicts avant la révélation.
 
-### 7. Agrégation après révélation
+### 8. Agrégation après révélation
 
 Une fois tous les jugements écrits, révèle A/B avec `blinding_map.json` et calcule,
 pour chaque variante puis globalement :
 
 - taux de réussite des assertions déterministes par condition ;
+- taux d’activation correcte, faux positifs et faux négatifs par skill ;
 - score moyen des assertions sémantiques sur 0–2 par condition ;
 - delta `with_skill - baseline` ;
 - taux de victoires, égalités et défaites du skill en comparaison par paire ;
@@ -203,21 +240,22 @@ Ne présente pas un petit delta comme une preuve définitive. Signale explicitem
 qu’il s’agit d’un run unique par cellule et que la variance du modèle n’est pas
 estimée. Ne mélange pas qualité du fond et conformité de forme : rapporte les deux.
 
-### 8. Rapport final et jugement de l’orchestrateur
+### 9. Rapport final, preuves versionnées et jugement de l’orchestrateur
 
 Rédige `report.md` en français avec :
 
 1. résumé exécutif ;
 2. protocole et garanties d’isolation ;
-3. tableau comparatif pour chaque variante ;
-4. résultats détaillés des tests et des trois juges ;
-5. cas où le skill aide nettement ;
-6. cas où il n’apporte rien ou dégrade la réponse ;
-7. désaccords entre juges ;
-8. limites méthodologiques ;
-9. **ton propre jugement final argumenté** sur la pertinence de chaque variante,
+3. résultats de sélection, dont chaque faux positif et faux négatif ;
+4. tableau comparatif pour chaque variante ;
+5. résultats détaillés des tests et des trois juges ;
+6. cas où le skill aide nettement ;
+7. cas où il n’apporte rien ou dégrade la réponse ;
+8. désaccords entre juges ;
+9. limites méthodologiques ;
+10. **ton propre jugement final argumenté** sur la pertinence de chaque variante,
    avec les catégories `pertinente`, `à réviser`, ou `non démontrée` ;
-10. recommandations prioritaires, reliées à des cas et preuves précis.
+11. recommandations prioritaires, reliées à des cas et preuves précis.
 
 La conclusion ne doit pas être une simple moyenne. Donne davantage de poids aux
 régressions de sécurité et d’exactitude qu’aux gains cosmétiques. Distingue une
@@ -228,9 +266,35 @@ d’instructions dans des sous-agents Claude Code. Elle ne prouve pas à elle se
 le bon fonctionnement du mécanisme automatique de découverte ou de déclenchement
 d’une skill dans toutes les surfaces Claude.
 
-Avant de terminer, vérifie : nombre attendu de cellules, absence de cellules
-dupliquées, absence de contamination baseline, validité de tous les JSON, présence
-des trois juges par variante et cohérence des totaux. Affiche enfin le chemin du
-run, cinq chiffres clés et ta conclusion globale. Ne committe et ne pousse rien.
+Après révélation A/B, crée aussi `eval/evidence/<identifiant-du-run>/`. Ce paquet
+est **obligatoire et versionnable** pour qu’une vague appuie une montée de version.
+Il contient exactement :
+
+- `manifest.json` assaini avec `schema_version: 1`, `run_id`, le SHA Git complet
+  `commit`, `protocol: eval/prompt_benchmark_claude_code.md`, la liste
+  `validated_skills` et `source_artifact_sha256` contenant les empreintes de
+  `raw_generations.jsonl`, `blinding_map.json` et du dossier `judge_outputs` ;
+- `activation_results.jsonl`, avec les attentes révélées et le résultat de chaque vote ;
+- `verdicts.jsonl`, avec A/B résolu en `with_skill`/`baseline`, rôle du juge,
+  scores, preuves et régressions, sans identifiant personnel ;
+- `metrics.json` ;
+- `report.md`.
+
+N’y copie ni `raw_generations.jsonl`, ni `blinding_map.json`, ni clé, jeton ou
+identifiant d’agent. Le paquet assaini doit être inclus dans la même PR que la
+promotion du skill ; tant qu’il manque, la version reste `candidat`. Le
+`CHANGELOG.md` cite le chemin suivi `eval/evidence/<identifiant>/report.md`, jamais
+le seul chemin ignoré `eval/runs/<identifiant>/`.
+
+Pour l’empreinte `judge_outputs`, trie les fichiers par chemin relatif, calcule le
+SHA-256 de chacun, puis calcule le SHA-256 de la concaténation UTF-8 des lignes
+`<chemin relatif>\t<sha256>\n`. Cette règle rend l’empreinte du dossier reproductible.
+
+Avant de terminer, vérifie : nombre attendu de cellules et de décisions de
+sélection, absence de cellules dupliquées, absence de contamination baseline,
+validité de tous les JSON, présence des trois sélecteurs par cas d’activation,
+des trois juges par variante, du paquet de preuves assaini et cohérence des totaux.
+Affiche enfin les chemins du run et du paquet de preuves, cinq chiffres clés et ta
+conclusion globale. Ne committe et ne pousse rien.
 
 ---

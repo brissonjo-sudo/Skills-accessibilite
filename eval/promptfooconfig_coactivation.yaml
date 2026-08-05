@@ -1,30 +1,4 @@
-description: Évaluation co-activation inter-skills — 6 paires à tension maximale
-
-defaultTest:
-  # Juge non-circulaire : mistral-small-latest n'est pas un provider testé
-  options:
-    provider:
-      id: mistral:mistral-small-latest
-      config:
-        apiKey: "{{env.MISTRAL_API_KEY}}"
-
-prompts:
-  - id: file://prompts/with_two_skills.yaml
-    label: "Co-activation (skill1 + skill2)"
-
-providers:
-  - id: mistral:mistral-large-latest
-    label: "Mistral Large"
-    config:
-      apiKey: "{{env.MISTRAL_API_KEY}}"
-  - id: google:gemini-2.5-flash
-    label: "Gemini 2.5 Flash"
-    config:
-      apiKey: "{{env.GOOGLE_API_KEY}}"
-  - id: anthropic:claude-sonnet-4-6
-    label: "Claude Sonnet 4.6"
-    config:
-      apiKey: "{{env.ANTHROPIC_API_KEY}}"
+description: Banque de cas — co-activation inter-skills, 6 paires à tension maximale
 
 tests:
   - description: "C1 — HDC + DYS : plafond DYS prime en co-activation"
