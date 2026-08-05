@@ -19,13 +19,13 @@ Un skill est un dossier contenant un fichier `SKILL.md` (instructions + métadon
 
 | Dossier | Skill | Version | Description |
 |---|---|---|---|
-| `skills/psychologie-rigoureuse/` | Psychologie rigoureuse | V6.1 | Cadre d'analyse psychologique non dogmatique, marquage du degré de confiance |
-| `skills/accessibilite-tdah/` | TDAH | V2.2 | Communication adaptée aux profils TDAH : structure, ancrage, charge cognitive réduite |
+| `skills/psychologie-rigoureuse/` | Psychologie rigoureuse | V6.2 | Cadre d'analyse psychologique non dogmatique, marquage du degré de confiance |
+| `skills/accessibilite-tdah/` | TDAH | V2.3 | Communication adaptée aux profils TDAH : structure, ancrage, charge cognitive réduite |
 | `skills/accessibilite-dys/` | DYS | V3.1 | Adaptation pour dyslexie, dysorthographie, dyspraxie, dyscalculie : lisibilité, reformulation |
 | `skills/accessibilite-tsa/` | TSA | V4.1 | Communication adaptée aux personnes autistes : littéralité, prévisibilité, pas de sous-entendus |
-| `skills/accessibilite-haute-densite-cognitive/` | Haute densité cognitive | V3.1 | Réponses denses et rigoureuses pour profils HDC/HPI : profondeur, rigueur épistémique |
-| `skills/accessibilite-douleur-chronique-fatigue-cognitive/` | Douleur chronique / Fatigue cognitive | V3.1 | Adaptation pour fatigue cognitive et douleur persistante : économie cognitive, modularité |
-| `skills/accessibilite-visuelle/` | Accessibilité visuelle | V1.1 | Adaptation pour basse vision et cécité : structure sémantique, alternatives textuelles, compatibilité lecteur d'écran |
+| `skills/accessibilite-haute-densite-cognitive/` | Haute densité cognitive | V3.2 | Réponses denses et rigoureuses pour profils HDC/HPI : profondeur, rigueur épistémique |
+| `skills/accessibilite-douleur-chronique-fatigue-cognitive/` | Douleur chronique / Fatigue cognitive | V3.2 | Adaptation pour fatigue cognitive et douleur persistante : économie cognitive, modularité |
+| `skills/accessibilite-visuelle/` | Accessibilité visuelle | V1.2 | Adaptation pour basse vision et cécité : structure sémantique, alternatives textuelles, compatibilité lecteur d'écran |
 
 Chaque dossier contient un fichier **`SKILL.md`** : un en-tête YAML (`name`, `description`) suivi des règles du skill.
 

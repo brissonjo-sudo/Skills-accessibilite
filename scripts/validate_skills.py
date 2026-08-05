@@ -40,6 +40,49 @@ def parse_frontmatter(lines: list[str]) -> dict[str, str] | None:
     return fm
 
 
+def find_yaml_breaking_scalars(lines: list[str]) -> list[tuple[str, int, str]]:
+    """
+    Détecte les valeurs de frontmatter qu'un parseur YAML strict refuserait.
+
+    En YAML, un ': ' (deux-points suivi d'un espace) dans un scalaire *plain*
+    (ni quoté, ni bloc '|' / '>') est lu comme un séparateur clé/valeur : le
+    document devient invalide ('mapping values are not allowed here'). Le
+    frontmatter est alors illisible pour tout chargeur au parseur strict, alors
+    même que le fichier paraît correct à l'œil.
+
+    Ce contrôle est volontairement écrit sans PyYAML : le workflow CI n'installe
+    aucune dépendance Python, et un `import yaml` y ferait échouer le job.
+
+    Retourne une liste de (clé, colonne 1-based, extrait fautif).
+    """
+    i = 0
+    while i < len(lines) and lines[i].strip() == "":
+        i += 1
+    if i >= len(lines) or lines[i].strip() != "---":
+        return []
+    i += 1
+
+    problems: list[tuple[str, int, str]] = []
+    while i < len(lines):
+        stripped = lines[i].rstrip("\n").rstrip()
+        if stripped == "---":
+            break
+        key, sep, value = stripped.partition(":")
+        if sep and not key.startswith(" ") and key.strip():
+            v = value.strip()
+            # Valeur quotée ou scalaire de bloc : le ': ' y est licite.
+            quoted = (len(v) >= 2 and v[0] == v[-1] and v[0] in "\"'")
+            block = v.startswith(("|", ">"))
+            if v and not quoted and not block:
+                pos = v.find(": ")
+                if pos != -1:
+                    col = len(key) + 1 + (len(value) - len(value.lstrip())) + pos + 1
+                    start = max(0, pos - 40)
+                    problems.append((key.strip(), col, v[start:pos + 20]))
+        i += 1
+    return problems
+
+
 def extract_precedence_block(lines: list[str]) -> list[str] | None:
     """
     Extrait le contenu du bloc '## Ordre de préséance' (toutes variantes de titre
@@ -96,6 +139,14 @@ def validate_skill(skill_dir: Path) -> tuple[bool, list[str]]:
     if fm is None:
         errors.append("frontmatter YAML introuvable (première ligne non vide doit être '---')")
         return False, errors
+
+    # Frontmatter réellement parsable par un YAML strict
+    for key, col, extrait in find_yaml_breaking_scalars(lines):
+        errors.append(
+            f"frontmatter invalide en YAML strict : ': ' dans la valeur non quotée "
+            f"de '{key}' (colonne {col}). Remplacer par ' — ' ou ' ; ', ou quoter "
+            f"la valeur. Extrait : …{extrait}…"
+        )
 
     # Champ 'name'
     if "name" not in fm:

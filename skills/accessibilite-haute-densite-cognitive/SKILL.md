@@ -113,7 +113,13 @@ Pas de plafond de mots imposé. La longueur est proportionnelle à la densité r
 
 **Contre-limite** : la longueur n'est pas un critère de qualité. Une réponse dense ne doit pas être longue par défaut — elle doit l'être quand le sujet le justifie. La relecture doit éliminer la redondance et la sur-explication, jamais la nuance.
 
-**Cas particulier.** Quand la déclaration de profil (« Mode HDC », « j'ai un HPI ») précède une question dont la réponse juste serait une phrase ou un paragraphe court, la proportionnalité prime sur le profil. La déclaration ne complexifie pas les questions simples — elle autorise la profondeur là où elle existe, pas là où elle n'existe pas.
+**Cas particulier.** Quand la **déclaration de profil** (« Mode HDC », « j'ai un HPI », « je suis zèbre ») précède une question dont la réponse juste serait une phrase ou un paragraphe court, la proportionnalité prime sur le profil. La déclaration ne complexifie pas les questions simples — elle autorise la profondeur là où elle existe, pas là où elle n'existe pas.
+
+**Cas inverse — le besoin communicationnel est une demande explicite de développement.** Une déclaration de profil décrit *qui est* l'utilisateur ; elle ne demande rien. Un besoin communicationnel exprimé (« ne simplifie pas », « garde toute la nuance », « j'ai besoin de réponses qui respectent la complexité réelle », « je veux la version complète, pas la version vulgarisée ») **est une consigne directe**. Dans ce cas, l'anti-édulcoration prime sur la proportionnalité.
+
+Concrètement : sur un sujet qui a une complexité réelle, une réponse brève et propre n'est **pas** une réponse correcte si l'utilisateur a explicitement demandé qu'on ne simplifie pas. Traiter les mécanismes, les limites et l'état du débat, même si une version courte aurait « suffi » à la question littérale. La proportionnalité ne reprend la main que si le sujet n'a objectivement pas de profondeur à honorer — et il faut alors le dire, plutôt que de livrer une esquisse sans commentaire.
+
+Ne pas confondre les deux : la déclaration de profil **autorise** la profondeur, le besoin exprimé la **demande**.
 
 ## Anti-essentialisation HDC/HPI
 
@@ -249,6 +255,7 @@ Même avec le skill actif, un sujet simple appelle une réponse courte. Le skill
 5. **Structure navigable** : si la réponse est dense, est-elle structurée (titres, gras, listes) ? Pas un pavé continu ?
 6. **Tolérance à l'ambiguïté** : ai-je forcé une conclusion là où le domaine ne l'impose pas ?
 7. **Proportionnalité** : la longueur est-elle justifiée par la complexité réelle du sujet ? Sinon, couper la redondance, pas la nuance.
+7bis. **Besoin exprimé vs profil déclaré** : si l'utilisateur a explicitement demandé de ne pas simplifier, ai-je bien traité mécanismes, limites et état du débat — plutôt qu'une version courte « suffisante » ? Une demande explicite de développement prime sur la proportionnalité.
 8. **Anti-essentialisation** : si je mentionne « HPI » ou « zèbre », est-ce que j'impute au profil un comportement, ressenti ou besoin précis ? Si oui, reformuler universellement.
 9. **Marquage de confiance économe** : 0 à 3 marquages, sur les affirmations qui le justifient vraiment ?
 10. Si co-active avec **DYS** : l'aération DYS prime — phrases courtes même si dense ?

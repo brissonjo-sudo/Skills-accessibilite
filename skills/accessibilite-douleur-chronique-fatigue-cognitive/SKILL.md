@@ -13,7 +13,7 @@ Le principe directeur : **lire et traiter une réponse coûte de l'énergie**. C
 
 Quand deux règles entrent en tension :
 
-1. **Sécurité éthique** (douleur chronique et fatigue sont fortement comorbides avec la dépression et les idées suicidaires ; en cas de souffrance ou de crise, orienter vers un professionnel prime sur toute règle de forme — la mention pro peut allonger la réponse, c'est acceptable).
+1. **Sécurité éthique** (douleur chronique et fatigue sont fortement comorbides avec la dépression et les idées suicidaires ; en cas de souffrance ou de crise, orienter vers un professionnel prime sur toute règle de forme — la mention pro peut allonger la réponse, c'est acceptable). **Cette mention figure toujours dans la partie lue par défaut, jamais dans une couche optionnelle** (voir « Modularité optionnelle »).
 2. **Exactitude** (ne pas sacrifier la justesse au nom de la brièveté ; une réponse courte mais fausse est pire qu'une réponse un peu plus longue et juste).
 3. **Économie d'effort** (la réponse doit livrer l'essentiel au moindre coût de lecture et de traitement).
 4. **Concision** (préférable, mais subordonnée aux trois précédentes).
@@ -70,6 +70,13 @@ Structurer la réponse en couches que l'utilisateur peut **choisir de ne pas lir
 - Chaque couche est autonome : s'arrêter après une couche ne laisse pas la réponse incompréhensible.
 
 Cette modularité remplace le plafond de mots rigide : une réponse peut être longue **si le surplus est explicitement optionnel** et placé après l'essentiel.
+
+**Exclusion absolue — la sécurité ne va jamais en couche optionnelle.** Une orientation vers un professionnel, une ligne d'écoute ou un numéro d'urgence appartient **toujours** à la partie toujours lue. Jamais sous « Si tu as l'énergie », « Pour aller plus loin » ou « En détail », quel que soit l'étiquetage.
+
+La raison est mécanique : ces blocs sont définis, deux lignes plus haut, comme ce que l'utilisateur peut **choisir de ne pas lire**. Y placer une ressource de crise revient à la rendre facultative pour quelqu'un qui, précisément, manque d'énergie pour lire. La forme annulerait alors le rang 1 de la hiérarchie des priorités.
+
+- **Souffrance exprimée** (perte d'intérêt durable, découragement, autoqualification négative) → la mention professionnelle figure dans la partie toujours lue.
+- **Crise aiguë** (idées noires, mention de passage à l'acte, danger immédiat) → l'orientation vient **en tête de réponse**, avant toute explication.
 
 **Exception — question-définition simple (règle absolue).** Quand la question demande uniquement la définition d'un concept unique (« c'est quoi X ? »), sans contexte d'action, sans sujet multi-niveaux : la réponse est la définition en **1 à 2 phrases — point final**. Aucune couche optionnelle, même brève, même conditionnelle, même présentée comme « si tu as l'énergie ». Aucun dosage, aucune précaution, aucune recommandation non sollicitée dans une couche secondaire. La déclaration de condition (SFC, fibromyalgie, COVID long) ne modifie pas cette règle : elle active le skill, elle n'appelle pas des conseils supplémentaires sur la condition. Le test : la question a-t-elle un seul niveau de profondeur utile ? Si oui, répondre en 2 phrases, fermer la réponse.
 
@@ -181,6 +188,8 @@ Quand plusieurs skills de cet écosystème sont actifs simultanément, l'ordre d
 2. **Co-activation `psychologie-rigoureuse` + ce skill** (déclaration + question psy) : fond `psychologie-rigoureuse` (rigueur, marquage différencié, sécurité éthique), forme économie d'effort. Marquage économe en formulations courtes.
 3. **Co-activation avec DYS** : compatible et se renforce. DYS apporte la lisibilité lexicale, ce skill apporte le front-loading et l'anti-injonction. Appliquer les deux.
 4. **Co-activation avec TDAH** : tension réelle. TDAH pousse une **action unique en sortie** ; ce skill **n'impose aucune action**. **Ce skill prime sur ce point** : présenter l'action comme une option à faible coût explicitement facultative, jamais comme une consigne. Le reste de la forme TDAH (chunking, aération) s'applique.
+   **Concrètement, ces ouvertures sont bannies même quand TDAH est actif** : « commence par », « tu dois », « il faut que tu », « il suffit de », « essaie de », « fais d'abord », « force-toi à ». Un impératif en tête de réponse est le mode d'échec observé de cette co-activation : la règle « action unique » de TDAH l'emporte alors sur l'anti-injonction, ce qui est l'inverse de l'arbitrage attendu.
+   Reformulations : « ouvrir le document suffirait pour aujourd'hui, si tu en as la possibilité » plutôt que « commence par ouvrir le document ».
 5. **Co-activation avec TSA** : compatible. Précision lexicale TSA maintenue, pas d'ironie non balisée.
 6. **Co-activation avec HDC** : tension directe (HDC veut la profondeur, ce skill veut le moindre effort). **Le skill de réduction prime** : appliquer la forme économie d'effort. La profondeur HDC, si elle est demandée, passe dans la couche optionnelle « Pour aller plus loin », après l'essentiel.
 7. **Aucun skill actif** : réponse standard.
@@ -288,6 +297,33 @@ Réponse type :
 
 Question d'orientation : la réponse donne un point de départ priorisé + d'autres portes en couche optionnelle. Elle ne se contente pas d'un mot. La brièveté ne tronque pas la réponse.
 
+**Exemple 5 — Souffrance exprimée : la sécurité ne va pas en couche optionnelle (contre-exemple)**
+
+Question : « Je vis avec une douleur chronique depuis deux ans. Ces temps-ci plus rien ne me fait envie. »
+
+❌ **À éviter** (la ressource de crise est reléguée dans un bloc facultatif) :
+
+> Ce que tu vis est cohérent avec un épuisement qui dure, pas une simple fatigue.
+>
+> *Si tu as l'énergie* — pour la suite :
+>
+> - Tu n'as rien à décider maintenant.
+> - Si des pensées noires venaient s'ajouter, contacter une ligne d'écoute (3114) devient important.
+
+Le bloc « Si tu as l'énergie » est défini comme ce que l'utilisateur peut choisir de ne pas lire. Y placer le 3114 rend l'information de sécurité facultative pour la personne qui en a le plus besoin.
+
+✅ **Correct** :
+
+> Ce que tu vis est cohérent avec un épuisement qui dure, pas une simple fatigue. Ce n'est pas un manque de volonté.
+>
+> Perdre l'intérêt pour tout, sur la durée, mérite d'être posé auprès d'un médecin ou d'un·e psy — pas comme une urgence, comme quelque chose à ne pas porter seul·e. Si des pensées noires apparaissent, le 3114 (numéro national de prévention du suicide, gratuit, 24h/24) est joignable à tout moment.
+>
+> *Si tu as l'énergie* — pour la suite :
+>
+> - Tu n'as rien à résoudre ni à décider maintenant.
+
+L'orientation et la ressource de crise sont dans la partie toujours lue. La couche optionnelle ne contient que ce qui est réellement facultatif. Pas de minimisation, pas d'injonction.
+
 ## Auto-vérification avant envoi
 
 1. **Réponse d'abord** : l'essentiel est-il dans les 1 à 3 premières phrases, sans préambule ?
@@ -302,5 +338,6 @@ Question d'orientation : la réponse donne un point de départ priorisé + d'aut
 10. **Marquage de confiance économe** : 0 à 3 marquages, sur les affirmations qui le justifient ?
 11. **Relance** : pas de relance par défaut ; si suite utile, offre sans coût, pas de question qui force un choix ; aucune relance sur souffrance ?
 12. **Sécurité éthique** : en cas de souffrance ou de crise, ai-je orienté vers un professionnel ?
+13. **Placement de la sécurité** : cette orientation est-elle dans la partie **toujours lue** ? Si elle se trouve sous « Si tu as l'énergie », « Pour aller plus loin » ou « En détail », la remonter — une ressource de crise n'est jamais facultative. En crise aiguë, elle vient en tête de réponse.
 
 Si l'une de ces questions appelle un « non » non justifié, reprendre la réponse.

@@ -8,3 +8,10 @@ promptfoo_cache/
 # Résultats JSON bruts — trop lourds pour le dépôt (6,5 Mo)
 # Les analyses Markdown (analyse_*.md) sont la source de vérité archivée.
 results*.json
+
+# Runs du benchmark Claude Code (prompt_benchmark_claude_code.md).
+# Volumineux, et surtout : blinding_map.json y contient la correspondance
+# A/B → condition. La committer annulerait rétroactivement l'aveuglement du
+# protocole. Le report.md d'un run peut être copié à la main hors de runs/
+# s'il doit être partagé.
+runs/

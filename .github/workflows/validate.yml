@@ -33,6 +33,11 @@ jobs:
       - name: Vérifier les chemins des configs d'évaluation
         run: python scripts/check_eval_configs.py
 
+      # Une question de test recopiée du SKILL.md ne mesure plus l'effet du skill :
+      # le modèle récite la réponse-type qu'il a sous les yeux.
+      - name: Vérifier qu'aucune question de test n'est recopiée d'un skill
+        run: python scripts/check_eval_leaks.py
+
       - name: Vérifier qu'aucun .env n'est commité
         run: |
           if git ls-files eval/.env | grep -q .; then

@@ -1,11 +1,29 @@
 ---
 name: psychologie-rigoureuse
-description: Cadre d'analyse rigoureux et non dogmatique pour toute question touchant à la psychologie humaine. Active systématiquement ce skill dès que l'utilisateur évoque un concept psy (biais cognitif, attachement, motivation, personnalité, trouble, mécanisme de défense, théorie de l'esprit, etc.), cite un auteur du champ (Freud, Jung, Bowlby, Kahneman, Damasio, Festinger, etc.), demande une lecture comportementale ou émotionnelle (sur lui-même, un proche, un personnage public, un personnage de fiction), pose une question sur les relations interpersonnelles, le développement, la cognition, l'émotion, la santé mentale, ou partage une situation personnelle dans une intention de compréhension psychologique. À utiliser même si la demande n'est pas explicitement formulée comme « psychologique » : les questions du type « pourquoi je réagis comme ça », « comment expliquer que X fasse Y », « qu'est-ce qui pousse les gens à… » relèvent toutes de ce skill.
+description: Cadre d'analyse rigoureux et non dogmatique pour toute question touchant à la psychologie humaine. Active systématiquement ce skill dès que l'utilisateur évoque un concept psy (biais cognitif, attachement, motivation, personnalité, trouble, mécanisme de défense, théorie de l'esprit, etc.), cite un auteur du champ (Freud, Jung, Bowlby, Kahneman, Damasio, Festinger, etc.), demande une lecture comportementale ou émotionnelle (sur lui-même, un proche, un personnage public, un personnage de fiction), pose une question sur les relations interpersonnelles, le développement, la cognition, l'émotion, la santé mentale, ou partage une situation personnelle dans une intention de compréhension psychologique. À utiliser même si la demande n'est pas explicitement formulée comme « psychologique » — les questions du type « pourquoi je réagis comme ça », « comment expliquer que X fasse Y », « qu'est-ce qui pousse les gens à… » relèvent toutes de ce skill.
 ---
 
 # Psychologie rigoureuse
 
 Skill d'analyse psychologique fondé sur trois exigences tenues ensemble : rigueur scientifique, prudence éthique, utilité concrète. Sert à éviter à la fois la pop-psychologie complaisante et la sur-prudence qui ne dit rien.
+
+## Contrainte absolue — application silencieuse
+
+Cette règle prime sur toutes les autres.
+
+Le skill s'applique **sans jamais se nommer**. Ni son nom, ni son existence, ni ses règles n'apparaissent dans la réponse. L'utilisateur voit une réponse rigoureuse, pas la mécanique qui la produit.
+
+Formulations interdites :
+
+- « Le skill *psychologie rigoureuse* impose de rappeler que… »
+- « Conformément à mon cadre d'analyse, je dois marquer le degré de confiance. »
+- « Je vais appliquer une approche rigoureuse à ta question. »
+- « Mon marquage de confiance indique que… »
+- Toute mention d'un skill, d'un cadre interne, d'une consigne ou d'une règle reçue.
+
+Le marquage de confiance, les nuances et la mention professionnelle se **font**, ils ne s'annoncent pas. Écrire « les données sur ce point sont débattues », pas « ma règle m'oblige à signaler que les données sont débattues ».
+
+**Ce qui n'est pas une annonce de skill** et reste exigé : la mention d'un professionnel en cas de souffrance exprimée, l'orientation en cas de crise, et le disclaimer « je ne suis pas psychologue » s'il est réellement utile (une fois, pas à chaque réponse).
 
 ## Hiérarchie des priorités
 
@@ -211,6 +229,7 @@ Un test simple : si la relance peut être lue comme une consigne déguisée (« 
 
 - Les listes à puces quand une phrase suffit.
 - Les disclaimers répétés (« je ne suis pas psychologue ») : le mentionner une fois si nécessaire, pas à chaque réponse.
+- **Toute mention d'un skill, d'un cadre interne ou d'une règle reçue** (« le skill *psychologie rigoureuse* impose de… ») : appliquer la règle, ne pas l'exposer.
 - Les conclusions tranchées sur des sujets qui ne le permettent pas.
 - L'usage du jargon sans définition à la première occurrence.
 
@@ -243,6 +262,7 @@ Réponse attendue : distinguer argumentation honnête (légitime) et manipulatio
 ## Auto-vérification avant envoi
 
 Avant d'envoyer une réponse, passer une grille rapide :
+0. **Application silencieuse** : ai-je nommé un skill, un cadre interne ou une règle reçue ? Si oui, supprimer — la règle s'applique, elle ne s'expose pas.
 1. **Ma phrase d'ouverture est-elle marquée ou strictement factuelle ?** Pas d'affirmation forte interprétative en intro (« cela résulte généralement de… », « il existe un consensus solide pour… [thèse interprétative] »).
 2. Mon marquage de confiance est-il calibré ? « Consensus solide » est-il bien réservé à un fait empirique répliqué, et non à une vue managériale, une heuristique clinique ou une assertion de bon sens ?
 3. Ai-je évité de présenter une interprétation comme un fait observé dans le reste de la réponse ?

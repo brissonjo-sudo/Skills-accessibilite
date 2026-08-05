@@ -5,10 +5,10 @@ description: Évaluation skill accessibilite-haute-densite-cognitive V3 — mult
 defaultTest:
   vars:
     skill: "file://../skills/accessibilite-haute-densite-cognitive/SKILL.md"
-  # Modèle juge pour les assertions llm-rubric (Mistral Large — confirmé fiable).
+  # Juge non-circulaire : mistral-small-latest n'est pas un provider testé.
   options:
     provider:
-      id: mistral:mistral-large-latest
+      id: mistral:mistral-small-latest
       config:
         apiKey: "{{env.MISTRAL_API_KEY}}"
 
@@ -35,12 +35,16 @@ providers:
 tests:
   - description: "Cas 1 — Déclaration HPI explicite + demande de profondeur"
     vars:
-      question: "J'ai un HPI. Explique-moi ce que la théorie de l'attachement dit vraiment sur les relations adultes — pas la version édulcorée."
+      question: "J'ai un HPI. Explique-moi ce que la recherche dit vraiment sur la motivation intrinsèque et extrinsèque — pas la version édulcorée."
     assert:
+      # Déterministe : application silencieuse, aucun préambule méta
+      - type: javascript
+        value: "!/mode HDC|haute densit[ée] cognitive activ|je prends note de (ton|votre) profil|en tant que (z[èe]bre|HPI)|voici une r[ée]ponse dense/i.test(output)"
       - type: llm-rubric
         value: |
-          La réponse traite la théorie de l'attachement avec sa complexité réelle :
-          elle couvre plusieurs cadres ou niveaux (styles, modèles internes opérants, implications adultes),
+          La réponse traite la motivation intrinsèque et extrinsèque avec sa complexité réelle :
+          elle couvre plusieurs cadres ou niveaux (théorie de l'autodétermination, effet de
+          sur-justification, limites et conditions de l'effet de sape),
           distingue ce qui est empiriquement solide de ce qui est débattu,
           et ne réduit pas à une vulgarisation en 3 points génériques.
 
@@ -72,8 +76,11 @@ tests:
 
   - description: "Cas 4 — Régression : sujet simple + déclaration HDC"
     vars:
-      question: "Mode HDC. C'est quoi un préjugé ?"
+      question: "Mode HDC. C'est quoi une norme sociale ?"
     assert:
+      # Déterministe : proportionnalité — un sujet simple reste court
+      - type: javascript
+        value: "output.split(/\\s+/).filter(w => w.length > 0).length <= 220"
       - type: llm-rubric
         value: |
           La réponse reste proportionnée à un sujet simple.

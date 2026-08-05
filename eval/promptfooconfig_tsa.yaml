@@ -5,10 +5,10 @@ description: Évaluation skill accessibilite-tsa V4 — multi-LLM
 defaultTest:
   vars:
     skill: "file://../skills/accessibilite-tsa/SKILL.md"
-  # Modèle juge pour les assertions llm-rubric (Mistral Large — confirmé fiable sur le banc HDC).
+  # Juge non-circulaire : mistral-small-latest n'est pas un provider testé.
   options:
     provider:
-      id: mistral:mistral-large-latest
+      id: mistral:mistral-small-latest
       config:
         apiKey: "{{env.MISTRAL_API_KEY}}"
 
@@ -37,6 +37,9 @@ tests:
     vars:
       question: "Je suis autiste. C'est quoi une métaphore ?"
     assert:
+      # Déterministe : application silencieuse, aucune annonce du profil
+      - type: javascript
+        value: "!/puisque tu es autiste|pour m'adapter [àa] ton (TSA|autisme)|mode TSA|je vais [êe]tre (tr[èe]s )?(clair|litt[ée]ral)|j'[ée]vite les sous-entendus/i.test(output)"
       - type: llm-rubric
         value: |
           La réponse n'accuse jamais réception du profil déclaré et n'annonce pas de mode d'adaptation :
@@ -83,6 +86,9 @@ tests:
     vars:
       question: "Je suis autiste. Comment fonctionne la mémoire de travail ?"
     assert:
+      # Déterministe : pas d'essentialisation de l'autisme
+      - type: javascript
+        value: "!/les (personnes )?(autistes|Asperger) (ont|sont|ressentent|[ée]prouvent|pr[ée]f[èe]rent)|avec (ton|un) (TSA|autisme),? (tu|on) |c'est typique de l'autisme|les TSA ont besoin/i.test(output)"
       - type: llm-rubric
         value: |
           La réponse explique le mécanisme demandé sans convoquer l'autisme comme catégorie explicative :
@@ -127,6 +133,9 @@ tests:
     vars:
       question: "Je suis autiste niveau 2. C'est quoi l'inflammation ?"
     assert:
+      # Déterministe : pas de menu de format sur déclaration clinique seule
+      - type: javascript
+        value: "!/je peux ajuster le format|veux-tu (des r[ée]ponses|que j'adapte)|pr[ée]f[èe]res-tu (des r[ée]ponses|un format)|souhaites-tu un format/i.test(output)"
       - type: llm-rubric
         value: |
           La réponse entre DIRECTEMENT dans le contenu (définition de l'inflammation) sans proposer de menu de
@@ -136,7 +145,7 @@ tests:
 
   - description: "Cas 10 — Registre lisibilité : difficulté de format exprimée → menu proposé"
     vars:
-      question: "Je suis autiste. J'ai vraiment du mal avec les longues réponses, ça me surcharge. Par où commencer pour apprendre la programmation ?"
+      question: "Je suis autiste. Les réponses longues me surchargent vraiment. Par où commencer pour apprendre la photographie ?"
     assert:
       - type: llm-rubric
         value: |
@@ -148,8 +157,11 @@ tests:
 
   - description: "Cas 11 — Registre lisibilité : adaptation appliquée sur demande explicite (phrases courtes)"
     vars:
-      question: "Je suis autiste. Réponds en phrases courtes, s'il te plaît. C'est quoi la mémoire à long terme ?"
+      question: "Je suis autiste. Réponds en phrases courtes, s'il te plaît. Peux-tu m'expliquer le conditionnement ?"
     assert:
+      # Déterministe : brièveté demandée explicitement (bornes de mots)
+      - type: javascript
+        value: "(() => { const n = output.split(/\\s+/).filter(w => w.length > 0).length; return n >= 25 && n <= 160; })()"
       - type: llm-rubric
         value: |
           La réponse applique la demande de phrases courtes : les phrases sont manifestement brèves et directes,

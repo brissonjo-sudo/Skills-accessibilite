@@ -18,6 +18,13 @@ cp .env.example .env
 
 ## Lancement
 
+### Benchmark complet via Claude Code
+
+Ouvrir Claude Code à la racine du dépôt, puis copier-coller le bloc de
+`prompt_benchmark_claude_code.md`. Il importe d’abord les `SKILL.md` canoniques à
+jour, exécute les conditions avec/sans skill en contextes isolés et orchestre
+trois juges aveugles en parallèle pour chaque variante.
+
 ### Tous les harnais (runner unique)
 
 ```bash
@@ -46,18 +53,40 @@ Chaque run produit un fichier `results_<skill>.json`. Le pousser sur la branche 
 | DYS V3.1 | `promptfooconfig_dys.yaml` | 8 | application silencieuse, phrases courtes, anti-essentialisation DYS, co-activation, sécurité éthique |
 | TDAH V2.2 | `promptfooconfig_tdah.yaml` | 10 | application silencieuse, action unique, chunking, anti-moralisation, anti-essentialisation TDAH, déclencheur TDA, non-déclenchement |
 | Psychologie rigoureuse V6.1 | `promptfooconfig_psychologie.yaml` | 8 | marquage différencié, non-prescription, anti-essentialisation, mention pro, sécurité éthique |
+| Co-activation inter-skills | `promptfooconfig_coactivation.yaml` | 6 | arbitrage des plafonds, anti-injonction TDAH/fatigue, littéralité TSA, marquage sous DYS |
 
 ## Structure des assertions
 
-Chaque harnais mélange deux types d'assertions :
+Chaque harnais mélange deux types d'assertions. Répartition réelle (39 assertions
+déterministes, 78 sémantiques) :
+
+| Harnais | `javascript` | `llm-rubric` |
+|---|--:|--:|
+| `promptfooconfig.yaml` (HDC) | 2 | 9 |
+| `promptfooconfig_visuel.yaml` | 6 | 16 |
+| `promptfooconfig_tsa.yaml` | 4 | 12 |
+| `promptfooconfig_fatigue.yaml` | 4 | 9 |
+| `promptfooconfig_dys.yaml` | 5 | 8 |
+| `promptfooconfig_tdah.yaml` | 5 | 10 |
+| `promptfooconfig_psychologie.yaml` | 8 | 8 |
+| `promptfooconfig_coactivation.yaml` | 5 | 6 |
 
 **Déterministes (`javascript`)** — vérifiables par regex, pas de juge LLM :
 - Application silencieuse : détection de formulations interdites (« mode DYS activ », « skill activ »…)
 - Anti-essentialisation : détection de généralisations catégorielles
 - Anti-prescription : détection de « tu devrais », « il faut que »
+- Anti-injonction à l'effort : « commence par », « tu dois », « il suffit de » (fatigue, co-activation)
 - Anti-relance cascade : comptage des `?` en fin de réponse
-- Plafond de mots : comptage simple
-- Anti-emojis (pour DYS, Visuelle)
+- Plafond ou bornes de mots : comptage simple
+- Anti-emojis (DYS, Visuelle)
+- Références positionnelles, ASCII art, hiérarchie des titres sans saut de niveau (Visuelle)
+- Mention d'un professionnel ou d'une ligne d'écoute (Visuelle, Fatigue, Psychologie)
+
+> **Nature de ces contrôles.** La plupart sont des **garde-fous anti-régression**, pas des
+> discriminants : sur le run de référence, seuls les plafonds de mots séparaient nettement les
+> deux conditions, les autres passaient déjà en baseline. Leur rôle est de faire échouer le
+> harnais si une évolution du skill réintroduit un emoji, un schéma ASCII ou une injonction —
+> pas de démontrer une valeur ajoutée.
 
 **Sémantiques (`llm-rubric`)** — évalués par le juge LLM (`mistral:mistral-small-latest`) :
 - Qualité du fond (profondeur, nuance, rigueur)

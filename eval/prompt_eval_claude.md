@@ -1,5 +1,9 @@
 # Prompt d'évaluation — provider Claude (via Claude Code)
 
+> **Archive — HDC uniquement.** Pour le benchmark actuel de toutes les variantes,
+> avec import des `SKILL.md` canoniques et juges parallèles, utiliser
+> `prompt_benchmark_claude_code.md`.
+
 Ce prompt fait jouer à **Claude** le rôle de modèle sous test, sur les mêmes 8 cas
 que le harnais promptfoo (Mistral + Gemini), dans les deux conditions
 (avec skill / baseline). Objectif : ajouter une 3ᵉ colonne de données à la base,
