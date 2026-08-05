@@ -40,19 +40,20 @@ promptfoo eval --config promptfooconfig_dys.yaml --output results_dys.json
 promptfoo view
 ```
 
-Chaque run produit un fichier `results_<skill>.json`. Le pousser sur la branche pour analyse partagée.
+Chaque run produit un fichier `results_<skill>.json`, ignoré par Git en raison de sa taille. Pour une
+analyse partagée, consigner les résultats synthétiques et les décisions dans un fichier `analyse_*.md`.
 
 ## Harnais disponibles
 
 | Skill | Config | Cas | Skills testés |
 |-------|--------|-----|---------------|
-| Haute densité cognitive V3.1 | `promptfooconfig.yaml` | 8 | application silencieuse, profondeur, anti-essentialisation HDC, co-activation |
-| Accessibilité visuelle V1.1 | `promptfooconfig_visuel.yaml` | 8 | application silencieuse, emojis, références positionnelles, ASCII art, tableaux, sécurité éthique |
+| Haute densité cognitive V3.2 | `promptfooconfig.yaml` | 8 | application silencieuse, profondeur, anti-essentialisation HDC, co-activation |
+| Accessibilité visuelle V1.2 | `promptfooconfig_visuel.yaml` | 8 | application silencieuse, emojis, références positionnelles, ASCII art, tableaux, sécurité éthique |
 | TSA V4.1 | `promptfooconfig_tsa.yaml` | 11 | application silencieuse, littéralité, prévisibilité, registre lisibilité, anti-essentialisation, sécurité |
-| Douleur chronique / Fatigue V3.1 | `promptfooconfig_fatigue.yaml` | 8 | application silencieuse, front-loading, modularité, anti-injonction, exception question-définition |
+| Douleur chronique / Fatigue V3.2 | `promptfooconfig_fatigue.yaml` | 8 | application silencieuse, front-loading, modularité, anti-injonction, exception question-définition |
 | DYS V3.1 | `promptfooconfig_dys.yaml` | 8 | application silencieuse, phrases courtes, anti-essentialisation DYS, co-activation, sécurité éthique |
-| TDAH V2.2 | `promptfooconfig_tdah.yaml` | 10 | application silencieuse, action unique, chunking, anti-moralisation, anti-essentialisation TDAH, déclencheur TDA, non-déclenchement |
-| Psychologie rigoureuse V6.1 | `promptfooconfig_psychologie.yaml` | 8 | marquage différencié, non-prescription, anti-essentialisation, mention pro, sécurité éthique |
+| TDAH V2.3 | `promptfooconfig_tdah.yaml` | 10 | application silencieuse, action unique, chunking, anti-moralisation, anti-essentialisation TDAH, déclencheur TDA, non-déclenchement |
+| Psychologie rigoureuse V6.2 | `promptfooconfig_psychologie.yaml` | 8 | marquage différencié, non-prescription, anti-essentialisation, mention pro, sécurité éthique |
 | Co-activation inter-skills | `promptfooconfig_coactivation.yaml` | 6 | arbitrage des plafonds, anti-injonction TDAH/fatigue, littéralité TSA, marquage sous DYS |
 
 ## Structure des assertions

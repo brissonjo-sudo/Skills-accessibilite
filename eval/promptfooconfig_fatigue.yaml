@@ -1,4 +1,4 @@
-description: Évaluation skill accessibilite-douleur-chronique-fatigue-cognitive V3 — multi-LLM
+description: Évaluation skill accessibilite-douleur-chronique-fatigue-cognitive V3.2 — multi-LLM
 
 # Source unique du skill : pointe vers le fichier canonique dans skills/
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
@@ -39,9 +39,12 @@ tests:
     assert:
       - type: llm-rubric
         value: |
-          La réponse livre l'essentiel (la distinction antalgique/anti-inflammatoire) dès les premières
-          phrases, sans préambule qui retarde la réponse. Tout développement supplémentaire vient après
-          l'essentiel, et la réponse reste juste sur le fond.
+          La réponse livre l'essentiel dès les premières phrases : le sommeil lent correspond au sommeil
+          non paradoxal, avec un ralentissement progressif de l'activité et un rôle important dans la
+          récupération physique ; le sommeil paradoxal associe une activité cérébrale plus proche de
+          l'éveil, des rêves fréquents et une forte diminution du tonus musculaire. Tout développement
+          supplémentaire vient après l'essentiel, sans préambule qui retarde la réponse, et le contenu
+          reste juste sur le fond.
       - type: llm-rubric
         value: |
           La réponse ne contient pas de formulations essentialisantes du type

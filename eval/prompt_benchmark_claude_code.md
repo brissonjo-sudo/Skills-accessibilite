@@ -41,8 +41,9 @@ effectivement utilisé, skills trouvés avec leurs SHA-256, configs et nombre de
 cas. Cet inventaire doit aussi être enregistré dans le manifeste du run.
 
 Dans l’état actuel du dépôt, l’inventaire attendu est de 7 skills, 7 configs
-principales, 59 cas principaux et donc 118 cellules principales. La coactivation
-ajoute actuellement 6 cas et 12 cellules. Ces nombres sont des contrôles de
+principales, 61 cas principaux et donc 122 cellules principales. La coactivation
+ajoute actuellement 6 cas et 12 cellules, soit 67 cas et 134 cellules au total.
+Ces nombres sont des contrôles de
 cohérence, pas des valeurs à forcer si les fichiers canoniques ont évolué.
 
 ### 2. Répertoire et artefacts du run

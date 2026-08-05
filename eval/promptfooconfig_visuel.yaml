@@ -1,4 +1,4 @@
-description: Évaluation skill accessibilite-visuelle V1 — multi-LLM
+description: Évaluation skill accessibilite-visuelle V1.2 — multi-LLM
 
 # Source unique du skill : pointe vers le fichier canonique dans skills/
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
@@ -132,10 +132,10 @@ tests:
     assert:
       - type: llm-rubric
         value: |
-          La réponse décrit le phénomène sans supposer que l'utilisateur perçoit un rendu visuel. Les
-          couleurs sont expliquées par leur propriété physique ou leur position dans le spectre (longueur
-          d'onde, déviation), pas supposées connues visuellement. Pas de « comme on peut le voir »,
-          « comme le montre », « vous pouvez observer ». Application silencieuse maintenue.
+          La réponse décrit le phénomène sans supposer que l'utilisateur perçoit un rendu visuel. Elle
+          explicite en mots la position relative du Soleil, de la Lune et de la Terre ainsi que le passage
+          de l'ombre, sans dépendre d'un schéma ou d'une référence spatiale vide. Pas de « comme on peut le
+          voir », « comme le montre », « vous pouvez observer ». Application silencieuse maintenue.
       - type: llm-rubric
         value: |
           La réponse explique correctement les mécanismes : alignement Soleil-Lune-Terre, interposition de

@@ -75,7 +75,7 @@ Exemple : `feat(accessibilite-tsa): ajout règle littéralité des négations`
 ```bash
 cd eval/
 ./run_all.sh                      # tous les skills
-./run_all.sh accessibilite-tdah   # un skill spécifique
+./run_all.sh tdah                 # un skill spécifique
 ./run_all.sh tdah dys tsa         # plusieurs skills
 ```
 
