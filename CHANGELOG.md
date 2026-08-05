@@ -9,7 +9,28 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 Correctifs issus du premier benchmark contrôlé avec/sans skill (130 réponses appariées, aveugle, trois juges indépendants par variante). Deux régressions critiques corrigées — une de sécurité, une d'exactitude — plus un défaut de chargement présent depuis l'origine.
 
-> **Validation.** Ces correctifs s'appuient sur le run `eval/runs/20260805-001935/` (protocole `eval/prompt_benchmark_claude_code.md`), **pas** sur un run `run_all.sh` : promptfoo n'était pas exécutable (ni réseau ni clés API au moment de la correction). `CONTRIBUTING.md` exige un passage au banc promptfoo pour toute montée de version — il reste à faire pour confirmer ces bumps.
+> **Validation.** Ces correctifs s'appuient sur le run `eval/runs/20260805-001935/` et sa vérification ciblée `eval/runs/20260805-181022-verif/` (protocole `eval/prompt_benchmark_claude_code.md`). Ce run a été conduit et jugé par le même agent que celui qui a écrit les correctifs : les montées de version restent **à confirmer par une vague indépendante**, d'où le statut « candidat » dans `docs/index_skills.md`.
+
+### Modifié — la validation ne passe plus par promptfoo
+
+L'évaluation automatisée est abandonnée. La validation se fait désormais en **vagues** : une
+session d'agents (Claude Code ou ChatGPT) exécute `eval/prompt_benchmark_claude_code.md` de
+bout en bout — deux conditions appariées, aveuglement A/B, trois juges indépendants par variante.
+
+- **Règle de versionnement réécrite** (`CONTRIBUTING.md` §2 et §5, `AGENTS.md`) : une montée de
+  version s'appuie sur une vague de validation, et le `CHANGELOG.md` cite le run qui l'appuie.
+  Les critères de recevabilité d'une vague sont explicités (appariement, aveuglement, trois juges,
+  cas exclus signalés, veto en cas de régression de sécurité ou d'exactitude).
+- **`eval/run_all.sh` supprimé** — lanceur promptfoo devenu inopérant. Un script mort qui prétend
+  valider est pire qu'une absence de script.
+- **`eval/prompts/` supprimé** — gabarits de prompt au format promptfoo ; le protocole définit
+  désormais son propre socle neutre.
+- **Les 8 `promptfooconfig*.yaml` deviennent une banque de cas** : les blocs `providers:`,
+  `prompts:` et le juge `mistral` sont retirés. Restent la description, le lien vers le `SKILL.md`,
+  les 67 cas et leurs 117 assertions — tout ce que le protocole consomme. Les noms de fichiers
+  sont conservés pour ne pas casser l'outillage et les références existantes.
+- **`eval/.env.example`** vidé de sa liste de providers : aucune clé n'est plus requise par
+  l'outillage du dépôt. Le garde-fou « aucun `.env` commité » reste en CI.
 
 ### Corrigé — sécurité et exactitude
 

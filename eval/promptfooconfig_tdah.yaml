@@ -1,36 +1,10 @@
-description: Évaluation skill accessibilite-tdah V2.3 — multi-LLM
+description: Banque de cas — skill accessibilite-tdah V2.3
 
 # Source unique du skill : pointe vers le fichier canonique dans skills/
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
 defaultTest:
   vars:
     skill: "file://../skills/accessibilite-tdah/SKILL.md"
-  # Juge non-circulaire : mistral-small-latest n'est pas un provider testé.
-  options:
-    provider:
-      id: mistral:mistral-small-latest
-      config:
-        apiKey: "{{env.MISTRAL_API_KEY}}"
-
-prompts:
-  - id: file://prompts/with_skill.yaml
-    label: "Avec skill TDAH"
-  - id: file://prompts/baseline.yaml
-    label: "Baseline (sans skill)"
-
-providers:
-  - id: mistral:mistral-large-latest
-    label: "Mistral Large"
-    config:
-      apiKey: "{{env.MISTRAL_API_KEY}}"
-  - id: google:gemini-2.5-flash
-    label: "Gemini 2.5 Flash"
-    config:
-      apiKey: "{{env.GOOGLE_API_KEY}}"
-  - id: anthropic:claude-sonnet-4-6
-    label: "Claude Sonnet 4.6"
-    config:
-      apiKey: "{{env.ANTHROPIC_API_KEY}}"
 
 tests:
   - description: "C1 — Application silencieuse (déclaration TDAH, tâche à étapes)"

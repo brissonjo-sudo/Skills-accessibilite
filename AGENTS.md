@@ -19,7 +19,7 @@ Guide de contribution pour agents (Claude Code, Codex) et humains travaillant su
 | `docs/bilan_ecosysteme_skills_accessibilite.md` | Historique d'itération, méthodologie, décisions d'architecture. |
 | `docs/note_ethique.md` | Limites éthiques (pas de diagnostic, pas de soin, pas de substitution). |
 | `docs/usage.md` | Cas d'usage concrets par skill. |
-| `eval/` | Harnais [promptfoo](https://promptfoo.dev) : un `promptfooconfig_<skill>.yaml` par skill, `run_all.sh`, résultats JSON. |
+| `eval/` | Banque de cas : un `promptfooconfig_<skill>.yaml` par skill, plus le protocole de validation en vagues (`prompt_benchmark_claude_code.md`) et les analyses archivées. |
 | `scripts/validate_skills.py` | Validation structurelle (CI + pré-commit). Stdlib uniquement. |
 | `.github/workflows/` | `validate.yml` (push/PR sur `main`), `release.yml` (publication des ZIP sur tag). |
 | `build_release.sh` | Valide puis génère un ZIP par skill dans `dist/`. |
@@ -60,14 +60,22 @@ Le **fond** est régi par `psychologie-rigoureuse`, hors de cet ordre. En co-act
 
 ## Évaluation
 
-```bash
-cd eval/
-cp .env.example .env        # renseigner MISTRAL_API_KEY et GOOGLE_API_KEY
-./run_all.sh                # tous les harnais
-./run_all.sh dys tsa        # harnais ciblés
-```
+Il n'y a **pas de lanceur automatisé**. La validation se fait en **vagues** : une session
+d'agents (Claude Code ou ChatGPT) exécute le protocole `eval/prompt_benchmark_claude_code.md`,
+ouvert à la racine du dépôt.
 
-Chaque harnais teste deux conditions (avec / sans skill) sur ≥ 2 providers (Mistral Large, Gemini 2.5 Flash), avec un juge `llm-rubric`. Couvrir au minimum : cas nominaux, cas de **non-déclenchement**, cas de **co-activation**, cas de **sécurité/éthique**. Les erreurs API (503) sont exclues du score, pas comptées comme échec.
+Les `eval/promptfooconfig_<skill>.yaml` ne sont plus exécutés par un outil : ils servent de
+**banque de cas** — question, assertions déterministes (`javascript`) et sémantiques
+(`llm-rubric`), et lien vers le `SKILL.md` évalué. Le protocole les lit pour construire ses cellules.
+
+Une vague joue chaque cas **deux fois** — avec et sans le skill, même question, contextes
+isolés — puis fait juger les paires **en aveugle** par trois juges indépendants, dont un
+chargé de chercher les régressions. Couvrir au minimum : cas nominaux, **non-déclenchement**,
+**co-activation**, **sécurité/éthique**. Les erreurs d'infrastructure sont exclues des
+dénominateurs, jamais comptées comme échec du skill.
+
+Les artefacts d'une vague vont dans `eval/runs/<horodatage>/`, ignoré par Git : `blinding_map.json`
+y lève l'anonymat des juges et ne doit pas être commité.
 
 ## Versionnement & release
 

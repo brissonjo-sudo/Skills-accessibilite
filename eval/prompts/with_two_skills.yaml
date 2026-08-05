@@ -1,4 +1,0 @@
-- role: system
-  content: "{{skill1}}\n\n---\n\n{{skill2}}"
-- role: user
-  content: "{{question}}"

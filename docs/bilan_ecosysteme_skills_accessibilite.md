@@ -359,9 +359,9 @@ Distinction affinée en TSA V4 (challenge 4 sous-agents).
 
 Trois évolutions majeures par rapport aux pratiques décrites en section 5 :
 
-### 5bis.1 Harnais promptfoo
+### 5bis.1 Harnais promptfoo *(abandonné)*
 
-Voir section 3.7. Remplace les tests manuels à partir du skill HDC.
+Voir section 3.7. A remplacé les tests manuels à partir du skill HDC, puis a été abandonné en août 2026 au profit de la validation en vagues (`eval/prompt_benchmark_claude_code.md`). Les `promptfooconfig_*.yaml` subsistent comme banque de cas.
 
 ### 5bis.2 Challenge multi-sous-agents
 
@@ -379,15 +379,17 @@ Pour le run Claude (contexte frais par cas), utiliser un sous-agent par cas de t
 
 | Skill | Version stable | Statut | Méthode de test | Résultats |
 |---|---|---|---|---|
-| psychologie-rigoureuse | V6.2 | production | Gemini + ChatGPT + Claude.ai (manuel) ; promptfoo 8 cas | référence d'écosystème |
-| accessibilite-tdah | V2.3 | production | Gemini + ChatGPT + 4 cas articulation (manuel) ; promptfoo 10 cas (C9 TDA / C10 non-déclenchement) | référence forme |
+| psychologie-rigoureuse | V6.2 | candidat | Gemini + ChatGPT + Claude.ai (manuel) ; promptfoo 8 cas | référence d'écosystème |
+| accessibilite-tdah | V2.3 | candidat | Gemini + ChatGPT + 4 cas articulation (manuel) ; promptfoo 10 cas (C9 TDA / C10 non-déclenchement) | référence forme |
 | accessibilite-dys | V3.1 | production | Gemini + Mistral + Claude.ai (manuel) ; promptfoo 8 cas | 3 cycles |
 | accessibilite-tsa | V4.1 | production | promptfoo 11 cas — Claude 11/11, Mistral 11/11, Gemini 10/11 | V4 stable ; Gemini C3 RLHF documenté |
-| accessibilite-haute-densite-cognitive | V3.2 | production | promptfoo 8 cas — Claude 8/8, Mistral 7/8, Gemini 4/8 applic. silencieuse | Gemini + Mistral preamble RLHF documenté |
-| accessibilite-douleur-chronique-fatigue-cognitive | V3.2 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 8/8 | 3 cycles |
-| accessibilite-visuelle | V1.2 | production | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 5/5 évalués | stable au 1er cycle |
+| accessibilite-haute-densite-cognitive | V3.2 | candidat | promptfoo 8 cas — Claude 8/8, Mistral 7/8, Gemini 4/8 applic. silencieuse | Gemini + Mistral preamble RLHF documenté |
+| accessibilite-douleur-chronique-fatigue-cognitive | V3.2 | candidat | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 8/8 | 3 cycles |
+| accessibilite-visuelle | V1.2 | candidat | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 5/5 évalués | stable au 1er cycle |
 
-> Les versions indiquées sont les versions stables actuelles (bump mineur 1.18.0 : insertion du bloc canonique « Ordre de préséance »). Les chiffres d'évaluation promptfoo ont été mesurés sur la version mineure antérieure (avant le bloc de préséance, sans impact comportemental sur les cas testés). Vue synthétique : `docs/index_skills.md`.
+> **Les chiffres de la colonne « Méthode de test » sont historiques.** Ils proviennent de l'outillage promptfoo, abandonné depuis : la validation se fait désormais en vagues (voir `CONTRIBUTING.md` §5 et `eval/prompt_benchmark_claude_code.md`). Ils avaient de plus été mesurés sur la version mineure antérieure, avant l'insertion du bloc canonique « Ordre de préséance ».
+>
+> Les skills marqués **candidat** ont été modifiés après le benchmark contrôlé du 2026-08-05 et attendent une vague de validation indépendante. Vue synthétique et statuts faisant foi : `docs/index_skills.md`.
 
 **Règle méta de co-activation — plafonds** : en co-activation, le plafond de mots le plus bas parmi les skills actifs prime. Exemples : DYS seul ~200 mots ; DYS + psychologie-rigoureuse ~150 mots ; DYS + TSA + psychologie-rigoureuse ~150 mots. HDC (pas de plafond fixe) adopte celui du skill le plus contraignant co-actif : HDC + DYS → ~150 mots.
 

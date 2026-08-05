@@ -1,69 +1,48 @@
-# Harnais d'évaluation — Écosystème Skills Accessibilité
+# Banque de cas et validation — Écosystème Skills Accessibilité
 
-Évalue chaque skill sur deux conditions (avec skill / baseline sans skill) et trois LLMs (Mistral Large, Gemini 2.5 Flash, Claude Sonnet 4.6).
+Ce répertoire contient les **cas de test** de chaque skill et le **protocole de validation**.
+Il n'y a pas de lanceur automatisé : la validation se fait en **vagues**, dans une session
+d'agents (Claude Code ou ChatGPT).
 
-## Prérequis
+## Lancer une vague
 
-- Node.js LTS
-- promptfoo installé globalement : `npm install -g promptfoo`
-- Clés API renseignées dans `eval/.env`
+Ouvrir une session à la racine du dépôt et coller le contenu de
+[`prompt_benchmark_claude_code.md`](prompt_benchmark_claude_code.md).
 
-## Installation
+Le protocole lit les `SKILL.md` canoniques et les banques de cas ci-dessous, joue chaque cas
+**deux fois** — avec et sans le skill, même question, contextes isolés — puis fait juger les
+paires **en aveugle** par trois juges indépendants par variante.
 
-```bash
-cd eval/
-cp .env.example .env
-# Renseigner MISTRAL_API_KEY et GOOGLE_API_KEY dans .env
-```
+Les artefacts vont dans `eval/runs/<AAAAMMJJ-HHMMSS>/`, **ignoré par Git** :
+`blinding_map.json` y contient la correspondance A/B → condition et lève l'anonymat du
+protocole. Pour partager un résultat, recopier le `report.md` hors de `runs/`, ou consigner
+la synthèse dans un `analyse_*.md` — source de vérité archivée.
 
-## Lancement
+Les `results*.json` historiques (13 archives, issues de l'ancien outillage) restent suivis
+pour la reproductibilité. Ne pas en ajouter de nouveaux.
 
-### Benchmark complet via Claude Code
+## Banques de cas
 
-Ouvrir Claude Code à la racine du dépôt, puis copier-coller le bloc de
-`prompt_benchmark_claude_code.md`. Il importe d’abord les `SKILL.md` canoniques à
-jour, exécute les conditions avec/sans skill en contextes isolés et orchestre
-trois juges aveugles en parallèle pour chaque variante.
+| Skill | Fichier | Cas |
+|---|---|---|
+| Haute densité cognitive V3.2 | `promptfooconfig.yaml` | 8 |
+| Accessibilité visuelle V1.2 | `promptfooconfig_visuel.yaml` | 8 |
+| TSA V4.1 | `promptfooconfig_tsa.yaml` | 11 |
+| Douleur chronique / Fatigue V3.2 | `promptfooconfig_fatigue.yaml` | 8 |
+| DYS V3.1 | `promptfooconfig_dys.yaml` | 8 |
+| TDAH V2.3 | `promptfooconfig_tdah.yaml` | 10 |
+| Psychologie rigoureuse V6.2 | `promptfooconfig_psychologie.yaml` | 8 |
+| Co-activation inter-skills | `promptfooconfig_coactivation.yaml` | 6 |
 
-### Tous les harnais (runner unique)
-
-```bash
-cd eval/
-./run_all.sh
-```
-
-### Un harnais spécifique
-
-```bash
-cd eval/
-promptfoo eval --config promptfooconfig_dys.yaml --output results_dys.json
-promptfoo view
-```
-
-Chaque run produit un fichier `results_<skill>.json`. Les nouveaux résultats bruts sont ignorés par Git
-en raison de leur taille ; 13 archives historiques déjà suivies restent conservées pour la reproductibilité.
-Ne pas ajouter de nouveau JSON brut : consigner les résultats synthétiques et les décisions dans un
-fichier `analyse_*.md`, source de vérité archivée.
-
-## Harnais disponibles
-
-| Skill | Config | Cas | Skills testés |
-|-------|--------|-----|---------------|
-| Haute densité cognitive V3.2 | `promptfooconfig.yaml` | 8 | application silencieuse, profondeur, anti-essentialisation HDC, co-activation |
-| Accessibilité visuelle V1.2 | `promptfooconfig_visuel.yaml` | 8 | application silencieuse, emojis, références positionnelles, ASCII art, tableaux, sécurité éthique |
-| TSA V4.1 | `promptfooconfig_tsa.yaml` | 11 | application silencieuse, littéralité, prévisibilité, registre lisibilité, anti-essentialisation, sécurité |
-| Douleur chronique / Fatigue V3.2 | `promptfooconfig_fatigue.yaml` | 8 | application silencieuse, front-loading, modularité, anti-injonction, exception question-définition |
-| DYS V3.1 | `promptfooconfig_dys.yaml` | 8 | application silencieuse, phrases courtes, anti-essentialisation DYS, co-activation, sécurité éthique |
-| TDAH V2.3 | `promptfooconfig_tdah.yaml` | 10 | application silencieuse, action unique, chunking, anti-moralisation, anti-essentialisation TDAH, déclencheur TDA, non-déclenchement |
-| Psychologie rigoureuse V6.2 | `promptfooconfig_psychologie.yaml` | 8 | marquage différencié, non-prescription, anti-essentialisation, mention pro, sécurité éthique |
-| Co-activation inter-skills | `promptfooconfig_coactivation.yaml` | 6 | arbitrage des plafonds, anti-injonction TDAH/fatigue, littéralité TSA, marquage sous DYS |
+**67 cas au total.** Les noms de fichiers sont un héritage de l'ancien outillage ; leur
+contenu est désormais une simple banque de cas — description, question, assertions, et lien
+vers le `SKILL.md` évalué.
 
 ## Structure des assertions
 
-Chaque harnais mélange deux types d'assertions. Répartition réelle (39 assertions
-déterministes, 78 sémantiques) :
+39 assertions déterministes, 78 sémantiques.
 
-| Harnais | `javascript` | `llm-rubric` |
+| Banque | `javascript` | `llm-rubric` |
 |---|--:|--:|
 | `promptfooconfig.yaml` (HDC) | 2 | 9 |
 | `promptfooconfig_visuel.yaml` | 6 | 16 |
@@ -74,57 +53,57 @@ déterministes, 78 sémantiques) :
 | `promptfooconfig_psychologie.yaml` | 8 | 8 |
 | `promptfooconfig_coactivation.yaml` | 5 | 6 |
 
-**Déterministes (`javascript`)** — vérifiables par regex, pas de juge LLM :
-- Application silencieuse : détection de formulations interdites (« mode DYS activ », « skill activ »…)
-- Anti-essentialisation : détection de généralisations catégorielles
-- Anti-prescription : détection de « tu devrais », « il faut que »
+**Déterministes (`javascript`)** — une expression JavaScript sur la variable `output`,
+évaluable sans juge :
+
+- Application silencieuse : formulations interdites (« mode DYS activ », « skill activ »…)
+- Anti-essentialisation : généralisations catégorielles
+- Anti-prescription : « tu devrais », « il faut que »
 - Anti-injonction à l'effort : « commence par », « tu dois », « il suffit de » (fatigue, co-activation)
-- Anti-relance cascade : comptage des `?` en fin de réponse
-- Plafond ou bornes de mots : comptage simple
+- Anti-relance cascade : comptage des `?`
+- Plafond ou bornes de mots
 - Anti-emojis (DYS, Visuelle)
 - Références positionnelles, ASCII art, hiérarchie des titres sans saut de niveau (Visuelle)
 - Mention d'un professionnel ou d'une ligne d'écoute (Visuelle, Fatigue, Psychologie)
 
 > **Nature de ces contrôles.** La plupart sont des **garde-fous anti-régression**, pas des
 > discriminants : sur le run de référence, seuls les plafonds de mots séparaient nettement les
-> deux conditions, les autres passaient déjà en baseline. Leur rôle est de faire échouer le
-> harnais si une évolution du skill réintroduit un emoji, un schéma ASCII ou une injonction —
+> deux conditions, les autres passaient déjà en baseline. Leur rôle est de faire échouer la
+> vague si une évolution du skill réintroduit un emoji, un schéma ASCII ou une injonction —
 > pas de démontrer une valeur ajoutée.
 
-**Sémantiques (`llm-rubric`)** — évalués par le juge LLM (`mistral:mistral-small-latest`) :
-- Qualité du fond (profondeur, nuance, rigueur)
-- Cohérence de la forme (structure, aération)
-- Co-activations
+Un bloc multi-lignes est autorisé : la **dernière expression** est la valeur retournée.
 
-> **Juge** : `mistral:mistral-small-latest` (non testé comme provider) — évite la circularité avec `mistral-large-latest`.
+**Sémantiques (`llm-rubric`)** — jugées par les trois juges de la vague : qualité du fond
+(profondeur, nuance, rigueur), cohérence de la forme, co-activations.
 
-## Erreurs API (503, 429)
+## Erreurs d'infrastructure
 
-Les erreurs d'infrastructure (Gemini 503, quota dépassé) produisent des résultats avec `failureReason: 2`.
-À distinguer des échecs de skill (`failureReason: 1`). Le script `run_all.sh` exclut ces erreurs du score.
+Limite de session, coupure réseau, agent qui ne rend pas de réponse : ce sont des erreurs
+**d'infrastructure**, à exclure des dénominateurs. Elles ne comptent jamais comme un échec du
+skill. Le protocole les enregistre en `status: infrastructure_error` et n'invente jamais de
+réponse à la place.
 
 ## Source unique du skill
 
-Chaque config pointe directement vers le fichier canonique dans `skills/` via `file://..skills/...`.
-**Aucune copie du skill dans `eval/`.** Pour changer de version, mettre à jour uniquement la ligne `skill:` du `defaultTest`.
+Chaque banque pointe vers le fichier canonique dans `skills/` via `file://../skills/...`.
+**Aucune copie du skill dans `eval/`.** Pour changer de version, rien à modifier ici : le
+lien suit le fichier.
 
-## Providers actifs
+## Règles à tenir sur les cas
 
-| Provider | Modèle | Clé |
-|----------|--------|-----|
-| Mistral AI | `mistral-large-latest` | `MISTRAL_API_KEY` |
-| Google AI Studio | `gemini-2.5-flash` | `GOOGLE_API_KEY` |
-| Anthropic | `claude-sonnet-4-6` | `ANTHROPIC_API_KEY` |
-
-> Le **modèle juge** des assertions `llm-rubric` est `mistral:mistral-small-latest` (non-circulaire : ce modèle n'est pas dans les providers testés).
-
-> Note historique :
-> - Grok (xAI) retiré — compte sans crédits (HTTP 403).
-> - Gemini 3.1 Pro Preview retiré — indisponible en tier gratuit (HTTP 429).
+- **Aucune question recopiée du `SKILL.md` évalué.** Un modèle qui a l'exemple sous les yeux
+  récite au lieu de raisonner — c'est arrivé, avec une réponse *byte-identique* à celle du
+  skill. Vérifié en CI par `scripts/check_eval_leaks.py`. Partager la **phrase de
+  déclenchement** documentée reste nécessaire et n'est pas une fuite.
+- **Cas de non-déclenchement** : la question ne contient aucune déclaration. Ils sont
+  inévaluables par une vague, qui injecte le skill de force — les rapporter à part.
+- **Chaque cas porte au moins une assertion sémantique.** Les assertions déterministes
+  s'ajoutent quand le critère est mécaniquement vérifiable.
 
 ## Convention de versionnement
 
-Chaque skill tient dans un unique `skills/<dossier>/SKILL.md` (pas de fichier versionné séparé ; l'historique des versions est dans Git). Lors d'une itération :
-1. Modifier le `SKILL.md` du skill (et incrémenter la version mentionnée dans son contenu / l'index).
-2. La ligne `skill:` du `defaultTest` pointe déjà vers `file://../skills/<dossier>/SKILL.md` — rien à changer.
-3. Relancer `promptfoo eval` pour mesurer le delta, puis mettre à jour `CHANGELOG.md` et `docs/index_skills.md`.
+1. Modifier le `SKILL.md` et incrémenter sa version.
+2. Rien à changer dans la banque de cas : le lien `skill:` suit déjà le fichier.
+3. Passer une **vague de validation**, puis mettre à jour `CHANGELOG.md` (en citant le run
+   qui appuie la montée de version) et `docs/index_skills.md`.
