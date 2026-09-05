@@ -1,0 +1,16 @@
+{
+  "protected_files": [
+    "docs/note_ethique.md",
+    "skills/psychologie-rigoureuse/SKILL.md",
+    "AGENTS.md",
+    "eval/runs/*"
+  ],
+  "forbid_patterns": [
+    {
+      "pattern": "\\bles (autistes|TDAH|dys|dyslexiques|HPI|zebres)\\b",
+      "files": "skills/*",
+      "message": "Formulation essentialisante possible, sauf s'il s'agit d'un contre-exemple cite",
+      "blocking": false
+    }
+  ]
+}
