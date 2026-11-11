@@ -3,13 +3,21 @@
     "docs/note_ethique.md",
     "skills/psychologie-rigoureuse/SKILL.md",
     "AGENTS.md",
-    "eval/runs/*"
+    "eval/runs/*",
+    ".github/auto-review.*",
+    ".github/workflows/*"
   ],
   "forbid_patterns": [
     {
-      "pattern": "\\bles (autistes|TDAH|dys|dyslexiques|HPI|zebres)\\b",
+      "pattern": "(?i)\\b(?:les|des|aux|ces)\\s+(?:personnes\\s+)?(?:autistes?|TSA|Asperger|TDAH|TDA|dys(?:lexiques|praxiques|calculiques|orthographiques|phasiques)?|HPI|HP|HDC|z[eè]bres|surdou[ée]s|neuroatypiques|neurodivergent\\w*|malvoyants|non-voyants|aveugles|fibromyalgiques)\\b",
       "files": "skills/*",
       "message": "Formulation essentialisante possible, sauf s'il s'agit d'un contre-exemple cite",
+      "blocking": false
+    },
+    {
+      "pattern": "(?i)\\bavec (?:ton|ta|votre|son|sa) (?:TDAH|TDA|TSA|autisme|HPI|dyslexie|fibromyalgie|handicap)\\b",
+      "files": "skills/*",
+      "message": "Imputation a une categorie possible, sauf s'il s'agit d'un contre-exemple cite",
       "blocking": false
     }
   ]

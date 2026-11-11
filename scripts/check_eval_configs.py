@@ -1,24 +1,25 @@
 #!/usr/bin/env python3
-"""Valide la syntaxe et le schéma des banques de cas YAML."""
+"""Valide la syntaxe et le schéma des banques de cas YAML.
 
+Vérifie aussi que chaque skill a exactement une banque dédiée, et que la
+syntaxe des assertions JavaScript est correcte (si `node` est disponible).
+"""
+
+import argparse
+import json
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
 import yaml
 
+from _common import utf8_stdio
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 EVAL_DIR = REPO_ROOT / "eval"
 SKILLS_DIR = (REPO_ROOT / "skills").resolve()
-EXPECTED_CONFIGS = {
-    "promptfooconfig.yaml",
-    "promptfooconfig_coactivation.yaml",
-    "promptfooconfig_dys.yaml",
-    "promptfooconfig_fatigue.yaml",
-    "promptfooconfig_psychologie.yaml",
-    "promptfooconfig_tdah.yaml",
-    "promptfooconfig_tsa.yaml",
-    "promptfooconfig_visuel.yaml",
-}
+COACTIVATION_CONFIG = "promptfooconfig_coactivation.yaml"
 ALLOWED_ROOT_KEYS = {"description", "defaultTest", "tests"}
 ALLOWED_DEFAULT_TEST_KEYS = {"vars"}
 ALLOWED_TEST_KEYS = {"description", "vars", "assert"}
@@ -62,16 +63,43 @@ def skill_refs(vars_block: dict) -> list[tuple[str, object]]:
     ]
 
 
-def check_config(path: Path) -> tuple[list[str], int, int, int]:
-    rel = path.relative_to(REPO_ROOT)
-    violations: list[str] = []
+class ConfigReport:
+    """Résultat du contrôle d'une banque."""
+
+    def __init__(self) -> None:
+        self.violations: list[str] = []
+        self.tests = 0
+        self.javascript = 0
+        self.rubrics = 0
+        self.default_skill: str | None = None  # skill évalué par la banque
+        self.js_assertions: list[tuple[str, str]] = []  # (étiquette, code)
+
+
+def skill_name_of(config_path: Path, reference: object) -> str | None:
+    """Nom du skill visé par une référence `file://…/skills/<nom>/SKILL.md`."""
+    if not nonempty_string(reference) or not reference.startswith("file://"):
+        return None
+    resolved = (config_path.parent / reference[len("file://"):]).resolve()
+    try:
+        parts = resolved.relative_to(SKILLS_DIR).parts
+    except ValueError:
+        return None
+    return parts[0] if len(parts) == 2 and parts[1] == "SKILL.md" else None
+
+
+def check_config(path: Path) -> ConfigReport:
+    report = ConfigReport()
+    rel = path.relative_to(REPO_ROOT).as_posix()
+    violations = report.violations
     try:
         data = yaml.safe_load(path.read_text(encoding="utf-8"))
     except (OSError, yaml.YAMLError) as exc:
-        return [f"{rel} : YAML invalide ({exc})"], 0, 0, 0
+        violations.append(f"{rel} : YAML invalide ({' '.join(str(exc).split())})")
+        return report
 
     if not isinstance(data, dict):
-        return [f"{rel} : la racine doit être un objet YAML"], 0, 0, 0
+        violations.append(f"{rel} : la racine doit être un objet YAML")
+        return report
 
     unknown_root = invalid_keys(data, ALLOWED_ROOT_KEYS)
     if unknown_root:
@@ -79,7 +107,7 @@ def check_config(path: Path) -> tuple[list[str], int, int, int]:
     if not nonempty_string(data.get("description")):
         violations.append(f"{rel} : description absente ou vide")
 
-    is_coactivation = path.name == "promptfooconfig_coactivation.yaml"
+    is_coactivation = path.name == COACTIVATION_CONFIG
     default_vars: dict = {}
     default_test = data.get("defaultTest")
     if is_coactivation:
@@ -105,17 +133,17 @@ def check_config(path: Path) -> tuple[list[str], int, int, int]:
             violations.append(f"{rel} : defaultTest.vars doit contenir exactement skill")
         for key, reference in refs:
             violations.extend(resolve_skill_ref(path, reference, f"{rel} : {key}"))
+            report.default_skill = skill_name_of(path, reference)
 
     tests = data.get("tests")
     if not isinstance(tests, list):
         violations.append(f"{rel} : tests doit être une liste")
-        return violations, 0, 0, 0
+        return report
     if len(tests) < 6:
         violations.append(f"{rel} : au moins 6 cas sont requis")
 
+    report.tests = len(tests)
     descriptions: set[str] = set()
-    javascript_count = 0
-    rubric_count = 0
 
     for index, test in enumerate(tests, start=1):
         label = f"{rel} : cas #{index}"
@@ -178,36 +206,103 @@ def check_config(path: Path) -> tuple[list[str], int, int, int]:
             if not nonempty_string(assertion.get("value")):
                 violations.append(f"{assertion_label} : value absent ou vide")
             if assertion_type == "javascript":
-                javascript_count += 1
+                report.javascript += 1
+                if nonempty_string(assertion.get("value")):
+                    report.js_assertions.append((assertion_label, assertion["value"]))
             elif assertion_type == "llm-rubric":
                 semantic_count += 1
-                rubric_count += 1
+                report.rubrics += 1
 
         if semantic_count == 0:
             violations.append(f"{label} : au moins une assertion llm-rubric est requise")
 
-    return violations, len(tests), javascript_count, rubric_count
+    return report
+
+
+# Compile chaque assertion sans l'exécuter : d'abord comme expression, puis
+# comme corps de fonction (assertions sur plusieurs lignes avec `return`).
+NODE_SYNTAX_CHECK = r"""
+const items = JSON.parse(require('fs').readFileSync(0, 'utf8'));
+const errors = [];
+for (const [label, code] of items) {
+  try { new Function('output', 'context', 'return (' + code + '\n);'); continue; } catch (e) {}
+  try { new Function('output', 'context', code); } catch (e) { errors.push([label, String(e.message)]); }
+}
+process.stdout.write(JSON.stringify(errors));
+"""
+
+
+def check_javascript_syntax(assertions: list[tuple[str, str]]) -> list[str] | None:
+    """Retourne les erreurs de syntaxe, ou None si `node` est indisponible."""
+    node = shutil.which("node")
+    if node is None:
+        return None
+    result = subprocess.run(
+        [node, "-e", NODE_SYNTAX_CHECK], input=json.dumps(assertions),
+        capture_output=True, text=True, encoding="utf-8", check=True,
+    )
+    return [
+        f"{label} : JavaScript invalide ({message})"
+        for label, message in json.loads(result.stdout)
+    ]
+
+
+def check_bank_coverage(reports: dict[str, ConfigReport]) -> list[str]:
+    """Chaque skill a exactement une banque dédiée, plus la banque de coactivation."""
+    violations: list[str] = []
+    if COACTIVATION_CONFIG not in reports:
+        violations.append(f"banque absente : {COACTIVATION_CONFIG}")
+
+    banks_by_skill: dict[str, list[str]] = {}
+    for name, report in sorted(reports.items()):
+        if name != COACTIVATION_CONFIG and report.default_skill:
+            banks_by_skill.setdefault(report.default_skill, []).append(name)
+
+    skills = sorted(
+        item.name for item in SKILLS_DIR.iterdir()
+        if item.is_dir() and (item / "SKILL.md").is_file()
+    )
+    for skill in skills:
+        banks = banks_by_skill.get(skill, [])
+        if not banks:
+            violations.append(
+                f"aucune banque de cas ne vise le skill {skill} "
+                "(defaultTest.vars.skill)"
+            )
+        elif len(banks) > 1:
+            violations.append(
+                f"plusieurs banques visent le skill {skill} : {', '.join(banks)}"
+            )
+    return violations
 
 
 def main() -> int:
+    utf8_stdio()
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--require-node", action="store_true",
+        help="échouer si node est absent (syntaxe JavaScript non vérifiable)",
+    )
+    args = parser.parse_args()
+
     config_paths = sorted(EVAL_DIR.glob("promptfooconfig*.yaml"))
-    actual_names = {path.name for path in config_paths}
+    reports = {path.name: check_config(path) for path in config_paths}
+
     violations: list[str] = []
+    for report in reports.values():
+        violations.extend(report.violations)
+    violations.extend(check_bank_coverage(reports))
 
-    missing = sorted(EXPECTED_CONFIGS - actual_names)
-    unexpected = sorted(actual_names - EXPECTED_CONFIGS)
-    if missing:
-        violations.append(f"configs absentes : {', '.join(missing)}")
-    if unexpected:
-        violations.append(f"configs inattendues : {', '.join(unexpected)}")
-
-    total_tests = total_javascript = total_rubrics = 0
-    for path in config_paths:
-        found, tests, javascript, rubrics = check_config(path)
-        violations.extend(found)
-        total_tests += tests
-        total_javascript += javascript
-        total_rubrics += rubrics
+    js_assertions = [item for report in reports.values() for item in report.js_assertions]
+    js_errors = check_javascript_syntax(js_assertions)
+    if js_errors is None:
+        message = "node introuvable : syntaxe des assertions JavaScript non vérifiée"
+        if args.require_node:
+            violations.append(message)
+        else:
+            print(f"[WARN] {message}")
+    else:
+        violations.extend(js_errors)
 
     if violations:
         for violation in violations:
@@ -215,8 +310,10 @@ def main() -> int:
         return 1
 
     print(
-        f"[OK] {len(config_paths)} banques YAML valides — {total_tests} cas, "
-        f"{total_javascript} assertions JavaScript, {total_rubrics} rubriques"
+        f"[OK] {len(reports)} banques YAML valides — "
+        f"{sum(r.tests for r in reports.values())} cas, "
+        f"{sum(r.javascript for r in reports.values())} assertions JavaScript, "
+        f"{sum(r.rubrics for r in reports.values())} rubriques"
     )
     return 0
 

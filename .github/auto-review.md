@@ -41,18 +41,22 @@ comportement du modèle envers un public vulnérable, pas un bug logiciel.
    notable d'un skill (format Keep a Changelog, section `[Non publié]`).
 8. **Preuves de vague d'évaluation non assainies.** Une promotion de skill
    doit s'accompagner d'un paquet sous `eval/evidence/<horodatage>/` ; la
-   CI vérifie sa présence et sa structure mais pas son contenu — vérifier
+   CI vérifie sa présence, sa structure et qu'il porte sur la version
+   présente du skill, mais pas la qualité de son contenu — vérifier
    qu'aucune donnée personnelle identifiable ne subsiste dans les cas
-   d'évaluation ou les verbatims cités, et que `blinding_map.json` (qui
-   lève l'anonymat des juges) n'est pas commité par erreur.
+   d'évaluation ou les verbatims cités, et que le rapport ne masque pas
+   une régression de sécurité ou d'exactitude.
 
 ## À ne pas signaler
 
 Déjà couvert par `scripts/validate_skills.py` (CI `validate.yml`), inutile
 de le répéter :
-- Frontmatter YAML absent, `name` différent du nom du dossier,
-  `description` de plus de 1024 caractères, valeur de frontmatter qui
-  casserait un parseur YAML strict.
-- Fichier `SKILL.md` de 500 lignes ou plus.
+- Frontmatter YAML absent, non fermé ou illisible par un parseur YAML
+  strict ; `name` différent du nom du dossier ou hors format ;
+  `description` de plus de 1024 caractères ; clé de frontmatter non
+  acceptée par claude.ai.
+- Fichier `SKILL.md` de 500 lignes ou plus, ou autre fichier présent
+  dans le dossier d'un skill.
+- `blinding_map.json`, fichier de `eval/runs/` ou `.env` commité.
 - Bloc « Ordre de préséance » absent d'un skill, ou divergent par hash
   entre les 7 fichiers (déjà détecté par comparaison sha256).

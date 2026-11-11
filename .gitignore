@@ -33,6 +33,9 @@ yarn-error.log*
 # Logs
 *.log
 
+# Secrets — ne jamais committer, où que ce soit dans le dépôt
+.env
+
 # Artefacts de build (ZIPs de release, régénérables via build_release.sh)
 dist/
 

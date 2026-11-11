@@ -272,11 +272,14 @@ Il contient exactement :
 
 - `manifest.json` assaini avec `schema_version: 1`, `run_id`, le SHA Git complet
   `commit`, `protocol: eval/prompt_benchmark_claude_code.md`, la liste
-  `validated_skills` et `source_artifact_sha256` contenant les empreintes de
-  `raw_generations.jsonl`, `blinding_map.json` et du dossier `judge_outputs` ;
-- `activation_results.jsonl`, avec les attentes révélées et le résultat de chaque vote ;
+  `validated_skills`, l'objet `skill_sha256` et `source_artifact_sha256` contenant
+  les empreintes de `raw_generations.jsonl`, `blinding_map.json` et du dossier
+  `judge_outputs` ;
+- `activation_results.jsonl`, avec les attentes révélées et le résultat de chaque
+  vote ; chaque ligne porte au moins `case_id` ;
 - `verdicts.jsonl`, avec A/B résolu en `with_skill`/`baseline`, rôle du juge,
-  scores, preuves et régressions, sans identifiant personnel ;
+  scores, preuves et régressions, sans identifiant personnel ; chaque ligne porte
+  au moins `judge_role`, `config` et `case_id` ;
 - `metrics.json` ;
 - `report.md`.
 
@@ -285,6 +288,13 @@ identifiant d’agent. Le paquet assaini doit être inclus dans la même PR que 
 promotion du skill ; tant qu’il manque, la version reste `candidat`. Le
 `CHANGELOG.md` cite le chemin suivi `eval/evidence/<identifiant>/report.md`, jamais
 le seul chemin ignoré `eval/runs/<identifiant>/`.
+
+`skill_sha256` associe à chaque skill de `validated_skills` l’empreinte SHA-256 de
+son `SKILL.md` tel qu’il a été évalué, fins de ligne ramenées à LF (remplace
+`\r\n` par `\n` avant de calculer). La CI compare cette empreinte au fichier de la
+PR : si le skill est retouché après le run, le paquet ne compte plus et une nouvelle
+vague est nécessaire. Le paquet ne contient aucun autre fichier que les cinq listés :
+la CI refuse tout fichier supplémentaire.
 
 Pour l’empreinte `judge_outputs`, trie les fichiers par chemin relatif, calcule le
 SHA-256 de chacun, puis calcule le SHA-256 de la concaténation UTF-8 des lignes

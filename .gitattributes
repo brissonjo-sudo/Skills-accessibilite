@@ -1,0 +1,6 @@
+# Fins de ligne LF pour les scripts : ils doivent rester exécutables tels quels
+# sous Linux, quel que soit le réglage core.autocrlf du poste.
+*.sh text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
