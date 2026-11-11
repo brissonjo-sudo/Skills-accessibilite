@@ -27,37 +27,44 @@ pour la reproductibilité. Ne pas en ajouter de nouveaux.
 
 | Skill | Fichier | Cas |
 |---|---|---|
-| Haute densité cognitive V3.2 | `promptfooconfig.yaml` | 8 |
+| Haute densité cognitive V3.2 | `promptfooconfig.yaml` | 9 |
 | Accessibilité visuelle V1.2 | `promptfooconfig_visuel.yaml` | 8 |
 | TSA V4.1 | `promptfooconfig_tsa.yaml` | 11 |
-| Douleur chronique / Fatigue V3.2 | `promptfooconfig_fatigue.yaml` | 8 |
+| Douleur chronique / Fatigue V3.2 | `promptfooconfig_fatigue.yaml` | 9 |
 | DYS V3.1 | `promptfooconfig_dys.yaml` | 8 |
 | TDAH V2.3 | `promptfooconfig_tdah.yaml` | 10 |
 | Psychologie rigoureuse V6.2 | `promptfooconfig_psychologie.yaml` | 8 |
-| Co-activation inter-skills | `promptfooconfig_coactivation.yaml` | 6 |
+| Co-activation inter-skills | `promptfooconfig_coactivation.yaml` | 7 |
 
-**67 cas au total.** Les noms de fichiers sont un héritage de l'ancien outillage ; leur
+**70 cas au total.** Les noms de fichiers sont un héritage de l'ancien outillage ; leur
 contenu est désormais une simple banque de cas — description, question, assertions, et lien
 vers le `SKILL.md` évalué.
 
-`activation_cases.json` ajoute **14 cas de sélection** : un déclenchement et un
-non-déclenchement pour chacun des 7 skills. Chaque cas est soumis à trois sélecteurs neufs,
-soit 42 décisions indépendantes. `scripts/check_activation_cases.py` contrôle cette couverture.
+`activation_cases.json` ajoute **28 cas de sélection** : au moins un déclenchement et un
+non-déclenchement pour chacun des 7 skills, des pièges proches (fautes réelles sans
+déclaration, procrastination, condition évoquée comme sujet ou pour un proche), une détresse
+sans profil déclaré et des cas de co-activation. Chaque cas est soumis à trois sélecteurs
+neufs, soit 84 décisions indépendantes. `scripts/check_activation_cases.py` contrôle cette
+couverture.
+
+Chaque cas vise un skill (`target_skill`, `expected_activation`). Deux champs facultatifs
+décrivent les autres skills : `also_expected` (à sélectionner aussi) et `must_not_activate`
+(à ne pas sélectionner).
 
 ## Structure des assertions
 
-39 assertions déterministes, 78 sémantiques.
+49 assertions déterministes, 81 sémantiques.
 
 | Banque | `javascript` | `llm-rubric` |
 |---|--:|--:|
-| `promptfooconfig.yaml` (HDC) | 2 | 9 |
-| `promptfooconfig_visuel.yaml` | 6 | 16 |
-| `promptfooconfig_tsa.yaml` | 4 | 12 |
-| `promptfooconfig_fatigue.yaml` | 4 | 9 |
-| `promptfooconfig_dys.yaml` | 5 | 8 |
-| `promptfooconfig_tdah.yaml` | 5 | 10 |
-| `promptfooconfig_psychologie.yaml` | 8 | 8 |
-| `promptfooconfig_coactivation.yaml` | 5 | 6 |
+| `promptfooconfig.yaml` (HDC) | 3 | 10 |
+| `promptfooconfig_visuel.yaml` | 7 | 16 |
+| `promptfooconfig_tsa.yaml` | 5 | 12 |
+| `promptfooconfig_fatigue.yaml` | 5 | 10 |
+| `promptfooconfig_dys.yaml` | 6 | 8 |
+| `promptfooconfig_tdah.yaml` | 6 | 10 |
+| `promptfooconfig_psychologie.yaml` | 9 | 8 |
+| `promptfooconfig_coactivation.yaml` | 8 | 7 |
 
 **Déterministes (`javascript`)** — une expression JavaScript sur la variable `output`,
 évaluable sans juge :
@@ -70,7 +77,14 @@ soit 42 décisions indépendantes. `scripts/check_activation_cases.py` contrôle
 - Plafond ou bornes de mots
 - Anti-emojis (DYS, Visuelle)
 - Références positionnelles, ASCII art, hiérarchie des titres sans saut de niveau (Visuelle)
-- Mention d'un professionnel ou d'une ligne d'écoute (Visuelle, Fatigue, Psychologie)
+- Mention d'un professionnel ou d'une ligne d'écoute (tous les cas de souffrance exprimée)
+- Ressource de crise nommée et placée en tête de réponse (idéation suicidaire, crise aiguë)
+- Placement de l'orientation hors de toute couche facultative (Fatigue)
+- Sigle erroné déjà livré une fois : « CRPV » (Visuelle)
+
+Les assertions de sécurité ne reposent sur aucun mot générique. « association », « aide »
+ou un nombre isolé (« 15 % ») valideraient n'importe quelle réponse : seuls comptent un
+professionnel nommé, une ligne d'écoute ou un numéro d'urgence précédé de son article.
 
 > **Nature de ces contrôles.** La plupart sont des **garde-fous anti-régression**, pas des
 > discriminants : sur le run de référence, seuls les plafonds de mots séparaient nettement les

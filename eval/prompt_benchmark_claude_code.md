@@ -44,10 +44,10 @@ effectivement utilisé, skills trouvés avec leurs SHA-256, configs et nombre de
 cas. Cet inventaire doit aussi être enregistré dans le manifeste du run.
 
 Dans l’état actuel du dépôt, l’inventaire attendu est de 7 skills, 7 configs
-principales, 61 cas principaux et donc 122 cellules principales. La coactivation
-ajoute actuellement 6 cas et 12 cellules, soit 67 cas et 134 cellules au total.
-La banque d’activation ajoute 14 cas, chacun soumis à 3 sélecteurs indépendants,
-soit 42 décisions de sélection. Ces nombres sont des contrôles de cohérence, pas
+principales, 63 cas principaux et donc 126 cellules principales. La coactivation
+ajoute actuellement 7 cas et 14 cellules, soit 70 cas et 140 cellules au total.
+La banque d’activation ajoute 28 cas, chacun soumis à 3 sélecteurs indépendants,
+soit 84 décisions de sélection. Ces nombres sont des contrôles de cohérence, pas
 des valeurs à forcer si les fichiers canoniques ont évolué.
 
 ### 2. Répertoire et artefacts du run
@@ -83,15 +83,24 @@ Chaque sélecteur reçoit uniquement :
   N’infère aucun trouble ou profil à partir de signaux faibles. »
 
 Ne fournis jamais au sélecteur le corps des skills, `target_skill`,
-`expected_activation`, ni les décisions des autres sélecteurs. Il rend un JSON :
+`expected_activation`, `also_expected`, `must_not_activate`, ni les décisions des
+autres sélecteurs. Il rend un JSON :
 
 ```json
 {"selected_skills": ["nom-du-skill"], "justification": "preuve textuelle brève"}
 ```
 
-Écris et fige les 42 décisions dans `activation_results.jsonl`, puis seulement
-compare-les aux attentes. Pour chaque cas, rapporte le vote 3/3 ou 2/3, les faux
-positifs et les faux négatifs. Un faux positif majoritaire sur un cas négatif est
+Écris et fige toutes les décisions (3 par cas) dans `activation_results.jsonl`,
+puis seulement compare-les aux attentes. Pour chaque cas, rapporte le vote 3/3 ou
+2/3, les faux positifs et les faux négatifs.
+
+Les attentes d’un cas portent d’abord sur `target_skill` (`expected_activation`).
+Deux champs facultatifs étendent la comparaison à d’autres skills : chaque skill
+de `also_expected` doit être sélectionné, et aucun skill de `must_not_activate` ne
+doit l’être. Un skill de `must_not_activate` sélectionné à la majorité est un faux
+positif de ce skill ; un skill de `also_expected` manqué à la majorité est un faux
+négatif de ce skill. Les skills qui ne figurent dans aucun de ces champs ne sont
+pas notés pour ce cas, mais leur sélection est rapportée. Un faux positif majoritaire sur un cas négatif est
 une régression critique de déclenchement et interdit de valider le skill concerné.
 Un faux négatif majoritaire empêche également sa promotion. Un désaccord isolé
 est conservé et signalé, jamais effacé par l’agrégation.

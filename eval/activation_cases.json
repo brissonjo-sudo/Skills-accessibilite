@@ -98,6 +98,121 @@
       "target_skill": "psychologie-rigoureuse",
       "expected_activation": false,
       "question": "Comment convertir des degrés Celsius en degrés Fahrenheit ?"
+    },
+    {
+      "id": "dys-real-typos-no-declaration",
+      "description": "Message réellement truffé de fautes, sans déclaration ni explication",
+      "target_skill": "accessibilite-dys",
+      "expected_activation": false,
+      "question": "bonjour je voudré savoir coment marche un moteur a explosion et pourquoi sa chauffe, mersi d'avance"
+    },
+    {
+      "id": "dys-one-off-format-request",
+      "description": "Préférence de format ponctuelle, sans déclaration DYS",
+      "target_skill": "accessibilite-dys",
+      "expected_activation": false,
+      "question": "Mets les chiffres à part stp : quelle est la population des cinq plus grandes villes de France ?"
+    },
+    {
+      "id": "tdah-procrastination-only",
+      "description": "Procrastination évoquée, sans déclaration TDAH",
+      "target_skill": "accessibilite-tdah",
+      "expected_activation": false,
+      "question": "Je procrastine depuis trois jours sur un rapport à rendre vendredi. Comment m'y mettre ?"
+    },
+    {
+      "id": "tdah-busy-week",
+      "description": "Surcharge de travail ordinaire, sans déclaration TDAH ni demande de format",
+      "target_skill": "accessibilite-tdah",
+      "expected_activation": false,
+      "question": "Je suis débordé au boulot cette semaine. Comment prioriser mes dossiers ?"
+    },
+    {
+      "id": "fatigue-condition-as-topic",
+      "description": "La condition est le sujet de la question, pas une déclaration",
+      "target_skill": "accessibilite-douleur-chronique-fatigue-cognitive",
+      "expected_activation": false,
+      "question": "C'est quoi le COVID long, et combien de temps ça dure en général ?"
+    },
+    {
+      "id": "fatigue-third-person",
+      "description": "La condition concerne un proche, pas la personne qui écrit",
+      "target_skill": "accessibilite-douleur-chronique-fatigue-cognitive",
+      "expected_activation": false,
+      "question": "Ma mère a une fibromyalgie. Comment puis-je l'aider au quotidien ?"
+    },
+    {
+      "id": "psy-ordinary-writing-task",
+      "description": "Tâche de rédaction touchant une relation de travail, sans demande de lecture psychologique",
+      "target_skill": "psychologie-rigoureuse",
+      "expected_activation": false,
+      "question": "Rédige un mail ferme mais poli pour demander à mon collègue d'arrêter de me couper la parole en réunion."
+    },
+    {
+      "id": "fatigue-need-only",
+      "description": "Besoin d'économie d'effort exprimé directement, sans pathologie déclarée",
+      "target_skill": "accessibilite-douleur-chronique-fatigue-cognitive",
+      "expected_activation": true,
+      "question": "Je n'ai pas l'énergie de lire long aujourd'hui. Comment fonctionne un vaccin à ARN messager ?"
+    },
+    {
+      "id": "psy-behaviour-reading-request",
+      "description": "Demande de lecture du comportement d'un tiers",
+      "target_skill": "psychologie-rigoureuse",
+      "expected_activation": true,
+      "question": "Mon collègue me coupe systématiquement la parole en réunion. Pourquoi fait-il ça ?"
+    },
+    {
+      "id": "psy-distress-without-profile",
+      "description": "Détresse exprimée sans aucun profil déclaré : le cadre psychologique doit s'activer, pas un skill d'accessibilité",
+      "target_skill": "psychologie-rigoureuse",
+      "expected_activation": true,
+      "must_not_activate": [
+        "accessibilite-douleur-chronique-fatigue-cognitive",
+        "accessibilite-tdah",
+        "accessibilite-tsa"
+      ],
+      "question": "Depuis la rentrée je n'ai plus envie de rien et je me sens nul. Qu'est-ce qui m'arrive ?"
+    },
+    {
+      "id": "coactivation-tdah-dys",
+      "description": "Deux déclarations explicites : les deux skills doivent être sélectionnés",
+      "target_skill": "accessibilite-tdah",
+      "expected_activation": true,
+      "also_expected": [
+        "accessibilite-dys"
+      ],
+      "question": "J'ai un TDAH et une dyslexie. Comment fonctionne le système de retraite par répartition ?"
+    },
+    {
+      "id": "coactivation-visuel-tsa",
+      "description": "Deux déclarations explicites : visuelle et TSA",
+      "target_skill": "accessibilite-visuelle",
+      "expected_activation": true,
+      "also_expected": [
+        "accessibilite-tsa"
+      ],
+      "question": "Je suis non-voyant et autiste. Explique-moi le déroulement d'une élection à deux tours."
+    },
+    {
+      "id": "coactivation-fatigue-hdc",
+      "description": "Déclaration de condition et besoin de densité exprimés ensemble",
+      "target_skill": "accessibilite-douleur-chronique-fatigue-cognitive",
+      "expected_activation": true,
+      "also_expected": [
+        "accessibilite-haute-densite-cognitive"
+      ],
+      "question": "J'ai une fibromyalgie. Ne simplifie pas tes explications : qu'est-ce que la sensibilisation centrale ?"
+    },
+    {
+      "id": "dys-complex-topic-no-hdc",
+      "description": "Déclaration DYS sur un sujet complexe : la complexité seule ne déclenche pas HDC",
+      "target_skill": "accessibilite-dys",
+      "expected_activation": true,
+      "must_not_activate": [
+        "accessibilite-haute-densite-cognitive"
+      ],
+      "question": "Je suis dyslexique. Explique-moi la relativité restreinte."
     }
   ]
 }

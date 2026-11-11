@@ -18,8 +18,8 @@ Dernière mise à jour : 2026-08-05 (changements non publiés après l'écosyst�
 | accessibilite-tdah | V2.3 | `skills/accessibilite-tdah/SKILL.md` | candidat — vague de validation requise | `eval/promptfooconfig_tdah.yaml` (10 cas) |
 | accessibilite-dys | V3.1 | `skills/accessibilite-dys/SKILL.md` | production | `eval/promptfooconfig_dys.yaml` (8 cas) |
 | accessibilite-tsa | V4.1 | `skills/accessibilite-tsa/SKILL.md` | production | `eval/promptfooconfig_tsa.yaml` (11 cas) |
-| accessibilite-haute-densite-cognitive | V3.2 | `skills/accessibilite-haute-densite-cognitive/SKILL.md` | candidat — vague de validation requise | `eval/promptfooconfig.yaml` (8 cas) |
-| accessibilite-douleur-chronique-fatigue-cognitive | V3.2 | `skills/accessibilite-douleur-chronique-fatigue-cognitive/SKILL.md` | candidat — vague de validation requise | `eval/promptfooconfig_fatigue.yaml` (8 cas) |
+| accessibilite-haute-densite-cognitive | V3.2 | `skills/accessibilite-haute-densite-cognitive/SKILL.md` | candidat — vague de validation requise | `eval/promptfooconfig.yaml` (9 cas) |
+| accessibilite-douleur-chronique-fatigue-cognitive | V3.2 | `skills/accessibilite-douleur-chronique-fatigue-cognitive/SKILL.md` | candidat — vague de validation requise | `eval/promptfooconfig_fatigue.yaml` (9 cas) |
 | accessibilite-visuelle | V1.2 | `skills/accessibilite-visuelle/SKILL.md` | candidat — vague de validation requise | `eval/promptfooconfig_visuel.yaml` (8 cas) |
 
 ---
