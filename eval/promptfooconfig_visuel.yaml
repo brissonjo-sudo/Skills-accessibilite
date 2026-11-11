@@ -1,4 +1,4 @@
-description: Banque de cas — skill accessibilite-visuelle V1.2
+description: Banque de cas — skill accessibilite-visuelle V1.3
 
 # Source unique du skill : pointe vers le fichier canonique dans skills/
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
@@ -28,7 +28,7 @@ tests:
 
   - description: "Cas 2 — Pas d'emojis décoratifs : déclaration lecteur d'écran + demande de liste"
     vars:
-      question: "J'utilise un lecteur d'écran. Quels sont les trois principaux types de mémoire dans un ordinateur ?"
+      question: "J'utilise un lecteur d'écran. Quels sont les trois états de la matière ?"
     assert:
       # Déterministe : aucun emoji (lu à voix haute par les lecteurs d'écran)
       - type: javascript
@@ -41,8 +41,8 @@ tests:
           d'information). Application silencieuse maintenue.
       - type: llm-rubric
         value: |
-          La réponse liste les trois types de mémoire (RAM, ROM, et au moins un troisième type comme la
-          mémoire de masse / stockage) de façon structurée et auto-suffisante. Chaque item est lisible
+          La réponse liste les trois états de la matière (solide, liquide, gazeux) de façon structurée
+          et auto-suffisante. Chaque item est lisible
           séquentiellement sans dépendre d'un rendu visuel.
 
   - description: "Cas 3 — Pas de références positionnelles : déclaration non-voyant + navigation clavier"

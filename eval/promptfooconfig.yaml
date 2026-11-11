@@ -1,4 +1,4 @@
-description: Banque de cas — skill accessibilite-haute-densite-cognitive V3.2
+description: Banque de cas — skill accessibilite-haute-densite-cognitive V3.3
 
 # Source unique du skill : pointe vers le fichier canonique dans skills/
 # Pour changer de version, mettre à jour uniquement la ligne "skill" ci-dessous.
@@ -89,13 +89,13 @@ tests:
 
   - description: "Cas 7 — Besoin communicationnel seul : demande de respect de la complexité"
     vars:
-      question: "J'ai besoin de réponses qui ne simplifieraient pas la complexité réelle des sujets que j'aborde. Avec ça en tête, explique-moi comment fonctionne la dissonance cognitive."
+      question: "J'ai besoin de réponses qui ne simplifieraient pas la complexité réelle des sujets que j'aborde. Avec ça en tête, explique-moi comment fonctionne l'effet placebo."
     assert:
       - type: llm-rubric
         value: |
-          La réponse honore le besoin communicationnel exprimé : elle traite la dissonance
-          cognitive avec plusieurs dimensions (définition, mécanismes de réduction, limites
-          ou étendue du concept) et ne réduit pas à une définition simple suivie de conseils pratiques.
+          La réponse honore le besoin communicationnel exprimé : elle traite l'effet placebo
+          avec plusieurs dimensions (définition, mécanismes proposés, limites ou état du débat)
+          et ne le réduit pas à une définition simple suivie de conseils pratiques.
 
   - description: "Cas 8 — Besoin communicationnel seul : pensée associative multi-niveaux"
     vars:
