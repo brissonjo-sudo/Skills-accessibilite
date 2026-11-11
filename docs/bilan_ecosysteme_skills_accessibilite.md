@@ -381,13 +381,13 @@ Cette méthode a été utilisée lors des premiers runs Claude : un sous-agent f
 
 | Skill | Version courante | Statut | Méthode de test | Résultats |
 |---|---|---|---|---|
-| psychologie-rigoureuse | V6.2 | candidat | Gemini + ChatGPT + Claude.ai (manuel) ; promptfoo 8 cas | référence d'écosystème |
-| accessibilite-tdah | V2.3 | candidat | Gemini + ChatGPT + 4 cas articulation (manuel) ; promptfoo 10 cas (C9 TDA / C10 non-déclenchement) | référence forme |
-| accessibilite-dys | V3.1 | production | Gemini + Mistral + Claude.ai (manuel) ; promptfoo 8 cas | 3 cycles |
-| accessibilite-tsa | V4.1 | production | promptfoo 11 cas — Claude 11/11, Mistral 11/11, Gemini 10/11 | V4 stable ; Gemini C3 RLHF documenté |
-| accessibilite-haute-densite-cognitive | V3.2 | candidat | promptfoo 8 cas — Claude 8/8, Mistral 7/8, Gemini 4/8 applic. silencieuse | Gemini + Mistral preamble RLHF documenté |
-| accessibilite-douleur-chronique-fatigue-cognitive | V3.2 | candidat | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 8/8 | 3 cycles |
-| accessibilite-visuelle | V1.2 | candidat | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 5/5 évalués | stable au 1er cycle |
+| psychologie-rigoureuse | V6.3 | candidat | Gemini + ChatGPT + Claude.ai (manuel) ; promptfoo 8 cas | référence d'écosystème |
+| accessibilite-tdah | V2.4 | candidat | Gemini + ChatGPT + 4 cas articulation (manuel) ; promptfoo 10 cas (C9 TDA / C10 non-déclenchement) | référence forme |
+| accessibilite-dys | V3.2 | production | Gemini + Mistral + Claude.ai (manuel) ; promptfoo 8 cas | 3 cycles |
+| accessibilite-tsa | V4.2 | production | promptfoo 11 cas — Claude 11/11, Mistral 11/11, Gemini 10/11 | V4 stable ; Gemini C3 RLHF documenté |
+| accessibilite-haute-densite-cognitive | V3.3 | candidat | promptfoo 8 cas — Claude 8/8, Mistral 7/8, Gemini 4/8 applic. silencieuse | Gemini + Mistral preamble RLHF documenté |
+| accessibilite-douleur-chronique-fatigue-cognitive | V3.3 | candidat | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 8/8 | 3 cycles |
+| accessibilite-visuelle | V1.3 | candidat | promptfoo 8 cas — Claude 8/8, Mistral 8/8, Gemini 5/5 évalués | stable au 1er cycle |
 
 > **Les chiffres de la colonne « Méthode de test » sont historiques.** Ils proviennent de l'outillage promptfoo, abandonné depuis : la validation se fait désormais en vagues (voir `CONTRIBUTING.md` §5 et `eval/prompt_benchmark_claude_code.md`). Ils avaient de plus été mesurés sur la version mineure antérieure, avant l'insertion du bloc canonique « Ordre de préséance ».
 >

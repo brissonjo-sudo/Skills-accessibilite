@@ -90,7 +90,7 @@ présente dans la PR : une vague doit donc évaluer l'état final du skill.
 ## Versionnement & release
 
 - **`CHANGELOG.md`** au format [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/). Toute modification notable y est consignée (section `[Non publié]` en attendant un tag).
-- **Versions par skill** (`V<major>.<minor>`) : la référence est `docs/index_skills.md`, reprise dans le README. Le frontmatter ne porte pas de version (claude.ai refuse les clés inconnues à l'import). La version d'écosystème (`X.Y.Z`) est portée par les tags Git.
+- **Versions par skill** (`V<major>.<minor>`) : la référence est `docs/index_skills.md`, reprise dans le README et dans le tableau « Historique versions » en fin de chaque `SKILL.md`. Le frontmatter ne porte pas de version (claude.ai refuse les clés inconnues à l'import). La version d'écosystème (`X.Y.Z`) est portée par les tags Git.
 - **Une montée de version s'appuie sur une vague de validation** (voir « Évaluation » et `CONTRIBUTING.md` §2 et §5). Tant que la preuve manque, le skill reste au statut « candidat » dans l'index. Seule exception : un correctif sans changement de comportement (erreur factuelle, défaut de chargement), consigné comme tel dans le changelog.
 - **Release** : pousser un tag `X.Y.Z`, **sans préfixe `v`** (ex. `1.19.1`), déclenche `release.yml`. Le workflow rejoue toute la validation (`validate.yml`), vérifie que le commit tagué est sur `main` ou sur une branche `hotfix/*`, puis exécute `build_release.sh` et publie un ZIP par skill. Un ZIP ne contient que `<nom>/SKILL.md`. Un tag `vX.Y.Z` ne déclenche rien.
 

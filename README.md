@@ -20,13 +20,13 @@ Un skill est un dossier contenant un fichier `SKILL.md` (instructions + métadon
 
 | Skill (dossier dans `skills/`) | Version sur `main` | Statut | Publiée (1.19.1) | Description |
 |---|---|---|---|---|
-| Psychologie rigoureuse (`psychologie-rigoureuse`) | V6.2 | candidat | V6.1 | Cadre d'analyse psychologique non dogmatique, marquage du degré de confiance |
-| TDAH (`accessibilite-tdah`) | V2.3 | candidat | V2.2 | Communication adaptée aux profils TDAH : structure, ancrage, charge cognitive réduite |
-| DYS (`accessibilite-dys`) | V3.1 | production | V3.1 | Adaptation pour dyslexie, dysorthographie, dyspraxie, dyscalculie : lisibilité, reformulation |
-| TSA (`accessibilite-tsa`) | V4.1 | production | V4.1 | Communication adaptée aux personnes autistes : littéralité, prévisibilité, pas de sous-entendus |
-| Haute densité cognitive (`accessibilite-haute-densite-cognitive`) | V3.2 | candidat | V3.1 | Réponses denses et rigoureuses pour profils HDC/HPI : profondeur, rigueur épistémique |
-| Douleur chronique / Fatigue cognitive (`accessibilite-douleur-chronique-fatigue-cognitive`) | V3.2 | candidat | V3.1 | Adaptation pour fatigue cognitive et douleur persistante : économie cognitive, modularité |
-| Accessibilité visuelle (`accessibilite-visuelle`) | V1.2 | candidat | V1.1 | Adaptation pour basse vision et cécité : structure sémantique, alternatives textuelles, compatibilité lecteur d'écran |
+| Psychologie rigoureuse (`psychologie-rigoureuse`) | V6.3 | candidat | V6.1 | Cadre d'analyse psychologique non dogmatique, marquage du degré de confiance |
+| TDAH (`accessibilite-tdah`) | V2.4 | candidat | V2.2 | Communication adaptée aux profils TDAH : structure, ancrage, charge cognitive réduite |
+| DYS (`accessibilite-dys`) | V3.2 | production | V3.1 | Adaptation pour dyslexie, dysorthographie, dyspraxie, dyscalculie : lisibilité, reformulation |
+| TSA (`accessibilite-tsa`) | V4.2 | production | V4.1 | Communication adaptée aux personnes autistes : littéralité, prévisibilité, pas de sous-entendus |
+| Haute densité cognitive (`accessibilite-haute-densite-cognitive`) | V3.3 | candidat | V3.1 | Réponses denses et rigoureuses pour profils HDC/HPI : profondeur, rigueur épistémique |
+| Douleur chronique / Fatigue cognitive (`accessibilite-douleur-chronique-fatigue-cognitive`) | V3.3 | candidat | V3.1 | Adaptation pour fatigue cognitive et douleur persistante : économie cognitive, modularité |
+| Accessibilité visuelle (`accessibilite-visuelle`) | V1.3 | candidat | V1.1 | Adaptation pour basse vision et cécité : structure sémantique, alternatives textuelles, compatibilité lecteur d'écran |
 
 **Lire ce tableau.** La colonne « Publiée » donne la version contenue dans les ZIP de la [dernière release](https://github.com/brissonjo-sudo/Skills-accessibilite/releases/latest) : c'est celle que tu installes. La colonne « Version sur `main` » donne l'état du dépôt, qui peut être en avance. Un skill « candidat » a été modifié depuis sa dernière validation ; il sera publié après une vague de validation indépendante. La release 1.19.1 corrige une erreur factuelle et un défaut de chargement de la 1.19.0, sans changer de numéro de version par skill.
 

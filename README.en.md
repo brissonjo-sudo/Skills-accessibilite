@@ -8,13 +8,13 @@ A collection of Markdown skills for LLMs (large language models). Each skill pro
 
 | Skill | Version on `main` | Status | Released (1.19.1) | Description |
 |---|---|---|---|---|
-| `psychologie-rigoureuse` | V6.2 | candidate | V6.1 | Rigorous psychology: epistemic framework, confidence markers, non-dogmatic |
-| `accessibilite-tdah` | V2.3 | candidate | V2.2 | ADHD-adapted communication: structure, anchoring, reduced cognitive load |
-| `accessibilite-dys` | V3.1 | production | V3.1 | Dyslexia/dyscalculia/dyspraxia: readability, reformulation, visual structure |
-| `accessibilite-tsa` | V4.1 | production | V4.1 | Autism-adapted: literality, predictability, no implied meaning |
-| `accessibilite-haute-densite-cognitive` | V3.2 | candidate | V3.1 | High-density cognitive profiles: depth, nuance, no oversimplification |
-| `accessibilite-douleur-chronique-fatigue-cognitive` | V3.2 | candidate | V3.1 | Chronic pain/fatigue (fibromyalgia, ME/CFS, long COVID): low-effort, no action injunctions |
-| `accessibilite-visuelle` | V1.2 | candidate | V1.1 | Low vision and blindness: linear structure, text alternatives, screen-reader compatibility |
+| `psychologie-rigoureuse` | V6.3 | candidate | V6.1 | Rigorous psychology: epistemic framework, confidence markers, non-dogmatic |
+| `accessibilite-tdah` | V2.4 | candidate | V2.2 | ADHD-adapted communication: structure, anchoring, reduced cognitive load |
+| `accessibilite-dys` | V3.2 | production | V3.1 | Dyslexia/dyscalculia/dyspraxia: readability, reformulation, visual structure |
+| `accessibilite-tsa` | V4.2 | production | V4.1 | Autism-adapted: literality, predictability, no implied meaning |
+| `accessibilite-haute-densite-cognitive` | V3.3 | candidate | V3.1 | High-density cognitive profiles: depth, nuance, no oversimplification |
+| `accessibilite-douleur-chronique-fatigue-cognitive` | V3.3 | candidate | V3.1 | Chronic pain/fatigue (fibromyalgia, ME/CFS, long COVID): low-effort, no action injunctions |
+| `accessibilite-visuelle` | V1.3 | candidate | V1.1 | Low vision and blindness: linear structure, text alternatives, screen-reader compatibility |
 
 "Released" is the version shipped in the ZIPs of the latest release: that is what you install. "Version on `main`" is the state of the repository, which may be ahead. A "candidate" skill has changed since its last validation and will be released after an independent validation wave.
 

@@ -11,6 +11,54 @@ Correctifs issus du premier benchmark contrôlé avec/sans skill (130 réponses 
 
 > **Validation.** Ces correctifs s'appuient sur un run local non publié (`eval/runs/20260805-001935/` et sa vérification ciblée `eval/runs/20260805-181022-verif/`, répertoires ignorés par Git ; protocole `eval/prompt_benchmark_claude_code.md`). **Aucune preuve versionnée n'existe encore sous `eval/evidence/` : elle reste à produire.** Ce run a été conduit et jugé par le même agent que celui qui a écrit les correctifs : les montées de version restent **à confirmer par une vague indépendante**, d'où le statut « candidat » dans `docs/index_skills.md`.
 
+### Corrigé — skills (audit du 2026-11-11)
+
+Corrections de comportement des sept skills. **Elles ne sont pas encore validées** : une vague indépendante doit les évaluer, et son paquet de preuves doit être joint avant fusion (`accessibilite-dys` et `accessibilite-tsa` sont en production, la CI l'exige).
+
+**Bloc de préséance, identique dans les 7 skills**
+- La mention de sécurité (professionnel, ligne d'écoute, urgences) figure dans la partie de la réponse lue par défaut. Jamais dans une couche facultative, une étape différée ou la fin d'une réponse longue ; aucun plafond de mots ne la supprime ; en crise aiguë, elle vient en tête.
+- La règle « le plafond de mots le plus bas prime » est désormais écrite dans les skills. Elle n'existait que dans la documentation, que le modèle ne lit pas. Un plafond règle la longueur, pas l'exactitude.
+- Sans `psychologie-rigoureuse`, seules les règles de co-activation qui le mentionnent sont ignorées. L'ancienne clause neutralisait aussi les arbitrages entre skills d'accessibilité.
+
+**`psychologie-rigoureuse` V6.2 → V6.3**
+- La mention d'un professionnel n'est plus placée « en fin de réponse » : en co-activation avec le skill fatigue, cette place était la couche facultative.
+- Crise aiguë : orientation en tête, table de ressources vérifiées sur les sites officiels (France, Belgique francophone, Suisse, Canada), chaque numéro cité avec son pays, aucun numéro inventé hors table. Une question directe de sécurité est permise, conformément aux recommandations du 3114.
+- L'hypothèse d'un TSA ou d'un TDAH n'est plus mobilisée « si des éléments le suggèrent », mais seulement si l'utilisateur l'a déclaré ou le demande.
+- Périmètre : une tâche pratique sans demande de compréhension (rédiger un message, préparer une négociation) ne relève pas du skill. La description déclenche explicitement sur une détresse exprimée.
+
+**`accessibilite-tdah` V2.3 → V2.4**
+- « Je suis débordé » ne déclenche plus : ce n'est ni une déclaration ni une demande de format.
+- Section d'application silencieuse ajoutée. Le skill autorisait la formule « puisque tu mentionnes un TDAH, je vais adapter la forme ».
+- « Ne touche pas au fond, sauf pour le rendre actionnable » : l'exception est retirée. Une nuance nécessaire à l'exactitude n'est jamais supprimée.
+- Règle et exemple pour la souffrance exprimée : professionnel d'abord, pas d'action à l'impératif, pas de relance.
+
+**`accessibilite-dys` V3.1 → V3.2**
+- Déclencheur : difficulté de lecture durable déclarée à la première personne. Une préférence de format ponctuelle est servie sans activer le skill.
+- Section d'application silencieuse ajoutée.
+- Faits corrigés : la dysorthographie est un trouble de l'acquisition de l'orthographe ; l'exemple chiffré contenait un calcul faux et une donnée mal nommée, il est remplacé par un exemple sans donnée réelle.
+
+**`accessibilite-tsa` V4.1 → V4.2**
+- La sécurité est placée au-dessus de l'application silencieuse et des plafonds du registre de lisibilité (« ≤ 120 mots », « une étape à la fois »).
+- « Niveau 1 » retiré de la description ; la densité est formulée comme une règle, non comme une capacité prêtée à une catégorie.
+- L'explicitation sociale se limite aux conventions non évidentes.
+
+**`accessibilite-haute-densite-cognitive` V3.2 → V3.3**
+- Face à une souffrance exprimée, le soutien professionnel est nommé dans les premières lignes, avant le développement dense. Le skill n'avait aucune règle de placement.
+- Avec DYS ou TDAH, la complétude se préserve en découpant la réponse, jamais en supprimant une nuance demandée.
+- Portée de « ne simplifie pas » précisée ; règle anti-flatterie ; la fatigue rejoint les skills de réduction de charge, le TSA en sort.
+
+**`accessibilite-douleur-chronique-fatigue-cognitive` V3.2 → V3.3**
+- Déclencheur à la première personne : une question sur la condition ou sur un proche, et une simple demande de concision, n'activent plus le skill.
+- La règle « question-définition : 1 à 2 phrases, aucune précaution » cède devant une souffrance exprimée ou une information de sécurité indispensable.
+- L'exemple de référence imputait une cause à la personne et jugeait de l'urgence : réécrit. Exemple de crise aiguë ajouté.
+
+**`accessibilite-visuelle` V1.2 → V1.3**
+- Nouvelle règle sur les liens, les flèches, le point médian et le Markdown non rendu.
+- Exemple de souffrance réécrit : professionnel d'abord, organismes sous leur nom exact avec leur pays, ligne de prévention du suicide retirée d'un message qui n'exprime pas d'idée noire.
+
+**Banques de cas**
+- Quatre cas portaient sur le même sujet qu'un exemple du skill évalué (`HDC` 7, `fatigue` 6 et 7, `visuel` 2), ce que le contrôle lexical ne détecte pas. Leur sujet change.
+
 ### Corrigé — outillage et CI
 
 Suite de l'audit du 2026-11-11 : plusieurs contrôles laissaient passer ce qu'ils étaient censés arrêter. Chaque correctif a été vérifié en rejouant, sur une copie du dépôt, les 48 mutations de l'audit.

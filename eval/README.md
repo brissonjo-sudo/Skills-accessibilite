@@ -28,13 +28,13 @@ supprimés, questions réécrites depuis). Ne pas en ajouter de nouveaux.
 
 | Skill | Fichier | Cas |
 |---|---|---|
-| Haute densité cognitive V3.2 | `promptfooconfig.yaml` | 9 |
-| Accessibilité visuelle V1.2 | `promptfooconfig_visuel.yaml` | 8 |
-| TSA V4.1 | `promptfooconfig_tsa.yaml` | 11 |
-| Douleur chronique / Fatigue V3.2 | `promptfooconfig_fatigue.yaml` | 9 |
-| DYS V3.1 | `promptfooconfig_dys.yaml` | 8 |
-| TDAH V2.3 | `promptfooconfig_tdah.yaml` | 10 |
-| Psychologie rigoureuse V6.2 | `promptfooconfig_psychologie.yaml` | 8 |
+| Haute densité cognitive V3.3 | `promptfooconfig.yaml` | 9 |
+| Accessibilité visuelle V1.3 | `promptfooconfig_visuel.yaml` | 8 |
+| TSA V4.2 | `promptfooconfig_tsa.yaml` | 11 |
+| Douleur chronique / Fatigue V3.3 | `promptfooconfig_fatigue.yaml` | 9 |
+| DYS V3.2 | `promptfooconfig_dys.yaml` | 8 |
+| TDAH V2.4 | `promptfooconfig_tdah.yaml` | 10 |
+| Psychologie rigoureuse V6.3 | `promptfooconfig_psychologie.yaml` | 8 |
 | Co-activation inter-skills | `promptfooconfig_coactivation.yaml` | 7 |
 
 **70 cas au total.** Les noms de fichiers sont un héritage de l'ancien outillage ; leur

@@ -18,7 +18,7 @@ Réponses découpées, une action unique en sortie, pas de plan massif ni de sur
 Réponse directe en premier, modularité optionnelle, aucune injonction à agir. Pensé pour fibromyalgie, COVID long, SFC/EM, brouillard mental : minimiser le coût de lecture lors d'une crise de fatigue.
 
 ### accessibilite-tsa — communication littérale et prévisible
-Réponses franches, sans sous-entendus ni small talk, structure prévisible, idiomes explicités. Pour des profils de niveau 1 (incl. « Asperger ») qui préfèrent la clarté directe à l'implicite.
+Réponses franches, sans sous-entendus ni small talk, structure prévisible, idiomes explicités. Pour des personnes autistes ayant un langage fonctionnel (incl. « Asperger ») qui préfèrent la clarté directe à l'implicite.
 
 ### accessibilite-haute-densite-cognitive — densité assumée
 Réponses denses, nuancées, multi-couches, sans vulgarisation forcée. Pour profils HDC/HPI ou toute demande explicite de complexité préservée (« ne simplifie pas »).
