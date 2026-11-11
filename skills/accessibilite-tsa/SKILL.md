@@ -24,7 +24,7 @@ La précision, la structure et la littéralité sont **appliquées**, pas annonc
 
 **Ce qui n'est pas une annonce de skill** et reste exigé : la mention d'un professionnel en cas de souffrance exprimée, et l'orientation en cas de crise.
 
-**Périmètre clinique** : profils autistes ayant un **langage fonctionnel** — capables de lire et traiter une réponse textuelle dense. Cela recouvre les profils dits « de niveau 1 » du DSM-5 et le diagnostic historique « Asperger ».
+**Périmètre clinique** : profils autistes ayant un **langage fonctionnel** — capables de lire et traiter une réponse textuelle dense. Cela inclut le diagnostic historique « Asperger ».
 
 Précision : les niveaux 1/2/3 du DSM-5 décrivent un **besoin de soutien** sur deux axes (communication sociale ; comportements restreints et répétitifs). Ils sont **spécifiés séparément** de la déficience intellectuelle et du niveau de langage — on peut relever du niveau 2 sans déficience intellectuelle. Ce skill se cale donc sur le **langage fonctionnel**, pas sur un « niveau » pris comme synonyme d'absence de déficience intellectuelle.
 
@@ -171,7 +171,7 @@ Expliciter brièvement une convention sociale ou un sous-entendu **seulement** s
 
 **Évidence, à ne pas expliquer** : « Tu peux en parler à ton manager. Le manager est la personne qui traite ce type de situation. » → « Tu peux en parler à ton manager. »
 
-**Convention non évidente, à expliciter** : « Tu peux annoncer un montant en entretien. » → « Dans une offre d'emploi, "salaire selon profil" indique le plus souvent que le montant se négocie. Tu peux donc annoncer un montant en entretien. »
+**Convention non évidente, à expliciter** : « Tu peux annoncer un montant en entretien. » → « Dans une offre d'emploi, "salaire selon profil" signifie que le montant n'est pas fixé d'avance. Tu peux donc annoncer un montant en entretien. »
 
 L'explicitation reste **courte** : une phrase, pas une dissertation sociologique.
 

@@ -22,7 +22,7 @@ Corrections de comportement des sept skills. **Elles ne sont pas encore validée
 
 **`psychologie-rigoureuse` V6.2 → V6.3**
 - La mention d'un professionnel n'est plus placée « en fin de réponse » : en co-activation avec le skill fatigue, cette place était la couche facultative.
-- Crise aiguë : orientation en tête, table de ressources vérifiées sur les sites officiels (France, Belgique francophone, Suisse, Canada), chaque numéro cité avec son pays, aucun numéro inventé hors table. Une question directe de sécurité est permise, conformément aux recommandations du 3114.
+- Crise aiguë : orientation en tête, table de ressources vérifiées sur les sites officiels (France, Belgique francophone, Suisse, Canada), chaque numéro cité avec son pays, aucun numéro inventé hors table. Une question directe de sécurité est permise, jamais obligatoire. La formulation « Est-ce que tu penses au suicide ? » est celle que recommande le 3114 ; « Es-tu en sécurité là, maintenant ? » est un choix du projet.
 - L'hypothèse d'un TSA ou d'un TDAH n'est plus mobilisée « si des éléments le suggèrent », mais seulement si l'utilisateur l'a déclaré ou le demande.
 - Périmètre : une tâche pratique sans demande de compréhension (rédiger un message, préparer une négociation) ne relève pas du skill. La description déclenche explicitement sur une détresse exprimée.
 

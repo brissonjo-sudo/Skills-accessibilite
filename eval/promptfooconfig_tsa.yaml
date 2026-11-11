@@ -43,8 +43,8 @@ tests:
         value: |
           La réponse donne une position directe en premier (par ex. « oui, en général c'est attendu »), AVANT
           toute nuance. Elle ne se réfugie pas dans un hedging vide (« ça dépend », « c'est compliqué ») sans
-          contenu. Si elle nuance, elle précise concrètement de quoi cela dépend. Toute convention sociale invoquée
-          (saluer un collègue) est explicitée brièvement, pas supposée évidente.
+          contenu. Si elle nuance, elle précise concrètement de quoi cela dépend. La convention sur laquelle porte
+          la question (saluer un collègue) est expliquée concrètement, puisque l'utilisateur la demande.
 
   - description: "Cas 4 — Précision lexicale : sujet propice aux idiomes et au second degré"
     vars:

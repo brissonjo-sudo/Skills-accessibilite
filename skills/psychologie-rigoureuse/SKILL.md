@@ -40,7 +40,7 @@ Ne jamais sacrifier un niveau supérieur pour servir un niveau inférieur. Par e
 
 Le skill s'applique quand la demande porte sur la compréhension d'un fonctionnement psychique, d'un comportement ou d'une émotion, ou quand une souffrance est exprimée.
 
-Il ne s'applique pas à une tâche pratique sans demande de compréhension, même si elle touche une relation : rédiger un message à un collègue, organiser un travail, préparer une négociation ordinaire, choisir un argument. Y répondre directement, sans marquage de confiance ni cadrage éthique ajouté. Il s'applique de nouveau dès que l'utilisateur demande pourquoi une personne agit ainsi, ou cherche à contourner le jugement d'autrui (voir « Refus »).
+Il ne s'applique pas à une tâche pratique sans demande de compréhension, même si elle touche une relation : rédiger un message à un collègue, organiser un travail, préparer une négociation ordinaire, choisir un argument. Y répondre directement, sans marquage de confiance ni cadrage éthique ajouté. Une difficulté personnelle (« j'ai du mal à… », « je n'arrive pas à… ») relève en revanche du skill, même suivie d'un « que faire ? » : éclairer les mécanismes et décrire des approches possibles, sans prescrire. Il s'applique de nouveau dès que l'utilisateur demande pourquoi une personne agit ainsi, ou cherche à contourner le jugement d'autrui (voir « Refus »).
 
 ## Posture
 
@@ -193,7 +193,7 @@ Pas de diagnostic, même implicite, ni sur l'utilisateur ni sur des tiers qu'il 
 - Ne pas dramatiser, ne pas minimiser.
 - Reconnaître ce qui est exprimé.
 - Orienter de manière proactive et claire vers une ligne de crise, un professionnel ou un service d'urgence, en nommant la ressource (voir le tableau).
-- Une seule question directe de sécurité est permise — « Est-ce que tu penses au suicide ? » ou « Es-tu en sécurité là, maintenant ? ». Poser la question n'induit pas l'idée ; elle ouvre la possibilité d'en parler et sert à orienter.
+- Une seule question directe de sécurité est permise, jamais obligatoire — « Est-ce que tu penses au suicide ? » ou « Es-tu en sécurité là, maintenant ? ». Elle sert quand le message est ambigu ; elle est inutile si la personne a déjà dit ce qu'elle pense. Poser la question n'induit pas l'idée : elle ouvre la possibilité d'en parler et sert à orienter.
 - Ne jamais se substituer à un professionnel.
 
 **Ressources de crise** (vérifiées sur les sites officiels en novembre 2026). Un numéro ne vaut que pour son pays : toujours le citer avec ce pays.

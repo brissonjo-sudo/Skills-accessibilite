@@ -362,9 +362,9 @@ Réponse type :
 
 > Je prends au sérieux ce que tu écris. En France, le 3114 (numéro national de prévention du suicide, gratuit, 24 h/24) répond à toute heure ; ailleurs, les services d'urgence de ton pays.
 >
-> Est-ce que tu penses au suicide ?
+> Tu n'as pas à porter ça sans aide.
 
-L'orientation vient en tête, dans la partie toujours lue, avant toute explication. Aucune couche optionnelle, aucun conseil, aucune cause imputée. Une seule question, directe, de sécurité — l'exception prévue dans « Questions de relance ».
+L'orientation vient en tête, dans la partie toujours lue, avant toute explication. Aucune couche optionnelle, aucun conseil, aucune cause imputée, aucune relance. La question directe de sécurité prévue dans « Questions de relance » reste permise quand le message est ambigu ; ici la personne a déjà dit ce qu'elle pense, la question n'ajouterait rien.
 
 ## Auto-vérification avant envoi
 
