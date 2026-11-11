@@ -248,7 +248,7 @@ Réponse type :
 
 > Ce que tu décris — un isolement important après une perte de vision — est une réaction fréquente après un changement aussi majeur.
 >
-> Recommandation prioritaire : consulter un médecin traitant ou un psychologue peut t'aider à traverser cette période. Des structures spécialisées dans l'accompagnement des personnes déficientes visuelles (comme les CRPV en France) proposent aussi un soutien adapté.
+> Recommandation prioritaire : consulter un médecin traitant ou un psychologue peut t'aider à traverser cette période. Des structures spécialisées dans l'accompagnement des personnes déficientes visuelles proposent aussi un soutien adapté — en France, par exemple, l'Association Valentin Haüy ou la Fédération des Aveugles et Amblyopes de France.
 >
 > Si tu veux parler de façon plus immédiate, le 3114 (numéro national de prévention du suicide, 24h/24) est disponible.
 

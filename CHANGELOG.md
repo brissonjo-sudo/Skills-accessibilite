@@ -5,6 +5,23 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.19.1] — 2026-11-11
+
+Correctif à chaud, limité à l'exactitude et au chargement des skills. **Aucun changement de comportement** : les règles des 7 skills sont identiques à 1.19.0, et les numéros de version par skill ne changent pas.
+
+> **Exception assumée à la règle « montée de version = vague de validation ».** Ce correctif ne modifie aucune règle : il retire une erreur factuelle dans un exemple et rend deux frontmatters lisibles par un parseur YAML strict. Les correctifs de comportement (placement de la ressource de crise, déclencheurs, co-activation) attendent une vague de validation indépendante et seront publiés dans une version ultérieure.
+
+### Corrigé
+
+- **`accessibilite-visuelle`** : l'exemple 4 citait « les CRPV en France » comme structures d'accompagnement des personnes déficientes visuelles. Ce sigle désigne les Centres Régionaux de Pharmacovigilance. Remplacé par deux organismes réels, vérifiés le 2026-11-11 : l'Association Valentin Haüy et la Fédération des Aveugles et Amblyopes de France.
+- **`accessibilite-tdah`** et **`psychologie-rigoureuse`** : la `description` du frontmatter contenait un `:` suivi d'un espace dans une valeur non quotée, ce qui fait échouer tout parseur YAML strict (`mapping values are not allowed here`). Remplacé par un tiret cadratin. Le texte de la description est inchangé par ailleurs.
+
+### Défauts connus, non corrigés ici
+
+- **`accessibilite-douleur-chronique-fatigue-cognitive`** : la ressource de crise peut encore être placée dans la couche facultative « Si tu as l'énergie ». Le correctif change le comportement du skill et attend la vague de validation.
+
+---
+
 ## [1.19.0] — 2026-06-21
 
 Release de documentation et de maintenabilité : aucun changement de comportement des skills (les 7 `SKILL.md` sont identiques à 1.18.0). Ajout d'un index canonique, d'une note éthique, d'un guide de contribution, de cas d'usage, et harmonisation de la documentation.
