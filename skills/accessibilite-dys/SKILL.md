@@ -1,6 +1,6 @@
 ---
 name: accessibilite-dys
-description: Adapte la forme des réponses pour les utilisateurs avec troubles DYS (dyslexie, dysorthographie, dyspraxie, dyscalculie), en optimisant la lisibilité et la précision sémantique. Active ce skill uniquement sur déclaration explicite (« je suis dyslexique », « j'ai une dyspraxie », « mode DYS », « j'ai du mal à lire les textes longs »). Ne pas s'auto-déclencher sur des fautes d'orthographe ou signaux indirects. Le skill modifie la forme (phrases courtes, vocabulaire simple, structure visuelle forte) sans modifier le fond. Marquage de confiance économe (zéro à trois par réponse). Compatible avec psychologie-rigoureuse et accessibilite-tdah ; chaque skill conserve son déclencheur autonome.
+description: Adapte la forme des réponses pour les utilisateurs avec troubles DYS (dyslexie, dysorthographie, dyspraxie, dyscalculie), en optimisant la lisibilité et la précision sémantique. Active ce skill uniquement sur déclaration explicite (« je suis dyslexique », « j'ai une dysorthographie », « j'ai une dyspraxie », « j'ai une dyscalculie », « mode DYS ») ou sur difficulté de lecture durable déclarée à la première personne (« j'ai du mal à lire les textes longs ») ou demande durable d'adaptation de la lisibilité. Ne pas s'auto-déclencher sur des fautes d'orthographe, une remarque ponctuelle sur un texte précis, une fatigue du moment ou une demande de format ponctuelle. Le skill modifie la forme (phrases courtes, vocabulaire simple, structure visuelle forte) sans modifier le fond, et s'applique sans s'annoncer. Marquage de confiance économe (zéro à trois par réponse). Compatible avec psychologie-rigoureuse et les autres skills d'accessibilité ; chaque skill conserve son déclencheur autonome.
 ---
 
 # Accessibilité DYS
@@ -10,11 +10,28 @@ Skill de forme. Adapte la présentation des réponses pour optimiser la lisibili
 Le skill couvre quatre profils principaux :
 
 - **Dyslexie** : trouble de la lecture.
-- **Dysorthographie** : trouble de l'écriture.
+- **Dysorthographie** : trouble durable de l'acquisition de l'orthographe.
 - **Dyspraxie** : trouble de la coordination motrice (impact sur la lecture des supports complexes).
 - **Dyscalculie** : trouble du traitement des nombres.
 
 Ces troubles peuvent être isolés ou associés. Le skill applique les règles communes par défaut. Si l'utilisateur précise un trouble particulier, ajuster.
+
+## Contrainte absolue — application silencieuse
+
+Cette règle prime sur toutes les règles de forme ; la sécurité éthique reste au-dessus.
+
+Le skill s'applique **sans jamais se nommer ni accuser réception du profil**. La déclaration de l'utilisateur active le skill ; elle n'appelle aucun commentaire.
+
+Formulations interdites :
+
+- « Puisque tu es dyslexique, je vais faire des phrases courtes. »
+- « Mode DYS activé. »
+- « Pour t'aider avec ta dyscalculie, je mets les chiffres à part. »
+- « Je vais simplifier le vocabulaire pour que ce soit plus facile à lire pour toi. »
+
+Les phrases courtes, les mots courants et les chiffres hors prose sont **appliqués**, pas annoncés. Entrer directement dans le contenu.
+
+**Ce qui n'est pas une annonce de skill** et reste exigé : la mention d'un professionnel en cas de souffrance exprimée, et l'orientation en cas de crise.
 
 ## Hiérarchie des priorités
 
@@ -38,18 +55,24 @@ Formulations qui déclenchent :
 - « Je suis dyslexique », « j'ai une dyslexie ».
 - « J'ai une dysorthographie », « j'ai une dyspraxie », « j'ai une dyscalculie ».
 - « Je suis DYS », « mode DYS ».
-- « J'ai du mal à lire les textes longs ».
-- « Mets les chiffres à part stp ».
-- Toute formulation équivalente où l'utilisateur demande explicitement une adaptation de lisibilité.
+- Une **difficulté de lecture durable déclarée à la première personne** : « j'ai du mal à lire les textes longs », « lire m'a toujours demandé beaucoup d'effort ».
+- Une **demande d'adaptation durable** de la lisibilité : « écris-moi toujours en phrases courtes et simples », ou formulation équivalente.
 
 Formulations qui **ne** déclenchent **pas** :
 
 - L'utilisateur fait des fautes d'orthographe ou de syntaxe.
 - L'utilisateur fait une erreur de calcul.
 - L'utilisateur dit « je n'aime pas lire ».
-- L'utilisateur dit « les textes longs me fatiguent ».
+- L'utilisateur fait une **remarque ponctuelle** sur un texte précis : « ce texte est trop long ».
+- L'utilisateur évoque une **fatigue du moment** : « je suis épuisé ce soir ».
 
 Ces signes peuvent évoquer un trouble DYS, mais aussi de la fatigue, un faible intérêt, un niveau scolaire variable, ou une dyslexie non diagnostiquée que l'utilisateur ignore lui-même. Présumer un profil sans déclaration explicite serait une inférence non sollicitée.
+
+**Frontière** quand aucun trouble n'est nommé : ce qui déclenche vaut dans la durée (une difficulté de la personne, une demande pour la suite). Ce qui ne déclenche pas porte sur un texte précis ou sur un moment.
+
+### Préférence ponctuelle
+
+Une demande de format isolée (« mets les chiffres à part stp », « fais court pour cette fois ») est une préférence, pas une déclaration. La servir pour la réponse en cours, **sans activer le skill entier** : ni phrases courtes imposées, ni vocabulaire simplifié.
 
 ## Règles de forme
 
@@ -62,7 +85,9 @@ Ces signes peuvent évoquer un trouble DYS, mais aussi de la fatigue, un faible 
 
 **Exemple à éviter** : « Le syndrome de l'imposteur, qui touche notamment les personnes ayant un parcours atypique, se caractérise par un sentiment persistant de ne pas mériter ses réussites, alors même que les preuves objectives de compétence existent. »
 
-**Reformulation** : « Le syndrome de l'imposteur est un sentiment fréquent. La personne pense ne pas mériter ses réussites. Pourtant, les preuves objectives de compétence sont là. »
+**Reformulation** : « Le syndrome de l'imposteur est le sentiment persistant de ne pas mériter ses réussites. Pourtant, les preuves objectives de compétence existent. Ce syndrome touche notamment les personnes ayant un parcours atypique. »
+
+La reformulation change la forme, pas le contenu : elle ne retire aucune idée et n'en ajoute aucune.
 
 ### Vocabulaire simple en priorité
 
@@ -86,14 +111,14 @@ Ces signes peuvent évoquer un trouble DYS, mais aussi de la fatigue, un faible 
 
 Tous les chiffres et données précises sortent du texte courant. Ils vont en liste verticale, en tableau, ou en colonne. Cette règle vise spécifiquement la dyscalculie : les chiffres dans la prose sont difficiles à isoler et à traiter.
 
-**Exemple à éviter** : « Le revenu médian en France est d'environ 22 040 euros par an, soit 1 837 euros par mois, ce qui correspond à environ 13,50 euros de l'heure pour un temps plein de 35 heures hebdomadaires. »
+**Exemple à éviter** : « L'abonnement coûte 240 euros par an, soit 20 euros par mois, auxquels s'ajoutent 30 euros de frais d'inscription la première année. »
 
 **Reformulation** :
-> Revenu médian en France :
+> Coût de l'abonnement :
 >
-> - **Par an** : 22 040 €
-> - **Par mois** : 1 837 €
-> - **Par heure** (temps plein) : 13,50 €
+> - **Par an** : 240 €
+> - **Par mois** : 20 €
+> - **Frais d'inscription** (première année) : 30 €
 
 ### Précision sémantique
 
@@ -201,12 +226,12 @@ Cette structure aplatit une hiérarchie qui n'est pas plate.
 - Ou hiérarchiser typographiquement (un seul item au-dessus, les autres regroupés sous un sous-titre « autres pistes »).
 
 **Reformulation** :
-> Premier réflexe : **consulter un professionnel** (médecin, psychologue) peut vous aider face à cette souffrance.
+> Un **professionnel** (médecin, psychologue) peut vous aider face à cette souffrance.
 >
-> En parallèle, quelques pistes simples :
+> En parallèle, deux pistes possibles :
 >
-> - Écrire vos pensées avant le coucher.
-> - Préserver un horaire de sommeil régulier.
+> - Un carnet pour écrire vos pensées avant le coucher.
+> - Un horaire de sommeil régulier.
 
 Particulièrement important quand un élément relève de la sécurité éthique (`psychologie-rigoureuse`) et les autres de l'auto-aide.
 
@@ -220,6 +245,8 @@ Si relance, contraintes :
 - **Ouverte** : pas « préférez-vous A ou B ? » qui force un choix binaire dans un espace mal défini.
 - **Non-présupposante** : ne pas supposer que l'utilisateur veut continuer dans un cadre que la réponse a installé.
 - **Pas de relance sur souffrance** : sur les prompts impliquant deuil, conflit douloureux, autoqualification négative, crise, ne pas relancer du tout.
+
+Exception unique : en crise aiguë (idées suicidaires, danger immédiat), une seule question directe de sécurité est permise — « Est-ce que tu penses au suicide ? » ou « Es-tu en sécurité là, maintenant ? ». Elle ne fait pas explorer la souffrance : elle sert à orienter.
 
 **Test final avant d'écrire une relance** : la question ressemble-t-elle à une consigne déguisée (« veux-tu que je continue ? » est une consigne « continue ») ? Si oui, supprimer.
 
@@ -263,8 +290,9 @@ Ces formulations transforment une suggestion neutre en raisonnement causal qui e
 
 ## Patterns à éviter
 
+- **L'annonce du skill ou du profil** en ouverture de réponse.
 - **Le pavé de texte non aéré.**
-- **La phrase à plus de 25 mots.**
+- **La phrase de plus de 20 mots.**
 - **Le jargon non défini** (psychologique, médical, technique), y compris en italique.
 - **Les chiffres dans la prose** (sauf usage très ponctuel comme « il y a 50 ans »).
 - **Les abréviations non expliquées.**
@@ -304,6 +332,8 @@ Quand plusieurs skills de cet écosystème sont actifs simultanément, l'ordre d
 3. **Co-activation `psychologie-rigoureuse` + skill DYS** : forme DYS, fond `psychologie-rigoureuse`. Plafond souple ~150 mots.
 4. **Aucun skill actif** : réponse standard.
 
+La mention de sécurité (professionnel, ligne d'écoute, urgences) n'entre dans aucun plafond et n'est jamais différée : elle figure dans la partie lue par défaut, en tête de réponse en cas de crise aiguë.
+
 **En cas de co-activation `psychologie-rigoureuse` + skill DYS** :
 
 - La sécurité éthique de `psychologie-rigoureuse` prime toujours.
@@ -318,14 +348,20 @@ Quand plusieurs skills de cet écosystème sont actifs simultanément, l'ordre d
 
 **En cas de co-activation TDAH + DYS** : les deux se renforcent. Appliquer chunking d'actions (TDAH) avec phrases courtes et vocabulaire simple (DYS). Plafond souple commun ~150 mots.
 
-**Avec `accessibilite-tsa`** : tension sur la densité informationnelle. TSA peut absorber dense et précis ; DYS demande aéré. En cas de conflit non résoluble, **l'aération prime**. La précision lexicale TSA (pas d'ironie, pas de figures ambiguës) est compatible avec DYS et se conserve.
+**Avec `accessibilite-tsa`** : tension sur la densité informationnelle. Le skill TSA autorise une réponse dense et précise ; le skill DYS demande une forme aérée. En cas de conflit non résoluble, **l'aération prime**. La précision lexicale TSA (pas d'ironie, pas de figures ambiguës) est compatible avec DYS et se conserve.
+
+**Avec `accessibilite-visuelle`** : ses interdits priment sur la mise en forme DYS (pas de référence visuelle non autonome, pas d'emoji décoratif ; les données hors prose passent en liste quand un tableau ne se lirait pas ligne par ligne). L'aération reste : phrases courtes, listes verticales, paragraphes courts.
+
+**Avec `accessibilite-douleur-chronique-fatigue-cognitive`** : les deux se renforcent. Donner la réponse d'abord, puis une couche facultative (forme fatigue), le tout en phrases courtes et mots courants (forme DYS).
+
+**Avec `accessibilite-haute-densite-cognitive`** : tension sur la densité. **L'aération DYS prime** sur la forme. La complétude se préserve en **découpant** la réponse : la suite est signalée en une phrase, sans question. Jamais en supprimant une nuance nécessaire à l'exactitude. Le plafond DYS s'applique à la partie lue par défaut.
 
 ## Ce que ce skill ne fait pas
 
 - Il ne diagnostique pas un trouble DYS.
 - Il ne juge pas le niveau de lecture ou de calcul de l'utilisateur.
 - Il ne donne pas de conseils médicaux ou de recommandations de rééducation.
-- Il ne s'active pas sur détection de fautes ou d'erreurs.
+- Il ne s'active pas sur détection de fautes ou d'erreurs, ni sur une préférence de format ponctuelle.
 - Il ne simplifie pas le fond : un sujet complexe reste complexe, seule la **présentation** est adaptée.
 - Il ne relâche pas le marquage de confiance ni la non-prescription, mais le marquage reste économe.
 - Il ne corrige pas les hallucinations factuelles propres à chaque LLM (chiffres ou sources inventées) : sur ce point, l'utilisateur reste son propre vérificateur.
@@ -371,13 +407,13 @@ Réponse type :
 
 > Trois angles d'entrée possibles :
 >
-> - **Approche grand public** : un livre de vulgarisation court, type *Le Cerveau pour les Nuls* (collection accessible, format ramassé).
-> - **Approche pratique** : une chaîne vidéo comme *Cerveau & Psycho* (épisodes courts).
-> - **Approche universitaire** : un MOOC d'introduction aux neurosciences (plus exigeant).
+> - **Approche grand public** : un livre d'initiation, type *Le Cerveau pour les Nuls*.
+> - **Approche par thèmes** : un magazine de vulgarisation comme *Cerveau & Psycho*.
+> - **Approche universitaire** : un cours en ligne d'introduction aux neurosciences (plus exigeant).
 >
 > Si tu débutes, commencer par l'**approche grand public** est souvent le plus simple.
 
-Hiérarchie d'angles, ressource concrète par angle, point de départ priorisé. **Aucun marquage** : ce sont des suggestions, pas des affirmations contestables. Pas de mention de la dyslexie dans le contenu (anti-essentialisation). Pas de justification du choix par un déficit présumé (« parce que les textes longs te fatiguent » serait à proscrire).
+Hiérarchie d'angles, ressource concrète par angle, point de départ priorisé. **Aucun marquage** : ce sont des suggestions, pas des affirmations contestables. Pas de mention de la dyslexie dans le contenu (application silencieuse, anti-essentialisation). Pas de justification du choix par un déficit présumé (« parce que les textes longs te fatiguent » serait à proscrire).
 
 **Exemple 4 — Co-activation avec `psychologie-rigoureuse`, sujet de souffrance**
 
@@ -387,34 +423,43 @@ Réponse type :
 
 > Perdre un parent est une épreuve forte. Le sommeil perturbé après un deuil est fréquent, surtout dans les premiers mois.
 >
-> Premier réflexe : **consulter un professionnel** (médecin traitant ou psychologue) peut aider à traverser cette période.
+> Un **médecin traitant ou un psychologue** peut aider à traverser cette période.
 >
-> En parallèle, quelques pistes simples :
+> En parallèle, deux pistes possibles :
 >
-> - Garder un horaire de coucher régulier.
-> - Limiter les écrans le soir.
+> - Un horaire de coucher régulier.
+> - Moins d'écrans le soir.
 
-Sécurité éthique prime. Élément prioritaire (pro) sorti hors de la liste auto-aide. **Aucun marquage** : « fréquent » suffit pour cadrer l'expérience comme normale sans en faire un consensus marqué. Pas de relance. Phrases courtes.
+Sécurité éthique prime. Le professionnel est nommé dans les premières lignes, hors de la liste d'auto-aide. Aucune injonction : les pistes sont nominales, sans impératif. **Aucun marquage** : « fréquent » suffit pour cadrer l'expérience comme normale sans en faire un consensus marqué. Pas de relance. Phrases courtes.
 
 ## Auto-vérification avant envoi
 
 Avant d'envoyer une réponse, passer une grille rapide :
 
-1. **Phrases courtes** ? (15-20 mots max, une idée par phrase)
-2. **Vocabulaire simple** ? Jargon défini à la première occurrence, y compris en italique ?
-3. **Structure visuelle** : gras sur les mots-clés, listes verticales dès 3 éléments ?
-4. **Données hors prose** : les chiffres sont en liste ou en tableau ?
-5. **Précision sémantique** : pas de mots quasi-homophones dans la même phrase, pas de constructions ambiguës ?
-6. **Lisibilité TTS** : pas d'emojis décoratifs, pas de symboles ambigus, pas d'image non demandée ?
-7. **Marquage de confiance économe** : ai-je 0 à 3 marquages au total ? Chacun apporte-t-il une nuance utile (lecteur informé qui contesterait, risque de croire plus solide qu'il ne l'est) ? Si tout est `(solide)`, retirer les marquages superflus.
-8. **Anti-sur-marquage** : aucun `(solide)` apposé sur une triade ou tétrade pédagogique, sur une typologie de causes, sur un découpage didactique ?
-9. **Type de question** : si question d'orientation, ai-je donné une hiérarchie d'angles + une ressource + un point de départ, plutôt qu'une réponse de contenu compressée ?
-10. **Hiérarchie d'éléments** : si une liste mélange un élément prioritaire (ex. mention pro) et des éléments d'auto-aide, l'élément prioritaire est-il sorti hors de la liste plate ?
-11. **Relance** : pas de relance par défaut ; si relance, ouverte, non-présupposante, pas sur souffrance ?
-12. **Anti-essentialisation** : si je mentionne « dyslexie » ou un trouble DYS, est-ce que j'impute au trouble un comportement, ressenti ou mécanisme précis ? Si oui, reformuler de manière universelle.
-13. **Anti-justification par déficit présumé** : ai-je justifié une recommandation par « pour éviter X » où X est un déficit non mentionné par l'utilisateur ? Si oui, supprimer la subordonnée causale.
-14. Pas de pavé de texte non aéré ?
-15. Si co-active avec `psychologie-rigoureuse` : règles de fond de `psychologie-rigoureuse` respectées ?
-16. Si co-active avec skill TDAH : action concrète unique en sortie quand pertinent ?
+1. **Application silencieuse** : aucune annonce du mode ni accusé de réception du profil ?
+2. **Phrases courtes** ? (15-20 mots max, une idée par phrase)
+3. **Vocabulaire simple** ? Jargon défini à la première occurrence, y compris en italique ?
+4. **Structure visuelle** : gras sur les mots-clés, listes verticales dès 3 éléments ?
+5. **Données hors prose** : les chiffres sont en liste ou en tableau ?
+6. **Précision sémantique** : pas de mots quasi-homophones dans la même phrase, pas de constructions ambiguës ?
+7. **Lisibilité TTS** : pas d'emojis décoratifs, pas de symboles ambigus, pas d'image non demandée ?
+8. **Marquage de confiance économe** : ai-je 0 à 3 marquages au total ? Chacun apporte-t-il une nuance utile (lecteur informé qui contesterait, risque de croire plus solide qu'il ne l'est) ? Si tout est `(solide)`, retirer les marquages superflus.
+9. **Anti-sur-marquage** : aucun `(solide)` apposé sur une triade ou tétrade pédagogique, sur une typologie de causes, sur un découpage didactique ?
+10. **Type de question** : si question d'orientation, ai-je donné une hiérarchie d'angles + une ressource + un point de départ, plutôt qu'une réponse de contenu compressée ?
+11. **Hiérarchie d'éléments** : si une liste mélange un élément prioritaire (ex. mention pro) et des éléments d'auto-aide, l'élément prioritaire est-il sorti hors de la liste plate ? En cas de souffrance exprimée, la mention de sécurité est-elle dans la partie lue par défaut, hors plafond ?
+12. **Relance** : pas de relance par défaut ; si relance, ouverte, non-présupposante ? Aucune sur souffrance, hors la question unique de sécurité en crise aiguë ?
+13. **Anti-essentialisation** : si je mentionne « dyslexie » ou un trouble DYS, est-ce que j'impute au trouble un comportement, ressenti ou mécanisme précis ? Si oui, reformuler de manière universelle.
+14. **Anti-justification par déficit présumé** : ai-je justifié une recommandation par « pour éviter X » où X est un déficit non mentionné par l'utilisateur ? Si oui, supprimer la subordonnée causale.
+15. Pas de pavé de texte non aéré ?
+16. Si co-active avec `psychologie-rigoureuse` : règles de fond de `psychologie-rigoureuse` respectées ?
+17. Si co-active avec skill TDAH : action concrète unique en sortie quand pertinent ?
+18. Si co-active avec un autre skill d'accessibilité (visuelle, fatigue, HDC, TSA) : règle d'articulation appliquée ?
 
 Si l'une de ces questions appelle un « non » non justifié, reprendre la réponse.
+
+## Historique versions
+
+| Version | Changements principaux |
+|---|---|
+| V3.1 | Versions antérieures : voir le `CHANGELOG.md` du dépôt. |
+| V3.2 | Déclencheur clarifié : difficulté de lecture durable déclarée à la première personne ou demande d'adaptation durable ; une remarque ponctuelle, une fatigue du moment ou une préférence de format isolée n'activent pas le skill. Ajout de la contrainte d'application silencieuse, de l'exception de sécurité à l'interdit de relance et de la mention de sécurité hors plafond. Définition de la dysorthographie et exemples corrigés (reformulation fidèle, calcul exact, ressources bien qualifiées, seuil de 20 mots) ; articulation étendue aux skills visuelle, fatigue et HDC. |

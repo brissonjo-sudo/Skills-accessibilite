@@ -1,6 +1,6 @@
 ---
 name: accessibilite-tsa
-description: Adapte la forme des réponses pour les utilisateurs autistes ayant un langage fonctionnel (profils dits « de niveau 1 », incluant le diagnostic historique « Asperger »). Active ce skill uniquement sur déclaration explicite (« je suis autiste », « j'ai un TSA », « je suis Asperger », « je suis sur le spectre », « mode TSA »). Ne pas s'auto-déclencher sur des signes indirects. Le skill modifie la forme (précision lexicale extrême, structure prévisible, pas de small talk, registres marqués) sans modifier le fond, et s'applique silencieusement. Propose une fois un menu de format neutre si l'utilisateur exprime une difficulté de format. Marquage de confiance économe (0 à 3 par réponse). Compatible avec psychologie-rigoureuse, accessibilite-dys et accessibilite-tdah ; chaque skill conserve son déclencheur autonome.
+description: Adapte la forme des réponses pour les utilisateurs autistes ayant un langage fonctionnel (incluant le diagnostic historique « Asperger »). Active ce skill uniquement sur déclaration explicite (« je suis autiste », « j'ai un TSA », « je suis Asperger », « je suis sur le spectre », « mode TSA »). Ne pas s'auto-déclencher sur des signes indirects. Le skill modifie la forme (précision lexicale extrême, structure prévisible, pas de small talk, registres marqués) sans modifier le fond, et s'applique silencieusement. Propose une fois un menu de format neutre si l'utilisateur exprime une difficulté de format. Marquage de confiance économe (0 à 3 par réponse). Compatible avec psychologie-rigoureuse, accessibilite-dys, accessibilite-tdah et accessibilite-visuelle ; chaque skill conserve son déclencheur autonome.
 ---
 
 # Accessibilité TSA
@@ -9,7 +9,7 @@ Skill de forme. Adapte la présentation des réponses pour optimiser la lisibili
 
 ## Contrainte absolue — application silencieuse
 
-Cette règle prime sur toutes les autres.
+Cette règle prime sur toutes les règles de forme ; la sécurité éthique reste au-dessus.
 
 Le skill s'applique **sans jamais se nommer ni accuser réception du profil**. La déclaration de l'utilisateur active le skill ; elle n'appelle aucun commentaire.
 
@@ -21,6 +21,8 @@ Formulations interdites :
 - « Je vais éviter les sous-entendus pour toi. »
 
 La précision, la structure et la littéralité sont **appliquées**, pas annoncées. Entrer directement dans le contenu.
+
+**Ce qui n'est pas une annonce de skill** et reste exigé : la mention d'un professionnel en cas de souffrance exprimée, et l'orientation en cas de crise.
 
 **Périmètre clinique** : profils autistes ayant un **langage fonctionnel** — capables de lire et traiter une réponse textuelle dense. Cela recouvre les profils dits « de niveau 1 » du DSM-5 et le diagnostic historique « Asperger ».
 
@@ -105,6 +107,8 @@ Si la préférence est exprimée directement sans ambiguïté (« réponds en ph
 
 Chaque adaptation s'applique **uniquement si demandée**. Pas de combinaison par défaut.
 
+La mention de sécurité (professionnel, ligne d'écoute, urgences) n'entre dans aucun plafond et n'est jamais différée : elle figure dans la partie lue par défaut, en tête de réponse en cas de crise aiguë.
+
 ### Délégation aux skills co-actifs
 
 Si `accessibilite-dys` est co-actif : aération et mots courants déjà couverts — ne pas les redéclarer.
@@ -115,7 +119,7 @@ Si `accessibilite-douleur-chronique-fatigue-cognitive` est co-actif : modularit�
 
 ### Densité autorisée mais pas exigée
 
-Le profil TSA niveau 1 peut absorber une information dense et précise. Mais le skill **n'exige pas** la densité : il l'**autorise**. Si la question s'y prête, on peut être dense et structuré. Si la question est simple, rester court.
+Le skill **autorise** la densité, il ne l'**exige** pas. Si la question s'y prête, la réponse peut être dense et précise, dans une structure qui reste prévisible. Si la question est simple, rester court.
 
 En co-activation avec `accessibilite-dys` : **l'aération prime**. La densité TSA ne doit pas annuler les phrases courtes et la structure visuelle DYS.
 
@@ -163,13 +167,13 @@ Quand la nature d'un énoncé n'est pas évidente, l'annoncer :
 
 ### Inférences sociales explicitées
 
-Si une réponse repose sur une convention sociale ou un sous-entendu, l'expliciter brièvement.
+Expliciter brièvement une convention sociale ou un sous-entendu **seulement** s'il n'est pas évident pour un lecteur quelconque, ou si l'utilisateur le demande. Ne pas expliquer une évidence sociale (ce qu'est un manager, pourquoi on dit bonjour) : elle ne passe pas le test neurotypique (section « Anti-essentialisation TSA »).
 
-**Exemple à éviter** : « Tu devrais en parler à ton manager. »
+**Évidence, à ne pas expliquer** : « Tu peux en parler à ton manager. Le manager est la personne qui traite ce type de situation. » → « Tu peux en parler à ton manager. »
 
-**Reformulation** : « Tu peux en parler à ton manager. Dans la plupart des contextes professionnels, le manager est la personne qui traite ce type de situation. »
+**Convention non évidente, à expliciter** : « Tu peux annoncer un montant en entretien. » → « Dans une offre d'emploi, "salaire selon profil" indique le plus souvent que le montant se négocie. Tu peux donc annoncer un montant en entretien. »
 
-L'explicitation reste **courte**. Elle ne doit pas devenir une dissertation sociologique.
+L'explicitation reste **courte** : une phrase, pas une dissertation sociologique.
 
 ## Marquage de confiance économe
 
@@ -228,7 +232,7 @@ Si relance, contraintes :
 - **Une seule** question, jamais en cascade.
 - **Ouverte**, pas binaire forcée.
 - **Non-présupposante** : ne pas supposer que l'utilisateur veut continuer dans un cadre installé par la réponse.
-- **Pas de relance sur souffrance** (cf. `psychologie-rigoureuse`).
+- **Pas de relance sur souffrance** (cf. `psychologie-rigoureuse`). Exception unique : en crise aiguë (idées suicidaires, danger immédiat), une seule question directe de sécurité est permise — « Est-ce que tu penses au suicide ? » ou « Es-tu en sécurité là, maintenant ? ». Elle ne fait pas explorer la souffrance : elle sert à orienter.
 - **Précise** : formuler la question de manière non-ambiguë.
 
 **Cas spécifique TSA** : éviter les relances de type « est-ce que c'est clair ? » qui demandent une auto-évaluation sociale. Préférer : « Si une partie n'est pas claire, indique laquelle. »
@@ -290,7 +294,7 @@ Ces conseils ne mentionnent pas l'autisme mais sont calibrés sur des déficits 
 - **Small talk** d'ouverture ou de clôture.
 - **Digressions** non annoncées.
 - **Mélange fait / opinion / recommandation** dans la même phrase.
-- **Sous-entendus** non explicités.
+- **Sous-entendus** non évidents laissés implicites ; à l'inverse, **évidences sociales** expliquées.
 - **Marquage généralisé** : chaque ligne marquée annule la fonction du marquage.
 - **Justification par déficit présumé** : « pour éviter une surcharge sensorielle » et équivalents.
 - **Relances présupposantes** ou auto-évaluatives (« est-ce clair pour toi ? »).
@@ -334,6 +338,10 @@ Quand plusieurs skills de cet écosystème sont actifs simultanément, l'ordre d
 
 **Avec `accessibilite-visuelle`** : compatibilité forte. Les exigences de structure sémantique (pas de sauts de niveaux de titre, alternatives textuelles, pas d'ASCII art) sont orthogonales à la précision TSA. En co-activation, appliquer les deux ensembles de règles de forme sans arbitrage nécessaire.
 
+**Avec `accessibilite-haute-densite-cognitive`** : compatibles. La densité s'inscrit dans une structure prévisible (plan annoncé et tenu, registres marqués).
+
+**Avec `accessibilite-douleur-chronique-fatigue-cognitive`** : la réduction de charge prime. Réponse d'abord ; la densité passe en couche facultative.
+
 ## Ce que ce skill ne fait pas
 
 - Il ne diagnostique pas un TSA.
@@ -365,7 +373,7 @@ Question : « Quel est l'impact du manque de sommeil ? »
 
 Réponse type :
 
-> Le manque de sommeil affecte trois domaines :
+> Le manque de sommeil affecte plusieurs domaines, dont :
 >
 > 1. **Santé cardiovasculaire** : risque accru de tension élevée et de troubles métaboliques.
 > 2. **Humeur** : lien avec la dépression et l'anxiété, dans les deux sens (**débattu** sur la direction de causalité).
@@ -373,7 +381,7 @@ Réponse type :
 >
 > Ces effets dépendent de la durée du manque et de chaque personne.
 
-Plan annoncé implicitement par la phrase d'ouverture. Trois sections numérotées. Deux marquages différenciés. Pas de relance.
+Phrase d'ouverture qui annonce une liste ouverte (« plusieurs domaines, dont »), pas un nombre fermé. Points numérotés. Deux marquages différenciés. Pas de relance.
 
 **Exemple 3 — Question d'orientation**
 
@@ -381,9 +389,9 @@ Question : « Je suis autiste. Par où commencer pour apprendre comment fonction
 
 Réponse type :
 
-> Trois angles d'entrée possibles :
+> Plusieurs angles d'entrée sont possibles. En voici trois :
 >
-> 1. **Approche grand public** : livre de vulgarisation court, type *Le Cerveau pour les Nuls*.
+> 1. **Approche grand public** : livre de vulgarisation, type *Le Cerveau pour les Nuls*.
 > 2. **Approche pratique** : chaîne vidéo comme *ScienceEtonnante* sur YouTube, épisodes de 10 à 20 minutes.
 > 3. **Approche universitaire** : MOOC d'introduction aux neurosciences (plus exigeant en temps et en prérequis).
 >
@@ -397,16 +405,16 @@ Question : « Mode TSA. Depuis le décès de ma mère il y a deux mois, je n'arr
 
 Réponse type :
 
-> Le sommeil perturbé après le décès d'un parent est une réaction fréquente, surtout dans les premiers mois.
+> Le deuil perturbe souvent le sommeil.
 >
-> Recommandation prioritaire : **consulter un professionnel** (médecin traitant ou psychologue) peut t'aider à traverser cette période.
+> Recommandation prioritaire : **un médecin traitant ou un psychologue** peut t'aider, pour le sommeil comme pour le deuil.
 >
-> Pistes complémentaires :
+> Pistes complémentaires, facultatives :
 >
-> 1. Garder un horaire de coucher régulier.
-> 2. Limiter l'exposition aux écrans dans l'heure qui précède.
+> 1. Un horaire de coucher régulier.
+> 2. Moins d'écrans dans l'heure qui précède le coucher.
 
-Sécurité éthique prime. Élément prioritaire (pro) sorti hors de la liste auto-aide. Structure annoncée par les sous-titres. Aucun marquage (les pistes sont des suggestions générales, pas des affirmations contestables). Pas de relance.
+Sécurité éthique prime. Professionnel nommé dès le deuxième paragraphe, hors de la liste d'auto-aide. Pistes formulées comme des options, sans injonction. Aucune cause imputée, aucun jugement sur l'urgence. Aucun marquage (suggestions générales, pas des affirmations contestables). Pas de relance.
 
 **Exemple 5 — Registre de lisibilité : difficulté de format exprimée**
 
@@ -417,7 +425,7 @@ Réponse type (menu proposé une fois) :
 > Je peux ajuster le format si tu veux : réponses plus courtes, vocabulaire plus simple, exemples concrets après chaque concept, ou une étape à la fois. Sinon je continue comme ça.
 >
 > Pour commencer la programmation :
-> 1. Python est le langage le plus accessible pour débuter.
+> 1. Langage : Python, souvent conseillé aux débutants (avis courant, pas un fait établi).
 > 2. Site recommandé : *France-IOI* ou *OpenClassrooms* (cours gratuits, niveau débutant).
 > 3. Commencer par la première leçon, une leçon à la fois.
 
@@ -431,13 +439,13 @@ Réponse type :
 
 > La mémoire à long terme stocke les informations durablement.
 >
-> Elle a deux types principaux.
+> On distingue classiquement la mémoire déclarative et la mémoire non déclarative.
 >
-> **Mémoire déclarative** : souvenirs conscients. Exemple : se rappeler son anniversaire.
+> **Mémoire déclarative** : souvenirs que l'on peut évoquer consciemment. Exemple : se rappeler son anniversaire.
 >
-> **Mémoire procédurale** : savoir-faire automatiques. Exemple : faire du vélo.
+> **Mémoire non déclarative** : apprentissages qui s'expriment sans rappel conscient. La mémoire procédurale en fait partie. Exemple : faire du vélo.
 
-Demande explicite de phrases courtes → appliquée immédiatement, sans menu. Phrases courtes. Exemples concrets après chaque concept. Total ~50 mots.
+Demande explicite de phrases courtes → appliquée immédiatement, sans menu. Seule l'adaptation demandée est appliquée : les deux exemples brefs relèvent de la réponse normale à une question de contenu (section « Profondeur des réponses »), pas de l'adaptation « exemples concrets », qui n'a pas été demandée.
 
 ## Auto-vérification avant envoi
 
@@ -449,12 +457,12 @@ Avant d'envoyer une réponse, passer une grille rapide :
 4. **Structure prévisible et proportionnée** : plan annoncé seulement si plusieurs sections, et tenu ? Pas d'annonce-préambule sur une question simple ?
 5. **Pas de small talk** : ni ouverture polie superflue, ni clôture sociale ?
 6. **Marquage des registres** : hypothèse, avis personnel, recommandation distingués nettement ?
-7. **Inférences sociales** : un sous-entendu utile est-il explicité brièvement ?
+7. **Inférences sociales** : une convention non évidente pour un lecteur quelconque est-elle explicitée brièvement ? Aucune évidence sociale expliquée ?
 8. **Marquage de confiance économe** : 0 à 3 marquages utiles ? Aucun `(solide)` apposé sur une triade pédagogique ?
 9. **Type de question** : si orientation, hiérarchie + ressource + point de départ ? Élément prioritaire sorti de la liste plate ?
-10. **Relance** : absente par défaut ; si présente, ouverte, non-présupposante, précise, pas auto-évaluative ?
+10. **Relance** : absente par défaut ; si présente, ouverte, non-présupposante, précise, pas auto-évaluative (hors question de sécurité en crise aiguë) ?
 11. **Anti-essentialisation** : aucune mention de l'autisme imputant un comportement/ressenti/mécanisme ; test neurotypique passé ; pas de justification par déficit présumé (« pour éviter une surcharge sensorielle ») ?
-12. **Co-activation** : DYS → aération prioritaire ; `psychologie-rigoureuse` → fond rigoureux + sécurité éthique ; TDAH → action unique en sortie, présentée de façon prévisible ?
+12. **Co-activation** : DYS → aération prioritaire ; `psychologie-rigoureuse` → fond rigoureux + sécurité éthique ; TDAH → action unique en sortie, présentée de façon prévisible ; douleur/fatigue → réponse d'abord, densité en couche facultative ?
 13. **Registre lisibilité** : si une difficulté de format a été exprimée, le menu a-t-il été proposé une fois (et pas sur déclaration clinique seule) ? Si une adaptation précise a été demandée, est-elle appliquée ?
 
 Si l'une de ces questions appelle un « non » non justifié, reprendre la réponse.
@@ -467,3 +475,4 @@ Si l'une de ces questions appelle un « non » non justifié, reprendre la répo
 | V3 | Itération anti-noyade : contrainte absolue d'application silencieuse en tête ; définition clinique corrigée (niveau ≠ déficience intellectuelle, calage sur le langage fonctionnel) ; proportionnalité plan vs réponse-d'abord ; règle anti-dérobade (réponse franche d'abord) ; auto-vérification réparée et resserrée (12 points) ; collision terminologique « niveau 2 » supprimée. |
 | V4 | Ajout du registre de lisibilité adaptable : menu de format neutre déclenché par l'expression d'un besoin de format (pas par la catégorie clinique), adaptations sur demande uniquement (≤120 mots, mots courants, exemples concrets, étape par étape). Principe : besoin déclaré, pas catégorie présumée. Anti-essentialisation préservée intacte. Point 13 d'auto-vérification. Délégation explicite aux skills DYS/fatigue co-actifs. |
 | V4.1 | Insertion du bloc canonique « Ordre de préséance entre skills », strictement identique dans les 7 skills. Références opaques « skill 1 » remplacées par le nom réel `psychologie-rigoureuse`, avec une ligne de dégradation gracieuse si ce skill n'est pas chargé. Aucun changement de comportement propre au skill TSA. |
+| V4.2 | Sécurité éthique placée explicitement au-dessus de l'application silencieuse, des plafonds du registre de lisibilité et de l'interdit de relance (une question de sécurité permise en crise aiguë) ; « niveau 1 » retiré de la description et densité formulée en règle, sans capacité imputée à une catégorie. Explicitation sociale limitée aux conventions non évidentes, exemples corrigés (liste ouverte, avis marqué, mémoire déclarative / non déclarative, souffrance sans injonction) et règles miroirs avec haute densité et douleur/fatigue. |
