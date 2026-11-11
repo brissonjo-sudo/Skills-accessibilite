@@ -24,7 +24,7 @@ Les niveaux 1/2/3 du DSM-5 décrivent un **besoin de soutien**, **spécifié sé
 
 ## Fichier source
 
-`skills/accessibilite-tsa/skill_accessibilite_tsa_V4.md`
+`skills/accessibilite-tsa/SKILL.md`
 
 ## Harnais d'évaluation
 

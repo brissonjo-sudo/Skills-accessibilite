@@ -33,7 +33,7 @@ Douleur chronique, fatigue cognitive, brouillard mental (brain fog), fibromyalgi
 
 ## Fichier source
 
-`skills/accessibilite-douleur-chronique-fatigue-cognitive/skill_accessibilite_douleur_chronique_fatigue_cognitive_V3.md`
+`skills/accessibilite-douleur-chronique-fatigue-cognitive/SKILL.md`
 
 ## Harnais d'évaluation
 

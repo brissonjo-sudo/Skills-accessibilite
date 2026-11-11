@@ -28,7 +28,7 @@ Inverse fonctionnel des skills DYS/TDAH/TSA : là où ceux-ci réduisent la char
 
 ## Fichier source
 
-`skills/accessibilite-haute-densite-cognitive/skill_accessibilite_haute_densite_cognitive_V3.md`
+`skills/accessibilite-haute-densite-cognitive/SKILL.md`
 
 ## Harnais d'évaluation
 

@@ -6,7 +6,7 @@ Page de référence unique : pour chaque skill, sa version courante, son fichier
 > Source de vérité de l'**historique d'itération** : `docs/bilan_ecosysteme_skills_accessibilite.md`.
 > En cas de divergence, le `SKILL.md` prime sur cet index.
 
-Dernière mise à jour : 2026-08-05 (changements non publiés après l'écosystème v1.19.0).
+Dernière mise à jour : 2026-11-11. Dernière release : 1.19.1. Les versions ci-dessous sont celles de la branche `main` ; elles ne sont pas toutes publiées (voir le tableau du `README.md`).
 
 ---
 
@@ -40,7 +40,7 @@ Dernière mise à jour : 2026-08-05 (changements non publiés après l'écosyst�
 - **Déclencheur** : déclaration explicite uniquement (« j'ai un TDAH », « j'ai un TDA », « trouble de l'attention », « mode TDAH », « réponds-moi de manière TDAH-friendly », « je suis facilement débordé », « j'ai du mal à suivre les longues réponses »).
 - **Ne se déclenche PAS sur** : mention de procrastination, surcharge, oubli, difficulté à finir — ces signaux ne suffisent pas à présumer un profil.
 - **Effet** : chunking, aération, action unique en sortie, gestion des digressions. Ne touche pas au fond.
-- **Compatibilités** : `psychologie-rigoureuse` (fond), DYS, TSA, Fatigue, Visuelle.
+- **Compatibilités** : `psychologie-rigoureuse` (fond), DYS, TSA, Fatigue (l'anti-injonction prime), Visuelle, HDC (la forme TDAH prime).
 
 ### accessibilite-dys — V3.1
 
@@ -48,7 +48,7 @@ Dernière mise à jour : 2026-08-05 (changements non publiés après l'écosyst�
 - **Déclencheur** : déclaration explicite uniquement (« je suis dyslexique », « j'ai une dyspraxie », « mode DYS », « j'ai du mal à lire les textes longs »).
 - **Ne se déclenche PAS sur** : fautes d'orthographe ou signaux indirects.
 - **Effet** : phrases courtes, vocabulaire simple, données hors prose, structure visuelle forte. Ne touche pas au fond.
-- **Compatibilités** : `psychologie-rigoureuse`, TDAH, TSA (tension densité/aération : aération prime), Visuelle.
+- **Compatibilités** : `psychologie-rigoureuse`, TDAH, TSA (tension densité/aération : aération prime), Fatigue, Visuelle, HDC (l'aération DYS prime).
 
 ### accessibilite-tsa — V4.1
 
@@ -56,7 +56,7 @@ Dernière mise à jour : 2026-08-05 (changements non publiés après l'écosyst�
 - **Déclencheur** : déclaration explicite uniquement (« je suis autiste », « j'ai un TSA », « je suis Asperger », « je suis sur le spectre », « mode TSA »).
 - **Ne se déclenche PAS sur** : signes indirects (goût des routines, franc-parler, intérêt intense…).
 - **Effet** : précision lexicale, structure prévisible, pas de small talk, littéralité. Application **silencieuse**. Menu de format neutre proposé une fois si l'utilisateur exprime une difficulté de format.
-- **Compatibilités** : `psychologie-rigoureuse`, DYS, TDAH, Visuelle.
+- **Compatibilités** : `psychologie-rigoureuse`, DYS, TDAH, Fatigue, Visuelle, HDC.
 
 ### accessibilite-haute-densite-cognitive — V3.2
 
@@ -64,7 +64,7 @@ Dernière mise à jour : 2026-08-05 (changements non publiés après l'écosyst�
 - **Déclencheur** : déclaration explicite (« j'ai un HPI », « je suis zèbre », « mode HDC », « je pense de façon associative ») OU besoin explicite de densité (« ne simplifie pas », « garde toute la nuance »).
 - **Ne se déclenche PAS sur** : la seule complexité de la question posée.
 - **Effet** : autorise et structure la profondeur, la nuance, l'exploration multi-couches. Ne touche pas au fond.
-- **Compatibilités** : `psychologie-rigoureuse` et les autres skills. **En co-activation avec un skill de réduction (DYS, TDAH), la réduction prime sur la forme.**
+- **Compatibilités** : `psychologie-rigoureuse` et les autres skills. **En co-activation avec un skill de réduction de charge (DYS, TDAH, Fatigue), la réduction prime sur la forme.** Avec Visuelle, la lisibilité linéaire prime.
 
 ### accessibilite-douleur-chronique-fatigue-cognitive — V3.2
 
@@ -79,7 +79,7 @@ Dernière mise à jour : 2026-08-05 (changements non publiés après l'écosyst�
 - **Périmètre** : forme. Basse vision, cécité avec lecteur d'écran.
 - **Déclencheur** : déclaration explicite (« je suis malvoyant », « je suis non-voyant », « j'utilise un lecteur d'écran »).
 - **Effet** : supprime les références visuelles non autonomes (couleurs, positions, schémas ASCII), évite les emojis décoratifs, structure pour la lecture linéaire. Application **silencieuse**.
-- **Compatibilités** : `psychologie-rigoureuse`, DYS, TDAH, TSA.
+- **Compatibilités** : `psychologie-rigoureuse`, DYS, TDAH, TSA, Fatigue, HDC (la lisibilité linéaire prime).
 
 ---
 
@@ -87,7 +87,7 @@ Dernière mise à jour : 2026-08-05 (changements non publiés après l'écosyst�
 
 Quand plusieurs skills se co-activent, l'ordre canonique sur la **forme** est :
 
-1. **Sécurité éthique** (`psychologie-rigoureuse`) — prime sur tout.
+1. **Sécurité éthique** (commune à tous les skills) — prime sur tout.
 2. `accessibilite-visuelle`
 3. Skills de réduction de charge (`accessibilite-dys`, `accessibilite-tdah`, `accessibilite-douleur-chronique-fatigue-cognitive`)
 4. `accessibilite-tsa`
@@ -111,7 +111,7 @@ Trois niveaux de statut, alignés sur le bilan (§7) : **testée en stress** (ca
 | TSA + Visuelle | documentée | compatibilité forte, règles orthogonales (TSA V4 + Visuelle V1) ; non testée en stress direct |
 | Visuelle + HDC | documentée | lisibilité linéaire prime sur densité |
 | HDC + DYS / TDAH | spécifiée | la réduction de charge prime sur la densité |
-| TDAH + Fatigue | spécifiée | plafond de mots le plus bas prime |
-| HDC + Fatigue | spécifiée | HDC adopte le plafond du skill le plus contraignant |
+| TDAH + Fatigue | spécifiée | l'anti-injonction du skill fatigue prime : l'action unique TDAH devient une option facultative, sans impératif |
+| HDC + Fatigue | spécifiée | réponse courte d'abord ; la profondeur HDC passe dans la couche facultative du skill fatigue |
 | TSA + TDAH, TSA + Fatigue, DYS + Fatigue | spécifiée | non encore testées en stress direct |
 | `psychologie-rigoureuse` + TSA + DYS (fond psy) | spécifiée | triple co-activation, non encore testée en stress direct |

@@ -1,5 +1,7 @@
 # Analyse run Claude — Skill Accessibilité Visuelle V1
 
+> **Archive — ancien outillage promptfoo (juin 2026).** Cette analyse n'est plus reproductible : les gabarits de prompt et le lanceur ont été supprimés, et plusieurs questions de la banque ont été réécrites ou ajoutées depuis. Les numéros de cas ne correspondent plus forcément à la banque actuelle. Référence historique seulement ; la validation courante suit `eval/prompt_benchmark_claude_code.md`.
+
 Date : 2026-06-07
 Modèle : claude-sonnet-4-6 (16 sous-agents isolés, contexte frais par cas)
 Conditions : with_skill (8 cas)

@@ -70,8 +70,8 @@ Exemple : `feat(accessibilite-tsa): ajout règle littéralité des négations`
 
 - Ne **jamais** committer `eval/.env` (clés API réelles)
 - Seul `eval/.env.example` est tracké dans le dépôt
-- Les nouveaux résultats JSON bruts (`results*.json`) ne sont pas commités (trop lourds) ; les archives historiques déjà suivies sont conservées pour la reproductibilité
-- Les analyses Markdown (`eval/analyse_*.md`) sont la source de vérité archivée
+- Les nouveaux résultats JSON bruts (`results*.json`) ne sont pas commités (trop lourds) ; les archives historiques déjà suivies sont conservées comme trace, sans être reproductibles
+- Les analyses Markdown (`eval/analyse_*.md`) sont des archives de l'ancien outillage promptfoo ; elles ne décrivent plus la banque de cas actuelle
 - Pour générer les ZIPs de release : `bash build_release.sh`
 
 ---
@@ -112,8 +112,8 @@ session ouverte à la racine du dépôt.
 métadonnées dans une session d'agents. Elle ne reproduit pas l'implémentation interne du
 mécanisme de découverte d'une plateforme donnée.
 
-Les analyses et décisions sont consignées dans `eval/analyse_*.md`, source de vérité
-archivée. Pour appuyer une promotion, la vague produit obligatoirement un paquet assaini
+Les `eval/analyse_*.md` sont des archives de l'ancien outillage. Le rapport d'une vague
+est son `report.md`. Pour appuyer une promotion, la vague produit obligatoirement un paquet assaini
 suivi dans `eval/evidence/<identifiant>/` : `manifest.json`, `activation_results.jsonl`,
 `verdicts.jsonl`, `metrics.json` et `report.md` — ces cinq fichiers, et aucun autre. Il
 exclut les réponses brutes, la table A/B et tout secret. Ce paquet est inclus dans la même

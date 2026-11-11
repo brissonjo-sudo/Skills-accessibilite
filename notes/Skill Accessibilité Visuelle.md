@@ -28,7 +28,7 @@ Deux profils couverts :
 
 ## Fichier source
 
-`skills/accessibilite-visuelle/skill_accessibilite_visuelle_V1.md`
+`skills/accessibilite-visuelle/SKILL.md`
 
 ## Harnais d'évaluation
 

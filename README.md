@@ -6,6 +6,8 @@
 
 Un écosystème de skills conçus pour Claude. Chaque skill programme le comportement du modèle pour répondre de façon adaptée aux personnes ayant des besoins cognitifs, sensoriels ou neurobiologiques spécifiques.
 
+*English summary: [README.en.md](README.en.md).*
+
 ---
 
 ## Qu'est-ce qu'un skill ?
@@ -16,19 +18,21 @@ Un skill est un dossier contenant un fichier `SKILL.md` (instructions + métadon
 
 ## Skills disponibles
 
-| Dossier | Skill | Version | Description |
-|---|---|---|---|
-| `skills/psychologie-rigoureuse/` | Psychologie rigoureuse | V6.2 | Cadre d'analyse psychologique non dogmatique, marquage du degré de confiance |
-| `skills/accessibilite-tdah/` | TDAH | V2.3 | Communication adaptée aux profils TDAH : structure, ancrage, charge cognitive réduite |
-| `skills/accessibilite-dys/` | DYS | V3.1 | Adaptation pour dyslexie, dysorthographie, dyspraxie, dyscalculie : lisibilité, reformulation |
-| `skills/accessibilite-tsa/` | TSA | V4.1 | Communication adaptée aux personnes autistes : littéralité, prévisibilité, pas de sous-entendus |
-| `skills/accessibilite-haute-densite-cognitive/` | Haute densité cognitive | V3.2 | Réponses denses et rigoureuses pour profils HDC/HPI : profondeur, rigueur épistémique |
-| `skills/accessibilite-douleur-chronique-fatigue-cognitive/` | Douleur chronique / Fatigue cognitive | V3.2 | Adaptation pour fatigue cognitive et douleur persistante : économie cognitive, modularité |
-| `skills/accessibilite-visuelle/` | Accessibilité visuelle | V1.2 | Adaptation pour basse vision et cécité : structure sémantique, alternatives textuelles, compatibilité lecteur d'écran |
+| Skill (dossier dans `skills/`) | Version sur `main` | Statut | Publiée (1.19.1) | Description |
+|---|---|---|---|---|
+| Psychologie rigoureuse (`psychologie-rigoureuse`) | V6.2 | candidat | V6.1 | Cadre d'analyse psychologique non dogmatique, marquage du degré de confiance |
+| TDAH (`accessibilite-tdah`) | V2.3 | candidat | V2.2 | Communication adaptée aux profils TDAH : structure, ancrage, charge cognitive réduite |
+| DYS (`accessibilite-dys`) | V3.1 | production | V3.1 | Adaptation pour dyslexie, dysorthographie, dyspraxie, dyscalculie : lisibilité, reformulation |
+| TSA (`accessibilite-tsa`) | V4.1 | production | V4.1 | Communication adaptée aux personnes autistes : littéralité, prévisibilité, pas de sous-entendus |
+| Haute densité cognitive (`accessibilite-haute-densite-cognitive`) | V3.2 | candidat | V3.1 | Réponses denses et rigoureuses pour profils HDC/HPI : profondeur, rigueur épistémique |
+| Douleur chronique / Fatigue cognitive (`accessibilite-douleur-chronique-fatigue-cognitive`) | V3.2 | candidat | V3.1 | Adaptation pour fatigue cognitive et douleur persistante : économie cognitive, modularité |
+| Accessibilité visuelle (`accessibilite-visuelle`) | V1.2 | candidat | V1.1 | Adaptation pour basse vision et cécité : structure sémantique, alternatives textuelles, compatibilité lecteur d'écran |
+
+**Lire ce tableau.** La colonne « Publiée » donne la version contenue dans les ZIP de la [dernière release](https://github.com/brissonjo-sudo/Skills-accessibilite/releases/latest) : c'est celle que tu installes. La colonne « Version sur `main` » donne l'état du dépôt, qui peut être en avance. Un skill « candidat » a été modifié depuis sa dernière validation ; il sera publié après une vague de validation indépendante. La release 1.19.1 corrige une erreur factuelle et un défaut de chargement de la 1.19.0, sans changer de numéro de version par skill.
 
 Chaque dossier contient un fichier **`SKILL.md`** : un en-tête YAML (`name`, `description`) suivi des règles du skill.
 
-Pour chaque skill — **version stable, déclencheur, quand l'utiliser / quand ne pas l'utiliser, compatibilités et statut d'évaluation** — voir l'index canonique : [`docs/index_skills.md`](docs/index_skills.md). Des cas d'usage concrets sont rassemblés dans [`docs/usage.md`](docs/usage.md). Les conventions de contribution sont décrites dans [`AGENTS.md`](AGENTS.md).
+Pour chaque skill — **version courante, déclencheur, quand l'utiliser / quand ne pas l'utiliser, compatibilités et statut d'évaluation** — voir l'index canonique : [`docs/index_skills.md`](docs/index_skills.md). Des cas d'usage concrets sont rassemblés dans [`docs/usage.md`](docs/usage.md). Les conventions de contribution sont décrites dans [`AGENTS.md`](AGENTS.md).
 
 Le fichier `docs/bilan_ecosysteme_skills_accessibilite.md` présente la philosophie commune et l'historique d'itération entre skills.
 
@@ -38,14 +42,14 @@ Le fichier `docs/bilan_ecosysteme_skills_accessibilite.md` présente la philosop
 
 ### Méthode recommandée — Upload du ZIP (Capabilities)
 
-Chaque skill se télécharge sous forme de ZIP depuis la [page Releases](../../releases) du dépôt.
+Chaque skill se télécharge sous forme de ZIP depuis la [page Releases](https://github.com/brissonjo-sudo/Skills-accessibilite/releases/latest) du dépôt.
 
 1. Dans Claude, ouvre **Paramètres → Capabilities**.
 2. Clique sur **« + »** puis **Create skill**.
 3. Choisis **Upload** et sélectionne le ZIP du skill (un ZIP = un skill).
 4. Le skill devient disponible et s'active selon son déclencheur (voir la `description` de chaque skill).
 
-> Un ZIP contient le dossier du skill à sa racine (`accessibilite-tsa/SKILL.md`, etc.). Importe un ZIP à la fois.
+> Un ZIP contient uniquement le dossier du skill et son `SKILL.md` (`accessibilite-tsa/SKILL.md`, etc.). Importe un ZIP à la fois.
 
 ### Méthode alternative — Coller dans le prompt système
 
@@ -61,30 +65,36 @@ Si tu n'utilises pas la fonctionnalité Capabilities :
 
 ```
 skills-accessibilite/
-├── README.md
+├── README.md              # ce fichier
+├── README.en.md           # résumé en anglais
+├── AGENTS.md              # conventions et invariants, pour agents et contributeurs
+├── CONTRIBUTING.md        # critères d'acceptation d'un skill, versionnement, vagues
 ├── CHANGELOG.md
-├── .gitignore
-├── skills/
+├── LICENSE
+├── build_release.sh       # génère un ZIP par skill dans dist/
+├── requirements-ci.txt    # dépendance des scripts de validation
+├── skills/                # un dossier par skill, un seul fichier SKILL.md
 │   ├── psychologie-rigoureuse/
-│   │   └── SKILL.md
 │   ├── accessibilite-tdah/
-│   │   └── SKILL.md
 │   ├── accessibilite-dys/
-│   │   └── SKILL.md
 │   ├── accessibilite-tsa/
-│   │   └── SKILL.md
 │   ├── accessibilite-haute-densite-cognitive/
-│   │   └── SKILL.md
 │   ├── accessibilite-douleur-chronique-fatigue-cognitive/
-│   │   └── SKILL.md
 │   └── accessibilite-visuelle/
-│       └── SKILL.md
-├── eval/                  # banque de cas + protocole de validation en vagues
-│   ├── promptfooconfig*.yaml
-│   ├── prompt_benchmark_claude_code.md
-│   └── README.md
-└── docs/
-    └── bilan_ecosysteme_skills_accessibilite.md
+├── docs/
+│   ├── index_skills.md    # index canonique : versions, déclencheurs, statuts
+│   ├── note_ethique.md    # limites éthiques
+│   ├── usage.md           # cas d'usage concrets
+│   └── bilan_ecosysteme_skills_accessibilite.md   # historique d'itération
+├── eval/                  # banques de cas + protocole de validation en vagues
+│   ├── promptfooconfig*.yaml            # banques de cas comportementaux
+│   ├── activation_cases.json            # cas de déclenchement et de non-déclenchement
+│   ├── prompt_benchmark_claude_code.md  # protocole d'une vague
+│   ├── README.md
+│   └── analyse_*.md, results*.json      # archives de l'ancien outillage
+├── scripts/               # contrôles exécutés par la CI
+├── .github/               # workflows (validation, release, relecture automatique)
+└── notes/                 # notes de travail, non normatives
 ```
 
 Chaque skill tient dans un unique `SKILL.md` (< 500 lignes, en deçà du seuil de découpage recommandé par Anthropic). Le contenu — règles, exemples de calibrage, historique — reste dans un seul fichier pour que le comportement soit complet dès le déclenchement.
