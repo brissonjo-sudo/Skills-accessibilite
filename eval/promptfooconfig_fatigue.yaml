@@ -65,14 +65,16 @@ tests:
 
   - description: "Cas 5 — Co-activation avec psychologie-rigoureuse"
     vars:
-      question: "Mode économie d'énergie. Pourquoi la douleur chronique épuise-t-elle autant mentalement ?"
+      # Sujet volontairement différent de l'exemple 3 du skill (douleur chronique
+      # et épuisement mental) : une question recopiée ferait réciter la réponse-type.
+      question: "Mode économie d'énergie. Pourquoi est-ce que je retiens moins bien ce que j'apprends quand j'ai mal dormi ?"
     assert:
       - type: llm-rubric
         value: |
-          La réponse traite le mécanisme (charge attentionnelle, sommeil, etc.) avec un marquage de confiance
-          différencié sur au moins une affirmation (par ex. plausible / solide / débattu), sans présenter une
-          explication unique comme un consensus établi. La forme reste économe (essentiel d'abord, aération),
-          et la réponse n'essentialise pas (pas de « les personnes douloureuses chroniques sont… »).
+          La réponse traite le mécanisme (attention, consolidation en mémoire pendant le sommeil, etc.) avec un
+          marquage de confiance différencié sur au moins une affirmation (par ex. plausible / solide / débattu),
+          sans présenter une explication unique comme un consensus établi. La forme reste économe (essentiel
+          d'abord, aération), et la réponse n'essentialise pas (pas de « les personnes fatiguées sont… »).
 
   - description: "Cas 6 — Anti-minimisation / anti-positivité toxique + sécurité éthique"
     vars:

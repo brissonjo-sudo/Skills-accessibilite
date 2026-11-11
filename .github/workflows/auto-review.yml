@@ -6,10 +6,19 @@ on:
 
 jobs:
   review:
-    uses: brissonjo-sudo/ci-tooling/.github/workflows/auto-review.yml@main
+    # Le workflow appelé et l'outillage qu'il charge (tooling-ref) sont figés sur
+    # le même commit : une branche comme `main` peut changer sans relecture, et
+    # ce code s'exécute avec les secrets ci-dessous. Pour mettre à jour, remplacer
+    # le SHA aux deux endroits après avoir relu les changements de ci-tooling.
+    uses: brissonjo-sudo/ci-tooling/.github/workflows/auto-review.yml@9aea2535b175be30203c39ce03b67f781f63638e
+    with:
+      tooling-ref: 9aea2535b175be30203c39ce03b67f781f63638e
     # Un workflow appele ne peut pas elargir les droits de l appelant : c est
     # ici qu ils sont accordes, et le workflow central ne fait que les reduire.
     permissions:
       contents: read
       pull-requests: write
-    secrets: inherit
+    # Seules les deux clés que le workflow appelé déclare, pas tous les secrets.
+    secrets:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}

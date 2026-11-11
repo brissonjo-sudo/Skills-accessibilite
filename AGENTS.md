@@ -20,24 +20,29 @@ Guide de contribution pour agents (Claude Code, Codex) et humains travaillant su
 | `docs/note_ethique.md` | Limites éthiques (pas de diagnostic, pas de soin, pas de substitution). |
 | `docs/usage.md` | Cas d'usage concrets par skill. |
 | `eval/` | Banques de cas comportementaux et d'activation, protocole de validation en vagues (`prompt_benchmark_claude_code.md`) et preuves assainies versionnées. |
-| `scripts/validate_skills.py` | Validation structurelle (CI + pré-commit). Stdlib uniquement. |
+| `scripts/validate_skills.py` | Validation structurelle des skills (CI). Dépend de PyYAML (`requirements-ci.txt`). |
+| `scripts/check_*.py` | Contrôles des banques d'évaluation, des cas d'activation et des paquets de preuves (CI). |
 | `.github/workflows/` | `validate.yml` (push/PR sur `main`), `release.yml` (publication des ZIP sur tag). |
 | `build_release.sh` | Valide puis génère un ZIP par skill dans `dist/`. |
 | `notes/` | Notes de travail (vault Obsidian), non normatif. |
 
 ## Invariants des skills (vérifiés par `validate_skills.py`)
 
-1. **Frontmatter YAML** présent : `name` et `description`.
-2. **`name` == nom du dossier** (ex. `accessibilite-tsa`).
-3. **`description` ≤ 1024 caractères** (contrainte format Claude Skills).
-4. **Fichier < 500 lignes** (seuil de découpage recommandé par Anthropic ; les skills tiennent volontairement en un seul fichier).
-5. **Bloc « Ordre de préséance entre skills » strictement identique** dans les 7 `SKILL.md` (comparé par hash sha256). Modifier ce bloc = le modifier à l'identique partout.
+1. **Frontmatter YAML** présent, fermé par `---` et lisible par un parseur YAML strict : `name` et `description`. Seules les clés acceptées à l'import dans claude.ai sont permises (`name`, `description`, `license`, `compatibility`, `metadata`, `allowed-tools`).
+2. **`name` == nom du dossier** (ex. `accessibilite-tsa`), en minuscules, chiffres et tirets simples, 64 caractères au plus.
+3. **`description` ≤ 1024 caractères** (contrainte format Claude Skills), mesurée sur la valeur lue par le parseur.
+4. **Fichier < 500 lignes** (seuil de découpage recommandé par Anthropic).
+5. **Un skill = un seul fichier** : le dossier ne contient que `SKILL.md`. Tout autre fichier partirait dans la distribution sans avoir été évalué.
+6. **Bloc « Ordre de préséance entre skills » strictement identique** dans les 7 `SKILL.md` (comparé par hash sha256). Modifier ce bloc = le modifier à l'identique partout.
 
 Toujours lancer la validation avant de committer un changement de skill :
 
 ```bash
-python3 scripts/validate_skills.py   # exit 0 = OK
+python -m pip install -r requirements-ci.txt   # une fois
+python scripts/validate_skills.py              # exit 0 = OK
 ```
+
+Sous Linux et macOS, la commande est `python3`.
 
 ## Principes de conception (non négociables)
 

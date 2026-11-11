@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # check_eval_leaks.py — Détecte les questions de test recopiées du skill évalué.
-# Stdlib uniquement (pas de dépendance externe : le CI n'installe rien).
+# Dépendance : PyYAML (voir requirements-ci.txt).
+# Codes de sortie : 0 = conforme, 1 = recopie détectée, 2 = banque illisible.
 #
 # Pourquoi ce contrôle existe
 # ---------------------------
@@ -11,22 +12,46 @@
 #
 # Ce qui n'est PAS une fuite : partager la phrase de déclenchement documentée
 # (« je suis non-voyant », « mode HDC »). C'est nécessaire pour activer le skill.
-# Le seuil porte donc sur la part de la QUESTION recouverte par le skill.
+# Les seuils portent donc sur la part de la QUESTION recouverte par le skill.
+#
+# Deux mesures complémentaires
+# ----------------------------
+# 1. La plus longue sous-chaîne commune : attrape la recopie d'un seul tenant.
+# 2. L'alignement mot à mot avec chaque ligne du skill : attrape la recopie
+#    retouchée (un mot remplacé au milieu), que la première mesure laisse passer.
+#    La comparaison se fait ligne par ligne pour ne pas confondre une recopie
+#    avec une question qui réunit deux phrases de déclenchement documentées.
+#
+# Limite connue : une question assemblée à partir de fragments pris à des
+# endroits différents du skill n'est pas détectée.
 
-import re
 import sys
 import unicodedata
+from difflib import SequenceMatcher
 from pathlib import Path
 
 import yaml
 
+from _common import utf8_stdio
+
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
 
-# Part de la question devant figurer dans le skill pour parler de recopie.
+# Part de la question devant figurer d'un seul tenant dans le skill.
 MAX_COVERAGE = 0.75
 # Longueur minimale d'une sous-chaîne commune prise en compte (caractères normalisés).
 MIN_LCS = 25
+# Part des mots de la question pouvant s'aligner, dans l'ordre, sur une même
+# ligne du skill. Seules les suites d'au moins MIN_RUN mots comptent : les mots
+# isolés (« de », « la ») ne prouvent rien.
+MAX_LINE_COVERAGE = 0.8
+MIN_RUN = 2
+# En dessous, une question est trop courte pour que la mesure ait un sens.
+MIN_QUESTION_WORDS = 5
+
+
+class BankError(Exception):
+    """Banque de cas illisible ou incomplète."""
 
 
 def normalize(text: str) -> str:
@@ -57,9 +82,29 @@ def longest_common_substring(needle: str, haystack: str, floor: int) -> str | No
     return None
 
 
+def line_coverage(question_words: list[str], skill_lines: list[list[str]]) -> float:
+    """Meilleure part des mots de la question alignés sur une seule ligne du skill."""
+    if len(question_words) < MIN_QUESTION_WORDS:
+        return 0.0
+    best = 0
+    for line_words in skill_lines:
+        matcher = SequenceMatcher(None, question_words, line_words, autojunk=False)
+        matched = sum(
+            block.size for block in matcher.get_matching_blocks() if block.size >= MIN_RUN
+        )
+        best = max(best, matched)
+    return best / len(question_words)
+
+
 def iter_cases(config: Path):
-    """Extrait (question, [chemins de skill]) depuis le YAML déjà validé."""
-    data = yaml.safe_load(config.read_text(encoding="utf-8"))
+    """Extrait (question, [chemins de skill]) d'une banque YAML."""
+    try:
+        data = yaml.safe_load(config.read_text(encoding="utf-8"))
+    except (OSError, yaml.YAMLError) as exc:
+        detail = " ".join(str(exc).split())
+        raise BankError(f"{config.name} : YAML illisible ({detail})") from exc
+    if not isinstance(data, dict) or not isinstance(data.get("tests"), list):
+        raise BankError(f"{config.name} : liste `tests` absente")
 
     def refs(vars_block: dict) -> list[str]:
         paths = []
@@ -69,22 +114,27 @@ def iter_cases(config: Path):
                 paths.append(str((config.parent / value[len("file://"):]).resolve()))
         return paths
 
-    default_vars = (data.get("defaultTest") or {}).get("vars") or {}
-    default_skills = refs(default_vars)
+    default_test = data.get("defaultTest")
+    default_vars = default_test.get("vars") if isinstance(default_test, dict) else None
+    default_skills = refs(default_vars) if isinstance(default_vars, dict) else []
     cases: list[tuple[str, list[str]]] = []
-    for test in data.get("tests", []):
-        vars_block = test.get("vars") or {}
-        cases.append((vars_block["question"], refs(vars_block) or default_skills))
+    for index, test in enumerate(data["tests"], start=1):
+        vars_block = test.get("vars") if isinstance(test, dict) else None
+        question = vars_block.get("question") if isinstance(vars_block, dict) else None
+        if not isinstance(question, str) or not question.strip():
+            raise BankError(f"{config.name} : cas #{index} sans `vars.question`")
+        cases.append((question, refs(vars_block) or default_skills))
     return cases
 
 
 def main() -> int:
+    utf8_stdio()
     configs = sorted((ROOT / "eval").glob("promptfooconfig*.yaml"))
     if not configs:
-        print("[WARN] Aucun fichier eval/promptfooconfig*.yaml trouvé")
-        return 0
+        print("[ERREUR] Aucun fichier eval/promptfooconfig*.yaml trouvé")
+        return 2
 
-    skill_cache: dict[str, str] = {}
+    skill_cache: dict[str, tuple[str, list[list[str]]]] = {}
     leaks: list[str] = []
     n_cases = 0
 
@@ -93,29 +143,47 @@ def main() -> int:
     print("=" * 60)
 
     for config in configs:
-        for question, skills in iter_cases(config):
+        try:
+            cases = iter_cases(config)
+        except BankError as exc:
+            print(f"[ERREUR] {exc}")
+            return 2
+        for question, skills in cases:
             n_cases += 1
             q_norm = normalize(question)
             if not q_norm:
                 continue
+            q_words = q_norm.split()
             for skill_path in skills:
                 if skill_path not in skill_cache:
                     p = Path(skill_path)
                     if not p.exists():
                         print(f"[ERREUR] skill introuvable : {skill_path}")
-                        return 1
-                    skill_cache[skill_path] = normalize(p.read_text(encoding="utf-8"))
+                        return 2
+                    text = p.read_text(encoding="utf-8")
+                    lines = [normalize(line).split() for line in text.splitlines()]
+                    skill_cache[skill_path] = (
+                        normalize(text),
+                        [words for words in lines if len(words) >= MIN_RUN],
+                    )
+                s_norm, s_lines = skill_cache[skill_path]
+                skill_label = f"{Path(skill_path).parent.name}/SKILL.md"
 
-                frag = longest_common_substring(q_norm, skill_cache[skill_path], MIN_LCS)
-                if not frag:
-                    continue
-                coverage = len(frag) / len(q_norm)
+                frag = longest_common_substring(q_norm, s_norm, MIN_LCS)
+                coverage = len(frag) / len(q_norm) if frag else 0.0
+                aligned = line_coverage(q_words, s_lines)
                 if coverage >= MAX_COVERAGE:
                     leaks.append(
                         f"{config.name} :: {question[:60]}…\n"
-                        f"         {coverage:.0%} de la question figure dans "
-                        f"{Path(skill_path).parent.name}/SKILL.md\n"
+                        f"         {coverage:.0%} de la question figure d'un seul "
+                        f"tenant dans {skill_label}\n"
                         f"         extrait : « {frag[:80]}… »"
+                    )
+                elif aligned >= MAX_LINE_COVERAGE:
+                    leaks.append(
+                        f"{config.name} :: {question[:60]}…\n"
+                        f"         {aligned:.0%} des mots de la question s'alignent "
+                        f"sur une même ligne de {skill_label}"
                     )
 
     print(f"cas analysés : {n_cases}")
@@ -126,7 +194,10 @@ def main() -> int:
         print("Réécrire la question : garder la phrase de déclenchement, changer le sujet.")
         return 1
 
-    print(f"[OK]     aucune question ne dépasse {MAX_COVERAGE:.0%} de recouvrement")
+    print(
+        f"[OK]     aucune question ne dépasse {MAX_COVERAGE:.0%} de recouvrement "
+        f"continu ni {MAX_LINE_COVERAGE:.0%} d'alignement sur une ligne du skill"
+    )
     return 0
 
 

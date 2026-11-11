@@ -5,10 +5,13 @@
 ### Critères minimum d'acceptation
 
 **Fichier**
-- Nommé `SKILL.md`, placé dans `skills/<nom-du-skill>/`
+- Nommé `SKILL.md`, placé dans `skills/<nom-du-skill>/`, seul fichier de ce dossier
 - Frontmatter YAML avec :
-  - `name` : ≤ 64 caractères, uniquement `a-z0-9-`
+  - `name` : ≤ 64 caractères, uniquement `a-z0-9-`, identique au nom du dossier
   - `description` : ≤ 1024 caractères, résume le comportement et le déclencheur
+  - aucune autre clé que celles acceptées à l'import dans claude.ai (`license`,
+    `compatibility`, `metadata`, `allowed-tools`)
+- Ces points sont vérifiés en CI par `scripts/validate_skills.py`
 
 **Déclencheur documenté**
 - Le skill doit documenter explicitement les formulations qui l'activent
@@ -24,7 +27,9 @@
 - Formulation actionnable (ex. : « Vérifie que chaque règle est appliquée »)
 
 **Banque de cas**
-- Fichier `eval/promptfooconfig_<nom>.yaml` dédié
+- Un fichier `eval/promptfooconfig_<suffixe>.yaml` dédié, dont `defaultTest.vars.skill`
+  pointe vers le `SKILL.md` du skill : c'est ce lien, et non le nom du fichier, que
+  `scripts/check_eval_configs.py` vérifie (une banque par skill, ni plus ni moins)
 - Minimum 6 cas comportementaux
 - Chaque cas porte au moins une assertion sémantique (`llm-rubric`) ; les assertions
   déterministes (`javascript`) s'ajoutent quand le critère est mécaniquement vérifiable
@@ -110,6 +115,13 @@ mécanisme de découverte d'une plateforme donnée.
 Les analyses et décisions sont consignées dans `eval/analyse_*.md`, source de vérité
 archivée. Pour appuyer une promotion, la vague produit obligatoirement un paquet assaini
 suivi dans `eval/evidence/<identifiant>/` : `manifest.json`, `activation_results.jsonl`,
-`verdicts.jsonl`, `metrics.json` et `report.md`. Il exclut les réponses brutes, la table
-A/B et tout secret. Ce paquet est inclus dans la même PR que la promotion ; la CI vérifie
-qu'il couvre chaque skill modifié ou nouvellement marqué `production`.
+`verdicts.jsonl`, `metrics.json` et `report.md` — ces cinq fichiers, et aucun autre. Il
+exclut les réponses brutes, la table A/B et tout secret. Ce paquet est inclus dans la même
+PR que la promotion ; la CI (`scripts/check_evidence.py`) vérifie qu'il couvre chaque skill
+modifié ou nouvellement marqué `production`.
+
+Le manifeste porte, pour chaque skill validé, l'empreinte SHA-256 du `SKILL.md` évalué
+(`skill_sha256`). La CI la compare au fichier présent dans la PR : **une vague doit donc
+porter sur l'état final du skill**. Toute retouche du `SKILL.md` après la vague demande une
+nouvelle vague. Rétrograder un skill en `candidat` dans la PR qui le modifie ne dispense
+pas de la preuve.

@@ -11,6 +11,31 @@ Correctifs issus du premier benchmark contrôlé avec/sans skill (130 réponses 
 
 > **Validation.** Ces correctifs s'appuient sur le run `eval/runs/20260805-001935/` et sa vérification ciblée `eval/runs/20260805-181022-verif/` (protocole `eval/prompt_benchmark_claude_code.md`). Ce run a été conduit et jugé par le même agent que celui qui a écrit les correctifs : les montées de version restent **à confirmer par une vague indépendante**, d'où le statut « candidat » dans `docs/index_skills.md`.
 
+### Corrigé — outillage et CI
+
+Suite de l'audit du 2026-11-11 : plusieurs contrôles laissaient passer ce qu'ils étaient censés arrêter. Chaque correctif a été vérifié en rejouant, sur une copie du dépôt, les 48 mutations de l'audit.
+
+- **`scripts/validate_skills.py`** lit le frontmatter avec un parseur YAML (PyYAML) au lieu de le découper sur le premier `:`. Sont désormais refusés : une séquence ou un alias YAML dans une valeur, une ligne de continuation contenant `: `, un ` #` qui tronque la valeur sans erreur, une description en bloc `>` dépassant 1024 caractères, un `name` placé dans une sous-clé, un `---` fermant absent, un BOM en tête de fichier, une clé de frontmatter que claude.ai refuse à l'import, un `name` hors format (minuscules, chiffres, tirets, 64 caractères), et tout fichier autre que `SKILL.md` dans le dossier d'un skill. Un `name` quoté, valide en YAML, n'est plus rejeté à tort.
+- **`scripts/check_evidence.py`** n'est plus contournable par la mise en forme de l'index :
+  - la colonne « Statut » est repérée par son en-tête, et la décoration Markdown ou un emoji n'empêche plus de reconnaître « production » ;
+  - un skill absent du tableau, ou au statut inconnu, fait échouer le contrôle ;
+  - modifier un skill et le rétrograder en « candidat » dans la même PR ne dispense plus de la preuve ;
+  - tout fichier sous `skills/<nom>/` compte comme une modification du skill ;
+  - une base de comparaison vide, nulle ou introuvable ne désactive plus le contrôle (repli sur `origin/main`) ;
+  - un paquet de preuves est une liste fermée de cinq fichiers : `blinding_map.json` et `raw_generations.jsonl` y sont refusés ;
+  - le manifeste porte l'empreinte du `SKILL.md` évalué (`skill_sha256`) : un paquet qui porte sur une autre version du skill ne compte pas. Une vague doit donc évaluer l'état final ;
+  - chaque ligne de `verdicts.jsonl` et de `activation_results.jsonl` doit porter ses champs d'identification : une ligne `{}` n'est plus une preuve.
+- **`scripts/check_eval_leaks.py`** attrape aussi la recopie retouchée (un mot changé au milieu de la question), par alignement mot à mot avec chaque ligne du skill. Ce contrôle a trouvé une recopie que l'ancien ratait : le cas 5 de la banque fatigue reprenait presque mot pour mot l'exemple 3 du skill. La question porte désormais sur un autre sujet.
+- **`scripts/check_eval_configs.py`** vérifie que chaque skill a exactement une banque dédiée, d'après le skill que la banque déclare, et non plus une liste de noms de fichiers. La syntaxe des assertions JavaScript est compilée avec `node`.
+- **`scripts/check_activation_cases.py`** accepte deux champs facultatifs, `also_expected` et `must_not_activate`, pour les cas de co-activation et les faux positifs croisés.
+- **Sortie des scripts en UTF-8** : sous Windows, une sortie redirigée faisait planter `validate_skills.py` au milieu du message d'erreur.
+- **`release.yml`** rejoue toute la validation (`validate.yml`) avant de publier, au lieu du seul `validate_skills.py`. Le tag doit être de la forme `X.Y.Z` et porter sur un commit de `main` ou d'une branche `hotfix/*`. Le contrôle des preuves compare au tag précédent.
+- **`validate.yml`** refuse tout `blinding_map.json`, tout fichier de `eval/runs/` et tout `.env` suivi par Git, et vérifie que chaque ZIP contient uniquement `<nom>/SKILL.md`.
+- **Chaîne d'approvisionnement** : actions GitHub épinglées par SHA, `pip install --require-hashes`, jeton non conservé après le checkout. Le workflow de relecture externe est figé sur un commit (y compris l'outillage qu'il charge) et ne reçoit plus que les deux secrets qu'il déclare, au lieu de `secrets: inherit`.
+- **Relecture automatique** : la configuration du relecteur et les workflows sont ajoutés aux fichiers protégés. Le motif d'essentialisation couvre les majuscules, « les personnes … », « des/aux … », « zèbres » accentué et « avec ton TDAH ».
+- **`build_release.sh`** n'a plus besoin de `zip` et trouve l'interpréteur Python sous Windows. Chaque archive ne contient que `SKILL.md`.
+- **`.gitattributes`** impose les fins de ligne LF aux scripts et aux fichiers YAML.
+
 ### Modifié — la validation ne passe plus par promptfoo
 
 L'évaluation automatisée est abandonnée. La validation se fait désormais en **vagues** : une
@@ -48,7 +73,7 @@ bout en bout — deux conditions appariées, aveuglement A/B, trois juges indép
 ### Corrigé — chargement des skills
 
 - **Frontmatter invalide en YAML strict** dans `accessibilite-tdah` (V2.2 → V2.3) et `psychologie-rigoureuse` (V6.1 → V6.2) : un `:` suivi d'un espace dans une valeur non quotée fait échouer tout parseur YAML strict (`mapping values are not allowed here`). Défaut présent depuis l'origine et invisible pour le validateur, qui découpait le frontmatter sur le premier `:`. Remplacé par un tiret cadratin.
-- **`scripts/validate_skills.py`** détecte désormais ce défaut (contrôle `find_yaml_breaking_scalars`, stdlib uniquement — le CI n'installe aucune dépendance).
+- **`scripts/validate_skills.py`** détecte désormais ce défaut. D'abord par un contrôle ciblé (`find_yaml_breaking_scalars`), puis par un vrai parseur YAML — voir « Corrigé — outillage et CI » ci-dessous.
 
 ### Corrigé — doctrine de co-activation
 
@@ -80,6 +105,23 @@ bout en bout — deux conditions appariées, aveuglement A/B, trois juges indép
 
 - `eval/runs/` ajouté à `eval/.gitignore`. Ce répertoire contient `blinding_map.json`, la table de correspondance A/B des juges : la committer annulerait rétroactivement l'aveuglement du protocole.
 - Le contrôle « aucun `.env` commité », perdu lors de la refonte du workflow CI, est rétabli.
+
+---
+
+## [1.19.1] — 2026-11-11
+
+Correctif à chaud publié depuis la branche `hotfix/1.19.1`, partie du tag `1.19.0`. Limité à l'exactitude et au chargement des skills. **Aucun changement de comportement** : les règles des 7 skills sont identiques à 1.19.0, et les numéros de version par skill ne changent pas. Ces deux correctifs figurent aussi dans `[Non publié]`, où ils s'accompagnent de changements de comportement.
+
+> **Exception assumée à la règle « montée de version = vague de validation ».** Ce correctif ne modifie aucune règle : il retire une erreur factuelle dans un exemple et rend deux frontmatters lisibles par un parseur YAML strict.
+
+### Corrigé
+
+- **`accessibilite-visuelle`** : l'exemple 4 citait « les CRPV en France » comme structures d'accompagnement des personnes déficientes visuelles. Ce sigle désigne les Centres Régionaux de Pharmacovigilance. Remplacé par deux organismes réels, vérifiés le 2026-11-11 : l'Association Valentin Haüy et la Fédération des Aveugles et Amblyopes de France.
+- **`accessibilite-tdah`** et **`psychologie-rigoureuse`** : la `description` du frontmatter contenait un `:` suivi d'un espace dans une valeur non quotée, ce qui fait échouer tout parseur YAML strict. Remplacé par un tiret cadratin.
+
+### Défauts connus, non corrigés dans cette version
+
+- **`accessibilite-douleur-chronique-fatigue-cognitive`** : la ressource de crise peut encore être placée dans la couche facultative « Si tu as l'énergie ». Le correctif change le comportement du skill et attend la vague de validation.
 
 ---
 

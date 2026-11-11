@@ -4,8 +4,10 @@
 # Sorties générées
 *.html
 
-# Résultats JSON bruts — trop lourds pour le dépôt (6,5 Mo)
-# Les analyses Markdown (analyse_*.md) sont la source de vérité archivée.
+# Résultats JSON bruts des nouveaux runs promptfoo — trop lourds pour le dépôt.
+# Exception : les 13 archives historiques (7,5 Mo), ajoutées avant cette règle,
+# restent suivies volontairement. Une règle d'ignore ne retire pas un fichier
+# déjà suivi.
 results*.json
 
 # Runs du benchmark Claude Code (prompt_benchmark_claude_code.md).
@@ -14,3 +16,9 @@ results*.json
 # protocole. Le report.md d'un run peut être copié à la main hors de runs/
 # s'il doit être partagé.
 runs/
+
+# Paquets de preuves : la table d'aveuglement et les réponses brutes n'y ont
+# pas leur place (scripts/check_evidence.py les refuse aussi).
+evidence/**/blinding_map.json
+evidence/**/raw_generations.jsonl
+evidence/**/judge_outputs/
