@@ -1,4 +1,6 @@
 # Analyse — run V2 provider Claude (claude-opus-4-8)
+
+> **Archive — ancien outillage promptfoo (juin 2026).** Cette analyse n'est plus reproductible : les gabarits de prompt et le lanceur ont été supprimés, et plusieurs questions de la banque ont été réécrites ou ajoutées depuis. Les numéros de cas ne correspondent plus forcément à la banque actuelle. Référence historique seulement ; la validation courante suit `eval/prompt_benchmark_claude_code.md`.
 # + synthèse 3-providers : Mistral Large / Gemini 2.5 Flash / Claude Opus 4-8
 
 Date : 2026-06-01  

@@ -21,7 +21,8 @@ résultats de sélection, verdicts résolus, métriques et rapport. La CI exige 
 chaque skill modifié ou nouvellement marqué `production`.
 
 Les `results*.json` historiques (13 archives, issues de l'ancien outillage) restent suivis
-pour la reproductibilité. Ne pas en ajouter de nouveaux.
+comme trace historique. Ils ne sont plus reproductibles (gabarits de prompt et lanceur
+supprimés, questions réécrites depuis). Ne pas en ajouter de nouveaux.
 
 ## Banques de cas
 

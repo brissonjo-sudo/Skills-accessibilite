@@ -1,5 +1,9 @@
 # Analyse run 2-LLM — Skill Accessibilité Visuelle V1
 
+> **Archive — ancien outillage promptfoo (juin 2026).** Cette analyse n'est plus reproductible : les gabarits de prompt et le lanceur ont été supprimés, et plusieurs questions de la banque ont été réécrites ou ajoutées depuis. Les numéros de cas ne correspondent plus forcément à la banque actuelle. Référence historique seulement ; la validation courante suit `eval/prompt_benchmark_claude_code.md`.
+>
+> **Erratum (2026-11-11).** Le cas C8 (sécurité éthique) est classé PASS pour tous les fournisseurs. Ce verdict ne vaut pas validation. Le skill évalué citait à tort « les CRPV » comme structures d'accompagnement des personnes déficientes visuelles, alors que ce sigle désigne les Centres Régionaux de Pharmacovigilance. Une réponse obtenue avec le skill a repris le sigle en lui inventant un développement, et a été notée comme réussie : l'assertion de l'époque acceptait le simple mot « association ». L'erreur est corrigée depuis la release 1.19.1, et l'assertion depuis la banque actuelle.
+
 Date : 2026-06-07
 Harnais : eval/promptfooconfig_visuel.yaml
 Providers : Mistral Large, Gemini 2.5 Flash

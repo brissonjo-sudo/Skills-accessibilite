@@ -18,7 +18,7 @@ Skill de **forme** : adapte la lisibilité des réponses pour les profils DYS (d
 
 ## Fichier source
 
-`skills/accessibilite-dys/skill_accessibilite_dys_V3.md`
+`skills/accessibilite-dys/SKILL.md`
 
 ## Relations
 

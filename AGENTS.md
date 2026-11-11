@@ -19,7 +19,7 @@ Guide de contribution pour agents (Claude Code, Codex) et humains travaillant su
 | `docs/bilan_ecosysteme_skills_accessibilite.md` | Historique d'itération, méthodologie, décisions d'architecture. |
 | `docs/note_ethique.md` | Limites éthiques (pas de diagnostic, pas de soin, pas de substitution). |
 | `docs/usage.md` | Cas d'usage concrets par skill. |
-| `eval/` | Banques de cas comportementaux et d'activation, protocole de validation en vagues (`prompt_benchmark_claude_code.md`) et preuves assainies versionnées. |
+| `eval/` | Banques de cas comportementaux et d'activation, protocole de validation en vagues (`prompt_benchmark_claude_code.md`). Les preuves assainies d'une vague sont versionnées sous `eval/evidence/` (aucune à ce jour). Les `analyse_*.md` et `results*.json` sont des archives de l'ancien outillage. |
 | `scripts/validate_skills.py` | Validation structurelle des skills (CI). Dépend de PyYAML (`requirements-ci.txt`). |
 | `scripts/check_*.py` | Contrôles des banques d'évaluation, des cas d'activation et des paquets de preuves (CI). |
 | `.github/workflows/` | `validate.yml` (push/PR sur `main`), `release.yml` (publication des ZIP sur tag). |
@@ -55,7 +55,7 @@ Sous Linux et macOS, la commande est `python3`.
 
 En co-activation, l'ordre canonique sur la forme est :
 
-1. Sécurité éthique (`psychologie-rigoureuse`) — prime sur tout
+1. Sécurité éthique (commune à tous les skills) — prime sur tout
 2. `accessibilite-visuelle`
 3. Skills de réduction de charge (`accessibilite-dys`, `accessibilite-tdah`, `accessibilite-douleur-chronique-fatigue-cognitive`)
 4. `accessibilite-tsa`
@@ -82,18 +82,30 @@ au minimum : cas nominaux, **co-activation**, **sécurité/éthique**. Les erreu
 d'infrastructure sont exclues des dénominateurs, jamais comptées comme échec du skill.
 
 Les artefacts d'une vague vont dans `eval/runs/<horodatage>/`, ignoré par Git : `blinding_map.json`
-y lève l'anonymat des juges et ne doit pas être commité. Une promotion exige dans la même PR
-un paquet assaini suivi sous `eval/evidence/<horodatage>/` ; la CI vérifie sa présence et sa structure.
+y lève l'anonymat des juges et ne doit pas être commité. Une promotion, ou la modification d'un
+skill en production, exige dans la même PR un paquet assaini suivi sous `eval/evidence/<horodatage>/`.
+La CI vérifie sa présence, sa structure, et que le paquet porte sur la version du `SKILL.md`
+présente dans la PR : une vague doit donc évaluer l'état final du skill.
 
 ## Versionnement & release
 
 - **`CHANGELOG.md`** au format [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/). Toute modification notable y est consignée (section `[Non publié]` en attendant un tag).
-- **Versions par skill** (`V<major>.<minor>`) suivies dans le frontmatter/README/index ; la version d'écosystème (`1.x.0`) est portée par les tags Git.
-- **Release** : pousser un tag `vX.Y.Z` déclenche `release.yml`, qui exécute `build_release.sh` (validation → ZIP par skill) et publie les ZIP. Un ZIP = un skill, dossier à la racine (`accessibilite-tsa/SKILL.md`).
+- **Versions par skill** (`V<major>.<minor>`) : la référence est `docs/index_skills.md`, reprise dans le README. Le frontmatter ne porte pas de version (claude.ai refuse les clés inconnues à l'import). La version d'écosystème (`X.Y.Z`) est portée par les tags Git.
+- **Une montée de version s'appuie sur une vague de validation** (voir « Évaluation » et `CONTRIBUTING.md` §2 et §5). Tant que la preuve manque, le skill reste au statut « candidat » dans l'index. Seule exception : un correctif sans changement de comportement (erreur factuelle, défaut de chargement), consigné comme tel dans le changelog.
+- **Release** : pousser un tag `X.Y.Z`, **sans préfixe `v`** (ex. `1.19.1`), déclenche `release.yml`. Le workflow rejoue toute la validation (`validate.yml`), vérifie que le commit tagué est sur `main` ou sur une branche `hotfix/*`, puis exécute `build_release.sh` et publie un ZIP par skill. Un ZIP ne contient que `<nom>/SKILL.md`. Un tag `vX.Y.Z` ne déclenche rien.
 
 ## Workflow Git
 
 - Développer sur une branche dédiée, jamais directement sur `main`.
-- Lancer `python3 scripts/validate_skills.py` avant tout commit touchant un skill.
+- Avant tout commit, lancer les contrôles que la CI exécute (`python3` sous Linux et macOS) :
+
+  ```bash
+  python -m pip install -r requirements-ci.txt   # une fois
+  python scripts/validate_skills.py
+  python scripts/check_eval_configs.py
+  python scripts/check_eval_leaks.py
+  python scripts/check_activation_cases.py
+  python scripts/check_evidence.py --base origin/main
+  ```
 - Messages de commit descriptifs ; mettre à jour `CHANGELOG.md` et, si pertinent, `docs/index_skills.md`.
 - Ouvrir une PR vers `main` ; la CI `validate` doit être verte avant merge.

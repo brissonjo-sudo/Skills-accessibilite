@@ -45,6 +45,6 @@ Suppression des références visuelles non autonomes (couleurs, positions, sché
 Plusieurs skills peuvent s'activer ensemble ; chacun garde son déclencheur autonome. Quelques combinaisons typiques (matrice complète dans [`index_skills.md`](index_skills.md)) :
 
 - **DYS + TSA** : tension densité/aération → l'aération prime.
-- **TDAH + fatigue cognitive** : le plafond de mots le plus bas prime.
+- **TDAH + fatigue cognitive** : l'anti-injonction prime. L'action unique en sortie devient une option facultative, jamais un impératif.
 - **HDC + DYS/TDAH** : la réduction de charge prime sur la densité.
 - **psychologie-rigoureuse + fatigue cognitive en contexte de détresse** : la sécurité éthique prime sur la forme.

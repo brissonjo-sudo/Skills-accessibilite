@@ -1,6 +1,6 @@
 # Bilan de synthèse — Écosystème des skills d'accessibilité
 
-Document de référence consolidant les cycles d'itération de l'écosystème. Initialement centré sur les trois premiers skills (« psychologie-rigoureuse », « accessibilite-tdah », « accessibilite-dys »), il couvre désormais les sept skills en production. Pour la vue d'ensemble synthétique (versions, déclencheurs, statuts), voir `docs/index_skills.md`.
+Document de référence consolidant les cycles d'itération de l'écosystème. Initialement centré sur les trois premiers skills (« psychologie-rigoureuse », « accessibilite-tdah », « accessibilite-dys »), il couvre désormais les sept skills de l'écosystème. Leur statut courant (production ou candidat) est tenu à jour dans `docs/index_skills.md`, qui fait foi. Pour la vue d'ensemble synthétique (versions, déclencheurs, statuts), voir `docs/index_skills.md`.
 
 ## 1. Vue d'ensemble du projet
 
@@ -13,10 +13,10 @@ Chaque skill couvre un périmètre clair :
 - **psychologie-rigoureuse** : règles de fond pour toute question relevant de la psychologie, de la cognition, de l'émotion ou de la lecture comportementale.
 - **accessibilite-tdah** : adaptation de forme pour profils TDAH (chunking d'actions, action unique en sortie, gestion des digressions).
 - **accessibilite-dys** : adaptation de forme pour profils DYS (phrases courtes, vocabulaire simple, données hors prose, structure visuelle).
-- **accessibilite-tsa** (V4, production) : adaptation pour profils du spectre autistique à langage fonctionnel.
-- **accessibilite-haute-densite-cognitive** (V3, production) : autorisation et structuration de la densité informationnelle pour profils HDC/HPI.
-- **accessibilite-douleur-chronique-fatigue-cognitive** (V3, production) : économie cognitive pour douleur chronique et fatigue cognitive.
-- **accessibilite-visuelle** (V1, production) : structure pour basse vision et lecteur d'écran.
+- **accessibilite-tsa** : adaptation pour profils du spectre autistique à langage fonctionnel.
+- **accessibilite-haute-densite-cognitive** : autorisation et structuration de la densité informationnelle pour profils HDC/HPI.
+- **accessibilite-douleur-chronique-fatigue-cognitive** : économie cognitive pour douleur chronique et fatigue cognitive.
+- **accessibilite-visuelle** : structure pour basse vision et lecteur d'écran.
 
 ### Architecture
 
@@ -243,7 +243,7 @@ Pour tout nouveau skill à concevoir, reprendre la méthodologie de la section 5
 
 ## 2.4 accessibilite-haute-densite-cognitive (V1 → V3)
 
-Skill de forme. 3 versions, version stable V3. Skill déclenché sur déclaration HPI, HPE, haut potentiel, ou besoin explicite de densité cognitive.
+Skill de forme. 3 versions, version stable V3. Skill déclenché sur déclaration HPI, haut potentiel, ou besoin explicite de densité cognitive.
 
 **Contexte** : skill conçu à l'origine avec un déclencheur « HPI » mais rapidement élargi au besoin communicationnel (densité, profondeur, rigueur) indépendamment du label clinique.
 
@@ -305,14 +305,16 @@ Skill de forme. V1 stable au premier cycle. Deux profils couverts : basse vision
 
 ---
 
-## 3.7 Harnais promptfoo systématique (nouveau pattern)
+## 3.7 Harnais promptfoo systématique (pattern historique)
+
+> **Section historique.** Ce harnais a été abandonné en août 2026 (voir §5bis.1). Les gabarits `prompts/*.yaml` et le lanceur ont été supprimés : les runs décrits ici ne peuvent plus être relancés. Les avantages listés sont ceux qui avaient motivé son adoption.
 
 **Avant** (cycles TDAH, DYS, TSA V1-V2) : tests manuels sur interface Claude.ai ou ChatGPT, 5 prompts par LLM, résultats saisis à la main.
 
 **Après** (HDC, Fatigue, TSA V3-V4, Visuelle) : harnais YAML reproductible — `promptfooconfig_<skill>.yaml` par skill, `prompts/with_skill.yaml` + `prompts/baseline.yaml`, 2 conditions systématiques, 2+ providers, juge Mistral Large (`llm-rubric`), résultats en JSON exploitable.
 
 **Avantages** :
-- Reproductibilité : le même run peut être relancé à n'importe quel moment.
+- Reproductibilité : le même run pouvait être relancé à n'importe quel moment.
 - Baseline systématique : comparaison with_skill / sans skill à chaque run, permettant de mesurer l'apport réel du skill.
 - Isolation des variables : source unique du skill dans `skills/`, aucune copie dans `eval/`.
 - Audit de régression : pour chaque version, on détecte si un correctif crée un nouveau défaut sur un cas précédemment PASS.
@@ -377,7 +379,7 @@ Cette méthode a été utilisée lors des premiers runs Claude : un sous-agent f
 
 ## 7. État de production des skills (mis à jour août 2026)
 
-| Skill | Version stable | Statut | Méthode de test | Résultats |
+| Skill | Version courante | Statut | Méthode de test | Résultats |
 |---|---|---|---|---|
 | psychologie-rigoureuse | V6.2 | candidat | Gemini + ChatGPT + Claude.ai (manuel) ; promptfoo 8 cas | référence d'écosystème |
 | accessibilite-tdah | V2.3 | candidat | Gemini + ChatGPT + 4 cas articulation (manuel) ; promptfoo 10 cas (C9 TDA / C10 non-déclenchement) | référence forme |

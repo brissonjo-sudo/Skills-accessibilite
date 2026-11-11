@@ -18,7 +18,7 @@ Skill de **fond** : cadre d'analyse psychologique non dogmatique, appliqué à t
 
 ## Fichier source
 
-`skills/psychologie-rigoureuse/skill_psychologie_rigoureuse_V6.md`
+`skills/psychologie-rigoureuse/SKILL.md`
 
 ## Relations
 

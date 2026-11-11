@@ -9,7 +9,7 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 Correctifs issus du premier benchmark contrôlé avec/sans skill (130 réponses appariées, aveugle, trois juges indépendants par variante). Deux régressions critiques corrigées — une de sécurité, une d'exactitude — plus un défaut de chargement présent depuis l'origine.
 
-> **Validation.** Ces correctifs s'appuient sur le run `eval/runs/20260805-001935/` et sa vérification ciblée `eval/runs/20260805-181022-verif/` (protocole `eval/prompt_benchmark_claude_code.md`). Ce run a été conduit et jugé par le même agent que celui qui a écrit les correctifs : les montées de version restent **à confirmer par une vague indépendante**, d'où le statut « candidat » dans `docs/index_skills.md`.
+> **Validation.** Ces correctifs s'appuient sur un run local non publié (`eval/runs/20260805-001935/` et sa vérification ciblée `eval/runs/20260805-181022-verif/`, répertoires ignorés par Git ; protocole `eval/prompt_benchmark_claude_code.md`). **Aucune preuve versionnée n'existe encore sous `eval/evidence/` : elle reste à produire.** Ce run a été conduit et jugé par le même agent que celui qui a écrit les correctifs : les montées de version restent **à confirmer par une vague indépendante**, d'où le statut « candidat » dans `docs/index_skills.md`.
 
 ### Corrigé — outillage et CI
 
@@ -51,6 +51,23 @@ Suite de l'audit du 2026-11-11 : les assertions de sécurité validaient des ré
 - **Quatre questions reformulées** (`HDC` 1, `fatigue` 1 et 4, `tsa` 1) : elles reprenaient la tournure d'un exemple du skill évalué. Le sujet testé ne change pas.
 
 Ces assertions visent le comportement cible des corrections de skills à venir. Plusieurs échoueront donc sur les skills actuels : c'est ce que la prochaine vague de validation doit mesurer.
+
+### Corrigé — documentation
+
+Suite de l'audit du 2026-11-11 : plusieurs documents décrivaient un état qui n'est pas celui du dépôt.
+
+- **Tags de release** : `AGENTS.md` annonçait des tags `vX.Y.Z`. La convention réelle, et la seule que `release.yml` reconnaît, est `X.Y.Z` sans préfixe.
+- **`README.md`** : le tableau distingue la version présente sur `main`, son statut (production ou candidat) et la version réellement publiée dans les ZIP. Il présentait les versions non publiées comme celles à installer. Arborescence complétée, lien vers le résumé anglais.
+- **`README.en.md`** resynchronisé : ses sept versions dataient de juin 2026.
+- **Statuts** : le bilan qualifiait les sept skills de « production » et parlait de « version stable » pour des candidats. `docs/index_skills.md` fait foi.
+- **Co-activation TDAH + fatigue et HDC + fatigue** : l'index et `docs/usage.md` décrivaient une règle de plafond de mots que les skills n'appliquent pas, le skill fatigue n'ayant pas de plafond. La règle réelle est décrite : l'anti-injonction prime, et la profondeur HDC passe en couche facultative.
+- **Sécurité éthique** : présentée comme « commune à tous les skills », conformément au bloc de préséance, et non plus comme propre à `psychologie-rigoureuse`.
+- **Compatibilités** de l'index rendues symétriques (fatigue et HDC manquaient dans plusieurs fiches).
+- **`AGENTS.md`** : les cinq commandes de validation de la CI, la règle « montée de version = vague », le contrôle des preuves tel qu'il fonctionne.
+- **Archives promptfoo** : les `eval/analyse_*.md` portent un bandeau d'archive. Ils étaient présentés comme « source de vérité » alors qu'ils décrivent une banque de cas qui a changé. Erratum ajouté à `analyse_visuel_v1_2llm.md`, qui classait en réussite une réponse reprenant l'erreur CRPV. Le mot « reproductibilité » est retiré : les gabarits et le lanceur n'existent plus.
+- **Ce changelog** : rectification de l'entrée `[1.18.0]`, mention que la preuve du `[Non publié]` reste à produire, suppression d'une entrée qui annonçait l'ajout d'une cible dans un script supprimé plus haut.
+- **Bilan** : la section sur le harnais promptfoo est marquée historique ; « HPE » est retiré des déclencheurs HDC, où il ne figure pas.
+- **`notes/`** : six liens pointaient vers d'anciens noms de fichiers.
 
 ### Modifié — la validation ne passe plus par promptfoo
 
@@ -107,15 +124,14 @@ bout en bout — deux conditions appariées, aveuglement A/B, trois juges indép
   est supprimé. Le protocole courant sépare générateurs et trois juges aveugles indépendants.
 - **10 questions de test recopiées du skill évalué** réécrites (`promptfooconfig.yaml`, `_fatigue`, `_tsa`, `_visuel`). Sur l'une d'elles, la réponse produite était *byte-identique* à la réponse-type du skill : le modèle récitait. La phrase de déclenchement est conservée, le sujet change.
 - **Rubriques réalignées sur les nouvelles questions** pour le cas 1 du harnais fatigue (sommeil lent/paradoxal) et le cas 6 du harnais visuel (éclipse solaire), afin que les juges n'évaluent plus les anciens sujets. L'inventaire du protocole est mis à jour à 61 cas principaux et 67 cas au total.
-- **Politique des résultats bruts clarifiée** : les 13 archives JSON historiques déjà suivies sont conservées pour la reproductibilité ; les nouveaux `results*.json` restent ignorés et les analyses Markdown demeurent la source de vérité.
-- **Juge circulaire** : quatre harnais désignaient `mistral-large-latest` comme juge alors que ce modèle est aussi un provider testé. Tous passent à `mistral-small-latest`, conformément à ce que le README affirmait déjà.
+- **Politique des résultats bruts clarifiée** : les 13 archives JSON historiques déjà suivies sont conservées comme trace (elles ne sont plus reproductibles depuis la suppression de `eval/prompts/` et de `eval/run_all.sh`) ; les nouveaux `results*.json` restent ignorés et les analyses Markdown demeurent la source de vérité.
+- **Juge circulaire** : quatre harnais désignaient `mistral-large-latest` comme juge alors que ce modèle est aussi un provider testé. Tous passent à `mistral-small-latest`, conformément à ce que le README affirmait déjà. *(État intermédiaire : ce juge a ensuite été retiré avec l'abandon de promptfoo, voir « Modifié — la validation ne passe plus par promptfoo ».)*
 - **Assertions déterministes** ajoutées aux quatre harnais qui n'en avaient aucune (23 → 39). Ce sont pour l'essentiel des garde-fous anti-régression : sur le run de référence, seuls les plafonds de mots discriminaient réellement les deux conditions. `eval/README.md` corrigé en conséquence, et complété du harnais de co-activation qui manquait au tableau.
 
 ### Ajouté
 
 - **`scripts/check_eval_leaks.py`** : échoue si une question de test recouvre à 75 % ou plus le texte du skill évalué. Branché au CI. Le simple partage d'une phrase de déclenchement documentée n'est pas traité comme une fuite.
 - **`eval/prompt_benchmark_claude_code.md`** : protocole du benchmark contrôlé (matrice appariée, aveuglement, trois juges plus adjudication, macro-moyenne par variante).
-- Cible `coactivation` dans `eval/run_all.sh`, qui n'en lançait que 7 sur 8 ; une cible inconnue échoue désormais au lieu d'être ignorée silencieusement.
 
 ### Sécurité
 
@@ -167,6 +183,12 @@ Release de documentation et de maintenabilité : aucun changement de comportemen
 ## [1.18.0] — 2026-06-11
 
 Amélioration de la robustesse et de la maintenabilité de l'écosystème (déclencheurs, articulation inter-skills, CI).
+
+> **Rectification (2026-11-11).** Cette entrée ne correspond pas exactement à ce qui a été publié :
+>
+> - le tag Git `1.18.0` pointe sur le même commit que `1.17.0`. L'archive source de ce tag ne contient donc pas les changements décrits ici ;
+> - les sections « CI/CD — GitHub Actions », « Provider Claude ajouté », « Harnais co-activation » et « Diffusion & communauté » décrivent un travail du 2026-06-10 resté sur une branche. Il n'est entré dans `main` que le 2026-08-06 (PR #7), donc après la release 1.19.0, et ne figure ni dans 1.18.0 ni dans 1.19.0 ;
+> - `scripts/check_frontmatter.py`, cité ci-dessous, n'est jamais arrivé dans `main`. Ses contrôles (format de `name`, longueur de `description`) sont repris par `scripts/validate_skills.py` (voir `[Non publié]`).
 
 ### Ajouté
 
