@@ -128,19 +128,21 @@ Ces formulations transforment une caractéristique en identité figée, mobilise
 
 Quand plusieurs skills de cet écosystème sont actifs simultanément, l'ordre de préséance sur la **forme** est :
 
-1. **Sécurité éthique** (commune à tous, prime toujours).
-2. **`accessibilite-visuelle`** (un rendu inaccessible annule tout le reste ; ses interdits — références visuelles non autonomes, emojis décoratifs — priment sur les règles de mise en forme des autres skills, y compris le gras de `accessibilite-tdah`).
+1. **Sécurité éthique** (commune à tous, prime toujours). Face à une souffrance exprimée ou à une crise, l'orientation vers un soutien (professionnel, ligne d'écoute, urgences) figure dans la partie de la réponse lue par défaut : jamais dans une couche facultative, une étape différée ou la fin d'une réponse longue, et aucun plafond de mots ne la supprime. En crise aiguë, elle vient en tête de réponse.
+2. **`accessibilite-visuelle`** (un rendu inaccessible annule tout le reste ; ses interdits — références visuelles non autonomes, emojis décoratifs — priment sur les règles de mise en forme des autres skills ; le gras de `accessibilite-tdah` se limite alors aux mots pivots).
 3. **Skills de réduction de charge** : `accessibilite-dys`, `accessibilite-tdah`, `accessibilite-douleur-chronique-fatigue-cognitive` (en cas de conflit entre eux, choisir la forme la plus économe en effort de lecture).
 4. **`accessibilite-tsa`** (littéralité et prévisibilité, dans la limite de la charge fixée par les niveaux supérieurs).
 5. **`accessibilite-haute-densite-cognitive`** (cède toujours face à un skill de réduction).
 
-`psychologie-rigoureuse` régit le **fond**, jamais la forme : il se combine avec n'importe quel niveau ci-dessus sans entrer dans cet ordre.
+**Plafond de mots.** Quand plusieurs skills actifs fixent un plafond, le plus bas s'applique à la partie lue par défaut. Il ne couvre ni la mention de sécurité, ni la couche facultative de `accessibilite-douleur-chronique-fatigue-cognitive`. Un plafond règle la longueur, pas l'exactitude : ce qui ne tient pas reste disponible sur demande, signalé en une phrase sans question, et une information nécessaire à l'exactitude de la réponse n'est jamais retirée.
+
+`psychologie-rigoureuse` régit le **fond** et n'entre pas dans cet ordre : il se combine avec n'importe quel niveau ci-dessus. Ses propres règles de forme (plafond, structure) cèdent à celles des skills d'accessibilité actifs.
 
 ## Articulation avec d'autres skills
 
 **Principe d'indépendance des déclencheurs.** Chaque skill chargé dans la conversation a son propre déclencheur autonome et s'active indépendamment des autres. Charger un skill ne le rend pas conditionnel à l'activation d'un autre.
 
-*Si `psychologie-rigoureuse` n'est pas chargé dans la conversation, ignorer les règles de co-activation de cette section.*
+*Si `psychologie-rigoureuse` n'est pas chargé dans la conversation, ignorer seulement les règles de cette section qui le mentionnent ; les autres restent valables.*
 
 **Avec `psychologie-rigoureuse`** : `psychologie-rigoureuse` a un **déclencheur autonome** qui ne dépend pas du skill TDAH. Toute question relevant de son champ (concept psychologique, demande de lecture comportementale, question sur la cognition, l'émotion, le développement, etc.) l'active, **que le skill TDAH soit actif ou non**. La co-activation n'est qu'un cas particulier où les deux skills s'appliquent simultanément ; elle n'est pas un prérequis pour que `psychologie-rigoureuse` fonctionne.
 
