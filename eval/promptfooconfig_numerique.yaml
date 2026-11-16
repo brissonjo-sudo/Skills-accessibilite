@@ -1,0 +1,140 @@
+description: Banque de cas — accessibilité des créations numériques, candidat V0.1
+
+defaultTest:
+  vars:
+    skill: "file://../skills/accessibilite-numerique/SKILL.md"
+
+tests:
+  - description: "N1 — Formulaire web utilisable sans dépendre du placeholder"
+    vars:
+      question: "Code une page HTML autonome pour réserver une visite à la médiathèque : nom, courriel, créneau et bouton de confirmation. Le courriel et le créneau sont obligatoires. Prévois l'affichage d'une erreur de saisie."
+    assert:
+      - type: llm-rubric
+        value: "Chaque champ possède un libellé visible associé à son contrôle ; un placeholder seul ne constitue pas le libellé."
+      - type: llm-rubric
+        value: "Les champs obligatoires sont identifiables autrement que par une couleur et exposent leur caractère obligatoire aux technologies d'assistance."
+      - type: llm-rubric
+        value: "L'erreur proposée explique la correction attendue et est reliée au champ concerné de façon perceptible par une technologie d'assistance."
+
+  - description: "N2 — Dialogue, navigation clavier et restitution du focus"
+    vars:
+      question: "Remplace cette confirmation par une fenêtre de dialogue utilisable au clavier : un bouton Supprimer un dossier ouvre la question Voulez-vous supprimer ce dossier ? avec Annuler et Confirmer. Fournis le code HTML et JavaScript."
+    assert:
+      - type: llm-rubric
+        value: "Le dialogue possède un nom accessible correspondant à la question de confirmation."
+      - type: llm-rubric
+        value: "L'ouverture place le focus dans le dialogue ; la navigation conserve un parcours cohérent dans le dialogue tant qu'il est modal."
+      - type: llm-rubric
+        value: "Une annulation au clavier est possible et la fermeture restitue le focus au déclencheur encore présent."
+      - type: llm-rubric
+        value: "Le code conserve un indicateur de focus visible et n'introduit pas de tabindex positif."
+
+  - description: "N3 — Contraste calculé et seuils distingués"
+    vars:
+      question: "Corrige le CSS de cette page : texte de paragraphe 16 px #999999 sur #ffffff, liens différenciés seulement en bleu clair, et boutons de 18 px de côté. Je vise WCAG 2.2 AA. Donne les styles corrigés et les vérifications utiles."
+    assert:
+      - type: llm-rubric
+        value: "La correction du texte normal satisfait un contraste d'au moins 4,5:1 ; si un ratio numérique est annoncé, il correspond aux couleurs proposées."
+      - type: llm-rubric
+        value: "La distinction des liens ne dépend pas uniquement de la couleur."
+      - type: llm-rubric
+        value: "Les cibles de 18 px sont agrandies ou une exception applicable au critère 2.5.8 est explicitement justifiée ; la réponse ne présente pas 44 px comme le seuil universel AA."
+
+  - description: "N4 — PDF, structure source et contrôle de l'export"
+    vars:
+      question: "Je prépare un guide PDF de quatre pages pour les inscriptions sportives, avec titres, une photo et un tableau de tarifs. Donne le contenu et les consignes de fabrication permettant une lecture avec assistance technique. Je n'ai pas de logiciel de balisage PDF disponible ici."
+    assert:
+      - type: llm-rubric
+        value: "La fabrication proposée prévoit une structure sémantique dans la source puis un export PDF balisé et un ordre de lecture à vérifier."
+      - type: llm-rubric
+        value: "La photo reçoit une alternative selon son rôle, et le tableau de tarifs conserve des en-têtes identifiables."
+      - type: llm-rubric
+        value: "La réponse ne prétend pas avoir produit ou validé un PDF/UA en l'absence d'export et de vérification du fichier."
+
+  - description: "N5 — Diaporama, ordre de lecture et sens sans couleur"
+    vars:
+      question: "Prépare six diapositives de bilan d'un jardin partagé : fréquentation, dépenses et projets. Les hausses sont en vert et les baisses en rouge. Donne un plan prêt à mettre en page avec les adaptations nécessaires pour une présentation accessible."
+    assert:
+      - type: llm-rubric
+        value: "Les variations restent compréhensibles sans distinguer le rouge du vert."
+      - type: llm-rubric
+        value: "Le plan prévoit des titres de diapositives distincts et un ordre de lecture logique des objets."
+      - type: llm-rubric
+        value: "Les graphiques ou images porteurs d'information sont accompagnés d'un équivalent textuel pertinent, sans déclaration de validation du fichier final."
+
+  - description: "N6 — Tableur, structure navigable et intégrité des données"
+    vars:
+      question: "Conçois un classeur de suivi des prêts de livres : feuille Emprunts avec identifiant, titre, emprunteur, échéance et statut ; feuille Synthèse avec le nombre de retards. Le statut est actuellement signalé par une cellule rouge. Je veux conserver les formules et rendre le classeur accessible."
+    assert:
+      - type: llm-rubric
+        value: "Le statut de retard possède une valeur textuelle explicite en plus de sa mise en couleur."
+      - type: llm-rubric
+        value: "La structure proposée utilise des en-têtes et des feuilles clairement nommés, sans cellules fusionnées dans le tableau de données."
+      - type: llm-rubric
+        value: "La proposition conserve les valeurs et la logique des formules au lieu de remplacer le classeur par une image ou une transcription sans calcul."
+
+  - description: "N7 — Vidéo, sous-titres et information visuelle"
+    vars:
+      question: "Prépare les livrables d'accessibilité d'une vidéo préenregistrée de démonstration d'un composteur. La voix décrit les gestes mais ne dit pas à quel repère remplir le bac ; ce repère n'apparaît qu'à l'image. J'ai une transcription automatique non relue."
+    assert:
+      - type: llm-rubric
+        value: "La proposition prévoit des sous-titres synchronisés relus, incluant les sons utiles et l'identification des locuteurs quand elle est nécessaire."
+      - type: llm-rubric
+        value: "Le repère visuel de remplissage est rendu accessible dans la piste sonore ou par une audiodescription adaptée, et pas seulement par des sous-titres de la parole existante."
+      - type: llm-rubric
+        value: "La transcription automatique est présentée comme une base à corriger, sans être assimilée à une validation humaine de l'accessibilité de la vidéo."
+
+  - description: "N8 — Graphique, équivalent de données et absence d'invention"
+    vars:
+      question: "Produis un graphique comparant les ateliers de janvier, février et mars : 18, 25 et 22 participants. Utilise trois couleurs et fournis ce qu'il faut pour le publier sur le site de l'association."
+    assert:
+      - type: llm-rubric
+        value: "L'information du graphique reste identifiable sans distinguer ses couleurs, par des libellés ou un autre encodage redondant."
+      - type: llm-rubric
+        value: "Un équivalent textuel ou tabulaire restitue correctement les trois mois et leurs valeurs, sans ajouter de données inventées."
+      - type: llm-rubric
+        value: "L'alternative courte décrit l'objet et l'information principale du graphique sans lui attribuer des tendances ou causes absentes des données."
+
+  - description: "N9 — Audit limité sans preuve d'exécution"
+    vars:
+      question: "Voici tout ce que je peux partager de mon site : une capture de sa page d'accueil. Je ne fournis ni URL, ni code, ni accès au navigateur. Peux-tu me remettre une attestation de conformité RGAA avec un pourcentage exact ?"
+    assert:
+      - type: llm-rubric
+        value: "La réponse refuse de déduire une conformité ou un pourcentage RGAA exact d'une capture seule."
+      - type: llm-rubric
+        value: "La réponse distingue les observations possibles sur une image des contrôles de sémantique, de clavier et d'assistance technique qui nécessitent le service réel."
+      - type: llm-rubric
+        value: "Aucun audit exécuté, outil lancé ou résultat de test n'est inventé."
+
+  - description: "N10 — Outil d'auteur, conservation des alternatives"
+    vars:
+      question: "Je conçois un éditeur d'actualités pour une association. Les auteurs importent des images avec un texte alternatif ; les articles sont ensuite exportés vers le site et un bulletin. Définis le comportement de l'éditeur et de ses exports pour préserver l'accessibilité."
+    assert:
+      - type: llm-rubric
+        value: "L'éditeur permet aux auteurs de renseigner ou réviser l'alternative et de distinguer une image décorative d'une image informative."
+      - type: llm-rubric
+        value: "Les exports préservent les alternatives et la structure utiles ; une limitation du format d'export est signalée plutôt que masquée."
+      - type: llm-rubric
+        value: "La réponse distingue l'accessibilité de l'interface de l'éditeur de son aide à produire un contenu accessible, sans prétendre qu'un texte alternatif généré est forcément exact."
+
+  - description: "N11 — Choix du référentiel et portée de la conformité"
+    vars:
+      question: "Nous refaisons le portail d'une collectivité française. Le cahier des charges cite RGAA 4.1.2 et l'équipe veut aussi viser WCAG 2.2 AA. Peut-on remplacer l'audit RGAA par un scanner automatique WCAG ? Explique comment articuler ces objectifs sans annoncer une conformité déjà acquise."
+    assert:
+      - type: llm-rubric
+        value: "La réponse maintient le référentiel contractuel RGAA demandé et distingue l'objectif complémentaire WCAG 2.2 AA, sans les déclarer interchangeables."
+      - type: llm-rubric
+        value: "Le scanner automatique est présenté comme une aide partielle à compléter par une évaluation manuelle du périmètre et des parcours."
+      - type: llm-rubric
+        value: "La réponse ne déduit aucune conformité acquise de l'intention de conception et ne présente pas un projet de norme comme une obligation applicable."
+
+  - description: "N12 — Préférences fonctionnelles sans collecte de diagnostic"
+    vars:
+      question: "Dans notre application de réservation, je veux un écran obligatoire demandant le diagnostic médical de chaque personne avant de proposer un affichage adapté. Conçois plutôt une solution d'accessibilité utilisable dès l'arrivée et explique quelles informations elle doit conserver."
+    assert:
+      - type: llm-rubric
+        value: "L'accès au service et à ses fonctions accessibles ne dépend pas de la déclaration d'un diagnostic."
+      - type: llm-rubric
+        value: "Les réglages proposés portent sur des besoins ou préférences fonctionnelles, sont facultatifs et réversibles, sans classement médical des utilisateurs."
+      - type: llm-rubric
+        value: "La conservation éventuelle se limite aux préférences nécessaires ; la réponse ne propose pas d'enregistrer ou de journaliser un diagnostic pour personnaliser l'interface."

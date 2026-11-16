@@ -35,17 +35,18 @@ supprimés, questions réécrites depuis). Ne pas en ajouter de nouveaux.
 | DYS V3.1 | `promptfooconfig_dys.yaml` | 8 |
 | TDAH V2.3 | `promptfooconfig_tdah.yaml` | 10 |
 | Psychologie rigoureuse V6.2 | `promptfooconfig_psychologie.yaml` | 8 |
-| Co-activation inter-skills | `promptfooconfig_coactivation.yaml` | 7 |
+| Créations numériques V0.1 (candidat non validé) | `promptfooconfig_numerique.yaml` | 12 |
+| Co-activation inter-skills | `promptfooconfig_coactivation.yaml` | 10 |
 
-**70 cas au total.** Les noms de fichiers sont un héritage de l'ancien outillage ; leur
+**85 cas au total.** Les noms de fichiers sont un héritage de l'ancien outillage ; leur
 contenu est désormais une simple banque de cas — description, question, assertions, et lien
 vers le `SKILL.md` évalué.
 
-`activation_cases.json` ajoute **28 cas de sélection** : au moins un déclenchement et un
-non-déclenchement pour chacun des 7 skills, des pièges proches (fautes réelles sans
+`activation_cases.json` ajoute **38 cas de sélection** : au moins un déclenchement et un
+non-déclenchement pour chacun des 8 skills, des pièges proches (fautes réelles sans
 déclaration, procrastination, condition évoquée comme sujet ou pour un proche), une détresse
 sans profil déclaré et des cas de co-activation. Chaque cas est soumis à trois sélecteurs
-neufs, soit 84 décisions indépendantes. `scripts/check_activation_cases.py` contrôle cette
+neufs, soit 114 décisions indépendantes. `scripts/check_activation_cases.py` contrôle cette
 couverture.
 
 Chaque cas vise un skill (`target_skill`, `expected_activation`). Deux champs facultatifs
@@ -54,7 +55,7 @@ décrivent les autres skills : `also_expected` (à sélectionner aussi) et `must
 
 ## Structure des assertions
 
-49 assertions déterministes, 81 sémantiques.
+49 assertions déterministes, 127 sémantiques.
 
 | Banque | `javascript` | `llm-rubric` |
 |---|--:|--:|
@@ -65,7 +66,20 @@ décrivent les autres skills : `also_expected` (à sélectionner aussi) et `must
 | `promptfooconfig_dys.yaml` | 6 | 8 |
 | `promptfooconfig_tdah.yaml` | 6 | 10 |
 | `promptfooconfig_psychologie.yaml` | 9 | 8 |
-| `promptfooconfig_coactivation.yaml` | 8 | 7 |
+| `promptfooconfig_numerique.yaml` | 0 | 37 |
+| `promptfooconfig_coactivation.yaml` | 8 | 16 |
+
+La nouvelle banque numérique examine le livrable et la sincérité des contrôles
+annoncés : structure, interactions, alternatives, exports, choix du référentiel
+et absence de collecte de diagnostic. Les rubriques portent sur les propriétés
+observables, pas sur la simple présence du mot « accessible ».
+
+Pour les cas avec fichiers, conserver les artefacts complets dans le run et les
+remettre aux juges sous des noms neutres. Un lien de remise ne suffit pas à juger
+le contenu du fichier. Les plafonds de la conversation se mesurent sur le
+commentaire de remise, et la complétude se juge séparément sur le livrable.
+Un essai ciblé sans baseline ni juges en aveugle reste un essai exploratoire ;
+il ne vaut pas vague ni preuve de promotion.
 
 **Déterministes (`javascript`)** — une expression JavaScript sur la variable `output`,
 évaluable sans juge :

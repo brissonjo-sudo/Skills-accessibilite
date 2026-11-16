@@ -213,6 +213,94 @@
         "accessibilite-haute-densite-cognitive"
       ],
       "question": "Je suis dyslexique. Explique-moi la relativité restreinte."
+    },
+    {
+      "id": "numerique-web-creation-no-profile",
+      "description": "Création d'une interface pour des visiteurs, sans profil personnel déclaré",
+      "target_skill": "accessibilite-numerique",
+      "expected_activation": true,
+      "must_not_activate": [
+        "accessibilite-visuelle",
+        "accessibilite-dys",
+        "accessibilite-tdah",
+        "accessibilite-tsa"
+      ],
+      "question": "Crée une page d'inscription à une randonnée avec un formulaire et un bouton de validation."
+    },
+    {
+      "id": "numerique-explicit-artifact-audit",
+      "description": "Demande explicite de correction de l'accessibilité d'un livrable",
+      "target_skill": "accessibilite-numerique",
+      "expected_activation": true,
+      "question": "Examine les obstacles d'accessibilité de ce menu de navigation HTML et propose une correction de son code."
+    },
+    {
+      "id": "numerique-concept-only",
+      "description": "Explication générale sans création, modification ni évaluation de livrable",
+      "target_skill": "accessibilite-numerique",
+      "expected_activation": false,
+      "question": "Que signifie le mot accessibilité dans le domaine du numérique ?"
+    },
+    {
+      "id": "numerique-profile-response-only",
+      "description": "Une déclaration personnelle appelle une adaptation de réponse, sans création numérique",
+      "target_skill": "accessibilite-numerique",
+      "expected_activation": false,
+      "also_expected": [
+        "accessibilite-visuelle"
+      ],
+      "question": "Je suis aveugle. Explique-moi pourquoi la Lune change d'apparence au fil du mois."
+    },
+    {
+      "id": "numerique-backend-without-ui",
+      "description": "Traitement serveur sans contenu destiné à une interface ou à une publication",
+      "target_skill": "accessibilite-numerique",
+      "expected_activation": false,
+      "question": "Écris une fonction Python qui calcule un hash SHA-256 pour chaque fichier d'un dossier, sans interface utilisateur."
+    },
+    {
+      "id": "numerique-aesthetic-opinion-only",
+      "description": "Avis esthétique abstrait, sans livrable à créer ou à revoir",
+      "target_skill": "accessibilite-numerique",
+      "expected_activation": false,
+      "question": "Quelle impression esthétique donne une typographie à empattements par rapport à une typographie sans empattements ?"
+    },
+    {
+      "id": "numerique-document-creation",
+      "description": "Création d'un document numérique destiné à être diffusé",
+      "target_skill": "accessibilite-numerique",
+      "expected_activation": true,
+      "question": "Prépare un document Word de présentation des activités de notre centre social avec des titres et un tableau des horaires."
+    },
+    {
+      "id": "numerique-media-creation",
+      "description": "Préparation d'un média destiné à une publication numérique",
+      "target_skill": "accessibilite-numerique",
+      "expected_activation": true,
+      "question": "Prépare le storyboard et les éléments de publication d'une courte vidéo de visite de notre musée."
+    },
+    {
+      "id": "numerique-audience-not-author-profile",
+      "description": "Un public mentionné ne suffit pas à attribuer un profil à la personne qui écrit",
+      "target_skill": "accessibilite-numerique",
+      "expected_activation": true,
+      "must_not_activate": [
+        "accessibilite-dys",
+        "accessibilite-tdah",
+        "accessibilite-tsa"
+      ],
+      "question": "Conçois une page de ressources scolaires destinée notamment aux adolescents dyslexiques ; je suis chargé de la mettre en ligne."
+    },
+    {
+      "id": "numerique-mobile-general-creation",
+      "description": "Une application mobile est un livrable numérique même sans demande de conformité",
+      "target_skill": "accessibilite-numerique",
+      "expected_activation": true,
+      "must_not_activate": [
+        "accessibilite-douleur-chronique-fatigue-cognitive",
+        "accessibilite-visuelle"
+      ],
+      "question": "Conçois les écrans d'une application mobile de suivi des collectes de déchets pour les habitants."
     }
   ]
 }

@@ -43,11 +43,11 @@ Affiche ensuite un court inventaire : commit Git, version de Claude Code, modèl
 effectivement utilisé, skills trouvés avec leurs SHA-256, configs et nombre de
 cas. Cet inventaire doit aussi être enregistré dans le manifeste du run.
 
-Dans l’état actuel du dépôt, l’inventaire attendu est de 7 skills, 7 configs
-principales, 63 cas principaux et donc 126 cellules principales. La coactivation
-ajoute actuellement 7 cas et 14 cellules, soit 70 cas et 140 cellules au total.
-La banque d’activation ajoute 28 cas, chacun soumis à 3 sélecteurs indépendants,
-soit 84 décisions de sélection. Ces nombres sont des contrôles de cohérence, pas
+Dans l’état actuel du dépôt, l’inventaire attendu est de 8 skills, 8 configs
+principales, 75 cas principaux et donc 150 cellules principales. La coactivation
+ajoute actuellement 10 cas et 20 cellules, soit 85 cas et 170 cellules au total.
+La banque d’activation ajoute 38 cas, chacun soumis à 3 sélecteurs indépendants,
+soit 114 décisions de sélection. Ces nombres sont des contrôles de cohérence, pas
 des valeurs à forcer si les fichiers canoniques ont évolué.
 
 ### 2. Répertoire et artefacts du run
@@ -77,7 +77,7 @@ Cette phase précède toute injection de `SKILL.md`. Pour chaque entrée de
 Chaque sélecteur reçoit uniquement :
 
 - la question utilisateur ;
-- le registre trié des champs frontmatter `name` et `description` des 7 skills ;
+- le registre trié des champs frontmatter `name` et `description` de tous les skills ;
 - cette consigne neutre : « Sélectionne zéro, un ou plusieurs skills dont les
   conditions de déclenchement sont satisfaites explicitement par la demande.
   N’infère aucun trouble ou profil à partir de signaux faibles. »
@@ -113,7 +113,8 @@ elle ne prétend pas reproduire l’implémentation interne d’une plateforme d
 Pour chaque cas de chaque config principale, produis exactement deux cellules :
 
 - `with_skill` : le ou les `SKILL.md` canoniques associés sont fournis
-  intégralement comme instructions de forme ;
+  intégralement comme instructions (forme de la conversation ou qualité du livrable
+  selon leur périmètre) ;
 - `baseline` : aucune instruction, mention ou connaissance issue d’un skill
   d’accessibilité n’est fournie.
 
@@ -148,6 +149,12 @@ Chaque ligne de `raw_generations.jsonl` contient au minimum : `config`, `case_id
 `response`. En cas d’erreur persistante, conserve `status: infrastructure_error`
 et n’invente jamais de réponse.
 
+Pour un cas produisant un fichier, les deux conditions disposent des mêmes outils
+et d'un espace de sortie isolé sous le run. Conserver chaque artefact complet et
+son empreinte dans ce run ; ne pas laisser une condition lire les artefacts de
+l'autre. Ajouter à la cellule les chemins et empreintes des fichiers produits.
+Si le livrable est fourni en code dans la réponse, conserver ce code intégralement.
+
 Exécute d’abord toutes les configs principales. Exécute ensuite la coactivation
 avec le même protocole, mais garde ses scores séparés des scores individuels.
 
@@ -169,6 +176,13 @@ aux deux conditions. Utilise une graine distincte, enregistrée. Les paquets rem
 aux juges contiennent uniquement : description du cas, question, assertions de la
 config, A et B. Ils ne contiennent ni nom de condition, ni chemin de skill, ni
 empreinte, ni ordre de génération.
+
+Pour les cas avec livrable, fournir aussi aux juges les fichiers complets sous des
+noms neutres, sans chemin ni métadonnée révélant la condition. Juger les propriétés
+du fichier et les contrôles effectivement démontrés, pas le seul commentaire de
+remise. Pour les co-activations avec réduction de charge, mesurer séparément la
+longueur du commentaire et la complétude de l'artefact ; le fichier ne doit pas
+être tronqué pour tenir le plafond conversationnel.
 
 Le fichier `blinding_map.json` ne doit être lu que par l’agrégateur final, jamais
 par un juge.
