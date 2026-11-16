@@ -1,0 +1,24 @@
+{
+  "name": "skills-accessibilite",
+  "owner": {
+    "name": "brissonjo-sudo",
+    "url": "https://github.com/brissonjo-sudo"
+  },
+  "description": "Skills d'accessibilité et de psychologie rigoureuse pour Claude. Distribution épinglée sur la version publiée.",
+  "plugins": [
+    {
+      "name": "skills-accessibilite",
+      "source": {
+        "source": "github",
+        "repo": "brissonjo-sudo/Skills-accessibilite",
+        "ref": "1.19.2",
+        "sha": "11c008140842094492cb5b886fe21a463dc5a9ae"
+      },
+      "displayName": "Skills accessibilité et psychologie",
+      "description": "TDAH, DYS, TSA, haute densité cognitive, fatigue cognitive, déficience visuelle et psychologie rigoureuse. Skills de la version publiée 1.19.1.",
+      "version": "1.19.2",
+      "license": "MIT",
+      "repository": "https://github.com/brissonjo-sudo/Skills-accessibilite"
+    }
+  ]
+}

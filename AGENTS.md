@@ -24,6 +24,7 @@ Guide de contribution pour agents (Claude Code, Codex) et humains travaillant su
 | `scripts/check_*.py` | Contrôles des banques d'évaluation, des cas d'activation et des paquets de preuves (CI). |
 | `.github/workflows/` | `validate.yml` (push/PR sur `main`), `release.yml` (publication des ZIP sur tag). |
 | `build_release.sh` | Valide puis génère un ZIP par skill dans `dist/`. |
+| `.claude-plugin/` | `plugin.json` (plugin Claude Code `skills-accessibilite`) et `marketplace.json`, qui épingle le dernier tag publié. |
 | `notes/` | Notes de travail (vault Obsidian), non normatif. |
 
 ## Invariants des skills (vérifiés par `validate_skills.py`)
@@ -93,6 +94,7 @@ présente dans la PR : une vague doit donc évaluer l'état final du skill.
 - **Versions par skill** (`V<major>.<minor>`) : la référence est `docs/index_skills.md`, reprise dans le README. Le frontmatter ne porte pas de version (claude.ai refuse les clés inconnues à l'import). La version d'écosystème (`X.Y.Z`) est portée par les tags Git.
 - **Une montée de version s'appuie sur une vague de validation** (voir « Évaluation » et `CONTRIBUTING.md` §2 et §5). Tant que la preuve manque, le skill reste au statut « candidat » dans l'index. Seule exception : un correctif sans changement de comportement (erreur factuelle, défaut de chargement), consigné comme tel dans le changelog.
 - **Release** : pousser un tag `X.Y.Z`, **sans préfixe `v`** (ex. `1.19.1`), déclenche `release.yml`. Le workflow rejoue toute la validation (`validate.yml`), vérifie que le commit tagué est sur `main` ou sur une branche `hotfix/*`, puis exécute `build_release.sh` et publie un ZIP par skill. Un ZIP ne contient que `<nom>/SKILL.md`. Un tag `vX.Y.Z` ne déclenche rien.
+- **Plugin** : à chaque tag, mettre la version de `.claude-plugin/plugin.json` au numéro du tag, puis, après le tag, mettre à jour `ref`, `sha` et `version` de l'entrée de `.claude-plugin/marketplace.json`. La CI vérifie les noms et que `version` égale `ref` dans la marketplace.
 
 ## Workflow Git
 

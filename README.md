@@ -40,6 +40,19 @@ Le fichier `docs/bilan_ecosysteme_skills_accessibilite.md` présente la philosop
 
 ## Comment importer un skill dans Claude
 
+### Claude Code — plugin
+
+Installe les 7 skills de la **version publiée** (pas les candidats de `main`) :
+
+```
+/plugin marketplace add brissonjo-sudo/Skills-accessibilite
+/plugin install skills-accessibilite@skills-accessibilite
+```
+
+- **Vérifier** : `/plugin` liste `skills-accessibilite` ; les skills apparaissent sous la forme `skills-accessibilite:accessibilite-tdah`.
+- **Mettre à jour** : `/plugin marketplace update skills-accessibilite`.
+- **Désinstaller** : `/plugin uninstall skills-accessibilite@skills-accessibilite`.
+
 ### Méthode recommandée — Upload du ZIP (Capabilities)
 
 Chaque skill se télécharge sous forme de ZIP depuis la [page Releases](https://github.com/brissonjo-sudo/Skills-accessibilite/releases/latest) du dépôt.

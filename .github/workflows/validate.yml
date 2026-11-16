@@ -45,6 +45,21 @@ jobs:
       - name: Vérifier qu'aucune question de test n'est recopiée d'un skill
         run: python scripts/check_eval_leaks.py
 
+      # La marketplace épingle un tag publié : sa version doit être celle du tag visé.
+      - name: Vérifier les manifestes du plugin Claude Code
+        run: |
+          python - <<'PY'
+          import json
+          plugin = json.load(open(".claude-plugin/plugin.json", encoding="utf-8"))
+          market = json.load(open(".claude-plugin/marketplace.json", encoding="utf-8"))
+          entries = [p for p in market["plugins"] if p["name"] == plugin["name"]]
+          assert plugin["name"] == market["name"] == "skills-accessibilite", "noms divergents"
+          assert len(entries) == 1, "entrée de marketplace absente ou en double"
+          source = entries[0]["source"]
+          assert entries[0]["version"] == source["ref"], "version différente du tag épinglé"
+          assert len(source["sha"]) == 40, "sha du tag absent"
+          print("[OK]     manifestes du plugin cohérents")
+          PY
       - name: Vérifier les cas d'activation et de non-déclenchement
         run: python scripts/check_activation_cases.py
 
