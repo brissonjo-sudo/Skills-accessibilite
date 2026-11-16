@@ -1,0 +1,22 @@
+{
+  "name": "skills-accessibilite",
+  "displayName": "Skills accessibilité et psychologie",
+  "version": "1.19.2",
+  "description": "Sept skills qui adaptent la forme des réponses à des besoins cognitifs, sensoriels ou neurobiologiques (TDAH, DYS, TSA, haute densité cognitive, fatigue cognitive, déficience visuelle) et encadrent le fond des questions psychologiques. Version publiée 1.19.1, sans diagnostic ni soin.",
+  "author": {
+    "name": "brissonjo-sudo",
+    "url": "https://github.com/brissonjo-sudo"
+  },
+  "homepage": "https://github.com/brissonjo-sudo/Skills-accessibilite",
+  "repository": "https://github.com/brissonjo-sudo/Skills-accessibilite",
+  "license": "MIT",
+  "keywords": [
+    "accessibilite",
+    "tdah",
+    "dys",
+    "tsa",
+    "basse-vision",
+    "fatigue-cognitive",
+    "psychologie"
+  ]
+}

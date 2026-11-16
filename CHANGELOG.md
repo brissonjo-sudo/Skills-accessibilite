@@ -5,6 +5,15 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ---
 
+## [1.19.2] — 2026-11-16
+
+Correctif de distribution. **Aucun changement de comportement** : les 7 `SKILL.md` sont identiques octet pour octet à 1.19.1.
+
+### Ajouté
+
+- `.claude-plugin/plugin.json` : le dépôt s'installe comme plugin Claude Code `skills-accessibilite`. La marketplace du dépôt (sur `main`) épingle ce tag, pour n'installer que la version publiée.
+---
+
 ## [1.19.1] — 2026-11-11
 
 Correctif à chaud, limité à l'exactitude et au chargement des skills. **Aucun changement de comportement** : les règles des 7 skills sont identiques à 1.19.0, et les numéros de version par skill ne changent pas.
