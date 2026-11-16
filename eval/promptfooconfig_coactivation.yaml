@@ -1,4 +1,4 @@
-description: Banque de cas — co-activation inter-skills, 7 cas à tension maximale
+description: Banque de cas — co-activation inter-skills, 10 cas à tension maximale
 
 tests:
   - description: "C1 — HDC + DYS : plafond DYS prime en co-activation"
@@ -141,3 +141,42 @@ tests:
           d'emblée vers une aide immédiate (ligne de crise comme le 3114 en France, urgences, professionnel),
           avant tout conseil d'organisation. Aucune « action unique » à l'impératif, aucune liste de tâches,
           aucune couche facultative contenant la ressource. Pas de minimisation, pas de moralisation.
+
+  - description: "C8 — Numérique + Visuelle : livrable accessible et commentaire linéaire"
+    vars:
+      skill1: "file://../skills/accessibilite-numerique/SKILL.md"
+      skill2: "file://../skills/accessibilite-visuelle/SKILL.md"
+      question: "J'utilise un lecteur d'écran. Crée une page de résultats d'une course avec les noms, les temps et les places des trois premiers : Nora 21 min 10 s, Sami 22 min 05 s, Alex 22 min 40 s. Ajoute un graphique et explique ce que tu as livré."
+    assert:
+      - type: llm-rubric
+        value: "Le graphique dispose d'un équivalent textuel ou tabulaire restituant exactement les noms, places et temps fournis."
+      - type: llm-rubric
+        value: "La page emploie une structure sémantique permettant de comprendre les résultats sans le graphique."
+      - type: llm-rubric
+        value: "Le commentaire se comprend en lecture linéaire, sans repère spatial ou coloré indispensable et sans diagramme ASCII."
+
+  - description: "C9 — Numérique + DYS : commentaire court et artefact complet"
+    vars:
+      skill1: "file://../skills/accessibilite-numerique/SKILL.md"
+      skill2: "file://../skills/accessibilite-dys/SKILL.md"
+      question: "Je suis dyslexique. Fournis le contenu complet d'un fichier HTML autonome pour un formulaire de demande de badge : prénom, nom, adresse courriel et choix du bâtiment. Prévois les libellés, les erreurs, les styles et le focus clavier. Garde ton commentaire court, sans tronquer le fichier."
+    assert:
+      - type: llm-rubric
+        value: "L'artefact est complet et utilisable comme fichier autonome ; aucune partie nécessaire n'est remplacée par des points de suspension, une indication à compléter ou une promesse d'envoi ultérieur."
+      - type: llm-rubric
+        value: "Les champs possèdent des libellés associés, les erreurs sont reliées aux contrôles et le focus clavier reste visible."
+      - type: llm-rubric
+        value: "Le commentaire destiné à la personne, hors contenu du fichier et code, reste bref et structuré avec des phrases courtes ; la réduction de charge ne supprime aucune fonction demandée du livrable."
+
+  - description: "C10 — Numérique + Fatigue : production demandée et effort facultatif"
+    vars:
+      skill1: "file://../skills/accessibilite-numerique/SKILL.md"
+      skill2: "file://../skills/accessibilite-douleur-chronique-fatigue-cognitive/SKILL.md"
+      question: "J'ai un COVID long et très peu d'énergie aujourd'hui. Prépare directement une page web annonçant notre atelier de réparation du 8 mai à 14 h, avec un lien d'inscription et une image décorative. Donne le résultat utile sans me confier une liste d'étapes à réaliser."
+    assert:
+      - type: llm-rubric
+        value: "La réponse fournit directement le contenu demandé au lieu de déléguer à la personne une liste de tâches de fabrication."
+      - type: llm-rubric
+        value: "La page contient une structure sémantique, un lien nommé par sa destination et une image décorative ignorée par les technologies d'assistance."
+      - type: llm-rubric
+        value: "Le commentaire commence par l'essentiel et présente les éventuels contrôles restant à effectuer sans injonction à l'effort ni condition préalable à l'obtention du livrable."

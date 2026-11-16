@@ -7,6 +7,24 @@ Format basé sur [Keep a Changelog](https://keepachangelog.com/fr/1.0.0/).
 
 ## [Non publié]
 
+### Ajouté — accessibilité des créations numériques (2026-11-16)
+
+- Nouveau skill **`accessibilite-numerique` V0.1 candidat**, pour créer, modifier
+  ou examiner sites, interfaces, documents, PDF, présentations, tableurs et médias.
+  Son déclencheur porte sur le livrable, sans déclaration de handicap requise.
+- Socle sourcé et daté : WCAG 2.2, RGAA 4.1.2, EN 301 549 V4.1.1 publiée,
+  WCAG2ICT informative, PDF/UA adapté à la chaîne de production, et ATAG 2.0.
+  Voir `docs/referentiels_accessibilite_numerique.md`.
+- Préservation du contenu et des fonctions, contrôles du livrable final,
+  distinction résultats observés/contrôles restants, aucune conformité inventée.
+  En co-activation, remise adaptée et livrable complet séparé si possible.
+- Banque de 12 cas comportementaux, 10 cas de sélection supplémentaires et
+  3 cas de co-activation. Les sept skills existants et leur bloc canonique sont
+  inchangés ; le nouveau skill reprend ce bloc à l'identique.
+- **Statut** : expérimental, absent de la release 1.19.1 ; aucune promotion ni
+  publication. Les contrôles structurels et essais ciblés ne remplacent pas la
+  vague indépendante et son paquet de preuves requis avant promotion.
+
 Correctifs issus du premier benchmark contrôlé avec/sans skill (130 réponses appariées, aveugle, trois juges indépendants par variante). Deux régressions critiques corrigées — une de sécurité, une d'exactitude — plus un défaut de chargement présent depuis l'origine.
 
 > **Validation.** Ces correctifs s'appuient sur un run local non publié (`eval/runs/20260805-001935/` et sa vérification ciblée `eval/runs/20260805-181022-verif/`, répertoires ignorés par Git ; protocole `eval/prompt_benchmark_claude_code.md`). **Aucune preuve versionnée n'existe encore sous `eval/evidence/` : elle reste à produire.** Ce run a été conduit et jugé par le même agent que celui qui a écrit les correctifs : les montées de version restent **à confirmer par une vague indépendante**, d'où le statut « candidat » dans `docs/index_skills.md`.

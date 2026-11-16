@@ -6,6 +6,11 @@
 
 Un écosystème de skills conçus pour Claude. Chaque skill programme le comportement du modèle pour répondre de façon adaptée aux personnes ayant des besoins cognitifs, sensoriels ou neurobiologiques spécifiques.
 
+Une extension candidate, **`accessibilite-numerique`**, couvre aussi ce que l'utilisateur
+crée : sites, interfaces, documents, PDF, présentations, tableurs et médias. Elle
+intègre l'accessibilité au livrable, même sans déclaration de handicap. Les sept
+skills existants conservent leurs déclencheurs et leur comportement.
+
 *English summary: [README.en.md](README.en.md).*
 
 ---
@@ -27,10 +32,18 @@ Un skill est un dossier contenant un fichier `SKILL.md` (instructions + métadon
 | Haute densité cognitive (`accessibilite-haute-densite-cognitive`) | V3.2 | candidat | V3.1 | Réponses denses et rigoureuses pour profils HDC/HPI : profondeur, rigueur épistémique |
 | Douleur chronique / Fatigue cognitive (`accessibilite-douleur-chronique-fatigue-cognitive`) | V3.2 | candidat | V3.1 | Adaptation pour fatigue cognitive et douleur persistante : économie cognitive, modularité |
 | Accessibilité visuelle (`accessibilite-visuelle`) | V1.2 | candidat | V1.1 | Adaptation pour basse vision et cécité : structure sémantique, alternatives textuelles, compatibilité lecteur d'écran |
+| Créations numériques (`accessibilite-numerique`) | V0.1 | candidat — non validé | — | Création et revue de livrables accessibles, avec contrôles et limites explicites |
 
 **Lire ce tableau.** La colonne « Publiée » donne la version contenue dans les ZIP de la [dernière release](https://github.com/brissonjo-sudo/Skills-accessibilite/releases/latest) : c'est celle que tu installes. La colonne « Version sur `main` » donne l'état du dépôt, qui peut être en avance. Un skill « candidat » a été modifié depuis sa dernière validation ; il sera publié après une vague de validation indépendante. La release 1.19.1 corrige une erreur factuelle et un défaut de chargement de la 1.19.0, sans changer de numéro de version par skill.
 
 Chaque dossier contient un fichier **`SKILL.md`** : un en-tête YAML (`name`, `description`) suivi des règles du skill.
+
+Le dépôt distribue des **skills individuels**, sans manifeste de plugin installable
+en bloc. Le nouveau skill est expérimental et absent de la release 1.19.1. Ses
+référentiels et ses limites sont décrits dans la
+[recherche sourcée](docs/referentiels_accessibilite_numerique.md).
+Une vague indépendante reste nécessaire avant toute promotion. Un build local
+génère aussi les ZIP des candidats : sa réussite ne vaut pas validation ni publication.
 
 Pour chaque skill — **version courante, déclencheur, quand l'utiliser / quand ne pas l'utiliser, compatibilités et statut d'évaluation** — voir l'index canonique : [`docs/index_skills.md`](docs/index_skills.md). Des cas d'usage concrets sont rassemblés dans [`docs/usage.md`](docs/usage.md). Les conventions de contribution sont décrites dans [`AGENTS.md`](AGENTS.md).
 
@@ -80,7 +93,8 @@ skills-accessibilite/
 │   ├── accessibilite-tsa/
 │   ├── accessibilite-haute-densite-cognitive/
 │   ├── accessibilite-douleur-chronique-fatigue-cognitive/
-│   └── accessibilite-visuelle/
+│   ├── accessibilite-visuelle/
+│   └── accessibilite-numerique/   # candidat : accessibilité des livrables
 ├── docs/
 │   ├── index_skills.md    # index canonique : versions, déclencheurs, statuts
 │   ├── note_ethique.md    # limites éthiques
@@ -105,10 +119,17 @@ Chaque skill tient dans un unique `SKILL.md` (< 500 lignes, en deçà du seuil d
 
 Le dossier `eval/` contient une banque de cas par skill et le protocole de validation. Une **vague** joue chaque cas deux fois — avec et sans le skill, même question, contextes isolés — puis fait juger les paires en aveugle par trois juges indépendants. Voir `eval/README.md`.
 
+Pour le nouveau candidat, un [compte rendu d'essais exploratoires](docs/essais_accessibilite_numerique_2026-11-16.md)
+décrit les trois livrables examinés, les contrôles réalisés et leurs limites.
+Il ne constitue pas une vague ni une preuve de promotion.
+
 ---
 
 ## Feuille de route
 
+- Valider `accessibilite-numerique` : sélection indépendante, comparaisons avec/sans
+  skill et juges en aveugle, incluant co-activation et limites de conformité. La
+  banque de cas et les contrôles structurels ne constituent pas cette preuve.
 - `accessibilite-tsa-niveau2/` — abandonné après analyse : le niveau DSM-5 n'est pas un paramètre communicationnel, et la simplification imposée sur déclaration clinique constitue une essentialisation de forme. Voir `docs/bilan_ecosysteme_skills_accessibilite.md` §2.6.
 
 ---

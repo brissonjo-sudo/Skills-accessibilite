@@ -6,7 +6,7 @@ Page de référence unique : pour chaque skill, sa version courante, son fichier
 > Source de vérité de l'**historique d'itération** : `docs/bilan_ecosysteme_skills_accessibilite.md`.
 > En cas de divergence, le `SKILL.md` prime sur cet index.
 
-Dernière mise à jour : 2026-11-11. Dernière release : 1.19.1. Les versions ci-dessous sont celles de la branche `main` ; elles ne sont pas toutes publiées (voir le tableau du `README.md`).
+Dernière mise à jour : 2026-11-16. Dernière release : 1.19.1. Les versions ci-dessous décrivent les sources du dépôt ; elles ne sont pas toutes publiées (voir le tableau du `README.md`).
 
 ---
 
@@ -21,6 +21,7 @@ Dernière mise à jour : 2026-11-11. Dernière release : 1.19.1. Les versions ci
 | accessibilite-haute-densite-cognitive | V3.2 | `skills/accessibilite-haute-densite-cognitive/SKILL.md` | candidat — vague de validation requise | `eval/promptfooconfig.yaml` (9 cas) |
 | accessibilite-douleur-chronique-fatigue-cognitive | V3.2 | `skills/accessibilite-douleur-chronique-fatigue-cognitive/SKILL.md` | candidat — vague de validation requise | `eval/promptfooconfig_fatigue.yaml` (9 cas) |
 | accessibilite-visuelle | V1.2 | `skills/accessibilite-visuelle/SKILL.md` | candidat — vague de validation requise | `eval/promptfooconfig_visuel.yaml` (8 cas) |
+| accessibilite-numerique | V0.1 | `skills/accessibilite-numerique/SKILL.md` | candidat — nouveau skill non validé | `eval/promptfooconfig_numerique.yaml` (12 cas) |
 
 ---
 
@@ -83,6 +84,29 @@ Dernière mise à jour : 2026-11-11. Dernière release : 1.19.1. Les versions ci
 
 ---
 
+## Accessibilité des créations
+
+### accessibilite-numerique — V0.1 candidate
+
+- **Périmètre** : structure et interactions des livrables numériques, sans perte
+  de contenu ni de fonctionnalité. Ce skill ne suppose aucun profil personnel.
+- **Déclencheur** : création, modification ou revue d'un site, d'une interface,
+  d'un document, PDF, diaporama, tableur, graphique ou média. L'accessibilité est
+  prise en compte même si la demande ne la mentionne pas.
+- **Ne se déclenche PAS sur** : une explication sans livrable, une déclaration de
+  handicap seule, une adaptation de la conversation seule, une opération backend
+  sans interface ni contenu utilisateur, ou l'accessibilité au sens du prix ou du transport.
+- **Effet** : choisir le référentiel adapté, produire ou corriger le livrable,
+  vérifier ce que permettent les outils, et nommer les contrôles restant à faire.
+  Aucune conformité globale déduite de la seule génération ou d'un score automatique.
+- **Compatibilités** : les sept skills existants gardent leur périmètre. Les
+  adaptations personnelles régissent la remise et l'explication ; le fichier
+  livré reste complet, avec ses alternatives et sa structure.
+- **Évaluation** : banque dédiée et cas de co-activation préparés ; vague
+  indépendante et paquet de preuves requis avant promotion. Aucun résultat
+  comportemental complet ni version publiée à ce stade.
+- **Référentiels** : voir la [recherche du 16 novembre 2026](referentiels_accessibilite_numerique.md).
+
 ## Ordre de préséance (rappel)
 
 Quand plusieurs skills se co-activent, l'ordre canonique sur la **forme** est :
@@ -93,9 +117,15 @@ Quand plusieurs skills se co-activent, l'ordre canonique sur la **forme** est :
 4. `accessibilite-tsa`
 5. `accessibilite-haute-densite-cognitive`
 
-Le **fond** est régi par `psychologie-rigoureuse`, hors de cet ordre. Le bloc canonique « Ordre de préséance entre skills » est inséré à l'identique dans les 7 `SKILL.md`.
+Le **fond** est régi par `psychologie-rigoureuse`, hors de cet ordre. Le bloc canonique « Ordre de préséance entre skills » est inséré à l'identique dans les 8 `SKILL.md`.
 
 En co-activation, le **plafond de mots le plus bas** parmi les skills actifs prime.
+
+Pour `accessibilite-numerique`, ce plafond s'applique au commentaire de remise ;
+le livrable complet est fourni dans un fichier si l'environnement le permet.
+Sinon, convenir d'un découpage ou du format de remise sans prétendre avoir livré
+un résultat complet. Les critères techniques du livrable ne sont pas un niveau
+supplémentaire dans l'ordre de forme de la conversation.
 
 ---
 
@@ -115,3 +145,5 @@ Trois niveaux de statut, alignés sur le bilan (§7) : **testée en stress** (ca
 | HDC + Fatigue | spécifiée | réponse courte d'abord ; la profondeur HDC passe dans la couche facultative du skill fatigue |
 | TSA + TDAH, TSA + Fatigue, DYS + Fatigue | spécifiée | non encore testées en stress direct |
 | `psychologie-rigoureuse` + TSA + DYS (fond psy) | spécifiée | triple co-activation, non encore testée en stress direct |
+| Numérique + Visuelle | spécifiée | un graphique destiné au public conserve son équivalent textuel ; remise lisible linéairement |
+| Numérique + DYS / TDAH / Fatigue | spécifiée | commentaire adapté, livrable complet séparé si possible ; aucun contrôle inventé |
