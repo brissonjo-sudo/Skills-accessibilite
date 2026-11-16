@@ -11,6 +11,10 @@ Correctifs issus du premier benchmark contrôlé avec/sans skill (130 réponses 
 
 > **Validation.** Ces correctifs s'appuient sur un run local non publié (`eval/runs/20260805-001935/` et sa vérification ciblée `eval/runs/20260805-181022-verif/`, répertoires ignorés par Git ; protocole `eval/prompt_benchmark_claude_code.md`). **Aucune preuve versionnée n'existe encore sous `eval/evidence/` : elle reste à produire.** Ce run a été conduit et jugé par le même agent que celui qui a écrit les correctifs : les montées de version restent **à confirmer par une vague indépendante**, d'où le statut « candidat » dans `docs/index_skills.md`.
 
+### Ajouté
+
+- Marketplace Claude Code (`.claude-plugin/marketplace.json`) épinglée sur le tag publié 1.19.2, et `plugin.json` pour les tags suivants. Méthode d'installation ajoutée aux README.
+
 ### Corrigé — outillage et CI
 
 Suite de l'audit du 2026-11-11 : plusieurs contrôles laissaient passer ce qu'ils étaient censés arrêter. Chaque correctif a été vérifié en rejouant, sur une copie du dépôt, les 48 mutations de l'audit.
@@ -140,6 +144,15 @@ bout en bout — deux conditions appariées, aveuglement A/B, trois juges indép
 
 ---
 
+## [1.19.2] — 2026-11-16
+
+Correctif de distribution, publié depuis `hotfix/1.19.2` (tag posé sur 1.19.1). **Aucun changement de comportement** : les 7 `SKILL.md` sont identiques octet pour octet à 1.19.1.
+
+### Ajouté
+
+- `.claude-plugin/plugin.json` : le dépôt s'installe comme plugin Claude Code `skills-accessibilite`.
+
+---
 ## [1.19.1] — 2026-11-11
 
 Correctif à chaud publié depuis la branche `hotfix/1.19.1`, partie du tag `1.19.0`. Limité à l'exactitude et au chargement des skills. **Aucun changement de comportement** : les règles des 7 skills sont identiques à 1.19.0, et les numéros de version par skill ne changent pas. Ces deux correctifs figurent aussi dans `[Non publié]`, où ils s'accompagnent de changements de comportement.

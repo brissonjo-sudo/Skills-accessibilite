@@ -29,6 +29,17 @@ The skills are written in French and target French-speaking users. This page is 
 
 ## How to use
 
+### Claude Code (plugin)
+
+Installs the 7 skills of the **released version** (not the candidates on `main`):
+
+```
+/plugin marketplace add brissonjo-sudo/Skills-accessibilite
+/plugin install skills-accessibilite@skills-accessibilite
+```
+
+Check with `/plugin`; skills appear as `skills-accessibilite:<name>`. Update with `/plugin marketplace update skills-accessibilite`; remove with `/plugin uninstall skills-accessibilite@skills-accessibilite`.
+
 ### In Claude (recommended)
 
 1. Go to **Settings → Capabilities → "+" → Create skill → Upload ZIP**
